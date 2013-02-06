@@ -46,10 +46,12 @@ class User extends CI_Controller {
 		$config['base_url'] = base_url() . 'index.php/admin/user/view';
 		$config['total_rows'] = $this -> user -> count_users();
 		$config['per_page'] = 10;
-		$config['uri_segment'] = 4;
+		$config['uri_segment'] = $this -> uri -> total_segments() + 1;
 
 		//initialize pagination config
 		$this -> pagination -> initialize($config);
+
+		var_dump($config['uri_segment']);
 
 		$uri_seg = $this -> uri -> segment($config['uri_segment']);
 		$page = $uri_seg ? $uri_seg : 0;
