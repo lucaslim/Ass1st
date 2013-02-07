@@ -96,7 +96,7 @@ class User_Model extends CI_Model {
 	 * This will return an array of user information
 	 *
 	 */
-	function get_users($total_num, $page_num) {
+	function get_users2($total_num, $page_num) {
 
 		//Set the limit on the database query
 		$this -> db -> limit($total_num, $page_num);
@@ -109,6 +109,39 @@ class User_Model extends CI_Model {
 			return FALSE;
 
 		return $query -> result_array();
+	}
+
+	function get_users($params) {
+		//Set start
+		$start = isset($params['start']) ? $params['start'] : NULL;
+		//Set limit
+		$limit = isset($params['limit']) ? $params['start'] : NULL;
+		//Set sort field
+		$sortField = isset($params['sortField']) ? $params['sortField'] : 'FullName';
+		//Set sort order
+		$sortOrder = isset($params['sortOrder']) ? $params['sortOrder'] : 'asc';
+		//Set where
+		$whereParam = isset($params['whereParam']) ? $params['whereParam'] : NULL;	
+		
+		//Set limit if both start and limit isn't null
+		if (!empty($start) && !empty($limit))
+			$this -> db -> limit($limit, $start);
+		
+		$this -> db -> where('(1=1)');
+
+		//Set where parameter
+		if (!empty($whereParam))
+			$this -> db -> where('(' . $whereParam . ')');
+		
+		$this-> db -> order_by($sortField, $sortOrder);
+
+		//Execute query
+		$query = $this -> db -> get('AllUsers');
+
+		if ($query -> num_rows() > 0)
+			return $query -> result();
+
+		return null;
 	}
 
 	// --------------------------------------------------------------------

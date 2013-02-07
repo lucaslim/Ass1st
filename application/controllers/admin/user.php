@@ -22,7 +22,47 @@ class User extends CI_Controller {
 	 *
 	 */
 	function index() {
-
+		//Load required model, helper, library class file.
+		$this -> load -> helper('url_helper');
+		$this -> load -> helper('jqgrid_helper');
+		
+		$grid_data = array(
+				'set_columns' => array(
+				array(
+				'label' => 'ID',
+				'name' => 'Id',
+				'width' => 100,
+				'size' => 10
+				),
+				array(
+				'label' => 'Full Name',
+				'name' => 'FullName',
+				'width' => 400,
+				'size' => 10
+				),
+				array(
+				'label' => 'Email',
+				'name' => 'Email',
+				'width' => 500,
+				'size' => 10
+				)
+				),
+				'div_name' => 'grid',
+				'source' => 'admin/user/view2',
+				'sort_name' => 'FullName',
+				'row_num' => 15,
+				'add_url' => 'customer/exec/add',
+				'edit_url' => 'customer/exec/edit',
+				'delete_url' => 'customer/exec/del',
+				'caption' => 'User database',
+				'primary_key' => 'Id',
+				'grid_height' => 230
+		);
+		
+		$data['data_grid'] = buildGrid($grid_data);
+		
+		//load view
+		$this -> load -> view('admin/user_view_view', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -38,6 +78,7 @@ class User extends CI_Controller {
 
 		//Load required model, helper, library class file.
 		$this -> load -> helper('url');
+		$this -> load -> helper('jqgrid_helper');
 		$this -> load -> model('User_Model', 'user', TRUE);
 		$this -> load -> library('pagination');
 
@@ -51,8 +92,6 @@ class User extends CI_Controller {
 		//initialize pagination config
 		$this -> pagination -> initialize($config);
 
-		var_dump($config['uri_segment']);
-
 		$uri_seg = $this -> uri -> segment($config['uri_segment']);
 		$page = $uri_seg ? $uri_seg : 0;
 
@@ -63,6 +102,22 @@ class User extends CI_Controller {
 
 		//load view
 		$this -> load -> view('admin/user_view_view', $data);
+	}
+
+	function view2() {
+		
+		//Load required model, helper, library class file.
+		$this -> load -> helper('url_helper');
+		$this -> load -> helper('jqgrid_helper');
+
+		buildGridData(
+			array(
+				'model' => 'user_model',
+				'method' => 'get_users',
+				'pkid' => 'Id',
+				'columns' => array('Id', 'FullName', 'Email')
+			)
+		);				
 	}
 
 	// --------------------------------------------------------------------
