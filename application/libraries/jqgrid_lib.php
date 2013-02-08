@@ -90,11 +90,15 @@ class jqgrid_lib {
 	}
 
 	public function setSubGridColumnNames($columnNames) {
-		$this -> subGridColumnNames = $columnNames;
+		if (is_array($columnNames) && isset($columnNames) && !is_null($columnNames)) {
+			$this -> subGridColumnNames = '[\'' . implode('\',\'', $columnNames) . '\']';
+		}
 	}
 
 	public function setSubGridColumnWidth($columnWidth) {
-		$this -> subGridColumnWidth = $columnWidth;
+		if (is_array($columnWidth) && isset($columnWidth) && !is_null($columnWidth)) {
+			$this -> subGridColumnWidth = '[' . implode(',', $columnWidth) . ']';
+		}
 	}
 
 	//NEW
@@ -116,7 +120,7 @@ class jqgrid_lib {
 		$buildGridHeight = $this -> gridHeight;
 		$buildPrimaryKey = $this -> primaryKey;
 		$buildCustomButtons = $this -> customButtons;
-		$buildSubGrid = $this -> subgrid;
+		$buildSubGrid = $this -> subGrid;
 		$buildSubGridUrl = $this -> subGridUrl;
 		$buildSubGridColumnNames = $this -> subGridColumnNames;
 		$buildSubGridColumnWidth = $this -> subGridColumnWidth;
@@ -137,6 +141,12 @@ class jqgrid_lib {
 				viewrecords: true,
 				sortorder: 'asc',
 				caption:'$buildCaption'";
+		if (!is_null($buildSubGridColumnNames) && !empty($buildSubGridColumnNames) && !is_null($buildSubGridColumnWidth) && !empty($buildSubGridColumnWidth)) {
+			$buildSubGrid = $buildSubGrid ? 'true' : 'false';
+			$grid .= ",subGrid:$buildSubGrid,
+					   subGridUrl:'$buildSubGridUrl',
+					   subGridModel: [{ name : $buildSubGridColumnNames, width : $buildSubGridColumnWidth } ]";
+		}
 		$grid .= "});";
 
 		//Search Toolbar

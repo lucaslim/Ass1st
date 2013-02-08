@@ -96,20 +96,28 @@ class User_Model extends CI_Model {
 	 * This will return an array of user information
 	 *
 	 */
-	function get_users2($total_num, $page_num) {
-
-		//Set the limit on the database query
-		$this -> db -> limit($total_num, $page_num);
-
-		//Execute select statement
+	function get_user_by_id($id) {
+		if (isset($id) && !empty($id)) {
+			$this -> db -> where('Id', $id);
+			
+			//Execute query
 		$query = $this -> db -> get('AllUsers');
 
-		//Check if any rows returned
-		if (!$query || $query -> num_rows() <= 0)
-			return FALSE;
+		if ($query -> num_rows() > 0)
+			return $query -> result();
 
-		return $query -> result_array();
+		return null;
+		}
 	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Get a array of user information
+	 *
+	 * This will return an array of user information
+	 *
+	 */
 
 	function get_users($params) {
 		//Set start
@@ -122,8 +130,9 @@ class User_Model extends CI_Model {
 		$sortOrder = isset($params['sortOrder']) ? $params['sortOrder'] : 'asc';
 		//Set where
 		$whereParam = isset($params['whereParam']) ? $params['whereParam'] : NULL;
-		//set filters
+		//Set filters
 		$filters = isset($params['filters']) ? json_decode($params['filters']) : NULL;
+		//Set search
 		$isSearch = isset($params['isSearch']) ? json_decode($params['isSearch']) : NULL;
 
 		//Set limit if both start and limit isn't null

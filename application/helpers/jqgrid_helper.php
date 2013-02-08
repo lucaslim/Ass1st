@@ -28,7 +28,7 @@ function buildGrid($aData) {
 
 	if (isset($aData['source']))
 		$jqGrid -> setSourceUrl(base_url() . 'index.php/' . $aData['source']);
-
+	
 	if (isset($aData['sort_name']))
 		$jqGrid -> setSortName($aData['sort_name']);
 
@@ -60,13 +60,35 @@ function buildGrid($aData) {
 		$jqGrid -> setSubGridColumnNames($aData['subgrid_columnnames']);
 
 	if (isset($aData['subgrid_columnwidth']))
-		$jqGrid -> subGridColumnWidth($aData['subgrid_columnwidth']);
+		$jqGrid -> setSubGridColumnWidth($aData['subgrid_columnwidth']);
 
-	//New
 	if (isset($aData['row_num']))
 		$jqGrid -> setRowNum($aData['row_num']);
 
 	return $jqGrid -> buildGrid();
+}
+
+function buildSubGridData($aData) {
+	$CI = &get_instance();
+	//get id
+	$id = $CI -> input -> get('id');
+
+	if (isset($aData['method']) && isset($aData['model'])) {
+		$CI -> load -> model($aData['model']);
+
+		$aDataList = $CI -> $aData['model'] -> $aData['method']($id);
+
+		if (!is_null($aDataList) && isset($aData['columns']) && count($aDataList) > 0) {
+			$columnData = array();
+			//$rs -> rows[0]['id'] = $id;
+			foreach ($aData['columns'] as $col) {
+				array_push($columnData, $aDataList[0] -> $col);
+			}
+			$rs -> rows[0]['cell'] = $columnData;
+			
+			echo json_encode($rs);
+		}
+	}
 }
 
 function buildGridData($aData) {
@@ -104,7 +126,7 @@ function buildGridData($aData) {
 
 		$CI -> load -> model($aData['model']);
 		$aDataList = $CI -> $aData['model'] -> $aData['method']($paramArr);
-		
+
 		$count = count($aDataList);
 		if ($count > 0)
 			$total_pages = ceil($count / $limit);
@@ -124,7 +146,7 @@ function buildGridData($aData) {
 		$paramArr['isSearch'] = $isSearch;
 		$paramArr['reload'] = TRUE;
 		$aDataList = $CI -> $aData['model'] -> $aData['method']($paramArr);
-		
+
 		$count = count($aDataList);
 		if ($count > 0)
 			$total_pages = ceil($count / $limit);

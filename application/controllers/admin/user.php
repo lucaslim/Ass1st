@@ -29,26 +29,45 @@ class User extends CI_Controller {
 		$grid_data = array(
 				'set_columns' => array(
 				array(
-				'label' => 'ID',
-				'name' => 'Id',
-				'width' => 100,
-				'size' => 10
-				),
-				array(
 				'label' => 'Full Name',
 				'name' => 'FullName',
-				'width' => 400,
+				'width' => 300,
 				'size' => 10
 				),
 				array(
 				'label' => 'Email',
 				'name' => 'Email',
-				'width' => 500,
+				'width' => 300,
+				'size' => 10
+				),
+				array(
+				'label' => 'Height',
+				'name' => 'Height',
+				'width' => 50,
+				'size' => 10
+				),
+				array(
+				'label' => 'Weight',
+				'name' => 'Weight',
+				'width' => 50,
+				'size' => 10
+				),
+				array(
+				'label' => 'Date of Birth',
+				'name' => 'DateOfBirth',
+				'width' => 70,
+				'size' => 10
+				),
+				array(
+				'label' => 'Status',
+				'name' => 'Status',
+				'width' => 50,
 				'size' => 10
 				)
 				),
 				'div_name' => 'grid',
 				'source' => 'admin/user/view',
+				'suburl' => 'admin/user/view_sub',
 				'sort_name' => 'FullName',
 				'row_num' => 10,
 				'add_url' => 'admin/user/add',
@@ -56,7 +75,11 @@ class User extends CI_Controller {
 				'delete_url' => 'customer/exec/del',
 				'caption' => 'User database',
 				'primary_key' => 'Id',
-				'grid_height' => 230
+				'grid_height' => 230,
+				'subgrid'=> true,
+				'subgrid_url' => 'view_sub',
+				'subgrid_columnnames' => array('Address', 'City', 'Province', 'CountryName', 'Contact Number', 'Other Number'),
+				'subgrid_columnwidth' => array(200,70,70,70,70,70)
 		);
 		
 		$data['data_grid'] = buildGrid($grid_data);
@@ -68,7 +91,7 @@ class User extends CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Default index for the User Class
+	 * JQGrid view for the User Class
 	 *
 	 * In case no parameters are given in the Url (e.g. path/User/).
 	 * The system will load this function by default
@@ -86,7 +109,8 @@ class User extends CI_Controller {
 				'model' => 'user_model',
 				'method' => 'get_users',
 				'pkid' => 'Id',
-				'columns' => array('Id', 'FullName', 'Email')
+				'columns' => array('FullName', 'Email', 'Height', 'Weight', 'DateOfBirth', 'Status'),
+				
 			)
 		);				
 	}
@@ -94,7 +118,32 @@ class User extends CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Default index for the User Class
+	 * JQGrid sub view for the User Class
+	 *
+	 * In case no parameters are given in the Url (e.g. path/User/).
+	 * The system will load this function by default
+	 *
+	 */
+
+	 function view_sub() {
+	 		
+	 	//Load required model, helper, library class file.
+		$this -> load -> helper('url_helper');
+		$this -> load -> helper('jqgrid_helper');
+		
+		buildSubGridData(
+			array(
+				'model' => 'user_model',
+				'method' => 'get_user_by_id',
+				'columns' => array('Address', 'City', 'Province', 'CountryName', 'ContactNumber', 'OtherNumber')			
+			)
+		);
+	 }	 
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Add function for the User Class
 	 *
 	 * In case no parameters are given in the Url (e.g. path/User/).
 	 * The system will load this function by default
