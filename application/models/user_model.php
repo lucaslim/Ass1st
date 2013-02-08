@@ -121,19 +121,34 @@ class User_Model extends CI_Model {
 		//Set sort order
 		$sortOrder = isset($params['sortOrder']) ? $params['sortOrder'] : 'asc';
 		//Set where
-		$whereParam = isset($params['whereParam']) ? $params['whereParam'] : NULL;	
-		
+		$whereParam = isset($params['whereParam']) ? $params['whereParam'] : NULL;
+		//set filters
+		$filters = isset($params['filters']) ? json_decode($params['filters']) : NULL;
+		$isSearch = isset($params['isSearch']) ? json_decode($params['isSearch']) : NULL;
+
 		//Set limit if both start and limit isn't null
 		if (!empty($start) && !empty($limit))
 			$this -> db -> limit($limit, $start);
-		
+
 		$this -> db -> where('(1=1)');
 
 		//Set where parameter
 		if (!empty($whereParam))
 			$this -> db -> where('(' . $whereParam . ')');
-		
-		$this-> db -> order_by($sortField, $sortOrder);
+
+		//Set search
+		if ($isSearch && $filters != null) {
+			//get rules
+			foreach ($filters -> rules as $rule) {
+				$field = $rule -> field;
+				$value = mysql_real_escape_string($rule -> data);
+
+				//add like clause
+				$this -> db -> like($field, $value, 'after');
+			}
+		}
+
+		$this -> db -> order_by($sortField, $sortOrder);
 
 		//Execute query
 		$query = $this -> db -> get('AllUsers');

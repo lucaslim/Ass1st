@@ -77,6 +77,8 @@ function buildGridData($aData) {
 	$searchString = $CI -> input -> get('searchString');
 	$searchOperator = $CI -> input -> get('searchOper');
 	$page = $CI -> input -> get('page');
+	// search filters
+	$filters = $CI -> input -> get('filters');
 	// get the requested page
 	$limit = $CI -> input -> get('rows');
 	// get how many rows we want to have into the grid
@@ -102,6 +104,7 @@ function buildGridData($aData) {
 
 		$CI -> load -> model($aData['model']);
 		$aDataList = $CI -> $aData['model'] -> $aData['method']($paramArr);
+		
 		$count = count($aDataList);
 		if ($count > 0)
 			$total_pages = ceil($count / $limit);
@@ -117,11 +120,22 @@ function buildGridData($aData) {
 		$paramArr['sortField'] = $sidx;
 		$paramArr['sortOrder'] = $sord;
 		$paramArr['whereParam'] = $whereParam;
+		$paramArr['filters'] = $filters;
+		$paramArr['isSearch'] = $isSearch;
 		$paramArr['reload'] = TRUE;
 		$aDataList = $CI -> $aData['model'] -> $aData['method']($paramArr);
+		
+		$count = count($aDataList);
+		if ($count > 0)
+			$total_pages = ceil($count / $limit);
+		else
+			$total_pages = 0;
+
+		if ($page > $total_pages)
+			$page = $total_pages;
 
 		$i = 0;
-		if (isset($aData['columns'])) {
+		if (isset($aData['columns']) && $aDataList != null) {
 			foreach ($aDataList as $row) {
 				$columnData = array();
 				foreach ($aData['columns'] as $sData) {
@@ -131,8 +145,8 @@ function buildGridData($aData) {
 				$rs -> rows[$i]['cell'] = $columnData;
 				$i++;
 			}
+			$rs -> cols = $columnData;
 		}
-		$rs -> cols = $columnData;
 		$rs -> page = $page;
 		$rs -> total = $total_pages;
 		$rs -> records = $count;

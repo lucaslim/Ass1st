@@ -34,6 +34,7 @@ class jqgrid_lib {
 		}
 		$this -> colNames = json_encode($tmpColNames);
 		$this -> colModels = '[' . $tmpColModels . ']';
+
 	}
 
 	public function setDivName($divName) {
@@ -95,8 +96,9 @@ class jqgrid_lib {
 	public function setSubGridColumnWidth($columnWidth) {
 		$this -> subGridColumnWidth = $columnWidth;
 	}
+
 	//NEW
-	public function setRowNum($rowNum){
+	public function setRowNum($rowNum) {
 		$this -> rowNum = $rowNum;
 	}
 
@@ -128,19 +130,25 @@ class jqgrid_lib {
 				rowNum:$buildRowNum,
 				rowList:[10,20,30],
 				pager: '#pager',
-				toppager:true,
-				cloneToTop:false,
+				loadonce:false,
+				rownumbers:true,
+				toppager:false,
 				sortname: '$buildSortName',
 				viewrecords: true,
 				sortorder: 'asc',
 				caption:'$buildCaption'";
 		$grid .= "});";
 
+		//Search Toolbar
+		$grid .= "$('#$buildDivName').jqGrid('navGrid','#toolbar',{del:false,add:false,edit:false,search:false});";
+		$grid .= "$('#$buildDivName').jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});";
+
 		//NavBar
 		$grid .= "$('#$buildDivName').jqGrid('navGrid','#pager',
 					{search:true,edit:false,add:false,del:false,cloneToTop:true}, //options
 					{} // search options
 					)";
+
 		if (!empty($buildCustomButtons)) {
 			foreach ($buildCustomButtons as $customButton) {
 				$customButton = ".navButtonAdd('#grid_toppager_left'," . $customButton . ")";

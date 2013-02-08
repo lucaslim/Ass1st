@@ -48,10 +48,10 @@ class User extends CI_Controller {
 				)
 				),
 				'div_name' => 'grid',
-				'source' => 'admin/user/view2',
+				'source' => 'admin/user/view',
 				'sort_name' => 'FullName',
-				'row_num' => 15,
-				'add_url' => 'customer/exec/add',
+				'row_num' => 10,
+				'add_url' => 'admin/user/add',
 				'edit_url' => 'customer/exec/edit',
 				'delete_url' => 'customer/exec/del',
 				'caption' => 'User database',
@@ -74,37 +74,8 @@ class User extends CI_Controller {
 	 * The system will load this function by default
 	 *
 	 */
+
 	function view() {
-
-		//Load required model, helper, library class file.
-		$this -> load -> helper('url');
-		$this -> load -> helper('jqgrid_helper');
-		$this -> load -> model('User_Model', 'user', TRUE);
-		$this -> load -> library('pagination');
-
-		//set pagination configuration
-		$config = array();
-		$config['base_url'] = base_url() . 'index.php/admin/user/view';
-		$config['total_rows'] = $this -> user -> count_users();
-		$config['per_page'] = 10;
-		$config['uri_segment'] = $this -> uri -> total_segments() + 1;
-
-		//initialize pagination config
-		$this -> pagination -> initialize($config);
-
-		$uri_seg = $this -> uri -> segment($config['uri_segment']);
-		$page = $uri_seg ? $uri_seg : 0;
-
-		//create data for view
-		$data['results'] = $this -> user -> get_users($config['per_page'], $page);
-		$data['current_page'] = $page;
-		$data['page_links'] = $this -> pagination -> create_links();
-
-		//load view
-		$this -> load -> view('admin/user_view_view', $data);
-	}
-
-	function view2() {
 		
 		//Load required model, helper, library class file.
 		$this -> load -> helper('url_helper');

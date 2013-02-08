@@ -13,6 +13,7 @@
 		<h1>View</h1>
 		<div>
 			<table id="grid"></table>
+			<div id="toolbar"></div>
 			<div id="pager"></div>
 			<?php echo $data_grid; ?>
 		</div>
