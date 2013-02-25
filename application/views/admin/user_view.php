@@ -5,8 +5,7 @@
 	</head>
 	<body>
 		<h1>Sign Up</h1>
-		<?php //echo validation_errors(); ?>
-		<?php echo form_open('admin/action/new_user'); ?>
+		<?php echo form_open('admin/user/new_user'); ?>
 
 		<table>
 			<tr>

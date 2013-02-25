@@ -173,5 +173,43 @@ class User extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------
+	
+	/**
+	 * Creating new user account
+	 *
+	 * This will create a new user account using the admin module.
+	 * Data will be added to 2 different tables. First the User
+	 * table, and then the system will retrieve the return id and
+	 * use it to insert into the UserTeamRole table in the database.
+	 *
+	 * Password will be hashed with MD5 before inserting into the
+	 * database
+	 *
+	 */
+
+	function new_user() {
+		//Load required helper and models
+		$this -> load -> model('User_Model', 'user', TRUE);
+		$this -> load -> helper('security');
+
+		//Get post array
+		$result = $this -> input -> post(NULL, TRUE);
+
+		//make sure user doesn't run the action script immediately
+		if (!$result)
+			return;
+
+
+		//Get returned Id
+		$return_id = $this -> user -> insert_new_user($result);
+
+		//insert new user role
+		$this -> user -> insert_user_role($return_id, $result['user_role']);
+
+		//redirect back
+		redirect('admin/user');
+	}
+
+	// --------------------------------------------------------------------
 }
 ?>
