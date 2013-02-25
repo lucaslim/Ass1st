@@ -42,7 +42,7 @@ class Action extends CI_Controller {
 		//set object for new user
 		$data = array('FirstName' => $result['first_name'], 'LastName' => $result['last_name'], 'Email' => $result['email'], 'Password' => do_hash($result['password'], 'md5'), 'Height' => 100, //$result['height'],
 		'Weight' => 100, //$result['weight'],
-		'Gender' => $result['gender'], 'DateOfBirth' => null, 'CountryId' => $result['country'], 'City' => $result['city'], 'Province' => $result['province'], 'Address' => $result['address'], 'PostalCode' => $result['postal_code'], 'ContactNumber' => $result['contact_number'], 'OtherNumber' => $result['other_number'], 'Picture' => null, 'Status' => 'Active');
+		'Gender' => $result['gender'], 'DateOfBirth' => ($result['dob_year'] . '-' . $result['dob_month'] . '-' . $result['dob_day']), 'CountryId' => $result['country'], 'City' => $result['city'], 'Province' => $result['province'], 'Address' => $result['address'], 'PostalCode' => $result['postal_code'], 'ContactNumber' => $result['contact_number'], 'OtherNumber' => $result['other_number'], 'Picture' => null, 'Status' => 'Active');
 
 		//insert into database
 		$this -> db -> insert('User', $data);

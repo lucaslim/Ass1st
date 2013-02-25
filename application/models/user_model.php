@@ -99,14 +99,14 @@ class User_Model extends CI_Model {
 	function get_user_by_id($id) {
 		if (isset($id) && !empty($id)) {
 			$this -> db -> where('Id', $id);
-			
+
 			//Execute query
-		$query = $this -> db -> get('AllUsers');
+			$query = $this -> db -> get('AllUsers');
 
-		if ($query -> num_rows() > 0)
-			return $query -> result();
+			if ($query -> num_rows() > 0)
+				return $query -> result();
 
-		return null;
+			return null;
 		}
 	}
 
@@ -169,5 +169,49 @@ class User_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
+
+	/**
+	 * Quick registration for the Home page
+	 *
+	 * This allows user to quickly register from the homepage with the minimum
+	 * information needed. Users are still required to complete their profile
+	 * once they logged in.
+	 *
+	 */
+
+	function quick_register($result) {
+
+		$this -> load -> helper('security');
+
+		//set object for new user
+		$data = array('FirstName' => $result['first_name'], 'LastName' => $result['last_name'], 'Email' => $result['email'], 'Password' => do_hash($result['password'], 'md5'), 'Gender' => $result['gender'], 'DateOfBirth' => ($result['dob_year'] . '-' . $result['dob_month'] . '-' . $result['dob_day']), 'Status' => 'Active');
+
+		//insert into database
+		$this -> db -> insert('User', $data);
+
+		//Get returned Id
+		$return_id = $this -> db -> insert_id();
+
+		//Inser user role
+		$this -> insert_user_role($return_id, 7);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Insert user role
+	 *
+	 * This will insert user role to the database based on the id and given role id
+	 *
+	 */
+
+	function insert_user_role($user_id, $role) {
+		//Set object for user team role
+		$data = array('UserId' => $user_id, 'UserRoleId' => $role, 'TeamId' => null);
+
+		//insert into database
+		$this -> db -> insert('UserTeamRole', $data);
+	}
+
 }
 ?>
