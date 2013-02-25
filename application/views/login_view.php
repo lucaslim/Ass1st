@@ -6,7 +6,7 @@
 	<body>
 		<h1>Login Panel</h1>
 		<?php echo validation_errors(); ?>
-		<?php echo form_open('action/login_verify'); ?>
+		<?php echo form_open('login/login_verify'); ?>
 		<label for="username">Email:</label>
 		<input type="text" size="20" id="email" name="email"/>
 		<br/>
