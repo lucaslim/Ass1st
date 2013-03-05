@@ -15,7 +15,7 @@ if (!defined('BASEPATH'))
 class Login extends CI_Controller {
 
 	/**
-	 * Constructor for the Action Class
+	 * Constructor for the Login Class
 	 *
 	 * Load required model, helper, library class file.
 	 *
