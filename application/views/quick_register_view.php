@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url(); ?>style/jqueryui.css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>style/jqueryui/jqueryui.css" />
 <script type="text/javascript" src="<?php echo base_url(); ?>script/jquery.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>script/jqueryui.js"></script>
 <script type="text/javascript">
