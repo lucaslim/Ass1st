@@ -1,103 +1,142 @@
 .storelocator-panel {
-  border: 1px solid #ccc;
-  overflow: auto;
+	border: 1px solid #ccc;
+	overflow: auto;
 }
 
 .storelocator-panel .store-list {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
-.storelocator-panel .store-list li,
-.storelocator-panel .directions-panel {
-  padding: 5px;
+.storelocator-panel .store-list li, .storelocator-panel .directions-panel {
+	padding: 5px;
 }
 .storelocator-panel .directions-panel {
-  font-size: 0.8em;
+	font-size: 0.8em;
 }
 
 .storelocator-panel .store-list li.store:hover {
-  cursor: pointer;
-  background: #eee;
+	cursor: pointer;
+	background: #eee;
 }
 
-.storelocator-panel .store-list li.highlighted,
-.storelocator-panel .store-list li.highlighted:hover {
-  background: #ccf;
+.storelocator-panel .store-list li.highlighted, .storelocator-panel .store-list li.highlighted:hover {
+	background: #ccf;
 }
 
 .storelocator-panel .directions {
-  display: none;
+	display: none;
 }
 
 .storelocator-panel .location-search {
-  padding: 5px;
+	padding: 5px;
 }
 
 .storelocator-panel .location-search input {
-  width: 95%;
+	width: 95%;
 }
 
 .storelocator-panel .location-search h4 {
-  font-size: 0.8em;
-  margin: 0;
-  padding: 0;
+	font-size: 0.8em;
+	margin: 0;
+	padding: 0;
 }
 
 .storelocator-panel .store-list .no-stores {
-  color: grey;
+	color: grey;
 }
 
 .storelocator-panel .store .features {
-  display: none;
+	display: none;
 }
 
 .storelocator-panel .feature-filter {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .storelocator-panel .feature-filter label {
-  display: block;
-  font-size: 0.8em;
-  margin: 0 0.4em;
-  float: left;
+	display: block;
+	font-size: 0.8em;
+	margin: 0 0.4em;
+	float: left;
 }
 
 .store .title {
-  font-weight: bold;
+	font-weight: bold;
 }
 
-.store .address,
-.store .phone,
-.store .web,
-.store .misc {
-  font-size: 80%;
-  margin-top: 0.2em;
-  margin-bottom: 0.5em;
-  display: block;
+.store .address, .store .phone, .store .web, .store .misc {
+	font-size: 80%;
+	margin-top: 0.2em;
+	margin-bottom: 0.5em;
+	display: block;
 }
 
 .store .features {
-  overflow: hidden;
-  color: grey;
-  margin: 0;
-  padding: 0;
-  font-size: 70%;
-  max-width: 250px;
+	overflow: hidden;
+	color: grey;
+	margin: 0;
+	padding: 0;
+	font-size: 70%;
+	max-width: 250px;
 }
 
 .store .features li {
-  display: inline;
-  float: left;
-  padding-right: 0.8em;
+	display: inline;
+	float: left;
+	padding-right: 0.8em;
 }
 
 .store .web a {
-  color: green
+	color: green
 }
 
 .store .action {
-  font-size: 0.8em;
-  color: green;
-  margin-right: 0.5em;
+	font-size: 0.8em;
+	color: green;
+	margin-right: 0.5em;
+}
+
+/*Styles for Infobubble and divs*/
+#canvas, #info {
+	height: 500px;
+}
+#info {
+	float: left;
+	margin-right: 10px;
+	width: 300px;
+}
+#info .feature-filter label {
+	width: 130px;
+}
+a:hover, #head-nav li a:hover, #menu-nav li a:hover {
+	text-decoration: underline;
+}
+#head-nav li, #menu-nav li {
+	display: inline;
+	padding-right: 15px;
+	text-transform: uppercase;
+}
+#head-nav li a, #menu-nav li a {
+	color: #FFF;
+	text-decoration: none;
+}
+.locator-title {
+	font-family: CaviarDreamsRegular;
+	font-weight: bold;
+	color: #000;
+}
+.locator-address {
+	font-size: 12px;
+	color: #000;
+}
+.locator-hours {
+	font-style: italic;
+	font-size: 12px;
+	color: #000;
+}
+.locator-number {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000;
 }

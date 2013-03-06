@@ -11,8 +11,14 @@ function StadiumClass() {
 //Stores Listing Array
 var arrStadiums = new Array();
 
-function LoadStadium() {
+//Renderer Option
+var rendererOptions = {
+  draggable: true
+};
 
+//Load Event
+google.maps.event.addDomListener(window, 'load', function() {
+	
 	//Set Default map view
 	var map = new google.maps.Map(document.getElementById('canvas'), {
 		center : new google.maps.LatLng(43.66836829614057, -79.44866180419922),
@@ -45,10 +51,9 @@ function LoadStadium() {
 
 	//Set Information Panel
 	new storeLocator.Panel(document.getElementById('info'), {
-		view : store,
-		directions : false
+		view : store
 	});
-}
+});
 
 function LoadStadiumData() {
 	// Store Class Variable
@@ -58,7 +63,7 @@ function LoadStadiumData() {
 		type : 'POST',
 		url : '../stadium/load_stadium_data',
 		dataType : "json",
-		async: false,
+		async : false,
 		success : function(data) {
 			for ( x = 0; x < data.length; x++) {
 				//Insert Data to Event Class
@@ -105,7 +110,7 @@ function GetStadiums() {
 			address : stadium.address,
 			number : stadium.number,
 			hours : stadium.hours,
-			description: stadium.description
+			description : stadium.description
 		});
 
 		stadiums.push(newStadium);
