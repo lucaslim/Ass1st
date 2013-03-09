@@ -22,6 +22,7 @@ class Pages extends CI_Controller {
 	 */
 	function __construct() {
 		parent::__construct();
+		$this->load->model('News_Model');
 	}
 
 	// --------------------------------------------------------------------
@@ -34,21 +35,33 @@ class Pages extends CI_Controller {
 	 *
 	 */
 
-	function view($loadThisPage = 'home') {
+	function index($loadThisPage = 'home') {
 		
 		if (!file_exists('application/views/pages/'.$loadThisPage.'.php'))
 		{
 			show_404();
-		}		
-		
+		}
+
+		$data['news'] = $this->News_Model->get_news(); // retrieve news
+		$data['archive'] = "News Archive";
+
 		$this -> load -> helper(array('form', 'url'));
-		$shareTitle['title'] = ucfirst($loadThisPage); // Use the file as the title
-		$this -> load -> view('templates/header', $shareTitle);
-		$this -> load -> view('pages/'.$loadThisPage, $shareTitle);
-		$this -> load -> view('templates/footer', $shareTitle);
+		$data['title'] = ucfirst($loadThisPage); // Use the file as the title
+		$this -> load -> view('templates/header', $data);
+		$this -> load -> view('pages/'.$loadThisPage, $data);
+		$this -> load -> view('templates/footer', $data);
 	}
 
 	// --------------------------------------------------------------------
 
+	function news($id) {
+		$data['news'] = $this->News_Model->get_news_by_id($id); // retrieve news
+		$data['headlines'] = $this->News_Model->get_news_headlines(); // retrieve news titles
+		$data['title'] = $id;
+
+		$this -> load -> view('templates/header', $data);
+		$this -> load -> view('pages/news.php', $data);
+		$this -> load -> view('templates/footer');
+	}
 }
 ?>

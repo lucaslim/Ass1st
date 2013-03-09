@@ -24,6 +24,7 @@ class News_Model extends CI_Model {
 	 */
 	function __construct() {
 		parent::__construct();
+		$this->load->database();
 	}
 
 	// --------------------------------------------------------------------
@@ -57,4 +58,56 @@ class News_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Get News
+	 *
+	 * This retrieves all news 
+	 * 
+	 * If no limit is provided, the default is the last 5 rows
+	 *
+	 */
+
+	function get_news($limit = '0,5') {
+		$query = $this->db->query('SELECT * FROM AllNews ORDER BY PostDate DESC LIMIT ' . $limit);
+		return $query->result_array();
+	}
+
+	// --------------------------------------------------------------------
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Get News Headlines
+	 *
+	 * This retrieves news headlines
+	 * 
+	 * Provides view with 5 headlines unless more are requested
+	 *
+	 */
+
+	function get_news_headlines($limit = '0,5') {
+		$query = $this->db->query('SELECT Id, Title FROM AllNews ORDER BY PostDate DESC LIMIT ' . $limit);
+		return $query->result_array();
+	}
+
+	// --------------------------------------------------------------------	
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Get News By ID
+	 *
+	 * This retrieves news by id number
+	 * 
+	 *
+	 */
+
+	function get_news_by_id($id) {
+		$query = $this->db->query('SELECT * FROM AllNews WHERE Id = ' . $id);
+		return $row = $query->row(); 
+	}
+
+	// --------------------------------------------------------------------
 }

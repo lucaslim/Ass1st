@@ -91,7 +91,7 @@
 		</div><!--hpImageSlider-->
 	</div><! -- /end left content -->
 
-	<div id="rightContent">
+	<div id="rightContent" class="clearfix">
 		<div id="accordion">
 			<h3>blah blah blah</h3>
 			<div>
@@ -123,5 +123,13 @@
 				</ul>
 			</div>
 		</div><! -- /end accordion -->
+		<div class="newsDisplay">
+			<h3><?php echo $archive; // display title ?></h3>
+			<?php foreach($news as $news_item): ?>
+
+			    <h4><a href="news/<?php echo $news_item['Id'] ?>"><?php echo $news_item['Title'] ?></a></h4>
+
+			<?php endforeach ?>
+		</div>
 	</div><! -- /end right content -->
 </div>

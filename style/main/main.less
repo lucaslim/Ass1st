@@ -48,6 +48,12 @@ h6 {
 	font-size: 1em;
 }
 
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+@subtitleGrey: #333;
+
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -280,6 +286,43 @@ button {
 	float: left;
 	width: 30%;
 	padding: 2.5%;
+}
+
+/* ==========================================================================
+   News Content Styles
+   ========================================================================== */
+
+.newsDisplay {
+  img {
+    margin-right: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #000;
+  }
+
+  .subtitle {
+    font-size: .75em;
+    color: @subtitleGrey;
+  }
+}
+
+.newsSidebar {
+  h2 {
+    font-size: 1.75em;
+    border-bottom: 1px solid #8b2025;
+  }
+  ul
+  {
+    li {
+      margin-bottom: 15px;
+      a {
+        color: #8b2025;
+        border: 0;
+        &:hover {
+          color: #580101;
+        }
+      }
+    }
+  }
 }
 
 /* ==========================================================================
@@ -542,16 +585,6 @@ button {
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
-}
-
-@media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
-}
 
 /* ==========================================================================
    Print styles.
