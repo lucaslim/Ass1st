@@ -209,6 +209,14 @@ class User_Model extends CI_Model {
 		$this->db->set('FirstName', $_POST['fname']);
 		$this->db->set('LastName', $_POST['lname']);
 		$this->db->set('Email', $_POST['email']);
+		$this->db->set('Height', $_POST['height']);
+		$this->db->set('Weight', $_POST['weight']);
+		$this->db->set('City', $_POST['city']);
+		$this->db->set('Province', $_POST['province']);
+		$this->db->set('Address', $_POST['address']);
+		$this->db->set('PostalCode', $_POST['pcode']);
+		$this->db->set('ContactNumber', $_POST['phone1']);
+		$this->db->set('OtherNumber', $_POST['phone2']);
 		$this->db->where('Id',$id);
 		$this->db->update('User');
 	}

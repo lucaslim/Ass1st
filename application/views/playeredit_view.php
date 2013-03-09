@@ -30,50 +30,37 @@
         <!--need to insert a date textbox-->
         
         <p>
-        <label for="c_id">Country ID: </label>
-        <select name="c_id" id="c_id">
-        	<?php
-				for ($i=1;$i<=40;$i++)
-				{
-					echo "<option value='$i'>$i</option>";
-				}
-			?>
-        </select>
-        </p>
-        
-        <p>
         	<label for="city">City: </label>
-            <input type="text" name="city" id="city" value="" size="30" />
+            <input type="text" name="city" id="city" value='<?php echo $results -> City ?>' />
         </p>
         
         <p>
         	<label for="province">Province: </label>
-            <input type="text" name="province" id="province" value="" size="30" />
+            <input type="text" name="province" id="province" value='<?php echo $results -> Province ?>' />
         </p>
         
         <p>
         	<label for="address">Address: </label>
-            <input type="text" name="address" id="address" value="" size="30" />
+            <input type="text" name="address" id="address" value='<?php echo $results -> Address ?>' />
         </p>
         
         <p>
         	<label for="pcode">Postal Code: </label>
-            <input type="text" name="pcode" id="pcode" value="" size="30" />
+            <input type="text" name="pcode" id="pcode" value='<?php echo $results -> PostalCode ?>' />
         </p>
         
         <p>
         	<label for="phone1">Phone Number: </label>
-            <input type="number" name="phone1" id="phone1" value="" size="30" />
+            <input type="number" name="phone1" id="phone1" value='<?php echo $results -> ContactNumber ?>' />
         </p>
         
         <p>
         	<label for="phone2">Other Phone Number: </label>
-            <input type="number" name="phone2" id="phone2" value="" size="30" />
+            <input type="number" name="phone2" id="phone2" value='<?php echo $results -> OtherNumber ?>' />
         </p>
         
         <!--add a picture upload-->
         
         <input type="submit" value="Submit" />
-        <input type="hidden" value="<?php set_value('id', $form['id']); ?>" />
     <?php echo form_close(); ?>
 </div>
