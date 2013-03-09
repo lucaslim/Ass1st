@@ -24,12 +24,8 @@ class News_Model extends CI_Model {
 	 */
 	function __construct() {
 		parent::__construct();
-<<<<<<< HEAD
-		$this->load->database();
-=======
 
 		$this -> load -> helper("grid_helper");
->>>>>>> 2ff286935ed069222778b95a1dc623ce62866e31
 	}
 
 	// --------------------------------------------------------------------
@@ -120,6 +116,23 @@ class News_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 
+		/**
+	 * Insert new news
+	 *
+	 * This allows administrator to add new news to the database.
+	 *
+	 * This function will return the new news id if inserted successfully
+	 *
+	 */
+
+	function delete_news($id) {
+		//set id
+		$this -> db -> where('Id', $id);
+
+		//delete news
+		return $this -> db -> delete('News');
+	}
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -138,8 +151,6 @@ class News_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 
-	// --------------------------------------------------------------------
-
 	/**
 	 * Get News Headlines
 	 *
@@ -153,8 +164,6 @@ class News_Model extends CI_Model {
 		$query = $this->db->query('SELECT Id, Title FROM AllNews ORDER BY PostDate DESC LIMIT ' . $limit);
 		return $query->result_array();
 	}
-
-	// --------------------------------------------------------------------	
 
 	// --------------------------------------------------------------------
 

@@ -11,7 +11,8 @@
 		});
 	}); 
 </script>
-<h1>View2</h1>
+<h1>View</h1>
+<?php echo form_open('admin/news/delete_news'); ?>
 <div>
 	<table border="1" style="border-collapse: collapse; border: 1px solid #000;">
 		<tr>
@@ -24,7 +25,7 @@
 		<?php $count=1; foreach ($results as $items):	?>
 		<tr>
 			<td>
-				<input type="checkbox" name="select[]" />
+				<input type="checkbox" name="select[]" value='<?php echo $items -> Id; ?>' />
 			</td>
 			<td>
 				<!-- Set row number -->
@@ -43,5 +44,5 @@
 		</tr>
 		<? endforeach; ?>
 	</table>
-	<?php echo $page_links ?>
+	<?php echo $page_links ?><input type="submit" id="delete" name="delete" value="Move to Trash" onclick="return confirm('Are you sure you want to remove this news?');" />
 </div>

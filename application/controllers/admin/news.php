@@ -47,7 +47,7 @@ class News extends CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * View News
+	 * View News Page
 	 *
 	 * This will display the page with all the news listed on it.
 	 *
@@ -70,7 +70,7 @@ class News extends CI_Controller {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Edit News
+	 * View Edit News Page
 	 *
 	 * This will display the Edit Post page
 	 *
@@ -123,13 +123,13 @@ class News extends CI_Controller {
 
 		//If update pass, redirect to the list page
 		if ($query)
-			header("location: ../news");
+			header("location: view");
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * Add new news Page
+	 * View Add News Page
 	 *
 	 * This will display the Add New Post page
 	 *
@@ -157,6 +157,28 @@ class News extends CI_Controller {
 
 		//Get user_id from session;
 		$this -> news -> add_news($data);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Delete News
+	 *
+	 * This will delete selected news from the databse based on the checkbox
+	 * select
+	 *
+	 */
+	function delete_news() {
+		$select = $this -> input -> post('select');
+
+		if($select) {
+			foreach ($select as $value) {
+				//Delete news
+				$this -> news -> delete_news($value);
+			}
+		}
+
+		header("location: view");
 	}
 
 	// --------------------------------------------------------------------

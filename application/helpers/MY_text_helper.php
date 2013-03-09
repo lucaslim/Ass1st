@@ -11,21 +11,26 @@
 // --------------------------------------------------------------------
 
 /**
- * Get array of birth years
+ * Trim Html Text
  *
- * Dynamically populate an array of birth year from the
- * range of current year and  80 years ago.
+ * This will remove all html tags from the content itself. By setting
+ * number of characters, user could limit the number of words
+ * return based on the given number.
  *
  */
-function trim_html_text($content, $number_of_character) {
+function trim_html_text($content, $number_of_character = NULL) {
 	
 	$content = strip_tags($content);
 
-	$content = wordwrap(trim($content), $number_of_character, "<br />");
+	if($number_of_character != null){
+		$content = wordwrap(trim($content), $number_of_character, "<br />");
 
-	$arrContent = explode('<br />', $content);
+		$arrContent = explode('<br />', $content);
 
-	return $arrContent[0];
+		return $arrContent[0];
+	}
+
+	return content;
 }
 
 // --------------------------------------------------------------------
