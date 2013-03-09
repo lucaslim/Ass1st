@@ -197,5 +197,35 @@ class User_Model extends CI_Model {
 		$this -> db -> insert('UserTeamRole', $data);
 	}
 
+
+	/**
+	 *
+	 *
+	 * This will edit the row on the given id
+	 *
+	 * 
+	 */
+	function edit_user($id) {
+		$this->db->set('FirstName', $_POST['fname']);
+		$this->db->set('LastName', $_POST['lname']);
+		$this->db->set('Email', $_POST['email']);
+		$this->db->where('Id',$id);
+		$this->db->update('User');
+	}
+
+
+	/**
+	*retrieving the user information
+	*/
+	function get_user_info($id) {
+		
+		$results = $this->db->get_where('User',array('Id' => $id));
+
+		$data = $results->row();
+
+		//$data = array('fname' => $results->['FirstName'],'lname' => $results->['LastName']);
+		return $data;
+	}
+
 }
 ?>
