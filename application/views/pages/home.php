@@ -4,18 +4,18 @@
 			<div class="slider-wrapper theme-dark">
 				<div id="slider" class="nivoSlider">
 					<!--Image Size -- 720 X 360-->
-					<a href="#"><img src="<?php echo base_url(); ?>assets/images/championship.jpg" data-thumb="images/skates.jpg" alt="" title="#htmlcaption1" /></a>
-					<a href="#"><img src="<?php echo base_url(); ?>assets/images/roadhockey.jpg" data-thumb="<?php base_url(); ?>assets/images/roadhockey.jpg" alt="" title="#htmlcaption2" /></a>
-					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skillscomp.jpg" data-thumb="<?php base_url(); ?>assets/images/skillscomp.jpg" alt="" title="#htmlcaption3" /></a>
-					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skates.jpg" data-thumb="<?php base_url(); ?>assets/images/championship.jpg" alt="" title="#htmlcaption4" data-transition="" /></a>
+					<a href="#"><img src="<?php echo base_url(); ?>assets/images/championship.jpg" data-thumb="<?php echo base_url(); ?>assets/images/skates.jpg" alt="" title="#htmlcaption1" /></a>
+					<a href="#"><img src="<?php echo base_url(); ?>assets/images/roadhockey.jpg" data-thumb="<?php echo base_url(); ?>assets/images/roadhockey.jpg" alt="" title="#htmlcaption2" /></a>
+					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skillscomp.jpg" data-thumb="<?php echo base_url(); ?>assets/images/skillscomp.jpg" alt="" title="#htmlcaption3" /></a>
+					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skates.jpg" data-thumb="<?php echo base_url(); ?>assets/images/championship.jpg" alt="" title="#htmlcaption4" data-transition="" /></a>
 				</div>
 				<!--htmlcaption1-->
 				<div id="htmlcaption1" class="nivo-html-caption">
-					<div id="htmlcaptionLeft">
+					<div class="htmlcaptionLeft">
 						<h3><a href="#">TEAM THREE BECOMES NUMBER ONE</a></h3>
 						<p>After two tough losses in the semi‘s against the top seeded Wolverines, Team 3 bounced back to win four straight in the Eastern Conference Championship.</p>
 					</div>
-					<div id="htmlcaptionRight">
+					<div class="htmlcaptionRight">
 						<p>
 							<a href="#">» Finals Preview</a>
 						</p>
@@ -29,11 +29,11 @@
 				</div><!--htmlcaption1-->
 				<!--htmlcaption2-->
 				<div id="htmlcaption2" class="nivo-html-caption">
-					<div id="htmlcaptionLeft">
+					<div class="htmlcaptionLeft">
 						<h3><a href="#">SCHOOLYARD PUCK</a></h3>
 						<p>It's the 4th Annual Wreckit Stadium's Road Hockey Tournament.</p>
 					</div>
-					<div id="htmlcaptionRight">
+					<div class="htmlcaptionRight">
 						<p>
 							<a href="#">» Register Now</a>
 							
@@ -49,11 +49,11 @@
 				</div><!--htmlcaption2-->
 				<!--htmlcaption3-->
 				<div id="htmlcaption3" class="nivo-html-caption">
-					<div id="htmlcaptionLeft">
+					<div class="htmlcaptionLeft">
 						<h3><a href="#">LaFLAMME GROWS BRIGHTER</a></h3>
 						<p>Selected in the first round, 5th overall by Toronto, come meet our very own Jacques LaFlamme on July 23rd at 1pm, before he starts his professional career.</p>
 					</div>
-					<div id="htmlcaptionRight">
+					<div class="htmlcaptionRight">
 						<p>
 							<a href="#">» Career Stats</a>
 							
@@ -69,11 +69,11 @@
 				</div><!--htmlcaption3-->
 				<!--htmlcaption4-->
 				<div id="htmlcaption4" class="nivo-html-caption">
-					<div id="htmlcaptionLeft">
+					<div class="htmlcaptionLeft">
 						<h3><a href="#">DON'T BE DULL!</a></h3>
 						<p>Be on the edge of your game. Every Wednesday Night, Wreckit Stadium offer's half price skate sharpenings for all league players.</p>
 					</div>
-					<div id="htmlcaptionRight">
+					<div class="htmlcaptionRight">
 						<p>
 							<a href="#">» Visit the ProShop</a>
 							

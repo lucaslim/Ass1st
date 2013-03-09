@@ -85,7 +85,7 @@ class User extends CI_Controller {
 		$data['data_grid'] = buildGrid($grid_data);
 		
 		//load view
-		$this -> load -> view('admin/user_view_view', $data);
+		$this -> load -> view('admin/user_list_view', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -93,8 +93,7 @@ class User extends CI_Controller {
 	/**
 	 * JQGrid view for the User Class
 	 *
-	 * In case no parameters are given in the Url (e.g. path/User/).
-	 * The system will load this function by default
+	* This will display a list of user on the JQGrid
 	 *
 	 */
 

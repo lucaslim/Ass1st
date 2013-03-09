@@ -120,52 +120,9 @@ class User_Model extends CI_Model {
 	 */
 
 	function get_users($params) {
-		//Set start
-		$start = isset($params['start']) ? $params['start'] : NULL;
-		//Set limit
-		$limit = isset($params['limit']) ? $params['start'] : NULL;
-		//Set sort field
-		$sortField = isset($params['sortField']) ? $params['sortField'] : 'FullName';
-		//Set sort order
-		$sortOrder = isset($params['sortOrder']) ? $params['sortOrder'] : 'asc';
-		//Set where
-		$whereParam = isset($params['whereParam']) ? $params['whereParam'] : NULL;
-		//Set filters
-		$filters = isset($params['filters']) ? json_decode($params['filters']) : NULL;
-		//Set search
-		$isSearch = isset($params['isSearch']) ? json_decode($params['isSearch']) : NULL;
+		$this -> load -> helper('jqgrid_helper');
 
-		//Set limit if both start and limit isn't null
-		if (!empty($start) && !empty($limit))
-			$this -> db -> limit($limit, $start);
-
-		$this -> db -> where('(1=1)');
-
-		//Set where parameter
-		if (!empty($whereParam))
-			$this -> db -> where('(' . $whereParam . ')');
-
-		//Set search
-		if ($isSearch && $filters != null) {
-			//get rules
-			foreach ($filters -> rules as $rule) {
-				$field = $rule -> field;
-				$value = mysql_real_escape_string($rule -> data);
-
-				//add like clause
-				$this -> db -> like($field, $value, 'after');
-			}
-		}
-
-		$this -> db -> order_by($sortField, $sortOrder);
-
-		//Execute query
-		$query = $this -> db -> get('AllUsers');
-
-		if ($query -> num_rows() > 0)
-			return $query -> result();
-
-		return null;
+		return filter_grid($this -> db, $params, 'AllUsers');
 	}
 
 	// --------------------------------------------------------------------
@@ -184,13 +141,7 @@ class User_Model extends CI_Model {
 		$this -> load -> helper('security');
 
 		//set object for new user
-		$data = array('FirstName' => $result['first_name'], 
-					  'LastName' => $result['last_name'], 
-					  'Email' => $result['email'], 
-					  'Password' => do_hash($result['password'], 'md5'), 
-					  'Gender' => $result['gender'], 
-					  'DateOfBirth' => ($result['dob_year'] . '-' . $result['dob_month'] . '-' . $result['dob_day']), 
-					  'Status' => 'Active');
+		$data = array('FirstName' => $result['first_name'], 'LastName' => $result['last_name'], 'Email' => $result['email'], 'Password' => do_hash($result['password'], 'md5'), 'Gender' => $result['gender'], 'DateOfBirth' => ($result['dob_year'] . '-' . $result['dob_month'] . '-' . $result['dob_day']), 'Status' => 'Active');
 
 		//insert into database
 		$this -> db -> insert('User', $data);
@@ -201,7 +152,6 @@ class User_Model extends CI_Model {
 		//Inser user role
 		$this -> insert_user_role($return_id, 7);
 	}
-	
 
 	// --------------------------------------------------------------------
 
@@ -210,38 +160,24 @@ class User_Model extends CI_Model {
 	 *
 	 * This allows administrator to add new user to the database with a
 	 * complete profile and information.
-	 * 
+	 *
 	 * This function will return the new user id if inserted successfully
 	 *
 	 */
 	function insert_new_user($result) {
-		
+
 		//set object for new user
-		$data = array('FirstName' => $result['first_name'], 
-					  'LastName' => $result['last_name'], 
-					  'Email' => $result['email'], 
-					  'Password' => do_hash($result['password'], 'md5'), 
-					  'Height' => 100, //$result['height'],
-					  'Weight' => 100, //$result['weight'],
-					  'Gender' => $result['gender'], 
-					  'DateOfBirth' => ($result['dob_year'] . '-' . $result['dob_month'] . '-' . $result['dob_day']), 
-					  'CountryId' => $result['country'], 
-					  'City' => $result['city'], 
-					  'Province' => $result['province'], 
-					  'Address' => $result['address'], 
-					  'PostalCode' => $result['postal_code'], 
-					  'ContactNumber' => $result['contact_number'], 
-					  'OtherNumber' => $result['other_number'], 
-					  'Picture' => null, 
-					  'Status' => 'Active');
+		$data = array('FirstName' => $result['first_name'], 'LastName' => $result['last_name'], 'Email' => $result['email'], 'Password' => do_hash($result['password'], 'md5'), 'Height' => 100, //$result['height'],
+		'Weight' => 100, //$result['weight'],
+		'Gender' => $result['gender'], 'DateOfBirth' => ($result['dob_year'] . '-' . $result['dob_month'] . '-' . $result['dob_day']), 'CountryId' => $result['country'], 'City' => $result['city'], 'Province' => $result['province'], 'Address' => $result['address'], 'PostalCode' => $result['postal_code'], 'ContactNumber' => $result['contact_number'], 'OtherNumber' => $result['other_number'], 'Picture' => null, 'Status' => 'Active');
 
 		//insert into database
 		$this -> db -> insert('User', $data);
-		
+
 		//Get returned Id
 		$return_id = $this -> db -> insert_id();
-		
-		return $return_id; 
+
+		return $return_id;
 	}
 
 	// --------------------------------------------------------------------
@@ -259,6 +195,44 @@ class User_Model extends CI_Model {
 
 		//insert into database
 		$this -> db -> insert('UserTeamRole', $data);
+	}
+
+
+	/**
+	 *
+	 *
+	 * This will edit the row on the given id
+	 *
+	 * 
+	 */
+	function edit_user($id) {
+		$this->db->set('FirstName', $_POST['fname']);
+		$this->db->set('LastName', $_POST['lname']);
+		$this->db->set('Email', $_POST['email']);
+		$this->db->set('Height', $_POST['height']);
+		$this->db->set('Weight', $_POST['weight']);
+		$this->db->set('City', $_POST['city']);
+		$this->db->set('Province', $_POST['province']);
+		$this->db->set('Address', $_POST['address']);
+		$this->db->set('PostalCode', $_POST['pcode']);
+		$this->db->set('ContactNumber', $_POST['phone1']);
+		$this->db->set('OtherNumber', $_POST['phone2']);
+		$this->db->where('Id',$id);
+		$this->db->update('User');
+	}
+
+
+	/**
+	*retrieving the user information
+	*/
+	function get_user_info($id) {
+		
+		$results = $this->db->get_where('User',array('Id' => $id));
+
+		$data = $results->row();
+
+		//$data = array('fname' => $results->['FirstName'],'lname' => $results->['LastName']);
+		return $data;
 	}
 
 }

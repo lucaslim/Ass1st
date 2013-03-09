@@ -4,3 +4,8 @@
 */cache/*
 */cache/!index.html
 */config/*
+<<<<<<< HEAD
+/nbproject/*
+=======
+nbproject/*
+>>>>>>> Update Git Ignore list
