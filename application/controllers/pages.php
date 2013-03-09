@@ -34,7 +34,7 @@ class Pages extends CI_Controller {
 	 *
 	 */
 
-	function view($loadThisPage = 'home') {
+	function index($loadThisPage = 'home') {
 		
 		if (!file_exists('application/views/pages/'.$loadThisPage.'.php'))
 		{

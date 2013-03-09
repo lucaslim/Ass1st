@@ -229,7 +229,7 @@ button {
 
   ul {
     list-style-type: none;
-    padding: 0;
+    padding: 0; 
     margin: 0;
     width: 100%;
 
@@ -387,21 +387,30 @@ button {
    jQuery Slider Styles
    ========================================================================== */
 
-#htmlcaptionLeft {
+@sliderFontFamilySet: 13px Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
+
+
+.htmlcaptionLeft {
 	float: left;
-	width: 63%;
+	width: 68%;
+  padding: 1% 0% 0% 0%;
+  font: @sliderFontFamilySet;
+    h3{
+      font-weight: lighter;
+    }
 }
 
-#htmlcaptionRight {
+.htmlcaptionRight {
 	width: 23%;
 	margin-left: 2%;
-	padding: 2% 0 2% 2%;
+	padding: 0% 0 0% 2%;
 	border-left: 2px solid #993333;
 	float: left;
 	height: 100%;
+  font: @sliderFontFamilySet;
 
   p {
-    font-size: .9em;
+    //font-size: .9em;
   }
 }
 
@@ -542,16 +551,7 @@ button {
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
-}
 
-@media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
-}
 
 /* ==========================================================================
    Print styles.
