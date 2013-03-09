@@ -24,6 +24,8 @@ class News extends CI_Controller {
 
 		$this -> load -> helper('date');
 		$this -> load -> helper(array('form', 'url'));
+
+		$this -> load -> model('News_Model', 'news', TRUE);
 	}
 
 	// --------------------------------------------------------------------
@@ -31,12 +33,107 @@ class News extends CI_Controller {
 	/**
 	 * Default index for the News Class
 	 *
-	 * In case no parameters are given in the Url (e.g. path/User_Role/).
+	 * In case no parameters are given in the Url (e.g. path/News/).
 	 * The system will load this function by default
 	 *
 	 */
 	function index() {
-		$this -> load -> view('admin/news_view');
+
+		//redirect to view
+		header('location: view');
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * View News
+	 *
+	 * This will display the page with all the news listed on it.
+	 *
+	 */
+	function view() {
+
+		//Get total number of rows
+		$total_rows = $this -> news -> get_news_count();
+
+		//Set pagination data
+		$data = get_pagination_data("admin/news/view", $total_rows);
+
+		//Set news data
+		$data['results'] = $this -> news -> get_news($data['per_page'], $data['current_page']);
+
+		//load view
+		$this -> load -> view('admin/news_list_view', $data);
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Edit News
+	 *
+	 * This will display the Edit Post page
+	 *
+	 */
+
+	function edit_post($id) {
+		//redirect is id is not valid or not given
+		if (!isset($id) || $id == '' || $id < 1)
+			header("location: admin/news");
+
+		$data['Id'] = $id;
+
+		$this -> load -> view('admin/news_edit_view', $data);
+	}
+
+	/**
+	 * Get Post by Id
+	 *
+	 * This will return a JSON object based on the given Id. This function will
+	 * becalled by the edit_post page using jQuery Ajax
+	 *
+	 */
+
+	function get_post($id) {
+
+		$data = $this -> news -> get_news_by_id($id);
+		if (!$data)
+			return NULL;
+
+		echo json_encode($data);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Update news age
+	 *
+	 * This will update news that is on the page to the database
+	 *
+	 */
+	function update_news() {
+		$title = $this -> input -> post('news_title');
+		$content = $this -> input -> post('news_editor');
+		$id = $this -> input -> post('news_id');
+
+		$data = array('Title' => $title, 'Content' => $content);
+
+		$query = $this -> news -> update_news($id, $data);
+
+		//If update pass, redirect to the list page
+		if ($query)
+			header("location: ../news");
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Add new news Page
+	 *
+	 * This will display the Add New Post page
+	 *
+	 */
+	function new_post() {
+		$this -> load -> view('admin/news_add_view');
 	}
 
 	// --------------------------------------------------------------------
@@ -48,14 +145,11 @@ class News extends CI_Controller {
 	 *
 	 */
 	function add_news() {
-		
-		//Load required helper and models
-		$this -> load -> model('News_Model', 'news', TRUE);
-		
 		$title = $this -> input -> post('news_title');
 		$content = $this -> input -> post('news_editor');
-		$user_id = 1; //Get user_id from session;
-		
+		$user_id = 1;
+		//Get user_id from session;
+
 		$this -> news -> add_news($title, $content, $user_id);
 	}
 

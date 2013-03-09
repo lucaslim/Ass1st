@@ -29,7 +29,14 @@ class jqgrid_lib {
 		foreach ($columns as $columnNames => $columnOptions) {
 			foreach ($columnOptions as $columnName => $columnOption) {
 				$tmpColNames[] = $columnName;
-				$tmpColModels .= json_encode($columnOption) . ",";
+
+				//Check for custom function hyper_link_format
+				if (isset($columnOption["formatter"]) && $columnOption["formatter"] == 'hyper_link_format') {
+					//Finding "hyper_link_format" (with quotes) and remove the quotes so as to use the given function below
+					$tmpColModels .= str_replace("\"hyper_link_format\"", "hyper_link_format", json_encode($columnOption)) . ",";
+				} else {
+					$tmpColModels .= json_encode($columnOption) . ",";
+				}
 			}
 		}
 		$this -> colNames = json_encode($tmpColNames);
@@ -206,6 +213,15 @@ class jqgrid_lib {
 					$('#$buildDivName').trigger('reloadGrid');
 				}
 			}
+		}
+		
+		function hyper_link_format (cellvalue, options, rowObject) {
+			
+			alert(rowObject);
+			
+			alert(options.rowId);
+			
+			return '<a href=\"#\">' + cellvalue + '</a>';
 		}
 
 		";

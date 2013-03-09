@@ -1,7 +1,39 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>style/jqueryui/jqueryui.css" />
 <script type="text/javascript" src="<?php echo base_url(); ?>script/jquery.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>script/jqueryui.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>script/quick_register.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//Form
+		$('#quick_register_form').submit(function(e) {
+			e.preventDefault();
+
+			dataString = $(this).serialize();
+
+			$.ajax({
+				type : $(this).attr("method"),
+				url : $(this).attr("action"),
+				data : dataString,
+				dataType : "json",
+				success : function(data) {
+					$('#error_message').html(data.message);
+					$('#error_box').dialog("open");
+				}
+			});
+		});
+
+		//Error Box
+		$('#error_box').dialog({
+			resizable : false,
+			autoOpen : false,
+			modal : true,
+			buttons : {
+				Cancel : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+</script>
 <?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
 <table border="1">
 	<tr>

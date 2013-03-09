@@ -6,10 +6,29 @@ function buildGrid($aData) {
 	if (isset($aData['set_columns'])) {
 		$aProperty = array();
 		foreach ($aData['set_columns'] as $sProperty) {
-			$aProperty[] = array($sProperty['label'] => array('name' => $sProperty['name'], 'index' => $sProperty['name'], 'width' => $sProperty['width'], 'editable' => false, 'editoptions' => array('readonly' => 'true', 'size' => $sProperty['size'])));
+			$lProperty = array('name' => $sProperty['name']);
+
+			if (isset($sProperty['index']) && !empty($sProperty['index']))
+				$lProperty["index"] = $sProperty['index'];
+
+			$lProperty["width"] = $sProperty['width'];
+			$lProperty["editable"] = array('readonly' => 'true', 'size' => $sProperty['size']);
+
+			if (isset($sProperty['formatter']) && !empty($sProperty['formatter'])) {
+				$lProperty["formatter"] = $sProperty['formatter'];
+
+				//Check formatoptions has variables
+				if (isset($sProperty['formatoptions']) && !empty($sProperty['formatoptions']) && is_array($sProperty['formatoptions'])) {
+					$lProperty["formatoptions"] = $sProperty["formatoptions"];
+				}
+			}
+
+			$aProperty[] = array($sProperty['label'] => $lProperty);
 		}
 		$jqGrid -> setColumns($aProperty);
 	}
+
+	var_dump($aData['custom']);
 
 	if (isset($aData['custom'])) {
 		if (isset($aData['custom']['button'])) {
@@ -28,7 +47,7 @@ function buildGrid($aData) {
 
 	if (isset($aData['source']))
 		$jqGrid -> setSourceUrl(base_url() . 'index.php/' . $aData['source']);
-	
+
 	if (isset($aData['sort_name']))
 		$jqGrid -> setSortName($aData['sort_name']);
 
@@ -85,7 +104,7 @@ function buildSubGridData($aData) {
 				array_push($columnData, $aDataList[0] -> $col);
 			}
 			$rs -> rows[0]['cell'] = $columnData;
-			
+
 			echo json_encode($rs);
 		}
 	}
@@ -218,3 +237,94 @@ function buildWhereClauseForSearch($searchField, $searchString, $searchOperator)
 		return null;
 	}
 }
+
+/**
+ * Filter JQGrid
+ *
+ * This will return results based on the parameters given
+ *
+ */
+
+function filter_grid($db, $params, $table_name, $default_sort_field = NULL) {
+	//Set start
+	$start = isset($params['start']) ? $params['start'] : NULL;
+	//Set limit
+	$limit = isset($params['limit']) ? $params['start'] : NULL;
+	//Set sort field
+	$sortField = isset($params['sortField']) && $params['sortField'] != '' ? $params['sortField'] : $default_sort_field;
+	//Set sort order
+	$sortOrder = isset($params['sortOrder']) ? $params['sortOrder'] : 'asc';
+	//Set where
+	$whereParam = isset($params['whereParam']) ? $params['whereParam'] : NULL;
+	//Set filters
+	$filters = isset($params['filters']) ? json_decode($params['filters']) : NULL;
+	//Set search
+	$isSearch = isset($params['isSearch']) ? json_decode($params['isSearch']) : NULL;
+
+	//Set limit if both start and limit isn't null
+	if (!empty($start) && !empty($limit))
+		$db -> limit($limit, $start);
+
+	$db -> where('(1=1)');
+
+	//Set where parameter
+	if (!empty($whereParam))
+		$db -> where('(' . $whereParam . ')');
+
+	//Set search
+	if ($isSearch && $filters != null) {
+		//get rules
+		foreach ($filters -> rules as $rule) {
+			$field = $rule -> field;
+			$value = mysql_real_escape_string($rule -> data);
+
+			//add like clause
+			$db -> like($field, $value, 'after');
+		}
+	}
+	if (isset($sortField))
+		$db -> order_by($sortField, $sortOrder);
+
+	//Execute query
+	$query = $db -> get($table_name);
+
+	if ($query -> num_rows() > 0)
+		return $query -> result();
+
+	return null;
+}
+
+// --------------------------------------------------------------------
+
+function custom_hyper_link($function_name, $params) {
+	
+	$str = 'function ' . $function_name . ' (cellvalue, options, rowObject) {';
+	
+	//add all custom variables into the javascript function
+	foreach ($params as $key => $value) {
+		$str .= 'var ' . $key . ' = ' . convert_javascript_value_type($value) . ';'; 
+	}
+	
+	$str .= 'alert(options.rowId);';
+	
+	$str .= '}';
+
+	return $str;
+}
+
+/**
+ * Convert to proper javascript value type
+ *
+ * This will make sure that all strings from the associative array has a ''(quotes) 
+ * and bool/integer is without quotes for the javascript file
+ *
+ */
+
+function convert_javascript_value_type($value) {
+	if(is_integer($value) || is_bool($value))
+		return $value;
+	else
+		return '\'' . $value . '\'';
+}
+
+// --------------------------------------------------------------------
