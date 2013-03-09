@@ -27,7 +27,7 @@
 		
 		<!-- include scripts -->
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	    <script type="text/javascript" src="<?php base_url(); ?>script/vendor/jquery.nivo.slider.js"></script>
+	    <script type="text/javascript" src="<?php echo base_url(); ?>script/vendor/jquery.nivo.slider.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 		<script src="<?php echo base_url(); ?>script/main.js"></script>
 
