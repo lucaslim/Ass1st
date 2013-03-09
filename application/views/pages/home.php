@@ -4,10 +4,10 @@
 			<div class="slider-wrapper theme-dark">
 				<div id="slider" class="nivoSlider">
 					<!--Image Size -- 720 X 360-->
-					<a href="#"><img src="<?php base_url(); ?>assets/images/championship.jpg" data-thumb="images/skates.jpg" alt="" title="#htmlcaption1" /></a>
-					<a href="#"><img src="<?php base_url(); ?>assets/images/roadhockey.jpg" data-thumb="<?php base_url(); ?>assets/images/roadhockey.jpg" alt="" title="#htmlcaption2" /></a>
-					<a href="#"><img src="<?php base_url(); ?>assets/images/skillscomp.jpg" data-thumb="<?php base_url(); ?>assets/images/skillscomp.jpg" alt="" title="#htmlcaption3" /></a>
-					<a href="#"><img src="<?php base_url(); ?>assets/images/skates.jpg" data-thumb="<?php base_url(); ?>assets/images/championship.jpg" alt="" title="#htmlcaption4" data-transition="" /></a>
+					<a href="#"><img src="<?php echo base_url(); ?>assets/images/championship.jpg" data-thumb="images/skates.jpg" alt="" title="#htmlcaption1" /></a>
+					<a href="#"><img src="<?php echo base_url(); ?>assets/images/roadhockey.jpg" data-thumb="<?php base_url(); ?>assets/images/roadhockey.jpg" alt="" title="#htmlcaption2" /></a>
+					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skillscomp.jpg" data-thumb="<?php base_url(); ?>assets/images/skillscomp.jpg" alt="" title="#htmlcaption3" /></a>
+					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skates.jpg" data-thumb="<?php base_url(); ?>assets/images/championship.jpg" alt="" title="#htmlcaption4" data-transition="" /></a>
 				</div>
 				<!--htmlcaption1-->
 				<div id="htmlcaption1" class="nivo-html-caption">
@@ -93,7 +93,7 @@
 
 	<div id="rightContent">
 		<div id="accordion">
-			<h3>New Team Registration</h3>
+			<h3>blah blah blah</h3>
 			<div>
 				<p>
 					Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
