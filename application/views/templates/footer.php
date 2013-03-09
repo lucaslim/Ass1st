@@ -2,7 +2,7 @@
 				<div id="footerBottom">
 					<div id="footerLeft">
 						<p>
-							Footer - &copy; <?php echo date('Y'); ?>
+							<a id="assistlogo_small_href" href="#"><img src="<?php echo base_url(); ?>assets/images/logos/AssistLogo_small.png" /></a> TEAM ASSIST - &copy; <?php echo date('Y'); ?>
 						</p>
 					</div>
 					<div id="footerRight">
@@ -10,12 +10,15 @@
 							<li>
 								<a href="#">Privacy</a>
 							</li>
+							<li>•</li>
 							<li>
 								<a href="#">Terms</a>
 							</li>
+							<li>•</li>
 							<li>
 								<a href="#">Help</a>
 							</li>
+							<li>•</li>
 							<li>
 								<a href="#">Contact</a>
 							</li>

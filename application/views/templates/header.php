@@ -30,7 +30,12 @@
 		<div id="headerWrapper" class="clearfix">
 			<div id="topHeader">
 				<div id="brand">
-					<h1>Team Assist</h1>
+					<div id="brand_logo">
+						<a href="#"><img src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header2.png" /></a>
+					</div>
+					<div id="brand_info">
+						div to go here with info about the stadium!!!!!
+					</div> 
 				</div>
 				<div id="login">
 					<form action="">
