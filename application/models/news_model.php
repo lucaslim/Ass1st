@@ -104,11 +104,7 @@ class News_Model extends CI_Model {
 	 *
 	 */
 
-	function add_news($title, $content, $user_id) {
-
-		//set object for new user
-		$data = array('Title' => $title, 'Content' => $content, 'PostDate' => date('Y-m-d H:i:s'), 'UserId' => $user_id, 'Status' => 'Active');
-
+	function add_news($data) {
 		//insert into database
 		$this -> db -> insert('News', $data);
 

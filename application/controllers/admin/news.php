@@ -24,6 +24,7 @@ class News extends CI_Controller {
 
 		$this -> load -> helper('date');
 		$this -> load -> helper(array('form', 'url'));
+		$this -> load -> helper('text');
 
 		$this -> load -> model('News_Model', 'news', TRUE);
 	}
@@ -113,6 +114,7 @@ class News extends CI_Controller {
 	function update_news() {
 		$title = $this -> input -> post('news_title');
 		$content = $this -> input -> post('news_editor');
+		$description = trim_html_text($content, 145) . '...';
 		$id = $this -> input -> post('news_id');
 
 		$data = array('Title' => $title, 'Content' => $content);
@@ -147,10 +149,14 @@ class News extends CI_Controller {
 	function add_news() {
 		$title = $this -> input -> post('news_title');
 		$content = $this -> input -> post('news_editor');
+		$description = trim_html_text($content, 145) . '...';
 		$user_id = 1;
-		//Get user_id from session;
 
-		$this -> news -> add_news($title, $content, $user_id);
+		//set object for new user
+		$data = array('Title' => $title, 'Content' => $content, 'Description' => $description, 'PostDate' => date('Y-m-d H:i:s'), 'UserId' => $user_id, 'Status' => 'Active');
+
+		//Get user_id from session;
+		$this -> news -> add_news($data);
 	}
 
 	// --------------------------------------------------------------------

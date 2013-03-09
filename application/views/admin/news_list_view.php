@@ -31,7 +31,7 @@
 				<?php echo($current_page + $count++); ?>
 			</td>
 			<td>
-				<a href="news/edit_post/<?php echo $items -> Id ?>"><?php echo $items -> Title ?></a>
+				<a href="/news/edit_post/<?php echo $items -> Id ?>"><?php echo $items -> Title ?></a>
 				<input type="hidden" id="user_id" value="" />
 			</td>
 			<td>
