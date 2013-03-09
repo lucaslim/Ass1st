@@ -105,17 +105,6 @@ textarea {
 }
 
 /* ==========================================================================
-   Chrome Frame prompt
-   ========================================================================== */
-
-.chromeframe {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
-
-/* ==========================================================================
    Form Styles
    ========================================================================== */
 
@@ -133,20 +122,6 @@ button {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#401019', endColorstr='#1a3a67',GradientType=0 ); /* IE6-9 */
 	color: #CCCCCC;
 	border: 1px solid #401019;		
-}
-
-#menu li.search input {
-	padding: 2px 10px; 
-	margin: 0;
-	border: 0;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-}
-
-#menu li.search input:focus {
-	outline: none;
-	border: 0;
 }
 
 /* ==========================================================================
@@ -250,37 +225,41 @@ button {
 	clear: both;
 	width: 100%;
 	background-color: #000;	
-	overflow: auto;	
+	overflow: auto;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    li {
+      float: left;
+      color: #fff;
+      width: 8%;
+      padding: 1%;
+      text-align: center;
+
+      &:hover {
+        background-color: grey;
+      }
+    }
+  }
 }
 
-#menu ul {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-	width: 100%;
+.search {
+  float: right;
+  text-align: right;
+
+  &:hover {
+    background-color: black;
+  }
+
+  input {
+    float: left;
+  }
 }
 
-#menu li {
-	float: left;
-	color: #fff;
-	width: 8%;
-	padding: 1%;
-	text-align: center;
-}
-
-#menu li:hover {
-	background-color: grey;
-}
-
-#menu li.search {
-	float: right;
-	width: 25%;
-	text-align: right;
-}
-
-#menu li.search:hover {
-	background-color: #000;
-}
 
 /* ==========================================================================
    Main Content Styles
@@ -327,14 +306,14 @@ button {
 	margin: 0 auto;
 }
 
-	#footerBottom a {
+	a {
 		text-decoration :none;
 		color: #ccc;
+
+      &:hover {
+        border-bottom: 1px solid #ccc;
+      }
 	}
-	
-		#footerBottom a:hover {
-			border-bottom: 1px solid #ccc;	
-		}
 
 #footerLeft {
 	float: left;
@@ -344,18 +323,17 @@ button {
 #footerRight {
 	float: right;
 	padding-right: 2%;
-}
 
-#footerRight ul {
-	list-style-type: none;
-}
+  ul {
+    list-style-type: none;
 
-#footerRight ul li {
-	float: left;
-	padding: 0 0 0 25px;
-	margin: 0;
+    li {
+      float: left;
+      padding: 0 0 0 25px;
+      margin: 0;
+    }
+  }
 }
-
 
 
 /* ==========================================================================
@@ -363,47 +341,47 @@ button {
    ========================================================================== */
 
 #accordion {
+  h3 {
+    text-transform: uppercase;
+  }
+
+  .ui-state-default {
+    color: #cccccc;
+    background: #8b2126; /* Old browsers */
+    background: -moz-linear-gradient(top,  #8b2126 0%, #47121a 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8b2126), color-stop(100%,#47121a)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #8b2126 0%,#47121a 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #8b2126 0%,#47121a 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #8b2126 0%,#47121a 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #8b2126 0%,#47121a 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8b2126', endColorstr='#47121a',GradientType=0 ); /* IE6-9 */
+  }
+
+  .ui-state-hover {
+    color: #000;
+    background: #e2e2e2; /* Old browsers */
+    background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+  }
+
+  .ui-state-active {
+    color: #000;
+    background: #e2e2e2; /* Old browsers */
+    background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+  }
 }
 
-	#accordion h3 {
-		text-transform: uppercase;
-	}
-
-	.ui-state-default {
-		color: #cccccc;
-		background: #8b2126; /* Old browsers */
-		background: -moz-linear-gradient(top,  #8b2126 0%, #47121a 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8b2126), color-stop(100%,#47121a)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #8b2126 0%,#47121a 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #8b2126 0%,#47121a 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #8b2126 0%,#47121a 100%); /* IE10+ */
-		background: linear-gradient(to bottom,  #8b2126 0%,#47121a 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8b2126', endColorstr='#47121a',GradientType=0 ); /* IE6-9 */
-	}
-	
-	.ui-state-hover {
-		color: #000;
-		background: #e2e2e2; /* Old browsers */
-		background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
-		background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
-	}
-
-	.ui-state-active {
-		color: #000;
-		background: #e2e2e2; /* Old browsers */
-		background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
-		background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
-	}
 
 /* ==========================================================================
    jQuery Slider Styles
@@ -421,38 +399,41 @@ button {
 	border-left: 2px solid #993333;
 	float: left;
 	height: 100%;
-}
 
-#htmlcaptionRight p {
-	font-size: .9em;
+  p {
+    font-size: .9em;
+  }
 }
 
 .slider-wrapper {
 	max-width: 100%;
 	line-height: 1;
+
+  p {
+    line-height: 1.4;
+  }
+
+  h3 {
+    padding: 0;
+    margin: 0;
+    letter-spacing: -1px;
+  }
+
+  a {
+    color:#FFF;
+    text-decoration:none;
+
+    &:hover {
+      color: #3CF;
+      text-decoration:none;
+    }
+
+    &:active {
+      color: #3CF;
+      text-decoration:none;
+    }
+  }
 }
-
-	.slider-wrapper p {
-		line-height: 1.4;
-	}
-
-	.slider-wrapper h3 {
-		padding: 0;
-		margin: 0;
-		letter-spacing: -1px;
-	}
-
-	.slider-wrapper a, a:visited {
-		color:#FFF;
-		text-decoration:none;
-	}
-	
-	.slider-wrapper a:hover, a:active {
-		color: #3CF;
-		text-decoration:none;
-	}
-
-
 
 /* ==========================================================================
    Helper classes

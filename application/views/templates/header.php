@@ -174,9 +174,8 @@
 						<li>
 							About
 						</li>
-						<li class="search">
-							Search
-							<input type="text" />
-						</li>
 					</ul>
+					<div class="search">
+					</div>
+
 				</div>
