@@ -34,7 +34,13 @@
 						<a href="#"><img src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header2.png" /></a>
 					</div>
 					<div id="brand_info">
-						div to go here with info about the stadium!!!!!
+						<ul>
+							<li id="brand_info_stadium_li">ETOBICOKE WRECKIT STADIUM</li>
+							<li>205 HUMBER BOULEVARD</li>
+							<li>ETOBICOKE, ONTARIO M9W 6V3</li>
+							<li>(416) 675 5000</li>
+						</ul>
+						
 					</div> 
 				</div>
 				<div id="login">

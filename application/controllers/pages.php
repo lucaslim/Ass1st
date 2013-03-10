@@ -22,7 +22,7 @@ class Pages extends CI_Controller {
 	 */
 	function __construct() {
 		parent::__construct();
-		$this->load->model('News_Model');
+		//$this->load->model('News_Model');
 	}
 
 	// --------------------------------------------------------------------
@@ -42,7 +42,7 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 
-		$data['news'] = $this->News_Model->get_news(); // retrieve news
+		//$data['news'] = $this->News_Model->get_news(); // retrieve news
 		$data['archive'] = "News Archive";
 
 		$this -> load -> helper(array('form', 'url'));
@@ -55,8 +55,8 @@ class Pages extends CI_Controller {
 	// --------------------------------------------------------------------
 
 	function news($id) {
-		$data['news'] = $this->News_Model->get_news_by_id($id); // retrieve news
-		$data['headlines'] = $this->News_Model->get_news_headlines(); // retrieve news titles
+		//$data['news'] = $this->News_Model->get_news_by_id($id); // retrieve news
+		//$data['headlines'] = $this->News_Model->get_news_headlines(); // retrieve news titles
 		$data['title'] = $id;
 
 		$this -> load -> view('templates/header', $data);
