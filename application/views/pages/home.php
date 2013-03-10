@@ -101,72 +101,237 @@
 			</div>
 			<h3>New Player Registration</h3>
 			<div>
-				<p>
-					<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
-					<table border="1">
-						<tr>
-							<td>
-							<input type="text" name="first_name" id="first_name" placeholder="First Name" />
-							</td>
-							<td>
-							<input type="text" name="last_name" id="last_name" placeholder="Last Name"  />
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-							<input type="text" name="email" id="email" placeholder="Email"  />
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-							<input type="password" name="password" id="password" placeholder="Password"  />
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-							<input type="password" name="repassword" id="repassword" placeholder="Re-enter Password"  />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<select name="dob_month">
-									<option value="">MM</option>
-									<?php foreach($dob_month as $item => $value):?>
-									<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
-									<?php endforeach; ?>
-								</select>
-								<select name="dob_day">
-									<option value="">DD</option>
-									<?php foreach($dob_day as $item => $value):?>
-									<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
-									<?php endforeach; ?>
-								</select>
-								<select name="dob_year">
-									<option value="">YYYY</option>
-									<?php foreach($dob_year as $item => $value):?>
-									<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
-									<?php endforeach; ?>
-								</select>
-							</td>
-							<td>
-								<input type="radio" name="gender" value="Male">Male
-								<input type="radio" name="gender" value="Female">Female
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div>
-									<input type="checkbox" name="terms" id="terms">I agree to the <a href="terms.php">Terms</a> and have read the <a href="policy.php">Policy</a>.
-									<input type="submit" value="Submit" id="submit" name="submit"/>				
-								</div>
-							</td>
-						</tr>
-					</table>
-					<div id="error_box" title="Error">
-					 <div id="error_message"></div>
+				<div id="player_registration_form_div">
+					<div class="prf_format">
+						<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
+						
+
+
+
+
+
+						<!-- Start Testing table format -->
+
+						<form action="" class="register">
+
+				            <fieldset>
+				                <h3>Player Information</h3>
+				                <p></p>
+				                <p>
+				                    <!-- First Name -->
+				                    <input type="text" name="first_name" id="first_name" placeholder="First Name" class="" />
+				                    <!-- Last Name -->
+									<input type="text" name="last_name" id="last_name" placeholder="Last Name"  />
+				                </p>
+				                <p>
+				                	<!-- Email -->
+				                    <input type="text" name="email" id="email" class="long" placeholder="Email" />
+				                </p>
+				                <p>
+				                	<!-- Password -->
+				                    <input type="password" name="password" id="password" placeholder="Password"  />
+				                    <!-- Repeat Password -->
+				                    <input type="password" name="repassword" id="repassword" placeholder="Confirm Password"  />
+				                </p>
+
+				                <p>
+				                	<!-- Birthday -->
+				                	<div id="ddls_birthday">
+					                    <!-- Month -->
+					                    <select name="dob_month">
+											<option value="">Month</option>
+											<?php foreach($dob_month as $item => $value):?>
+											<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+											<?php endforeach; ?>
+										</select>
+										<!-- Day -->
+										<select name="dob_day">
+											<option value="">Day</option>
+											<?php foreach($dob_day as $item => $value):?>
+											<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+											<?php endforeach; ?>
+										</select>
+										<!-- Year -->
+										<select name="dob_year">
+											<option value="">Year</option>
+											<?php foreach($dob_year as $item => $value):?>
+											<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+											<?php endforeach; ?>
+										</select>
+									</div>
+
+
+				                	<!-- Gender Radio Options -->
+				                	<div id="rbs_gender">
+				                		<!-- Male -->
+					                	<div class="gender">
+					                		<input type="radio" name="gender" value="Male">		
+					                    	<label>Male</label>
+					                    </div>
+										<!-- Female -->
+										<div class="gender">
+											<input type="radio" name="gender" value="Female">
+					                    	<label>Female</label>
+					                    </div>
+					              	</div>
+				                </p>
+
+				                <p>
+				                    <!-- City -->
+				                    <input type="text" placeholder="City" class="short" />
+									<!-- Province -->
+				                    <select class="ddl_province">
+				                        <option value=""> Province</option>
+
+				                       	<option value="AB">Alberta</option>
+										<option value="BC">British Columbia</option>
+										<option value="MB">Manitoba</option>
+										<option value="NB">New Brunswick</option>
+										<option value="NL">Newfoundland</option>
+										<option value="NS">Nova Scotia</option>
+										<option value="ON">Ontario</option>
+										<option value="PE">Prince Edward Island</option>
+										<option value="QC">Quebec</option>
+										<option value="SK">Saskatchewan</option>
+										<option value="NT">Northwest Territories</option>
+										<option value="NU">Nunavut</option>
+										<option value="YT">Yukon</option>
+				                    </select>
+				                </p>
+				                
+				                <p>
+				                	<div class="ckb_agreeTerms">
+					                    <input type="checkbox" name="terms" id="terms" />
+					                </div>
+					                <div class="ckb_agreeTerms">
+					                    <label>I agree to the <a href="terms.php">Terms</a> and have read the <a href="policy.php">Policy</a>.</label>
+				                	</div>
+				                </p>
+				            </fieldset>
+
+				            <div>
+				            	<input type="submit" value="Submit" id="submit" name="submit"/>
+				            </div>
+
+				        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<!-- End table testing format -->
+
+
+
+
+
+
+
+
+
+						<!-- Lucas Table  -->
+
+						<!-- <table border="1">
+							<tr>
+								<td>
+								<input type="text" name="first_name" id="first_name" placeholder="First Name" />
+								</td>
+								<td>
+								<input type="text" name="last_name" id="last_name" placeholder="Last Name"  />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+								<input type="text" name="email" id="email" placeholder="Email"  />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+								<input type="password" name="password" id="password" placeholder="Password"  />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+								<input type="password" name="repassword" id="repassword" placeholder="Re-enter Password"  />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<select name="dob_month">
+										<option value="">MM</option>
+										<?php foreach($dob_month as $item => $value):?>
+										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+										<?php endforeach; ?>
+									</select>
+									<select name="dob_day">
+										<option value="">DD</option>
+										<?php foreach($dob_day as $item => $value):?>
+										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+										<?php endforeach; ?>
+									</select>
+									<select name="dob_year">
+										<option value="">YYYY</option>
+										<?php foreach($dob_year as $item => $value):?>
+										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+										<?php endforeach; ?>
+									</select>
+								</td>
+								<td>
+									<input type="radio" name="gender" value="Male">Male
+									<input type="radio" name="gender" value="Female">Female
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div>
+										<input type="checkbox" name="terms" id="terms">I agree to the <a href="terms.php">Terms</a> and have read the <a href="policy.php">Policy</a>.
+										<input type="submit" value="Submit" id="submit" name="submit"/>				
+									</div>
+								</td>
+							</tr>
+						</table> -->
+
+						<!-- End lucas Table -->
+
+
+
+
+
+
+
+
+
+
+
+
+						<div id="error_box" title="Error">
+							<div id="error_message"></div>
+						</div>
 					</div>
-				</p>
+				</div>
 			</div>
+
 			<h3>Upcoming Tournaments</h3>
 			<div>
 				<p>
