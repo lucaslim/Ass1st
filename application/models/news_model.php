@@ -161,8 +161,8 @@ class News_Model extends CI_Model {
 		return get_result($option);
 
 
-		$query = $this->db->query('SELECT Id, Title FROM AllNews ORDER BY PostDate DESC LIMIT ' . $limit);
-		return $query->result_array();
+		// $query = $this->db->query('SELECT Id, Title FROM AllNews ORDER BY PostDate DESC LIMIT ' . $limit);
+		// return $query->result_array();
 	}
 
 }
