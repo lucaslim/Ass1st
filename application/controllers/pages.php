@@ -42,7 +42,11 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 
+<<<<<<< HEAD
 		//$data['news'] = $this->News_Model->get_news(); // retrieve news
+=======
+		$data['news'] = $this->News_Model->get_news(5, 0); // retrieve news
+>>>>>>> Fixed duplicate function in News_Model
 		$data['archive'] = "News Archive";
 
 		$this -> load -> helper(array('form', 'url'));

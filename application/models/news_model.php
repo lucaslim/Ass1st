@@ -49,7 +49,13 @@ class News_Model extends CI_Model {
 	 *
 	 */
 	function get_news($total_num, $page_num) {
-		return get_results("AllNews", $total_num, $page_num);
+
+		$option = array('table_name' => 'AllNews', 
+						'order_by' => array('PostDate' => 'DESC'),
+						'start_number' => $start_num,
+						'total_number' => $total_num);
+
+		return get_result($option);
 	}
 
 	// --------------------------------------------------------------------
@@ -136,22 +142,6 @@ class News_Model extends CI_Model {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Get News
-	 *
-	 * This retrieves all news 
-	 * 
-	 * If no limit is provided, the default is the last 5 rows
-	 *
-	 */
-
-	function get_news($limit = '0,5') {
-		$query = $this->db->query('SELECT * FROM AllNews ORDER BY PostDate DESC LIMIT ' . $limit);
-		return $query->result_array();
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Get News Headlines
 	 *
 	 * This retrieves news headlines
@@ -161,24 +151,18 @@ class News_Model extends CI_Model {
 	 */
 
 	function get_news_headlines($limit = '0,5') {
+
+		// $option = array('table_name' => 'AllNews', 
+		// 				'column_name' => 'Id, Title',
+		// 				'order_by' => array('PostDate' => 'DESC'),
+		// 				'start_number' => $start_num,
+		// 				'total_number' => $total_num);
+
+		// return get_result($option);
+
+
 		$query = $this->db->query('SELECT Id, Title FROM AllNews ORDER BY PostDate DESC LIMIT ' . $limit);
 		return $query->result_array();
 	}
 
-	// --------------------------------------------------------------------
-
-	/**
-	 * Get News By ID
-	 *
-	 * This retrieves news by id number
-	 * 
-	 *
-	 */
-
-	function get_news_by_id($id) {
-		$query = $this->db->query('SELECT * FROM AllNews WHERE Id = ' . $id);
-		return $row = $query->row(); 
-	}
-
-	// --------------------------------------------------------------------
 }

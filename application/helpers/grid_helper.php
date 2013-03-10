@@ -33,16 +33,33 @@ function get_row_count($table_name) {
  *
  */
 
-function get_results($table_name, $total_num, $page_num) {
+function get_result($option) {
+
+	if(!isset($option))
+		return FALSE;
+
+	if(!isset($option['table_name']))
+		return FALSE;
 
 	//Create a new instance of CI
 	$CI = &get_instance();
 
+	//Set column names
+	if(isset($option['column_names']))
+		$CI -> db -> select($column_names);
+
 	//Set the limit on the database query
-	$CI -> db -> limit($total_num, $page_num);
+	if(isset($option['start_number']) && isset($option['total_number']))
+		$CI -> db -> limit($option['total_number'], $option['start_number']);
+
+	if($option['order_by'] != NULL){
+		foreach ($option['order_by'] as $column_name => $direction) {
+			$CI -> db -> order_by($column_name, $direction);
+		}
+	}
 
 	//Execute select statement
-	$query = $CI -> db -> get($table_name);
+	$query = $CI -> db -> get($option['table_name']);
 
 	//Check if any rows returned
 	if (!$query || $query -> num_rows() <= 0)

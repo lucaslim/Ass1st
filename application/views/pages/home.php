@@ -127,7 +127,7 @@
 			<!--<h3><?php echo $archive; // display title ?></h3>
 			<?php foreach($news as $news_item): ?>
 
-			    <h4><a href="news/<?php echo $news_item['Id'] ?>"><?php echo $news_item['Title'] ?></a></h4>
+			    <h4><a href="news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a></h4>
 
 			<?php endforeach ?>-->
 		</div>
