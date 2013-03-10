@@ -51,6 +51,10 @@ function get_result($option) {
 	//Set the limit on the database query
 	if(isset($option['start_number']) && isset($option['total_number']))
 		$CI -> db -> limit($option['total_number'], $option['start_number']);
+	else {
+		if(isset($option['total_number']))
+			$CI -> db -> limit($option['total_number']);
+	}
 
 	if($option['order_by'] != NULL){
 		foreach ($option['order_by'] as $column_name => $direction) {

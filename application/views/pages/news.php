@@ -16,7 +16,7 @@
 	<ul>
 		<?php foreach($headlines as $news_item): ?>
 			<li>
-				<a href="<?php echo $news_item['Id'] ?>"><?php echo $news_item['Title'] ?></a>
+				<a href="<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
 			</li>
 		<?php endforeach ?>
 	</ul>

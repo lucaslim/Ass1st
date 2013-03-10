@@ -150,15 +150,15 @@ class News_Model extends CI_Model {
 	 *
 	 */
 
-	function get_news_headlines($limit = '0,5') {
+	function get_news_headlines($start_num = 0, $total_num = 5) {
 
-		// $option = array('table_name' => 'AllNews', 
-		// 				'column_name' => 'Id, Title',
-		// 				'order_by' => array('PostDate' => 'DESC'),
-		// 				'start_number' => $start_num,
-		// 				'total_number' => $total_num);
+		$option = array('table_name' => 'AllNews', 
+						'column_name' => 'Id, Title',
+						'order_by' => array('PostDate' => 'DESC'),
+						'start_number' => $start_num,
+						'total_number' => $total_num);
 
-		// return get_result($option);
+		return get_result($option);
 
 
 		$query = $this->db->query('SELECT Id, Title FROM AllNews ORDER BY PostDate DESC LIMIT ' . $limit);
