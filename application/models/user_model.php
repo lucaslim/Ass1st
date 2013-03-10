@@ -25,6 +25,7 @@ class User_Model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 
+		$this -> load -> helper("grid_helper");
 		$this -> load -> helper('security');
 	}
 
@@ -119,10 +120,13 @@ class User_Model extends CI_Model {
 	 *
 	 */
 
-	function get_users($params) {
-		$this -> load -> helper('jqgrid_helper');
+	function get_users($total_num, $start_num) {
 
-		return filter_grid($this -> db, $params, 'AllUsers');
+		$option = array('table_name' => 'AllUsers', 
+						'start_number' => $start_num,
+						'total_number' => $total_num);
+
+		return get_result($option);
 	}
 
 	// --------------------------------------------------------------------

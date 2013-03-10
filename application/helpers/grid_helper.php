@@ -56,7 +56,7 @@ function get_result($option) {
 			$CI -> db -> limit($option['total_number']);
 	}
 
-	if($option['order_by'] != NULL){
+	if(isset($option['order_by'])){
 		foreach ($option['order_by'] as $column_name => $direction) {
 			$CI -> db -> order_by($column_name, $direction);
 		}

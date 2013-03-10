@@ -13,6 +13,19 @@ if (!defined('BASEPATH'))
 // --------------------------------------------------------------------
 
 class User extends CI_Controller {
+	/**
+	 * Constructor for the News Class
+	 *
+	 * Load required model, helper, library class file.
+	 *
+	 */
+	function __construct() {
+		parent::__construct();
+
+		$this -> load -> model('User_Model', 'user', TRUE);
+	}
+
+	// --------------------------------------------------------------------
 
 	/**
 	 * Default index for the User Class
@@ -22,96 +35,32 @@ class User extends CI_Controller {
 	 *
 	 */
 	function index() {
-		//Load required model, helper, library class file.
-		$this -> load -> helper('url_helper');
-		$this -> load -> helper('jqgrid_helper');
-		
-		$grid_data = array(
-				'set_columns' => array(
-				array(
-				'label' => 'Full Name',
-				'name' => 'FullName',
-				'width' => 300,
-				'size' => 10
-				),
-				array(
-				'label' => 'Email',
-				'name' => 'Email',
-				'width' => 300,
-				'size' => 10
-				),
-				array(
-				'label' => 'Height',
-				'name' => 'Height',
-				'width' => 50,
-				'size' => 10
-				),
-				array(
-				'label' => 'Weight',
-				'name' => 'Weight',
-				'width' => 50,
-				'size' => 10
-				),
-				array(
-				'label' => 'Date of Birth',
-				'name' => 'DateOfBirth',
-				'width' => 70,
-				'size' => 10
-				),
-				array(
-				'label' => 'Status',
-				'name' => 'Status',
-				'width' => 50,
-				'size' => 10
-				)
-				),
-				'div_name' => 'grid',
-				'source' => 'admin/user/view',
-				'suburl' => 'admin/user/view_sub',
-				'sort_name' => 'FullName',
-				'row_num' => 10,
-				'add_url' => 'admin/user/add',
-				'edit_url' => 'customer/exec/edit',
-				'delete_url' => 'customer/exec/del',
-				'caption' => 'User database',
-				'primary_key' => 'Id',
-				'grid_height' => 230,
-				'subgrid'=> true,
-				'subgrid_url' => 'view_sub',
-				'subgrid_columnnames' => array('Address', 'City', 'Province', 'CountryName', 'Contact Number', 'Other Number'),
-				'subgrid_columnwidth' => array(200,70,70,70,70,70)
-		);
-		
-		$data['data_grid'] = buildGrid($grid_data);
-		
-		//load view
-		$this -> load -> view('admin/user_list_view', $data);
+		//redirect to view
+		header('location: view');
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * JQGrid view for the User Class
+	 * View User Page
 	 *
-	* This will display a list of user on the JQGrid
+	 * This will display the page with all the user listed on it.
 	 *
 	 */
 
 	function view() {
-		
-		//Load required model, helper, library class file.
-		$this -> load -> helper('url_helper');
-		$this -> load -> helper('jqgrid_helper');
 
-		buildGridData(
-			array(
-				'model' => 'user_model',
-				'method' => 'get_users',
-				'pkid' => 'Id',
-				'columns' => array('FullName', 'Email', 'Height', 'Weight', 'DateOfBirth', 'Status'),
-				
-			)
-		);				
+		//Get total number of rows
+		$total_rows = $this -> user -> count_users();
+
+		//Set pagination data
+		$data = get_pagination_data("admin/user/view", $total_rows);
+
+		//Set news data
+		$data['results'] = $this -> user -> get_users($data['per_page'], $data['current_page']);
+
+		//load view
+		$this -> load -> view('admin/user_list_view', $data);			
 	}
 
 	// --------------------------------------------------------------------
