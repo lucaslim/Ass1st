@@ -47,7 +47,7 @@ class Pages extends CI_Controller {
 		}
 
 		$data['dob_year'] = get_birth_years(); //Get Birth Year
-		$data['dob_month'] = get_months(); //Get Birth Month
+		$data['dob_month'] = get_months_short(); //Get Birth Month
 		$data['dob_day'] = get_days(); //Get Birth Day
 		$data['news'] = $this->News_Model->get_news(5, 0); // retrieve news
 		$data['archive'] = "News Archive";
