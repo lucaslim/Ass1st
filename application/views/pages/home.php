@@ -102,7 +102,69 @@
 			<h3>New Player Registration</h3>
 			<div>
 				<p>
-					Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna.
+					<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
+					<table border="1">
+						<tr>
+							<td>
+							<input type="text" name="first_name" id="first_name" placeholder="First Name" />
+							</td>
+							<td>
+							<input type="text" name="last_name" id="last_name" placeholder="Last Name"  />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+							<input type="text" name="email" id="email" placeholder="Email"  />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+							<input type="password" name="password" id="password" placeholder="Password"  />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+							<input type="password" name="repassword" id="repassword" placeholder="Re-enter Password"  />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="dob_month">
+									<option value="">MM</option>
+									<?php foreach($dob_month as $item => $value):?>
+									<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+									<?php endforeach; ?>
+								</select>
+								<select name="dob_day">
+									<option value="">DD</option>
+									<?php foreach($dob_day as $item => $value):?>
+									<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+									<?php endforeach; ?>
+								</select>
+								<select name="dob_year">
+									<option value="">YYYY</option>
+									<?php foreach($dob_year as $item => $value):?>
+									<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</td>
+							<td>
+								<input type="radio" name="gender" value="Male">Male
+								<input type="radio" name="gender" value="Female">Female
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div>
+									<input type="checkbox" name="terms" id="terms">I agree to the <a href="terms.php">Terms</a> and have read the <a href="policy.php">Policy</a>.
+									<input type="submit" value="Submit" id="submit" name="submit"/>				
+								</div>
+							</td>
+						</tr>
+					</table>
+					<div id="error_box" title="Error">
+					 <div id="error_message"></div>
+					</div>
 				</p>
 			</div>
 			<h3>Upcoming Tournaments</h3>
@@ -124,12 +186,12 @@
 			</div>
 		</div><! -- /end accordion -->
 		<div class="newsDisplay">
-			<!--<h3><?php echo $archive; // display title ?></h3>
+			<h3><?php echo $archive; // display title ?></h3>
 			<?php foreach($news as $news_item): ?>
 
 			    <h4><a href="news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a></h4>
 
-			<?php endforeach ?>-->
+			<?php endforeach ?>
 		</div>
 	</div><! -- /end right content -->
 </div>

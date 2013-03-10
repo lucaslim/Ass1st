@@ -48,7 +48,7 @@ class News_Model extends CI_Model {
 	 * This will return an array of news information
 	 *
 	 */
-	function get_news($total_num, $page_num) {
+	function get_news($total_num, $start_num) {
 
 		$option = array('table_name' => 'AllNews', 
 						'order_by' => array('PostDate' => 'DESC'),
