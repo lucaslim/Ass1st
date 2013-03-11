@@ -18,19 +18,19 @@
  *
  */
 
-$(function() {
-    var icons = {
-      header: "ui-icon-circle-arrow-e",
-      activeHeader: "ui-icon-circle-arrow-s"
-    };
-	$( "#accordion" ).accordion({
-		active: false,
-		icons: icons,
-		animate: 100,
-		heightStyle: "content",
-		collapsible: false
-	});
-});
+ $(function() {
+ 	var icons = {
+ 		header: "ui-icon-circle-arrow-e",
+ 		activeHeader: "ui-icon-circle-arrow-s"
+ 	};
+ 	$( "#accordion" ).accordion({
+ 		active: false,
+ 		icons: icons,
+ 		animate: 100,
+ 		heightStyle: "content",
+ 		collapsible: false
+ 	});
+ });
 
 // --------------------------------------------------------------------
 
@@ -43,9 +43,9 @@ $(function() {
  *
  */
 
-$(window).load(function() {
-	$('#slider').nivoSlider();
-}); 
+ $(window).load(function() {
+ 	$('#slider').nivoSlider();
+ }); 
 
 // --------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ $(window).load(function() {
  *
  */
 
-$(document).ready(function() {
+ $(document).ready(function() {
 		//Form
 		$('#quick_register_form').submit(function(e) {
 			e.preventDefault();
@@ -88,4 +88,51 @@ $(document).ready(function() {
 	});
 
  // --------------------------------------------------------------------
+
+ /**
+  *
+  * User Login
+  *
+  */
+
+  function login_user(form, error_box, error_message, is_main_login) {
+	//Form
+	$(form).submit(function(e) {
+		e.preventDefault();
+alert($.myURL());
+		dataString = $(this).serialize();
+
+		$.ajax({
+			type : $(this).attr("method"),
+			url : $(this).attr("action"),
+			data : dataString,
+			dataType : "json",
+			success : function(data) {
+				if(!data.success)
+				{
+					$(error_message).html(data.message);
+					$(error_box).dialog("open");
+				}
+				else{
+					if(!is_main_login)
+						window.location.reload();
+					else
+						window.location.href = $.myURL();
+				}
+			}
+		});
+	});
+
+	//Error Box
+	$(error_box).dialog({
+		resizable : false,
+		autoOpen : false,
+		modal : true,
+		buttons : {
+			Cancel : function() {
+				$(this).dialog("close");
+			}
+		}
+	});
+}
 

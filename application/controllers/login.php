@@ -1,6 +1,7 @@
 <?php
-if (!defined('BASEPATH'))
-	exit('no direct script access allowed');
+if (!defined('BASEPATH'))	exit('no direct script access allowed');
+
+session_start();
 /**
  * Assist
  *
@@ -23,7 +24,7 @@ class Login extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
-			$this -> load -> model('User_Model', 'user', TRUE);
+		$this -> load -> model('User_Model', 'user', TRUE);
 	}
 
 	// --------------------------------------------------------------------
@@ -37,6 +38,7 @@ class Login extends CI_Controller {
 	 */
 
 	function index() {
+
 		$this -> load -> helper(array('form', 'url'));
 		$this -> load -> view('login_view');
 	}
@@ -62,7 +64,7 @@ class Login extends CI_Controller {
 
 		if ($this -> form_validation -> run() == FALSE) {
 			echo json_encode(array("success" => false,
-								   "message" => 'The email or password you entered is incorrect.'));	
+				"message" => 'The email or password you entered is incorrect.'));	
 
 		} else {
 			//Refreh
@@ -92,7 +94,7 @@ class Login extends CI_Controller {
 				$sess_array = array(
 					'id' => $row -> Id,
 					'fullname' => $row -> FullName
-				);
+					);
 
 				$this -> session -> set_userdata('authorized', $sess_array);
 			}

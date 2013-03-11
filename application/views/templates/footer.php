@@ -30,10 +30,10 @@
 		
 		<!-- include scripts -->
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	    <script type="text/javascript" src="<?php echo base_url(); ?>script/vendor/jquery.nivo.slider.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>script/vendor/jquery.nivo.slider.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 		<script src="<?php echo base_url(); ?>script/main.js"></script>
-
+		<script type="text/javascript" src="<?php echo base_url(); ?>script/myurl.js"></script>
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 		<!-- Uncomment later <script>
 			var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']]; ( function(d, t) {
@@ -41,6 +41,6 @@
 					g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
 					s.parentNode.insertBefore(g, s)
 				}(document, 'script'));
-		</script> -->
-	</body>
-</html>
+			</script> -->
+		</body>
+		</html>

@@ -1,42 +1,9 @@
 <script type="text/javascript">
-$(document).ready(function() {
-		//Form
-		$('#login_form').submit(function(e) {
-			e.preventDefault();
-
-			dataString = $(this).serialize();
-
-			$.ajax({
-				type : $(this).attr("method"),
-				url : $(this).attr("action"),
-				data : dataString,
-				dataType : "json",
-				success : function(data) {
-					if(!data.success)
-					{
-						$('#error_message').html(data.message);
-						$('#error_box').dialog("open");
-					}
-					else{
-						window.location.reload();
-					}
-				}
-			});
-		});
-
-		//Error Box
-		$('#error_box').dialog({
-			resizable : false,
-			autoOpen : false,
-			modal : true,
-			buttons : {
-				Cancel : function() {
-					$(this).dialog("close");
-				}
-			}
-		});
-	});
+$(document).ready(function (){
+	login_user($('#login_header_form'), $('#error_header_box'), $('#error_header_message'),);
+});
 </script>
+<<<<<<< HEAD
 <div id="player_login_form_div">
 	<?php echo form_open('login/login_verify', array('id' => 'login_form')); ?>
 		
@@ -63,3 +30,18 @@ $(document).ready(function() {
 
 	</form>
 </div>
+=======
+<?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>
+<fieldset>
+	<input type="text" placeholder="Email" id="email" name="email"/>
+	<input type="password" placeholder="Password" id="password" name="password"/>
+	<input type="submit" class="btn" value="Login"/>
+	<label class="checkbox">
+		<input type="checkbox" name="remember_me" id="remember_me">	Remember Me 
+	</label>
+	<div id="error_header_box" title="Incorrect Login">
+		<div id="error_header_message"></div>
+	</div>
+</fieldset>
+</form>
+>>>>>>> Added Login Page
