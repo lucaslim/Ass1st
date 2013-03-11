@@ -52,6 +52,8 @@ class Pages extends CI_Controller {
 		$data['news'] = $this->News_Model->get_news(5, 0); // retrieve news
 		$data['archive'] = "News Archive";
 
+		$data['login_content'] = $this -> load -> view('login_view', '', true);
+
 		$data['title'] = ucfirst($loadThisPage); // Use the file as the title
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('pages/'.$loadThisPage, $data);

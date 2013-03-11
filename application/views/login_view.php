@@ -1,19 +1,45 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Login</title>
-	</head>
-	<body>
-		<h1>Login Panel</h1>
-		<?php echo validation_errors(); ?>
-		<?php echo form_open('login/login_verify'); ?>
-		<label for="username">Email:</label>
-		<input type="text" size="20" id="email" name="email"/>
-		<br/>
-		<label for="password">Password:</label>
-		<input type="password" size="20" id="password" name="password"/>
-		<br/>
-		<input type="submit" value="Login"/>
-		</form>
-	</body>
-</html>
+<script type="text/javascript">
+$(document).ready(function() {
+		//Form
+		$('#login_form').submit(function(e) {
+			e.preventDefault();
+
+			dataString = $(this).serialize();
+
+			$.ajax({
+				type : $(this).attr("method"),
+				url : $(this).attr("action"),
+				data : dataString,
+				dataType : "json",
+				success : function(data) {
+					$('#error_message').html(data.message);
+					$('#error_box').dialog("open");
+				}
+			});
+		});
+
+		//Error Box
+		$('#error_box').dialog({
+			resizable : false,
+			autoOpen : false,
+			modal : true,
+			buttons : {
+				Cancel : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+</script>
+<?php echo form_open('login/login_verify', array('id' => 'login_form')); ?>
+<fieldset>
+	<input type="text" placeholder="Email" id="email" name="email"/>
+	<input type="password" placeholder="Password" id="password" name="password"/>
+	<input type="submit" class="btn" value="Login"/>
+	<label class="checkbox">
+		<input type="checkbox">	Remember Me 
+	</label>
+	<div id="error_box" title="Error">
+		<div id="error_message"></div>
+	</div>
+</fieldset>

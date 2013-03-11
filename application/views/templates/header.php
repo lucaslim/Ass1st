@@ -20,7 +20,8 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/slider/dark/dark.css" />
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/main/main.css" />
-		<script src="<?php echo base_url(); ?>scripts/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="<?php echo base_url(); ?>script/vendor/modernizr-2.6.2.min.js"></script>
 	</head>
 	<body>
 		<!--[if lt IE 7]>
@@ -44,18 +45,7 @@
 					</div> 
 				</div>
 				<div id="login">
-					<form action="">
-						<fieldset>
-							<input type="text" placeholder="Email"/>
-							<input type="password" placeholder="Password"/>
-							<button type="submit" class="btn">
-								Login
-							</button>
-							<label class="checkbox">
-								<input type="checkbox">
-								Remember Me </label>
-						</fieldset>
-					</form>
+					<?php echo $login_content ?>
 				</div>
 			</div>
 		</div>
