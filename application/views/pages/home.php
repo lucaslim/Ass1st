@@ -93,12 +93,6 @@
 
 	<div id="rightContent" class="clearfix">
 		<div id="accordion">
-			<h3>New Team Registration</h3>
-			<div>
-				<p>
-					Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-				</p>
-			</div>
 			<h3>New Player Registration</h3>
 			<div>
 				<div id="player_registration_form_div">
@@ -109,7 +103,7 @@
 
 				            <fieldset>
 				                <h3>Player Information</h3>
-				                <p></p>
+				                
 				                <p>
 				                    <!-- First Name -->
 				                    <input type="text" name="first_name" id="first_name" placeholder="First Name" class="" />
@@ -273,11 +267,17 @@
 					</div>
 				</div>
 			</div>
+			<h3>New Team Registration</h3>
+			<div>
+				<p>
+					Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. 
+				</p>
+			</div>
 
 			<h3>Upcoming Tournaments</h3>
 			<div>
 				<p>
-					Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+					Blah. Blah Blah Blah.Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
 				</p>
 				<ul>
 					<li>

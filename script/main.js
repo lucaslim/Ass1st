@@ -28,7 +28,7 @@ $(function() {
 		icons: icons,
 		animate: 100,
 		heightStyle: "content",
-		collapsible: true
+		collapsible: false
 	});
 });
 
