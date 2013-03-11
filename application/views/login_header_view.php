@@ -38,15 +38,15 @@ $(document).ready(function() {
 	});
 </script>
 <?php echo form_open('login/login_verify', array('id' => 'login_form')); ?>
-<fieldset>
-	<input type="text" placeholder="Email" id="email" name="email"/>
-	<input type="password" placeholder="Password" id="password" name="password"/>
-	<input type="submit" class="btn" value="Login"/>
-	<label class="checkbox">
-		<input type="checkbox">	Remember Me 
-	</label>
-	<div id="error_box" title="Incorrect Login">
-		<div id="error_message"></div>
-	</div>
-</fieldset>
+	<fieldset>
+		<input type="text" placeholder="Email" id="email" name="email"/>
+		<input type="password" placeholder="Password" id="password" name="password"/>
+		<input type="submit" class="btn" value="Login"/>
+		<label class="checkbox">
+			<input type="checkbox">	Remember Me 
+		</label>
+		<div id="error_box" title="Incorrect Login">
+			<div id="error_message"></div>
+		</div>
+	</fieldset>
 </form>

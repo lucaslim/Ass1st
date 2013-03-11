@@ -223,6 +223,138 @@ button {
 }
 
 /* ==========================================================================
+   Login - [Login_Header_View.php]
+   (Header Styles)
+   ========================================================================== */
+#player_registration_form_div {
+  color: #373C40;
+  font-family: Verdana,Arial, Helvetica, sans-serif;
+
+
+  .prf_format {
+    //padding: 7px 0 7px 0;
+    font-weight: 500;
+    font-size: 10pt;
+  }
+
+  a {
+    color: #656565;
+    text-decoration:none;
+    
+    &:hover{
+      color: red;
+      text-decoration: none;
+    }
+  }
+  
+  h3 {
+    padding:0px;
+    margin: 0 0 0px 0;
+    color: #000000;
+    font-size:10pt;
+    text-transform:uppercase;
+    text-align: center;
+  }
+
+  h4 {
+    padding:0px;
+    margin: 0px;
+    color: #ACACAC;
+    font-size:9pt;
+    font-weight:100;
+    text-transform:uppercase;
+
+  }
+  
+  form{
+    //border: dashed 1px pink;
+
+    p{
+      clear: both;
+      color: gray;
+      margin: 0 0 5px 0;
+    }
+
+    input{
+      width: 46.25%;
+      color:  black;
+      background-color: none; 
+      margin: 0 1px 3px 1px;
+      //border-radius: 3px;
+      //display: inline-block;
+
+        &.long{
+          width: 97.05%;
+        }
+        &.short{
+          width: 41.1%;
+        }
+        &[type=radio]{
+          //float:left;
+          width:15px;
+        }
+        &[type=checkbox]{
+          width:5%;
+          margin-top:4px;
+        }
+        &[type=submit]{
+          width:36%;
+          margin:4px 0 0px 0;
+        }
+        &:focus/*, select:focus*/{
+          background-color: cyan;
+        }
+    }
+
+    .ddl_province{
+      margin: 1px 0 0 4px;
+      font-size: 8pt;
+    }
+
+    #ddls_birthday{
+      margin: 1% 0 3% 0;
+      text-align: center;
+    }
+
+    #rbs_gender{
+      margin: 1% 0;
+      text-align: center;
+      
+      .gender{
+        display: inline-block;
+        margin: 0 10px;
+      }
+    }
+
+    .agreeForm{
+      clear: both;
+      //border: 1px red dashed;
+
+      .AF_ckb_desc_submit{
+        clear: both;
+        //border: 1px red dashed;
+
+        .AF_desc{
+          font-size: 7pt;  
+        }
+      }
+    }
+  }
+
+  // form.register select
+  // {
+  //     border: 1px solid #E1E1E1;
+  //     width: 130px;
+  //     float:left;
+  //     margin-bottom:3px;
+  //     color: #505050;
+  //     margin-right:5px;
+  // }
+}
+
+
+
+/* ==========================================================================
    Scoreboard Styles
    ========================================================================== */
 
