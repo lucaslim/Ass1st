@@ -448,7 +448,7 @@ a {
     text-decoration:none;
     
     &:hover{
-      color: #abda0f;
+      color: red;
       text-decoration: none;
     }
   }
@@ -473,40 +473,53 @@ a {
   }
   
   form{
+    //border: dashed 1px pink;
 
     p{
-      clear:both;
-      color:gray;
+      clear: both;
+      color: gray;
       margin: 0 0 5px 0;
     }
 
     input{
-      width: 130px;
+      width: 46.25%;
       color:  black;
-      float: left;
-      margin: 0 5px 5px 0;
+      background-color: none; 
+      margin: 0 1px 3px 1px;
+      //display: inline-block;
 
-       &.long{
-          width: 270px;
-          color: black;
+        &.long{
+          width: 97.05%;
         }
         &.short{
-          width: 120px;
-          color: black;
+          width: 41.1%;
         }
         &[type=radio]{
-          float:left;
+          //float:left;
           width:15px;
+        }
+        &[type=checkbox]{
+          width:5%;
+          margin-top:4px;
+        }
+        &[type=submit]{
+          width:36%;
+          margin-top:4px;
         }
     }
 
     .ddl_province{
-      margin-top: 1px;
+      margin: 1px 0 0 4px;
       font-size: 8pt;
     }
 
+    #ddls_birthday{
+      margin: 1% 0 3% 0;
+      text-align: center;
+    }
+
     #rbs_gender{
-      margin: 5px 0;
+      margin: 1% 0;
       text-align: center;
       
       .gender{
@@ -515,14 +528,18 @@ a {
       }
     }
 
-    #ddls_birthday{
-      margin: 5px 0;
-      text-align: center;
-    }
+    .agreeForm{
+      clear: both;
+      //border: 1px red dashed;
 
-    .ckb_agreeTerms{
-      display: inline-block;
+      .AF_ckb_desc_submit{
+        clear: both;
+        //border: 1px red dashed;
 
+        .AF_desc{
+          font-size: 7pt;  
+        }
+      }
     }
   }
 

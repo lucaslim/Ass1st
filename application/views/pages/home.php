@@ -104,13 +104,6 @@
 				<div id="player_registration_form_div">
 					<div class="prf_format">
 						<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
-						
-
-
-
-
-
-						<!-- Start Testing table format -->
 
 						<form action="" class="register">
 
@@ -132,6 +125,29 @@
 				                    <input type="password" name="password" id="password" placeholder="Password"  />
 				                    <!-- Repeat Password -->
 				                    <input type="password" name="repassword" id="repassword" placeholder="Confirm Password"  />
+				                </p>
+
+				                <p>
+				                    <!-- City -->
+				                    <input type="text" placeholder="City" class="short" />
+									<!-- Province -->
+				                    <select class="ddl_province">
+				                        <option value=""> Province</option>
+
+				                       	<option value="AB">Alberta</option>
+										<option value="BC">British Columbia</option>
+										<option value="MB">Manitoba</option>
+										<option value="NB">New Brunswick</option>
+										<option value="NL">Newfoundland</option>
+										<option value="NS">Nova Scotia</option>
+										<option value="ON">Ontario</option>
+										<option value="PE">Prince Edward Island</option>
+										<option value="QC">Quebec</option>
+										<option value="SK">Saskatchewan</option>
+										<option value="NT">Northwest Territories</option>
+										<option value="NU">Nunavut</option>
+										<option value="YT">Yukon</option>
+				                    </select>
 				                </p>
 
 				                <p>
@@ -160,7 +176,6 @@
 										</select>
 									</div>
 
-
 				                	<!-- Gender Radio Options -->
 				                	<div id="rbs_gender">
 				                		<!-- Male -->
@@ -175,80 +190,17 @@
 					                    </div>
 					              	</div>
 				                </p>
-
 				                <p>
-				                    <!-- City -->
-				                    <input type="text" placeholder="City" class="short" />
-									<!-- Province -->
-				                    <select class="ddl_province">
-				                        <option value=""> Province</option>
-
-				                       	<option value="AB">Alberta</option>
-										<option value="BC">British Columbia</option>
-										<option value="MB">Manitoba</option>
-										<option value="NB">New Brunswick</option>
-										<option value="NL">Newfoundland</option>
-										<option value="NS">Nova Scotia</option>
-										<option value="ON">Ontario</option>
-										<option value="PE">Prince Edward Island</option>
-										<option value="QC">Quebec</option>
-										<option value="SK">Saskatchewan</option>
-										<option value="NT">Northwest Territories</option>
-										<option value="NU">Nunavut</option>
-										<option value="YT">Yukon</option>
-				                    </select>
-				                </p>
-				                
-				                <p>
-				                	<div class="ckb_agreeTerms">
-					                    <input type="checkbox" name="terms" id="terms" />
-					                </div>
-					                <div class="ckb_agreeTerms">
-					                    <label>I agree to the <a href="terms.php">Terms</a> and have read the <a href="policy.php">Policy</a>.</label>
-				                	</div>
+				                	<div class="agreeForm">
+					                	<div class="AF_ckb_desc_submit">
+						                    <input type="checkbox" name="terms" id="terms" />
+						                    <label class="AF_desc">I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>
+					            			<input type="submit" value="Sign Up" id="submit" name="submit"/>
+					            		</div>
+				            		</div>
 				                </p>
 				            </fieldset>
-
-				            <div>
-				            	<input type="submit" value="Submit" id="submit" name="submit"/>
-				            </div>
-
 				        </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-						<!-- End table testing format -->
-
-
-
-
-
-
-
-
 
 						<!-- Lucas Table  -->
 
@@ -312,17 +264,7 @@
 							</tr>
 						</table> -->
 
-						<!-- End lucas Table -->
-
-
-
-
-
-
-
-
-
-
+						<!-- End Lucas Table -->
 
 
 						<div id="error_box" title="Error">
