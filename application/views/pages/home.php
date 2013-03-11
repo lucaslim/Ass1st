@@ -99,8 +99,6 @@
 					<div class="prf_format">
 						<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
 
-						
-
 				            <fieldset>
 				                <h3>Player Information</h3>
 				                
