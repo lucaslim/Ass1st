@@ -59,10 +59,10 @@ class Pages extends CI_Controller {
 		if($userdata) {
 			$profile['full_name'] = $userdata['fullname'];
 			//Show Profile
-			$data['login_content'] = $this -> load -> view('profile_header_view', $profile, true);
+			$data['login_content'] = $this -> load -> view('header_profile_view', $profile, true);
 		}
 		else {
-			$data['login_content'] = $this -> load -> view('login_header_view', '', true);
+			$data['login_content'] = $this -> load -> view('header_login_view', '', true);
 		}
 
 		$data['title'] = ucfirst($loadThisPage); // Use the file as the title

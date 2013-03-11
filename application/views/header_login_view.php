@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function (){
-	login_user($('#login_header_form'), $('#error_header_box'), $('#error_header_message'),);
+	login_user($('#login_header_form'), $('#error_header_box'), $('#error_header_message'), false);
 });
 </script>
 <div id="player_login_form_div">
@@ -22,8 +22,8 @@ $(document).ready(function (){
 				<a href="#">Forgot your password?</a>
 			</div>
 		</div>
-		<div id="error_box" title="Incorrect Login">
-			<div id="error_message"></div>
+		<div id="error_header_box" title="Incorrect Login">
+			<div id="error_header_message"></div>
 		</div>
 	</fieldset>
 

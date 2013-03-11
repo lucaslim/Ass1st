@@ -99,7 +99,7 @@
 	//Form
 	$(form).submit(function(e) {
 		e.preventDefault();
-alert($.myURL());
+		
 		dataString = $(this).serialize();
 
 		$.ajax({
