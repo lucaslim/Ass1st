@@ -1,8 +1,6 @@
-<?php echo form_open('login/login_verify', array('id' => 'login_form')); ?>
 <div>
 	<?php echo $full_name; ?>
 </div>
 <div>
-	Profile | Log Out
+	<a href="#">Profile</a> | <a href="<?php echo base_url(); ?>index.php/logout">Log Out</a>
 </div>
-</form>
