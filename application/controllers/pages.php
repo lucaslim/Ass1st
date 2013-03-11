@@ -1,6 +1,8 @@
 <?php
 if (!defined('BASEPATH'))
 	exit('no direct script access allowed');
+
+session_start();
 /**
  * Assist
  *
@@ -52,7 +54,16 @@ class Pages extends CI_Controller {
 		$data['news'] = $this->News_Model->get_news(5, 0); // retrieve news
 		$data['archive'] = "News Archive";
 
-		$data['login_content'] = $this -> load -> view('login_view', '', true);
+		//Check if logged in
+		$userdata = $this -> session -> userdata('authorized');
+		if($userdata) {
+			$profile['full_name'] = $userdata['fullname'];
+			//Show Profile
+			$data['login_content'] = $this -> load -> view('profile_header_view', $profile, true);
+		}
+		else {
+			$data['login_content'] = $this -> load -> view('login_header_view', '', true);
+		}
 
 		$data['title'] = ucfirst($loadThisPage); // Use the file as the title
 		$this -> load -> view('templates/header', $data);

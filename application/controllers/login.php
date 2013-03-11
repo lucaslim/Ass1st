@@ -61,11 +61,12 @@ class Login extends CI_Controller {
 		$this -> form_validation -> set_rules('password', 'password', 'required|callback_validate_user');
 
 		if ($this -> form_validation -> run() == FALSE) {
-			//Field validation failed.  User redirected to login page
-			$this -> load -> view('login_view');
+			echo json_encode(array("success" => false,
+								   "message" => 'The email or password you entered is incorrect.'));	
+
 		} else {
-			//Go to private area
-			redirect('admin/home', 'refresh');
+			//Refreh
+			echo json_encode(array("success" => true));
 		}
 	}
 
@@ -88,7 +89,11 @@ class Login extends CI_Controller {
 		if ($result) {
 			$sess_array = array();
 			foreach ($result as $row) {
-				$sess_array = array('id' => $row -> Id, 'fullname' => $row -> FullName);
+				$sess_array = array(
+					'id' => $row -> Id,
+					'fullname' => $row -> FullName
+				);
+
 				$this -> session -> set_userdata('authorized', $sess_array);
 			}
 			return TRUE;
