@@ -29,5 +29,22 @@ function validate_email($obj, $email, $error_message = 'Please enter a valid ema
 	return FALSE;
 }
 
+
+/**
+*Call back function for text validation
+*
+*make sure text only contains letters
+*
+*	function validate_text($obj, $text, $error_message = 'This field can only contain a letters'){
+*		$pattern = '/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/';
+*
+*		//if the entry matches the result will be 1
+*		if (preg_match($pattern, $text) == 1)
+*			return TRUE;
+*
+*		obj -> set_message('validate_text', $error_message)
+*		return FALSE;
+*	}
+*/
 // --------------------------------------------------------------------
 ?>

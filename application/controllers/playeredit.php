@@ -1,5 +1,6 @@
 <?php if ( ! defined ('BASEPATH')) exit('No direct script access allowed');
 	
+	session_start();
 	//controller for player registration
 	
 	class Playeredit extends CI_Controller
@@ -7,7 +8,10 @@
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->library('session');//loads the library for all the functions
+			$this -> load -> library('session');//loads the library for all the functions
+			$this -> load -> helper('validation_helper');
+			
+			
 		}
 		
 		public function index()
@@ -17,11 +21,14 @@
 			$data['title'] = 'Player Edit';
 			
 			$this->load->model('user_model');//loads the user_model.php
-			//$this->load->library('session');
-			$data['query']=$this->user_model->get_user_by_id($this->session->userdata('id'));
+			
+			$user_data = $this->session->userdata('authorized');//stores the information array for the user into $user_data
+			
+			
+			$data['query']=$this->user_model->get_user_by_id($user_data['id']);
 
-			$num = $this->session->userdata('id');
-			$data['results'] = $this -> user_model -> get_user_info($num);
+			
+			$data['results'] = $this -> user_model -> get_user_info($user_data['id']);
 
 
 			
@@ -35,27 +42,36 @@
 		public function edit_player()
 		{
 			
+			if ($_POST){
+				$this -> form_validation->set_rules('fname', 'First Name', 'required|callback_check_fname');
+				if ($this->form_validation->run() == FALSE){            
+		            echo validation_errors();       
+		        }
+		        else {}
+			}
+
+
+
+			$user_data = $this->session->userdata('authorized');
 			
-			//$this->load->library('session');
-			$num = $this->session->userdata('id');
+			
 			$this->load->model('user_model');
-			$this->user_model->edit_user($num);
-			
-			//$this->load->model('player_model');//loads this model
-        	//$this->message_model->add_player();//adds the player
+			$this->user_model->edit_user($user_data['id']);
 		}
 
-		/*public function edit()
+		function check_fname($p)
 		{
-			$this->load->model('user_model');
-			$num = $this->session->userdata('id');
+			$p = $this -> input -> post('fname');
 
-			$data['results'] = $this -> user_model -> get_user_info($num);
 
-			var_dump($data['results']);
+			$pattern = '/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/';
 
-			  //$data['form'] = '$form';
-			  $this->load->view('playeredit_view', $data);
-		}*/
+			if (preg_match($pattern, $p))
+				return true;
+			else{
+				$this->form_validation->set_message('check_fname', 'check your first name');
+				return false;
+			}
+		}
 	}
 ?>

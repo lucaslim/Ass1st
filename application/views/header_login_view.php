@@ -4,24 +4,34 @@
 	<?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>
 
 	<fieldset>
-		<div class="input_email_pass">
-			<input type="text" placeholder="Email" id="email" name="email" />
-			<input type="password" placeholder="Password" id="password" name="password"/>
-			<input type="submit" class="btn" value="Log In"/>
-		</div>
-		<div id="div_remember_forgot">
-			<div class="ckb_remember">
-				<label class="checkbox">
-					<input type="checkbox">	Remember Me 
-				</label>
+		<ul>
+			<li>
+				<div>
+					<input type="submit" class="btn" value="Log In"/>
+				</div>
+			</li>
+			<li>
+				<div>
+					<input type="password" placeholder="Password" id="password" name="password"/>
+				</div>
+				<div class="forgot_remember">
+					<a href="#">Forgot your password?</a>
+				</div>
+			</li>
+			<li>
+				<div>
+					<input type="text" placeholder="Email" id="email" name="email" />
+				</div>
+				<div class="forgot_remember">
+					<label class="checkbox">
+						<input type="checkbox">	Remember Me 
+					</label>
+				</div>
+			</li>
+			<div id="error_header_box" title="Incorrect Login">
+				<div id="error_header_message"></div>
 			</div>
-			<div class="ckb_remember" id="forgot_pass">
-				<a href="#">Forgot your password?</a>
-			</div>
-		</div>
-		<div id="error_header_box" title="Incorrect Login">
-			<div id="error_header_message"></div>
-		</div>
+		</ul>
 	</fieldset>
 
 </form>
