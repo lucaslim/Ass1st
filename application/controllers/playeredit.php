@@ -8,7 +8,8 @@
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->library('session');//loads the library for all the functions
+			$this -> load -> library('session');//loads the library for all the functions
+			$this -> load -> helper('validation_helper');
 			
 			
 		}
@@ -41,11 +42,36 @@
 		public function edit_player()
 		{
 			
+			if ($_POST){
+				$this -> form_validation->set_rules('fname', 'First Name', 'required|callback_check_fname');
+				if ($this->form_validation->run() == FALSE){            
+		            echo validation_errors();       
+		        }
+		        else {}
+			}
+
+
+
 			$user_data = $this->session->userdata('authorized');
 			
 			
 			$this->load->model('user_model');
 			$this->user_model->edit_user($user_data['id']);
+		}
+
+		function check_fname($p)
+		{
+			$p = $this -> input -> post('fname');
+
+
+			$pattern = '/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/';
+
+			if (preg_match($pattern, $p))
+				return true;
+			else{
+				$this->form_validation->set_message('check_fname', 'check your first name');
+				return false;
+			}
 		}
 	}
 ?>
