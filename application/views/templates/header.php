@@ -45,7 +45,7 @@
 					</div> 
 				</div>
 				<div id="login">
-					<?php echo $login_content ?>
+					<?php echo $login_header ?>
 				</div>
 			</div>
 		</div>

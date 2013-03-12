@@ -1,8 +1,6 @@
 <?php
-if (!defined('BASEPATH'))
-	exit('no direct script access allowed');
+if (!defined('BASEPATH')) exit('no direct script access allowed');
 
-session_start();
 /**
  * Assist
  *
@@ -28,6 +26,7 @@ class Pages extends CI_Controller {
 		$this -> load -> model('News_Model');
 
 		$this -> load -> helper('date');
+		$this -> load -> helper('template');
 		$this -> load -> helper(array('form', 'url'));
 	}
 
@@ -55,15 +54,7 @@ class Pages extends CI_Controller {
 		$data['archive'] = "News Archive";
 
 		//Check if logged in
-		$userdata = $this -> session -> userdata('authorized');
-		if($userdata) {
-			$profile['full_name'] = $userdata['fullname'];
-			//Show Profile
-			$data['login_content'] = $this -> load -> view('header_profile_view', $profile, true);
-		}
-		else {
-			$data['login_content'] = $this -> load -> view('header_login_view', '', true);
-		}
+		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
 
 		$data['title'] = ucfirst($loadThisPage); // Use the file as the title
 		$this -> load -> view('templates/header', $data);
@@ -73,14 +64,21 @@ class Pages extends CI_Controller {
 
 	// --------------------------------------------------------------------
 
+
 	function news($id) {
 		$data['news'] = $this->News_Model->get_news_by_id($id); // retrieve news
 		$data['headlines'] = $this->News_Model->get_news_headlines(); // retrieve news titles
 		$data['title'] = $id;
 
+		//Check if logged in
+		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
+
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('pages/news.php', $data);
 		$this -> load -> view('templates/footer');
 	}
+
+	// --------------------------------------------------------------------
+
 }
 ?>

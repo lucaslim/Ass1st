@@ -24,6 +24,9 @@ class Login extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
+		$this -> load -> helper('template');
+		$this -> load -> helper(array('form', 'url'));
+
 		$this -> load -> model('User_Model', 'user', TRUE);
 	}
 
@@ -39,8 +42,17 @@ class Login extends CI_Controller {
 
 	function index() {
 
-		$this -> load -> helper(array('form', 'url'));
+		//Redirect if user is logged in
+		if(!$this -> session -> userdata('authorized') == '')
+			redirect(base_url());
+
+		//Check if logged in
+		$data['title'] = 'Login';
+		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
+
+		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('login_view');
+		$this -> load -> view('templates/footer');
 	}
 
 	// --------------------------------------------------------------------
