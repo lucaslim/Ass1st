@@ -27,6 +27,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/slider/dark/dark.css" />
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/main/main.css" />
+		<link rel="stylesheet" href="<?php echo base_url(); ?>style/main/neil.css" /> <!-- merge later on -->
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="<?php echo base_url(); ?>script/vendor/modernizr-2.6.2.min.js"></script>
 	</head>
