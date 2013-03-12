@@ -50,8 +50,10 @@ class Login extends CI_Controller {
 		$data['title'] = 'Login';
 		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
 
+		$login_data['facebook_url'] = base_url() . 'index.php/login_fb/';  
+
 		$this -> load -> view('templates/header', $data);
-		$this -> load -> view('login_view');
+		$this -> load -> view('login_view', $login_data);
 		$this -> load -> view('templates/footer');
 	}
 
@@ -106,15 +108,14 @@ class Login extends CI_Controller {
 		$result = $this -> user -> authenticate_user($email, $password);
 
 		if ($result) {
-			$sess_array = array();
-			foreach ($result as $row) {
-				$sess_array = array(
-					'id' => $row -> Id,
-					'fullname' => $row -> FullName
-					);
 
-				$this -> session -> set_userdata('authorized', $sess_array);
-			}
+			$sess_array = array(
+				'id' => $result -> Id,
+				'fullname' => $row -> FullName,
+				);
+
+			$this -> session -> set_userdata('authorized', $sess_array);
+
 			return TRUE;
 		} else {
 			$this -> form_validation -> set_message('authenticate_user', 'Invalid username or password');

@@ -16,7 +16,7 @@
 	</tr>
 	<tr>
 		<td>
-			Password:
+			Passwords:
 		</td>
 		<td>
 			<input type="password" name="password" id="password" class="long"  />
@@ -36,6 +36,11 @@
 		</td>
 		<td>
 			<input type="submit" class="btn" value="Login"/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<a href='<?php echo $facebook_url; ?>'><img src="<?php echo base_url(); ?>assets/images/icons/facebook_login.png"></a>
 		</td>
 	</tr>
 </table>

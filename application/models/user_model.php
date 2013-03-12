@@ -52,7 +52,7 @@ class User_Model extends CI_Model {
 		$query = $this -> db -> get();
 
 		if ($query -> num_rows() == 1) {
-			return $query -> result();
+			return $query -> row();
 		} else {
 			return false;
 		}
@@ -158,6 +158,28 @@ class User_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
+	
+	/**
+	 * Insert new user
+	 *
+	 * This allows administrator to add new user to the database with a
+	 * complete profile and information.
+	 *
+	 * This function will return the new user id if inserted successfully
+	 *
+	 */
+	function insert_user($data) {
+
+		//insert into database
+		$this -> db -> insert('User', $data);
+
+		//Get returned Id
+		$return_id = $this -> db -> insert_id();
+
+		return $return_id;
+	}
+
+	// --------------------------------------------------------------------
 
 	/**
 	 * Insert new user
@@ -238,6 +260,40 @@ class User_Model extends CI_Model {
 		//$data = array('fname' => $results->['FirstName'],'lname' => $results->['LastName']);
 		return $data;
 	}
+
+	/**
+	*
+	* Check Facebook Id
+	* 
+	* Check if facebook id is attached to any user account
+	*
+	*/
+
+	function check_facebook_account($facebook_id) {
+
+		$result = $this -> db -> get_where('AllUsers', array('FacebookId' => $facebook_id));
+
+		if(!$result)
+			return NULL;
+
+		//facebook account found
+		if($result -> num_rows() > 0){
+			return $data = $result -> row();
+		}
+		else {
+			return NULL;
+		}
+	}
+
+	function insert_facebook_user($fb_data) {
+		$result = $this -> db -> insert('UserFacebook', $fb_data);
+
+		if($result)
+			return TRUE;
+		else
+			return FALSE;
+	}
+
 
 }
 ?>
