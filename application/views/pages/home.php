@@ -100,7 +100,7 @@
 						<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
 
 				            <fieldset>
-				                <h3>Player Information</h3>
+				                <!-- <h3>Player Information</h3> -->
 				                
 				                <p>
 				                    <!-- First Name -->
@@ -170,16 +170,10 @@
 
 				                	<!-- Gender Radio Options -->
 				                	<div id="rbs_gender">
-				                		<!-- Male -->
-					                	<div class="gender">
-					                		<input type="radio" name="gender" value="Male">		
-					                    	<label>Male</label>
-					                    </div>
+				                		<!-- Male -->					                	
+				                		<label><input type="radio" name="gender" value="Male">Male&nbsp;&nbsp;&nbsp;</label>
 										<!-- Female -->
-										<div class="gender">
-											<input type="radio" name="gender" value="Female">
-					                    	<label>Female</label>
-					                    </div>
+										<label><input type="radio" name="gender" value="Female">Female</label>
 					              	</div>
 				                </p>
 				                <p>
