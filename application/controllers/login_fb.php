@@ -67,7 +67,7 @@ class Login_Fb extends CI_Controller {
 		else {
 			try{
 				// Get user's data and print it
-				$fb_user = $this -> facebook -> api('/me?fields=picture');
+				$fb_user = $this -> facebook -> api('/me?fields=first_name,last_name,gender,email,picture');
 			} catch(FacebookApiException $e) {
 				Redirect($base_url() . 'index.php/login') ;
 			}
@@ -80,27 +80,28 @@ class Login_Fb extends CI_Controller {
 
 			//facebook_id is attached to an account
 			if($account == NULL) {
-				$username = $fb_user['username'];
+				$username = array_key_exists('username', $fb_user) ? $fb_user['username'] : '';
+
 				//Set facebook data
 				$fb_data = array('OauthUid' => $fb_id, 
-								 'Username' => isset($username) ? $username : NULL);
+								 'Username' => $username);
 
 
 				if($this -> user -> insert_facebook_user($fb_data))
 				{
-					$first_name = $fb_user['first_name'];
-					$last_name = $fb_user['last_name'];
-					$gender = $fb_user['gender'];
-					$email = $fb_user['email'];
-					$picture = $fb_user['picture']['data']['url'];
+					$first_name = array_key_exists('first_name', $fb_user) ? $fb_user['first_name'] : '';
+					$last_name = array_key_exists('last_name', $fb_user) ? $fb_user['last_name'] : '';
+					$gender = array_key_exists('gender', $fb_user) ? $fb_user['gender'] : '';
+					$email = array_key_exists('email', $fb_user) ? $fb_user['email'] : '';
+					$picture = array_key_exists('picture', $fb_user) ? $fb_user['picture']['data']['url'] : NULL;
 
 					//set facebook data to user account
-					$data = array('FirstName' => isset($first_name) ? $first_name : '',
-						'LastName' => isset($last_name) ? $last_name : '',
-						'Gender' => isset($gender) ? $gender : NULL,
-						'Email' => isset($email) ? $email : '',
+					$data = array('FirstName' => $first_name,
+						'LastName' => $last_name,
+						'Gender' => $gender,
+						'Email' => $email,
 						'FacebookId' => $fb_id,
-						'Picture' => isset($picture) ? $picture : NULL) ;
+						'Picture' => $picture);
 
 					$user_id = $this -> user -> insert_user($data);
 
@@ -117,6 +118,7 @@ class Login_Fb extends CI_Controller {
 				$sess_array = array(
 					'id' => $account -> Id,
 					'fullname' => $account -> FullName,
+					'picture' => $account -> Picture
 					);
 
 				$this -> session -> set_userdata('authorized', $sess_array);
