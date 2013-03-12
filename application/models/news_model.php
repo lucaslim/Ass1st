@@ -153,7 +153,7 @@ class News_Model extends CI_Model {
 	function get_news_headlines($start_num = 0, $total_num = 5) {
 
 		$option = array('table_name' => 'AllNews', 
-						'column_name' => 'Id, Title',
+						'column_name' => 'Id, Title, Description',
 						'order_by' => array('PostDate' => 'DESC'),
 						'start_number' => $start_num,
 						'total_number' => $total_num);

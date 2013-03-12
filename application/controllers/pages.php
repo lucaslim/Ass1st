@@ -23,6 +23,7 @@ class Pages extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
+		$this -> load -> model('Division_Model');
 		$this -> load -> model('News_Model');
 
 		$this -> load -> helper('date');
@@ -64,7 +65,6 @@ class Pages extends CI_Controller {
 
 	// --------------------------------------------------------------------
 
-
 	function news($id) {
 		$data['news'] = $this->News_Model->get_news_by_id($id); // retrieve news
 		$data['headlines'] = $this->News_Model->get_news_headlines(); // retrieve news titles
@@ -75,6 +75,22 @@ class Pages extends CI_Controller {
 
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('pages/news.php', $data);
+		$this -> load -> view('templates/footer');
+	}
+
+	// --------------------------------------------------------------------
+
+	function division() {
+		$data['teams'] = $this -> Division_Model -> get_divisions(); // retrieve east teams
+
+		// provide a page title
+		$data['title'] = "Division Profiles";
+
+		//Check if logged in
+		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
+
+		$this -> load -> view('templates/header', $data);
+		$this -> load -> view('pages/division.php', $data);
 		$this -> load -> view('templates/footer');
 	}
 

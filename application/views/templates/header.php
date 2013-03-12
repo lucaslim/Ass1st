@@ -32,7 +32,7 @@
 			<div id="topHeader">
 				<div id="brand">
 					<div id="brand_logo">
-						<a id="wreckit_logo_href" href="#"><img src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header2.png" /></a>
+						<a id="wreckit_logo_href" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header2.png" /></a>
 					</div>
 					<div id="brand_info">
 						<ul>

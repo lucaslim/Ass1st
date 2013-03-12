@@ -291,12 +291,17 @@
 			</div>
 		</div><! -- /end accordion -->
 		<div class="newsDisplay">
-			<h3><?php echo $archive; // display title ?></h3>
-			<?php foreach($news as $news_item): ?>
+			<h2><?php echo $archive; // display title ?></h2>
+			<ul>
+				<?php foreach($news as $news_item): ?>
 
-			    <h4><a href="news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a></h4>
+				    <li>
+				    	<a href="index.php/pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
+				    	<p><?php echo $news_item -> Description ?></p>
+				    </li>
 
-			<?php endforeach ?>
+				<?php endforeach ?>
+			</ul>
 		</div>
 	</div><! -- /end right content -->
 </div>
