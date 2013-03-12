@@ -93,6 +93,8 @@
   *
   * User Login
   *
+  * To be removed later
+  *
   */
 
   function login_user(form, error_box, error_message, is_main_login) {

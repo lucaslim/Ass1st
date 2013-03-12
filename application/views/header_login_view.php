@@ -1,7 +1,4 @@
 <script type="text/javascript">
-$(document).ready(function (){
-	login_user($('#login_header_form'), $('#error_header_box'), $('#error_header_message'), false);
-});
 </script>
 <div id="player_login_form_div">
 	<?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>

@@ -1,9 +1,9 @@
-<script type="text/javascript">
-$(document).ready(function (){
-	login_user($('#login_form'), $('#error_box'), $('#error_message'), true);
-});
-</script>
 <h3>Login</h3>
+
+<?php if($this -> session -> flashdata('message')) : ?>
+	<div style="border: 1px solid red;"><?= $this -> session -> flashdata('message') ?></div style="border: 1px solid red;">
+<?php endif; ?>
+
 <?php echo form_open('login/login_verify', array('id' => 'login_form')); ?>
 <table>
 	<tr>
