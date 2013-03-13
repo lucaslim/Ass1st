@@ -51,7 +51,7 @@ class Pages extends CI_Controller {
 		$data['dob_year'] = get_birth_years(); //Get Birth Year
 		$data['dob_month'] = get_months_short(); //Get Birth Month
 		$data['dob_day'] = get_days(); //Get Birth Day
-		$data['news'] = $this->News_Model->get_news(5, 0); // retrieve news
+		$data['news'] = $this -> News_Model -> get_news(5, 0); // retrieve news
 		$data['archive'] = "News Archive";
 
 		//Check if logged in
@@ -65,20 +65,44 @@ class Pages extends CI_Controller {
 
 	// --------------------------------------------------------------------
 
-	function news($id) {
-		$data['news'] = $this->News_Model->get_news_by_id($id); // retrieve news
-		$data['headlines'] = $this->News_Model->get_news_headlines(); // retrieve news titles
-		$data['title'] = $id;
+	/**
+	 * News Page 
+	 *
+	 * Displays news by $id or display headlines if no $id provided
+	 *
+	 */
+
+	function news($id = FALSE) {
 
 		//Check if logged in
 		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
 
+		if ($id != FALSE)
+		{
+			$data['news'] = $this -> News_Model -> get_news_by_id($id); // retrieve news
+			$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news titles
+			$data['title'] = "View News Item";
+
+			$this -> load -> view('templates/header', $data);
+			$this -> load -> view('pages/news_single.php', $data);
+			$this -> load -> view('templates/footer');
+		}
+
+		$data['news'] = $this -> News_Model -> get_news(5, 0); // retrieve 5 latest headlines and descriptions
+	
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('pages/news.php', $data);
 		$this -> load -> view('templates/footer');
 	}
 
 	// --------------------------------------------------------------------
+
+	/**
+	 * Division Page
+	 *
+	 * Displays the division profile
+	 *
+	 */
 
 	function division() {
 		$data['teams'] = $this -> Division_Model -> get_divisions(); // retrieve east teams
@@ -91,6 +115,29 @@ class Pages extends CI_Controller {
 
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('pages/division.php', $data);
+		$this -> load -> view('templates/footer');
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Team Profile
+	 *
+	 * Displays team by id
+	 *
+	 */
+
+	function team($id) {
+		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve east teams
+
+		// Provide a page title
+		$data['title'] = "Team Profile";
+
+		//Check if logged in
+		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
+
+		$this -> load -> view('templates/header', $data);
+		$this -> load -> view('pages/team_profile.php', $data);
 		$this -> load -> view('templates/footer');
 	}
 

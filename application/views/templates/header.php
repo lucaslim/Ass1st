@@ -166,22 +166,22 @@
 				<div id="menu">
 					<ul>
 						<li>
-							Schedule
+							<a href="<?php echo base_url(); ?>index.php">Schedule</a>
 						</li>
 						<li>
-							Scores
+							<a href="<?php echo base_url(); ?>index.php">Scores</a>
 						</li>
 						<li>
-							Standings
+							<a href="<?php echo base_url(); ?>index.php/pages/division/">Standings</a></a>
 						</li>
 						<li>
-							Stats
+							<a href="<?php echo base_url(); ?>index.php">Stats</a>
 						</li>
 						<li>
-							News
+							<a href="<?php echo base_url(); ?>index.php/pages/news/">News</a>
 						</li>
 						<li>
-							About
+							<a href="<?php echo base_url(); ?>index.php">About</a>
 						</li>
 					</ul>
 					<div class="search">

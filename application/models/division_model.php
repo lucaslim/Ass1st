@@ -37,7 +37,7 @@ class Division_Model extends CI_Model {
 	 */
 	function get_divisions() {
 
-		$this -> db -> select('Id, Name, DivisionName, ConferenceName');
+		$this -> db -> select('ConferenceId, ConferenceName, DivisionId, DivisionName, Id, Name');
 		$this -> db -> from('AllTeams');
 
 		$query = $this -> db -> get();
@@ -47,4 +47,32 @@ class Division_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Get Team by Id
+	 *
+	 * Retrieves all the division names based on id (1 = east, 2 = west)
+	 *
+	 */
+	function get_team_by_id($id) {
+
+		// set where clause
+		$this -> db -> where('Team.Id', $id);
+
+		$this -> db -> select('Team.Name AS tname, Team.Founded AS tfounded, Team.Picture AS tpicture, Arena.Name AS aname, Division.Name AS dname');
+		$this -> db -> from('Team');
+		$this -> db -> join('Arena', 'Arena.Id = Team.ArenaId');
+		$this -> db -> join('Division', 'Division.Id = Team.DivisionId');
+
+		$query = $this->db->get();
+
+		//Check if any rows returned
+		if (!$query || $query -> num_rows() <= 0)
+			return FALSE;
+		
+		return $query -> row();
+	}
+
+	// --------------------------------------------------------------------
 }
