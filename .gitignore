@@ -10,3 +10,4 @@
 nbproject/*
 >>>>>>> Update Git Ignore list
 /.idea/*
+*/.DS_Store
