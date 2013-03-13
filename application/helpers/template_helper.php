@@ -28,6 +28,7 @@ function SetLoginHeader() {
 			// Set Profile Data
 		$profile['full_name'] = $userdata['fullname'];
 		$profile['id'] = $userdata['id'];
+		$profile['picture'] = $userdata['picture'];
 
 		return $CI -> load -> view('header_profile_view', $profile, true);
 	}

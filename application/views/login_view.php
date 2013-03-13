@@ -1,4 +1,4 @@
-<h3>Login</h3>
+<h4>Login</h4>
 
 <?php if($this -> session -> flashdata('message')) : ?>
 	<div style="border: 1px solid red;"><?= $this -> session -> flashdata('message') ?></div style="border: 1px solid red;">

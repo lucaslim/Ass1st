@@ -95,6 +95,7 @@
 		<div id="accordion">
 			<h3>New Player Registration</h3>
 			<div>
+				
 				<div id="player_registration_form_div">
 					<div class="prf_format">
 						<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
