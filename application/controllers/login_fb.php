@@ -84,29 +84,46 @@ class Login_Fb extends CI_Controller {
 
 				//Set facebook data
 				$fb_data = array('OauthUid' => $fb_id, 
-								 'Username' => $username);
+					'Username' => $username);
 
-
+				//Insert facebook id into the database
 				if($this -> user -> insert_facebook_user($fb_data))
-				{
+				{	
 					$first_name = array_key_exists('first_name', $fb_user) ? $fb_user['first_name'] : '';
 					$last_name = array_key_exists('last_name', $fb_user) ? $fb_user['last_name'] : '';
 					$gender = array_key_exists('gender', $fb_user) ? $fb_user['gender'] : '';
-					$email = array_key_exists('email', $fb_user) ? $fb_user['email'] : '';
 					$picture = array_key_exists('picture', $fb_user) ? $fb_user['picture']['data']['url'] : NULL;
+					$email = array_key_exists('email', $fb_user) ? $fb_user['email'] : '';
 
+					$user_id = $this -> user -> check_user_email($email);
+
+					//Check if email already exists
+					if($user_id) {
+						$data = array('FacebookId' => $fb_id, 
+							'Picture' => $picture);
+
+						$where_clause = array('Email' => $email);
+
+						//Attached facebook Id to existing user account
+						$this -> user -> update_user($data, $where_clause);
+					}
+					else {
 					//set facebook data to user account
-					$data = array('FirstName' => $first_name,
-						'LastName' => $last_name,
-						'Gender' => $gender,
-						'Email' => $email,
-						'FacebookId' => $fb_id,
-						'Picture' => $picture);
+						$data = array('FirstName' => $first_name,
+							'LastName' => $last_name,
+							'Gender' => $gender,
+							'Email' => $email,
+							'FacebookId' => $fb_id,
+							'Picture' => $picture);
 
-					$user_id = $this -> user -> insert_user($data);
+						//Create new facebook account
+						$user_id = $this -> user -> insert_user($data);
 
-					if($user_id > 0){
-						$this -> user -> insert_user_role($user_id, 7);
+						if($user_id > 0){
+							//attach player role
+							$this -> user -> insert_user_role($user_id, 7);
+						}
+
 					}
 
 					$account = $this -> user -> get_user_info($user_id);

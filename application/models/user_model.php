@@ -223,6 +223,7 @@ class User_Model extends CI_Model {
 		$this -> db -> insert('UserTeamRole', $data);
 	}
 
+	// --------------------------------------------------------------------
 
 	/**
 	 *
@@ -247,9 +248,31 @@ class User_Model extends CI_Model {
 		$this->db->update('User');
 	}
 
+	// --------------------------------------------------------------------
 
 	/**
-	*retrieving the user information
+	 * Update User
+	 *
+	 * This will update user data based on the given array. 
+	 * Array may consist of the fields that needs to be update.
+	 *
+	 * This requires a where clause based on an associative array
+	 * eg. $where_clause = array('id' => $id);
+	 * 
+	 */
+	function update_user($data, $where_clause) {
+
+		$this->db->where($where_clause);
+		$this->db->update('User', $data);
+	}
+
+	// --------------------------------------------------------------------
+
+
+	/**
+	*
+	* retrieving the user information
+	*
 	*/
 	function get_user_info($id) {
 		
@@ -260,6 +283,8 @@ class User_Model extends CI_Model {
 		//$data = array('fname' => $results->['FirstName'],'lname' => $results->['LastName']);
 		return $data;
 	}
+
+	// --------------------------------------------------------------------
 
 	/**
 	*
@@ -285,6 +310,16 @@ class User_Model extends CI_Model {
 		}
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	*
+	* Insert facebook id
+	* 
+	* Check if facebook id is attached to any user account
+	*
+	*/
+
 	function insert_facebook_user($fb_data) {
 		$result = $this -> db -> insert('UserFacebook', $fb_data);
 
@@ -292,6 +327,33 @@ class User_Model extends CI_Model {
 			return TRUE;
 		else
 			return FALSE;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	*
+	* Check Email
+	* 
+	* Check email already exist in the database, if exist returns the Id of
+	* the account
+	*
+	*/
+
+	function check_user_email($email) {
+
+		$result = $this -> db -> get_where('User', array('Email' => $email));
+
+		if(!$result)
+			return FALSE;
+
+		//facebook account found
+		if($result -> num_rows() > 0){
+			return $result -> row() -> Id;
+		}
+		else {
+			return FALSE;
+		}
 	}
 
 
