@@ -47,14 +47,6 @@ class Login_Fb extends CI_Controller {
 	 *
 	 */
 
-	function test() {
-		$fb_user = $this -> facebook -> getUser();
-
-		$data = $this -> facebook -> api('/me/?fields=picture');
-
-		var_dump($data['picture']['data']['url']);
-	}
-
 	function index() {
 
 		$fb_user = $this -> facebook -> getUser();
@@ -69,7 +61,7 @@ class Login_Fb extends CI_Controller {
 				// Get user's data and print it
 				$fb_user = $this -> facebook -> api('/me?fields=first_name,last_name,gender,email,picture');
 			} catch(FacebookApiException $e) {
-				Redirect($base_url() . 'index.php/login') ;
+				// Throw Error
 			}
 
 			//Get facebook Id
@@ -139,12 +131,8 @@ class Login_Fb extends CI_Controller {
 					);
 
 				$this -> session -> set_userdata('authorized', $sess_array);
-
-
 			}
-
-			Redirect(base_url());
 		}
 	}
 }
-?>
+	?>

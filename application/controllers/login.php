@@ -27,6 +27,15 @@ class Login extends CI_Controller {
 		$this -> load -> helper('template');
 		$this -> load -> helper(array('form', 'url'));
 
+		//Load facebook config
+		$this -> config -> load("facebook", TRUE);
+
+		//Set config variable
+		$config = $this -> config -> item('facebook');
+
+		//Loads Facebook API Library
+		$this -> load -> library('facebook', $config);
+
 		$this -> load -> model('User_Model', 'user', TRUE);
 	}
 
@@ -50,7 +59,20 @@ class Login extends CI_Controller {
 		$data['title'] = 'Login';
 		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
 
-		$login_data['facebook_url'] = base_url() . 'index.php/login_fb/';  
+		//Facebook Login
+		$fb_user = $this -> facebook -> getUser();
+
+		if($user){ 
+			try{
+				// Get user's data 
+				$fb_user = $this -> facebook -> api('/me');
+			} catch(FacebookApiException $e) {
+				//show error
+			}
+		}
+
+		//Get Facebook App ID
+		$login_data['fb_api'] = $this -> facebook -> getAppID(); 
 
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('login_view', $login_data);

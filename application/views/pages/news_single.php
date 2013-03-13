@@ -4,7 +4,14 @@
 		<p class="subtitle">
 			Posted By: <?php echo $news -> Author; ?> | Date Posted: <?php echo $news -> PostDate; ?>
 		</p>
+		<p>
+			<div class="fb-like" data-href="<?php echo current_url(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+		</p>
 		<?php echo $news -> Content; ?>
+		<p>
+			<!-- <fb:comments href="http://www.codeopolis.com"></fb:comments> -->
+			<!-- <fb:comments href="<?php echo current_url(); ?>"></fb:comments> -->
+		</p>
 		<p>
 			<a href="#top">Back to the Top</a>
 		</p>

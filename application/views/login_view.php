@@ -1,3 +1,30 @@
+<!-- Facebook SDK -->
+<script>
+  // Additional JS functions here
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<?php echo $fb_api ?>', // App ID
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true,  // parse XFBML
+      oauth		 : true,
+    });
+  };
+
+  function login() {
+    FB.login(function(response) {
+        if (response.authResponse) {
+        	$.ajax({
+				type : "POST",
+				url : '<?php echo base_url() . 'index.php/login_fb/' ?>',
+				dataType : "json",
+				async: false
+			});
+			window.location.reload();
+        } 
+    });
+}
+</script>
 <h4>Login</h4>
 
 <?php if($this -> session -> flashdata('message')) : ?>
@@ -40,7 +67,8 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<a href='<?php echo $facebook_url; ?>'><img src="<?php echo base_url(); ?>assets/images/icons/facebook_login.png"></a>
+			<!-- <a href='<?php echo $facebook_url; ?>'><img src="<?php echo base_url(); ?>assets/images/icons/facebook_login.png"></a> -->
+			<img src="<?php echo base_url(); ?>assets/images/icons/facebook_login.png" onclick="login()" style="cursor:pointer;">
 		</td>
 	</tr>
 </table>
