@@ -87,12 +87,14 @@ class Pages extends CI_Controller {
 			$this -> load -> view('pages/news_single.php', $data);
 			$this -> load -> view('templates/footer');
 		}
-
-		$data['news'] = $this -> News_Model -> get_news(5, 0); // retrieve 5 latest headlines and descriptions
-	
-		$this -> load -> view('templates/header', $data);
-		$this -> load -> view('pages/news.php', $data);
-		$this -> load -> view('templates/footer');
+		else
+		{
+			$data['news'] = $this -> News_Model -> get_news(5, 0); // retrieve 5 latest headlines and descriptions
+		
+			$this -> load -> view('templates/header', $data);
+			$this -> load -> view('pages/news.php', $data);
+			$this -> load -> view('templates/footer');
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -105,7 +107,7 @@ class Pages extends CI_Controller {
 	 */
 
 	function division() {
-		$data['teams'] = $this -> Division_Model -> get_divisions(); // retrieve east teams
+		$data['teams'] = $this -> Division_Model -> get_divisions(); // retrieve teams
 
 		// provide a page title
 		$data['title'] = "Division Profiles";
@@ -128,7 +130,8 @@ class Pages extends CI_Controller {
 	 */
 
 	function team($id) {
-		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve east teams
+		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
+		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 
 		// Provide a page title
 		$data['title'] = "Team Profile";

@@ -28,7 +28,6 @@ class Division_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * Get Conference Profile
 	 *
@@ -48,7 +47,6 @@ class Division_Model extends CI_Model {
 	// --------------------------------------------------------------------
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * Get Team by Id
 	 *
@@ -75,4 +73,30 @@ class Division_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Team Roster by Id
+	 *
+	 * Retrieves the roster for the team specified
+	 *
+	 */
+	function get_team_roster_by_id($id) {
+
+		// set where clause
+		$this -> db -> where('AllRosters.TeamId', $id);
+
+		$this -> db -> select('*');
+		$this -> db -> from('AllRosters');
+
+		$query = $this->db->get();
+
+		//Check if any rows returned
+		if (!$query || $query -> num_rows() <= 0)
+			return FALSE;
+		
+		return $query -> result();
+	}
+
+	// --------------------------------------------------------------------	
 }
