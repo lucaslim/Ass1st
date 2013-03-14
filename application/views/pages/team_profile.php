@@ -8,7 +8,7 @@
 
 			<p><?php echo $team -> tpicture; ?></p>
 
-			<p><a href="<?php echo base_url(); ?>index.php/pages/division/"><?php echo $team -> dname; ?> Division</a></p>
+			<p><a href="<?php echo site_url(); ?>/pages/division/"><?php echo $team -> dname; ?> Division</a></p>
 
 
 	</div>

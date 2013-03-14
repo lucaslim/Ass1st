@@ -55,7 +55,7 @@ class Pages extends CI_Controller {
 		$data['archive'] = "News Archive";
 
 		//Check if logged in
-		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
+		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		$data['title'] = ucfirst($loadThisPage); // Use the file as the title
 		$this -> load -> view('templates/header', $data);
@@ -75,7 +75,7 @@ class Pages extends CI_Controller {
 	function news($id = FALSE) {
 
 		//Check if logged in
-		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
+		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		if ($id != FALSE)
 		{
@@ -111,7 +111,7 @@ class Pages extends CI_Controller {
 		$data['title'] = "Division Profiles";
 
 		//Check if logged in
-		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
+		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('pages/division.php', $data);
@@ -134,7 +134,7 @@ class Pages extends CI_Controller {
 		$data['title'] = "Team Profile";
 
 		//Check if logged in
-		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
+		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('pages/team_profile.php', $data);

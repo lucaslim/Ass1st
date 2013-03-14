@@ -122,9 +122,7 @@ class User_Model extends CI_Model {
 
 	function get_users($total_num, $start_num) {
 
-		$option = array('table_name' => 'AllUsers', 
-						'start_number' => $start_num,
-						'total_number' => $total_num);
+		$option = array('table_name' => 'AllUsers', 'start_number' => $start_num, 'total_number' => $total_num);
 
 		return get_result($option);
 	}
@@ -158,7 +156,7 @@ class User_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Insert new user
 	 *
@@ -230,22 +228,22 @@ class User_Model extends CI_Model {
 	 *
 	 * This will edit the row on the given id
 	 *
-	 * 
+	 *
 	 */
 	function edit_user($id) {
-		$this->db->set('FirstName', $_POST['fname']);
-		$this->db->set('LastName', $_POST['lname']);
-		$this->db->set('Email', $_POST['email']);
-		$this->db->set('Height', $_POST['height']);
-		$this->db->set('Weight', $_POST['weight']);
-		$this->db->set('City', $_POST['city']);
-		$this->db->set('Province', $_POST['province']);
-		$this->db->set('Address', $_POST['address']);
-		$this->db->set('PostalCode', $_POST['pcode']);
-		$this->db->set('ContactNumber', $_POST['phone1']);
-		$this->db->set('OtherNumber', $_POST['phone2']);
-		$this->db->where('Id',$id);
-		$this->db->update('User');
+		$this -> db -> set('FirstName', $_POST['fname']);
+		$this -> db -> set('LastName', $_POST['lname']);
+		$this -> db -> set('Email', $_POST['email']);
+		$this -> db -> set('Height', $_POST['height']);
+		$this -> db -> set('Weight', $_POST['weight']);
+		$this -> db -> set('City', $_POST['city']);
+		$this -> db -> set('Province', $_POST['province']);
+		$this -> db -> set('Address', $_POST['address']);
+		$this -> db -> set('PostalCode', $_POST['pcode']);
+		$this -> db -> set('ContactNumber', $_POST['phone1']);
+		$this -> db -> set('OtherNumber', $_POST['phone2']);
+		$this -> db -> where('Id', $id);
+		$this -> db -> update('User');
 	}
 
 	// --------------------------------------------------------------------
@@ -253,32 +251,31 @@ class User_Model extends CI_Model {
 	/**
 	 * Update User
 	 *
-	 * This will update user data based on the given array. 
+	 * This will update user data based on the given array.
 	 * Array may consist of the fields that needs to be update.
 	 *
 	 * This requires a where clause based on an associative array
 	 * eg. $where_clause = array('id' => $id);
-	 * 
+	 *
 	 */
 	function update_user($data, $where_clause) {
 
-		$this->db->where($where_clause);
-		$this->db->update('User', $data);
+		$this -> db -> where($where_clause);
+		$this -> db -> update('User', $data);
 	}
 
 	// --------------------------------------------------------------------
 
-
 	/**
-	*
-	* retrieving the user information
-	*
-	*/
+	 *
+	 * retrieving the user information
+	 *
+	 */
 	function get_user_info($id) {
-		
-		$results = $this->db->get_where('AllUsers',array('Id' => $id));
 
-		$data = $results->row();
+		$results = $this -> db -> get_where('AllUsers', array('Id' => $id));
+
+		$data = $results -> row();
 
 		//$data = array('fname' => $results->['FirstName'],'lname' => $results->['LastName']);
 		return $data;
@@ -287,25 +284,24 @@ class User_Model extends CI_Model {
 	// --------------------------------------------------------------------
 
 	/**
-	*
-	* Check Facebook Id
-	* 
-	* Check if facebook id is attached to any user account
-	*
-	*/
+	 *
+	 * Check Facebook Id
+	 *
+	 * Check if facebook id is attached to any user account
+	 *
+	 */
 
 	function check_facebook_account($facebook_id) {
 
 		$result = $this -> db -> get_where('AllUsers', array('FacebookId' => $facebook_id));
 
-		if(!$result)
+		if (!$result)
 			return NULL;
 
 		//facebook account found
-		if($result -> num_rows() > 0){
+		if ($result -> num_rows() > 0) {
 			return $data = $result -> row();
-		}
-		else {
+		} else {
 			return NULL;
 		}
 	}
@@ -313,17 +309,17 @@ class User_Model extends CI_Model {
 	// --------------------------------------------------------------------
 
 	/**
-	*
-	* Insert facebook id
-	* 
-	* Check if facebook id is attached to any user account
-	*
-	*/
+	 *
+	 * Insert facebook id
+	 *
+	 * Check if facebook id is attached to any user account
+	 *
+	 */
 
 	function insert_facebook_user($fb_data) {
 		$result = $this -> db -> insert('UserFacebook', $fb_data);
 
-		if($result)
+		if ($result)
 			return TRUE;
 		else
 			return FALSE;
@@ -332,30 +328,74 @@ class User_Model extends CI_Model {
 	// --------------------------------------------------------------------
 
 	/**
-	*
-	* Check Email
-	* 
-	* Check email already exist in the database, if exist returns the Id of
-	* the account
-	*
-	*/
+	 *
+	 * Check Email
+	 *
+	 * Check email already exist in the database, if exist returns the Id of
+	 * the account
+	 *
+	 */
 
 	function check_user_email($email) {
 
 		$result = $this -> db -> get_where('User', array('Email' => $email));
 
-		if(!$result)
+		if (!$result)
 			return FALSE;
 
 		//facebook account found
-		if($result -> num_rows() > 0){
+		if ($result -> num_rows() > 0) {
 			return $result -> row() -> Id;
-		}
-		else {
+		} else {
 			return FALSE;
 		}
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 *
+	 * Check Twitter Id
+	 *
+	 * Check if facebook id is attached to any user account
+	 *
+	 */
+
+	function check_twitter_account($twitter_id) {
+
+		$result = $this -> db -> get_where('AllUsers', array('TwitterId' => $twitter_id));
+
+		if (!$result)
+			return NULL;
+
+		//facebook account found
+		if ($result -> num_rows() > 0) {
+			return $data = $result -> row();
+		} else {
+			return NULL;
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 *
+	 * Insert twitter id
+	 *
+	 * Check if twitter id is attached to any user account
+	 *
+	 */
+
+	function insert_twitter_user($t_data) {
+		$result = $this -> db -> insert('UserTwitter', $t_data);
+
+		if ($result)
+			return TRUE;
+		else
+			return FALSE;
+	}
+
+	// --------------------------------------------------------------------
 
 }
 ?>

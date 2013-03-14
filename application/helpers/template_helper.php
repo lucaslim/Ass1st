@@ -18,7 +18,7 @@
  * or not
  *
  */
-function SetLoginHeader() {
+function set_login_header() {
 	//Create a new instance of CI
 	$CI = &get_instance();
 

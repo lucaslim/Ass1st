@@ -24,17 +24,18 @@ class Login extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
+		//Load Login Helper
+		$this -> load -> helper('login_helper');
+
+		//Redirect if user is logged in
+		if (is_loggedin())
+			redirect(base_url());
+
 		$this -> load -> helper('template');
 		$this -> load -> helper(array('form', 'url'));
 
 		//Load facebook config
 		$this -> config -> load("facebook", TRUE);
-
-		//Set config variable
-		$config = $this -> config -> item('facebook');
-
-		//Loads Facebook API Library
-		$this -> load -> library('facebook', $config);
 
 		$this -> load -> model('User_Model', 'user', TRUE);
 	}
@@ -50,32 +51,12 @@ class Login extends CI_Controller {
 	 */
 
 	function index() {
-
-		//Redirect if user is logged in
-		if(!$this -> session -> userdata('authorized') == '')
-			redirect(base_url());
-
 		//Check if logged in
 		$data['title'] = 'Login';
-		$data['login_header'] = SetLoginHeader(); //get from template_helper.php
-
-		//Facebook Login
-		$fb_user = $this -> facebook -> getUser();
-
-		if($user){ 
-			try{
-				// Get user's data 
-				$fb_user = $this -> facebook -> api('/me');
-			} catch(FacebookApiException $e) {
-				//show error
-			}
-		}
-
-		//Get Facebook App ID
-		$login_data['fb_api'] = $this -> facebook -> getAppID(); 
+		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		$this -> load -> view('templates/header', $data);
-		$this -> load -> view('login_view', $login_data);
+		$this -> load -> view('login_view');
 		$this -> load -> view('templates/footer');
 	}
 

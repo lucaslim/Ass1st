@@ -91,7 +91,7 @@ function get_pagination_data($controller_path, $total_rows, $per_page = 10) {
 
 	//set pagination configuration
 	$config = array();
-	$config["base_url"] = base_url() . 'index.php/' . $controller_path;
+	$config["base_url"] = site_url() . '/' . $controller_path;
 	$config["total_rows"] = $total_rows;
 	$config["per_page"] = $per_page;
 	$config["uri_segment"] = $CI -> uri -> total_segments();
