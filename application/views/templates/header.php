@@ -61,21 +61,24 @@
 			<div id="topHeader">
 				<div id="brand">
 					<div id="brand_logo">
-						<a id="wreckit_logo_href" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header2.png" /></a>
+						<a id="wreckit_logo_href" href="<?php echo base_url(); ?>"><img id="test" src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
 					</div>
-					<div id="brand_info">
+					<!-- <div id="brand_info">
 						<ul>
 							<li id="brand_info_stadium_li">ETOBICOKE WRECKIT STADIUM</li>
 							<li>205 HUMBER BOULEVARD</li>
 							<li>ETOBICOKE, ONTARIO M9W 6V3</li>
 							<li>(416) 675 5000</li>
 						</ul>
-						
-					</div> 
+					</div> --> 
 				</div>
-				<div id="login">
+
+				<!-- ///////LOGIN IN CONTROL/////// -->
+
+				<!-- <div id="login">
 					<?php echo $login_header ?>
-				</div>
+				</div> -->
+
 			</div>
 		</div>
 		<div id="bodyWrapper" class="clearfix">

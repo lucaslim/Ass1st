@@ -18,6 +18,10 @@ textarea {
     color: #222;
 }
 
+html {
+  height: 100%;
+}
+
 body {
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
@@ -130,14 +134,16 @@ button {
 #headerWrapper {
 	width: 100%;
 	background: #8c2126; /* Old browsers */
-	background: -moz-linear-gradient(top,  #8c2126 49%, #660000 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,#8c2126), color-stop(100%,#660000)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #8c2126 49%,#660000 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #8c2126 49%,#660000 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #8c2126 49%,#660000 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #8c2126 49%,#660000 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c2126', endColorstr='#660000',GradientType=0 ); /* IE6-9 */
-	color: #cccccc;	
+  color: #cccccc; 
+  border-bottom: navy solid 1px;
+	// background: -moz-linear-gradient(top,  #8c2126 49%, #660000 100%); /* FF3.6+ */
+	// background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,#8c2126), color-stop(100%,#660000)); /* Chrome,Safari4+ */
+	// background: -webkit-linear-gradient(top,  #8c2126 49%,#660000 100%); /* Chrome10+,Safari5.1+ */
+	// background: -o-linear-gradient(top,  #8c2126 49%,#660000 100%); /* Opera 11.10+ */
+	// background: -ms-linear-gradient(top,  #8c2126 49%,#660000 100%); /* IE10+ */
+	// background: linear-gradient(to bottom,  #8c2126 49%,#660000 100%); /* W3C */
+	// filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c2126', endColorstr='#660000',GradientType=0 ); /* IE6-9 */
+	
 }
 
 #bodyWrapper {
@@ -154,54 +160,54 @@ button {
 }
 
 #topHeader {
-	width: 1200px;
-	padding: 5px 0;
+	max-width: 1200px;
+  min-height: 40px;
+	padding: 0px 0;
 	margin: 0 auto;
 	overflow: auto;
+  z-index: 10; 
 }
 
 #brand {
 	float: left;
 	width: 50%;
 
- 
-  #wreckit_logo_href{
+  #brand_logo{
+    //border: dashed 1px blue;
+    //height: 25px;
+    margin: 5px 0;
+    float: left;
 
-    &:hover{
-      border-bottom: 0px;
+    #wreckit_logo_href{
+      &:hover{
+        border-bottom: 0px;
+      }
     }
   }
 }
 
-#brand_logo{
-  //border: dashed 1px blue;
-  margin: 5px 0;
-  float: left;
+// #brand_info{
+//   border: dashed 1px green;
+//   float: left;
+//   margin: 1px 50px;
 
-}
+//     ul {
+//       font-size: 10px;
+//       list-style-type: none;
+//       margin: 0;
+//       padding-left: 0; 
 
-#brand_info{
-  //border: dashed 1px green;
-  float: left;
-  margin: 1px 50px;
+//       li {
+//         color: #fff;
+//         padding: 0;
+//         text-align: right;
+//       }
+//     }
 
-    ul {
-      font-size: 10px;
-      list-style-type: none;
-      margin: 0;
-      padding-left: 0; 
-
-      li {
-        color: #fff;
-        padding: 0;
-        text-align: right;
-      }
-    }
-
-    #brand_info_stadium_li{
-      font-size: 15px;
-    }
-}
+//     #brand_info_stadium_li{
+//       font-size: 15px;
+//     }
+// }
 
 #topHeader form {
 }
@@ -210,7 +216,7 @@ button {
 	background-color: #ffffff;	
 	max-width: 1200px;
 	margin: 0 auto;
-	box-shadow: 0px 0px 10px #000;	
+	box-shadow: 0px 5px 8px #000;
 }
 
 
@@ -747,6 +753,59 @@ a {
     &:active {
       color: #3CF;
       text-decoration:none;
+    }
+  }
+}
+
+/* ==========================================================================
+   Login Page - [login_view.php]
+   ========================================================================== */
+#div_login{
+  width: 100%;
+  height: 100%;
+  //border: solid 1px blue;
+
+  #title_info{
+    //border: dashed 1px red;
+  }
+
+  #login_accounts{
+    margin: 0% auto 5% auto;
+    //border:1px red solid;
+    min-height: 200px;
+    width: 75%;
+    
+    #LA_socialnet{
+      border-right: solid 2px black;
+      min-height: 200px;
+      width: 49.862%;
+      float:left;
+      background-color: cyan;
+
+      ul{
+        list-style-type: none;
+
+        li{
+        }
+      }
+    
+      #LA_or{
+        width:10%;
+        font-size:1em;
+        position:relative;
+        top: 40%;
+        left:92%;
+        padding: 10px;
+        background-color:white;
+        text-align: center;
+      }
+    }
+
+    #LA_usremail{
+      float:left;
+      min-height: 200px;
+      width: 49.862%;
+      background-color: pink;
     }
   }
 }
