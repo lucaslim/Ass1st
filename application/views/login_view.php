@@ -1,4 +1,4 @@
-
+ 
 <div id="div_login" class="clearfix">
 	<div id="title_info">
 		<h4>Login to your account -- No Account Yet?</h4>
@@ -16,10 +16,10 @@
 				</li>
 				<!-- <a href='<?php echo $facebook_url; ?>'><img src="<?php echo base_url(); ?>assets/images/icons/facebook_login.png"></a> -->
 				<li>
-					<a href='<?php echo $facebook_url; ?>'><input type="submit" value="X&nbsp;&nbsp;Sign in with Facebook" id="submit_facebook" name="submit facebook" /></a>
+					<a href='<?php echo site_url('login_fb') ?>'><input type="submit" value="X&nbsp;&nbsp;Sign in with Facebook" id="submit_facebook" name="submit facebook" /></a>
 				</li>
 				<li>
-					<a href='http://www.twitter.com/'><input type="submit" value="X&nbsp;&nbsp;Sign in with Twitter" id="submit_twitter" name="submit twitter"/></a>
+					<a href='<?php echo site_url('login_twitter') ?>'><input type="submit" value="X&nbsp;&nbsp;Sign in with Twitter" id="submit_twitter" name="submit twitter"/></a>
 				</li>
 			</ul>
 				<div id="LA_or">OR</div>
