@@ -35,18 +35,28 @@
 		<div id="fb-root"></div>
 		<script>
 		  // Load the Facebook SDK Asynchronously
-		 //  (function(d, s, id) {
-			//   var js, fjs = d.getElementsByTagName(s)[0];
-			//   if (d.getElementById(id)) return;
-			//   js = d.createElement(s); js.id = id;
-			//   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-			//   fjs.parentNode.insertBefore(js, fjs);
-			// }(document, 'script', 'facebook-jssdk'));
+		  (function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+
+		  // Load the Twitter SDK
+		  ! function (d, s, id) {
+			    var js, fjs = d.getElementsByTagName(s)[0];
+			    if (!d.getElementById(id)) {
+			        js = d.createElement(s);
+			        js.id = id;
+			        js.src = "https://platform.twitter.com/widgets.js";
+			        fjs.parentNode.insertBefore(js, fjs);
+			    }
+			}(document, "script", "twitter-wjs");
 		</script>
 		<!--[if lt IE 7]>
 		<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 		<![endif]-->
-
 		<div id="headerWrapper" class="clearfix">
 			<div id="topHeader">
 				<div id="brand">
