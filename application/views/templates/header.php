@@ -59,9 +59,17 @@
 		<![endif]-->
 		<div id="headerWrapper" class="clearfix">
 			<div id="topHeader">
-				<div id="brand">
-					<div id="brand_logo">
-						<a id="wreckit_logo_href" href="<?php echo base_url(); ?>"><img id="test" src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
+				<div id="brand_logo">
+					<a id="wreckit_logo_href" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
+				</div>
+				<div id="th_search">
+					<div id="search-box">
+	  					<form action="/search" id="search-form" method="get" target="_top">
+	    					<input id="search-text" name="q" placeholder="Search for players, teams or tournaments" type="text"/>
+	    					<button id="search-button" type="submit">
+	    						<span ><i class="icon-search"></i></span>
+	    					</button>
+	  					</form>
 					</div>
 					<!-- <div id="brand_info">
 						<ul>
