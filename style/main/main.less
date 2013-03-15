@@ -7,6 +7,12 @@
  */
 
 /* ==========================================================================
+   FONT STYLE -- FONT AWESOME
+   ========================================================================== */
+
+ //@import url("../fontAwesome/font-awesome.min.css");
+
+/* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
 
@@ -112,19 +118,29 @@ textarea {
    ========================================================================== */
 
 button {
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background: #401019; /* Old browsers */
-	background: -moz-linear-gradient(top,  #401019 0%, #1a3a67 35%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#401019), color-stop(35%,#1a3a67)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #401019 0%,#1a3a67 35%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #401019 0%,#1a3a67 35%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #401019 0%,#1a3a67 35%); /* IE10+ */
-	background: linear-gradient(to bottom,  #401019 0%,#1a3a67 35%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#401019', endColorstr='#1a3a67',GradientType=0 ); /* IE6-9 */
-	color: #CCCCCC;
-	border: 1px solid #401019;		
+  width:36%;
+  margin: 1% 0 0 1%;
+
+  color: #cccccc;
+  font-weight: normal;
+
+  background: #1a3a67; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFhM2E2NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY1JSIgc3RvcC1jb2xvcj0iIzFhM2E2NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #1a3a67 0%, #1a3a67 65%, #000000 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1a3a67), color-stop(65%,#1a3a67), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a3a67', endColorstr='#000000',GradientType=0 ); /* IE6-8 */
+
+  border: black solid 1px;
+  border-radius: 3px;
+
+  &:active{
+      background: #091834;
+  }
 }
 
 /* ==========================================================================
@@ -168,50 +184,6 @@ button {
   z-index: 10; 
 }
 
-#brand {
-	float: left;
-	width: 50%;
-
-  #brand_logo{
-    //border: dashed 1px blue;
-    //height: 25px;
-    margin: 5px 0;
-    float: left;
-
-    #wreckit_logo_href{
-      &:hover{
-        border-bottom: 0px;
-      }
-    }
-  }
-}
-
-// #brand_info{
-//   border: dashed 1px green;
-//   float: left;
-//   margin: 1px 50px;
-
-//     ul {
-//       font-size: 10px;
-//       list-style-type: none;
-//       margin: 0;
-//       padding-left: 0; 
-
-//       li {
-//         color: #fff;
-//         padding: 0;
-//         text-align: right;
-//       }
-//     }
-
-//     #brand_info_stadium_li{
-//       font-size: 15px;
-//     }
-// }
-
-#topHeader form {
-}
-
 #bodyContent {
 	background-color: #ffffff;	
 	max-width: 1200px;
@@ -220,107 +192,202 @@ button {
 }
 
 
-
-
 /* ==========================================================================
-   Login - [Login_Header_View.php]
-   (Header Styles)
+   Header Content: 
+   (Brand, Search, Logo Social Network - [header.php], Login - [Login_Header_View.php])
    ========================================================================== */
-#login {
-  width: 40%;
-  float: right;
-  //margin-top: 0.75em;
+#headerWrapper {
+  #topHeader{
+    #brand_logo{
+      //border: dashed 1px blue;
+      padding: 0.5% 0;
+      float: left;
 
-  #player_login_form_div {
-    //border: 1px white dashed;
-    margin-top: 3%;
-    color: #cccccc;
-    font-weight: 500;
-    font-size: 0.825em;
-
-    ul{
-      list-style-type: none;
-      padding: 0px;
-      margin: 0px; 
-
-      li{
-        //border: 1px green dashed;
-        float: right;
-        margin-left: 5%;  
+      #wreckit_logo_href{
+        &:hover{
+          border-bottom: 0px;
+        }
       }
     }
 
-    a {
-      color: #cccccc;
-      text-decoration:none;
-      
-      &:hover{
-        color: #cccccc;
-        text-decoration: none;
-      }
-    }
-    
-    form{
-      text-align: left;
+    #th_search{
+      float: left;
+      margin: 0.6% 0 0 2%;
 
-      input{
-        color: #000;
-        font-weight: none;
-        //background-color: none;
-        border-radius: 3px;
+      #search-box {
+        position: relative;
+        width: 200%;
+        margin: 0;
 
-          &[type=text]{
-            width: 100%;
-            padding: 2%;
-            border: 0%;
-          }
-          &[type=password]{
-            width: 100%;
-            padding: 2%;
-            border: 0%; 
-          }
-          &[type=checkbox]{
-            //width:10%;
-            //margin:4px 0 0 0px;
-          }
-          &[type=submit]{
-            //margin-left: 2%;
-            padding: 6% 15%;
-            width: 100%;
-            color: #cccccc;
-            font-weight: normal;
+        #search-form {
+          //height: 40px;
+          //border: 1px solid #999;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+          background-color: #fff;
+          overflow: hidden;
             
-            background: #1a3a67; /* Old browsers */
-            /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFhM2E2NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY1JSIgc3RvcC1jb2xvcj0iIzFhM2E2NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-            background: -moz-linear-gradient(top,  #1a3a67 0%, #1a3a67 65%, #000000 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1a3a67), color-stop(65%,#1a3a67), color-stop(100%,#000000)); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* IE10+ */
-            background: linear-gradient(to bottom,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a3a67', endColorstr='#000000',GradientType=0 ); /* IE6-8 */
-
-            border: black solid 1px;
-            border-radius: 3px;
-
-            &:active{
-              background: #091834;
+            #search-text {
+              color: #000;
+              border-width: 0;
+              background: transparent;
             }
-          }
-          &:focus/*, select:focus*/{
-            background-color: cyan;
-          }
-      }
 
-      .forgot_remember{
-        //border: 1px white dashed;
-        font-size: 0.75em;
-        margin-top: 3%;
+          input[type="text"] {
+            width: 100%;
+            padding: 2% 0 2% 2%;
+            font-size: 0.75em;
+            color: #333;
+            outline: none;
+          }
+
+          #search-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            height: 100%;
+            width: 40px;
+            font-size: 1em;
+            color: #1a3a67;
+            text-align: center;
+            //line-height: -10px;
+            border-width: 0;
+            -webkit-border-radius: 0px 5px 5px 0px;
+            -moz-border-radius: 0px 5px 5px 0px;
+            border-radius: 0px 5px 5px 0px;
+            cursor: pointer;
+
+              span{
+                margin: -10px;
+              }
+          }
+        }  
       }
     }
-  }
+    #th_rightside{
+      float: right;
+      width: 50%;
+      //border: 1px white dashed;
+      text-align: right;
+      margin-top: 0.6%;
+      a{
+        &:hover{
+          border-bottom: 0px;
+        }
+      }
+
+      #thrs_social_networks{
+        margin-right: 3%;
+      }
+      #thrs_sign_reg{
+
+      }
+    }
+  } 
 }
+
+
+
+
+
+
+// #login {
+//   width: 40%;
+//   float: right;
+//   //margin-top: 0.75em;
+
+//   #player_login_form_div {
+//     //border: 1px white dashed;
+//     margin-top: 3%;
+//     color: #cccccc;
+//     font-weight: 500;
+//     font-size: 0.825em;
+
+//     ul{
+//       list-style-type: none;
+//       padding: 0px;
+//       margin: 0px; 
+
+//       li{
+//         //border: 1px green dashed;
+//         float: right;
+//         margin-left: 5%;  
+//       }
+//     }
+
+//     a {
+//       color: #cccccc;
+//       text-decoration:none;
+      
+//       &:hover{
+//         color: #cccccc;
+//         text-decoration: none;
+//       }
+//     }
+    
+//     form{
+//       text-align: left;
+
+//       input{
+//         color: #000;
+//         font-weight: none;
+//         //background-color: none;
+//         border-radius: 3px;
+
+//           &[type=text]{
+//             width: 100%;
+//             padding: 2%;
+//             border: 0%;
+//           }
+//           &[type=password]{
+//             width: 100%;
+//             padding: 2%;
+//             border: 0%; 
+//           }
+//           &[type=checkbox]{
+//             //width:10%;
+//             //margin:4px 0 0 0px;
+//           }
+//           &[type=submit]{
+//             //margin-left: 2%;
+//             padding: 6% 15%;
+//             width: 100%;
+//             color: #cccccc;
+//             font-weight: normal;
+            
+//             background: #1a3a67; /* Old browsers */
+//             /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+//             background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFhM2E2NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY1JSIgc3RvcC1jb2xvcj0iIzFhM2E2NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+//             background: -moz-linear-gradient(top,  #1a3a67 0%, #1a3a67 65%, #000000 100%); /* FF3.6+ */
+//             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1a3a67), color-stop(65%,#1a3a67), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+//             background: -webkit-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* Chrome10+,Safari5.1+ */
+//             background: -o-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* Opera 11.10+ */
+//             background: -ms-linear-gradient(top,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* IE10+ */
+//             background: linear-gradient(to bottom,  #1a3a67 0%,#1a3a67 65%,#000000 100%); /* W3C */
+//             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a3a67', endColorstr='#000000',GradientType=0 ); /* IE6-8 */
+
+//             border: black solid 1px;
+//             border-radius: 3px;
+
+//             &:active{
+//               background: #091834;
+//             }
+//           }
+//           &:focus/*, select:focus*/{
+//             background-color: cyan;
+//           }
+//       }
+
+//       .forgot_remember{
+//         //border: 1px white dashed;
+//         font-size: 0.75em;
+//         margin-top: 3%;
+//       }
+//     }
+//   }
+// }
 
 
 /* ==========================================================================
@@ -384,20 +451,6 @@ button {
     }
   }
 }
-
-.search {
-  float: right;
-  text-align: right;
-
-  &:hover {
-    background-color: black;
-  }
-
-  input {
-    float: left;
-  }
-}
-
 
 /* ==========================================================================
    Main Content Styles
