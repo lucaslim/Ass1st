@@ -83,10 +83,14 @@
 						<a href src="#"><i class="icon-rss icon-large"></i><a/>
 					</span>
 					<span id="thrs_sign_reg">
-						<span><a href src="#">Sign In<a/></span>
+						<span><a id="sign_in" href src="#">Sign In<a/></span>
 						<span>|</span>
 						<span><a href src="#">Register<a/></span>
 					</span>
+						<!-- Login Modal -->
+					<div style="display:none; position: absolute; border:1px dotted red; background:black; left:40%; top:20%; height: 200px; width: 300px; z-index: 99999;" id="signin_dialog">
+						Login goes here
+					</div>
 				</div>
 			</div>
 		</div>

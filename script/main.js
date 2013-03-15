@@ -149,10 +149,10 @@
  */
 
 $(document).ready(function () {
-	$('#log_in').click(function(e) {
+	$('#sign_in').click(function(e) {
 		e.preventDefault();
 
-		$('#login_dialog').toggle()
+		$('#signin_dialog').toggle()
 	});
 });
 
