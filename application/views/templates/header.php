@@ -28,8 +28,6 @@
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/main/main.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/main/neil.css" /> <!-- merge later on -->
-		<link rel="stylesheet" href="<?php echo base_url(); ?>style/fontAwesome/font-awesome.min.css" />
-		<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>style/main/normalize.css" /> -->
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="<?php echo base_url(); ?>script/vendor/modernizr-2.6.2.min.js"></script>
 	</head>
@@ -61,33 +59,32 @@
 		<![endif]-->
 		<div id="headerWrapper" class="clearfix">
 			<div id="topHeader">
-				<div id="brand_logo">
-					<a id="wreckit_logo_href" href="<?php echo base_url(); ?>"><img id="test" src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
-				</div>
-				<div id="th_search">
-					<div id="search-box">
-	  					<form action="/search" id="search-form" method="get" target="_top">
-	    					<input id="search-text" name="q" placeholder="Search for players, teams or tournaments" type="text"/>
-	    					<button id="search-button" type="submit">
-	    						<span ><i class="icon-search"></i></span>
-	    					</button>
-	  					</form>
+				<div id="brand">
+					<div id="brand_logo">
+						<a id="wreckit_logo_href" href="<?php echo base_url(); ?>"><img id="test" src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
 					</div>
+					<!-- <div id="brand_info">
+						<ul>
+							<li id="brand_info_stadium_li">ETOBICOKE WRECKIT STADIUM</li>
+							<li>205 HUMBER BOULEVARD</li>
+							<li>ETOBICOKE, ONTARIO M9W 6V3</li>
+							<li>(416) 675 5000</li>
+						</ul>
+					</div> --> 
 				</div>
+				<!-- Login Popup -->
+				<input type="button" id="log_in" value="Login"/>
 
-				<div id="th_rightside">
-					<span id="thrs_social_networks">
-						<a href src="#"><i class="icon-facebook-sign icon-large"></i></a>
-						<a href src="#"><i class="icon-twitter icon-large"></i></a>
-						<a href src="#"><i class="icon-google-plus-sign icon-large"></i></a>
-						<a href src="#"><i class="icon-rss icon-large"></i><a/>
-					</span>
-					<span id="thrs_sign_reg">
-						<span><a href src="#">Sign In<a/></span>
-						<span>|</span>
-						<span><a href src="#">Register<a/></span>
-					</span>
+				<!-- Login Modal -->
+				<div style="display:none; position: absolute; border:1px dotted red; background:black; left:40%; top:20%; height: 200px; width: 300px; z-index: 99999;" id="login_dialog">
+					Login goes here
 				</div>
+				<!-- ///////LOGIN IN CONTROL/////// -->
+
+				<!-- <div id="login">
+					<?php echo $login_header ?>
+				</div> -->
+
 			</div>
 		</div>
 		<div id="bodyWrapper" class="clearfix">
@@ -217,4 +214,7 @@
 							<a href="<?php echo base_url(); ?>index.php">About</a>
 						</li>
 					</ul>
+					<div class="search">
+					</div>
+
 				</div>

@@ -138,3 +138,23 @@
 	});
 }
 
+// --------------------------------------------------------------------
+
+/**
+ *
+ * Login modal
+ *
+ * This will pop up the login dialog upon clicking the login button
+ *
+ */
+
+$(document).ready(function () {
+	$('#log_in').click(function(e) {
+		e.preventDefault();
+
+		$('#login_dialog').toggle()
+	});
+});
+
+// --------------------------------------------------------------------
+
