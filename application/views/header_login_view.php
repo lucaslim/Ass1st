@@ -1,38 +1,54 @@
-<script type="text/javascript">
-</script>
-<div id="player_login_form_div">
-	<?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>
+<span id="thrs_sign_reg">
+	<span><a href="#" id="sign_in">Sign In</a></span>
+	<span>|</span>
+	<span><a href="#">Register</a></span>
+</span>
 
-	<fieldset>
-		<ul>
-			<li>
-				<div>
-					<input type="submit" class="btn" value="Log In"/>
-				</div>
-			</li>
-			<li>
-				<div>
-					<input type="password" placeholder="Password" id="password" name="password"/>
-				</div>
-				<div class="forgot_remember">
-					<a href="#">Forgot your password?</a>
-				</div>
-			</li>
-			<li>
-				<div>
-					<input type="text" placeholder="Email" id="email" name="email" />
-				</div>
-				<div class="forgot_remember">
-					<label class="checkbox">
-						<input type="checkbox">	Remember Me 
-					</label>
-				</div>
-			</li>
-			<div id="error_header_box" title="Incorrect Login">
-				<div id="error_header_message"></div>
-			</div>
-		</ul>
-	</fieldset>
+<!-- Background Fader -->
+<div style="display:none; background: #000; position:fixed; top:0; left:0; width:100%; height:100%; z-index: 99998; opacity: .4" id="bg_fade"></div>
 
-</form>
+<!-- Login Modal -->
+<div style="display:none;" id="signin_dialog" >
+
+	<div class="" id="user-session-form">
+        <header>
+        	<span>Sign into your Team Assist account.</span>
+        </header>
+        
+        <div class="cell social-signin">
+            <div class="sectionTitle">Sign in with a social network...</div>    
+            <ul>
+            	<li><button class="btn_social_signup" id="signup_facebook" onclick="window.location.href = '<?php echo site_url('login_fb') ?>'"><span><i class="icon-facebook"></i></span>&nbsp;| &nbsp;&nbsp;Sign in with Facebook</button></li>
+                <li><button class="btn_social_signup" id="signup_twitter" onclick="window.location.href = '<?php echo site_url('login_twitter') ?>'"><span><i class="icon-twitter"></i></span>&nbsp;| &nbsp;&nbsp;Sign in with Twitter</button></li>
+                <li><button class="btn_social_signup" id="signup_google"><span><i class="icon-google-plus"></i></span>&nbsp;| &nbsp;&nbsp;Sign in with Google+</button></li>
+            </ul>
+        </div>
+   
+        <div class="cell email-signin">
+            
+            <div class="sectionTitle">Sign in with your email...</div>
+            
+            <span class="or">or</span>
+            <div style="cursor: pointer;" id="signin_exit" class="exit">X</div>
+            <?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>                
+                <ul>
+                    <li><input id="user_login" name="email" placeholder="Email" type="text" /></li>
+                    <li><input id="user_password" name="password" placeholder="Password" type="password" /></li>
+                </ul>
+                
+                <div>
+                    <input class="sign-in-button" name="commit" type="submit" value="Login" />
+                    <a href="#" class="forgot_pass">Forgot your password?</a>
+                </div>
+                	<br />
+                <div class="create_account">
+                    <span>No account yet?&nbsp;&nbsp;&nbsp;</span><a href="#" class="">Sign Up</a>
+                </div>
+                
+            </form>
+        </div>
+        <div id="error_box" title="Incorrect Login">
+            <div id="error_message"></div>
+        </div>
+	</div>
 </div>

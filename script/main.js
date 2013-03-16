@@ -89,17 +89,15 @@
 
  // --------------------------------------------------------------------
 
- /**
-  *
-  * User Login
-  *
-  * To be removed later
-  *
-  */
+/**
+ *
+ * User Login
+ *
+ */
 
-  function login_user(form, error_box, error_message, is_main_login) {
+$(document).ready(function() {
 	//Form
-	$(form).submit(function(e) {
+	$('#login_header_form').submit(function(e) {
 		e.preventDefault();
 		
 		dataString = $(this).serialize();
@@ -112,31 +110,28 @@
 			success : function(data) {
 				if(!data.success)
 				{
-					$(error_message).html(data.message);
-					$(error_box).dialog("open");
-				}
-				else{
-					if(!is_main_login)
-						window.location.reload();
-					else
-						window.location.href = $.myURL();
+					alert('hi');
+					$('#error_message').html(data.message);
+					$('#error_box').dialog("open");
 				}
 			}
 		});
 	});
 
 	//Error Box
-	$(error_box).dialog({
+	$('#error_box').dialog({
 		resizable : false,
 		autoOpen : false,
 		modal : true,
+		stack: false,
+		zIndex: 100000,
 		buttons : {
 			Cancel : function() {
 				$(this).dialog("close");
 			}
 		}
 	});
-}
+});
 
 // --------------------------------------------------------------------
 
@@ -148,11 +143,38 @@
  *
  */
 
-$(document).ready(function () {
-	$('#sign_in').click(function(e) {
-		e.preventDefault();
+ $(document).ready(function () {
+ 	var fade_time = 700;
 
-		$('#signin_dialog').toggle()
+ 	$('#sign_in').on({
+ 		click: function(e) {
+ 			e.preventDefault();
+ 			$('#signin_dialog').fadeToggle(fade_time);
+
+ 			//toggle background fade
+ 			$('#bg_fade').fadeToggle($('#signin_dialog').is(':visible'));
+ 			
+ 		}
+ 	});
+
+	//Exit Button
+	$('#signin_exit').on({
+		click: function(e) {
+			e.preventDefault();
+			$('#signin_dialog').fadeToggle(fade_time);
+			$('#bg_fade').fadeOut(fade_time);
+		}
+	});
+
+	//Escape Button
+	$(this).on({
+		keyup: function(e){
+			e.preventDefault();
+			if(e.keyCode == 27){
+				$('#signin_dialog').fadeOut(fade_time);
+				$('#bg_fade').fadeOut(fade_time);
+			}
+		}
 	});
 });
 

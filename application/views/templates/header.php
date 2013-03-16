@@ -82,60 +82,9 @@
 						<a href id="icon-google-plus-sign" src="#"><i class="icon-google-plus-sign icon-large"></i></a>
 						<a href id="icon-rss" src="#"><i class="icon-rss icon-large"></i><a/>
 					</span>
-					<span id="thrs_sign_reg">
-						<span><a id="sign_in" href src="#">Sign In<a/></span>
-						<span>|</span>
-						<span><a href src="#">Register<a/></span>
-					</span>
+					<?php echo $login_header ?>
 				</div>
 			</div>
-			
-			<!-- Login Modal -->
-			<div id="signin_dialog" >
-
-				<div class="" id="user-session-form">
-			        <header>
-			        	<span>Sign into your Team Assist account.</span>
-			        </header>
-			        
-			        <div class="cell social-signin">
-			            <div class="sectionTitle">Sign in with a social network...</div>    
-			            <ul>
-			            	<li><button class="btn_social_signup" id="signup_facebook" type="submit"><span><i class="icon-facebook"></i></span>&nbsp;| &nbsp;&nbsp;Sign in with Facebook</button></li>
-			                <li><button class="btn_social_signup" id="signup_twitter" type="submit"><span><i class="icon-twitter"></i></span>&nbsp;| &nbsp;&nbsp;Sign in with Twitter</button></li>
-			                <li><button class="btn_social_signup" id="signup_google" type="submit"><span><i class="icon-google-plus"></i></span>&nbsp;| &nbsp;&nbsp;Sign in with Google+</button></li>
-			            </ul>
-			        </div>
-			   
-			        <div class="cell email-signin">
-			            
-			            <div class="sectionTitle">Sign in with your email...</div>
-			            
-			            <span class="or">or</span>
-			            <a href src="#" class="exit">X</a>
-			            
-			            <form action="" class="" id="" method="">
-			                
-			                <ul>
-			                    <li><input id="user_login" name="email" placeholder="Email" type="text" /></li>
-			                    <li><input id="user_password" name="password" placeholder="Password" type="password" /></li>
-			                </ul>
-			                
-			                <div>
-			                    <input class="sign-in-button" name="commit" type="submit" value="Login" />
-			                    <a href="#" class="forgot_pass">Forgot your password?</a>
-			                </div>
-			                	<br />
-			                <div class="create_account">
-			                    <span>No account yet?&nbsp;&nbsp;&nbsp;</span><a href="#" class="">Sign Up</a>
-			                </div>
-			                
-			            </form>
-			        </div>
-				</div>
-			</div>
-
-
 		</div>
 		<div id="bodyWrapper" class="clearfix">
 			<div id="bodyContent" class="clearfix">

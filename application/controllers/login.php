@@ -80,15 +80,14 @@ class Login extends CI_Controller {
 		$this -> form_validation -> set_rules('password', 'password', 'required|callback_validate_user');
 
 		if ($this -> form_validation -> run() == FALSE) {
-			// echo json_encode(array("success" => false,
-			// 	"message" => 'The email or password you entered is incorrect.'));	
+			echo json_encode(array("success" => false,
+				"message" => 'The email or password you entered is incorrect.'));	
 			
-			$this -> session -> set_flashdata('message', 'The email or password you entered is incorrect.');
-			Redirect('login');
+			// $this -> session -> set_flashdata('message', 'The email or password you entered is incorrect.');
+			// Redirect('login');
 
 		} else {
-			//ncurses_refresh(ch)
-			//echo json_encode(array("success" => true));
+			echo json_encode(array("success" => true));
 
 			Redirect(base_url());
 		}
