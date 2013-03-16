@@ -28,7 +28,7 @@
 					<tbody>
 			<?php endif; ?>	
 						<tr>
-							<td class="team"><a href="<?php echo base_url(); ?>index.php/pages/team/<?php echo $team -> Id; ?>"><?php echo $team -> Name; ?></a></td>
+							<td class="team"><a href="<?php echo base_url(); ?>pages/team/<?php echo $team -> Id; ?>"><?php echo $team -> Name; ?></a></td>
 							<td>14</td>
 							<td>12</td>
 							<td>1</td>

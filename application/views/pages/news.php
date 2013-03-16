@@ -7,7 +7,7 @@
 				<p class="subtitle">
 					Posted By: <?php echo $news_item -> Author; ?> | Date Posted: <?php echo $news_item -> PostDate; ?>
 				</p>
-				<p><?php echo $news_item -> Description ?> <a href="<?php echo base_url(); ?>index.php/pages/news/<?php echo $news_item -> Id ?>">[ Full Story ]</a></p>
+				<p><?php echo $news_item -> Description ?> <a href="<?php echo base_url(); ?>pages/news/<?php echo $news_item -> Id ?>">[ Full Story ]</a></p>
 			<?php endforeach ?>
 			<p>
 				<a href="#top">Back to the Top</a>

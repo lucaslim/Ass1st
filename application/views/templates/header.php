@@ -246,22 +246,22 @@
 				<div id="menu">
 					<ul>
 						<li>
-							<a href="<?php echo base_url(); ?>index.php">Schedule</a>
+							<a href="<?php echo base_url(); ?>">Schedule</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>index.php">Scores</a>
+							<a href="<?php echo base_url(); ?>">Scores</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>index.php/pages/division/">Standings</a></a>
+							<a href="<?php echo base_url(); ?>/pages/division/">Standings</a></a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>index.php">Stats</a>
+							<a href="<?php echo base_url(); ?>">Stats</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>index.php/pages/news/">News</a>
+							<a href="<?php echo base_url(); ?>/pages/news/">News</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>index.php">About</a>
+							<a href="<?php echo base_url(); ?>">About</a>
 						</li>
 					</ul>
 				</div>
