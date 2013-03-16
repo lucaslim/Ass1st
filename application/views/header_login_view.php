@@ -5,10 +5,10 @@
 </span>
 
 <!-- Background Fader -->
-<div style="display:none; background: #000; position:fixed; top:0; left:0; width:100%; height:100%; z-index: 99998; opacity: .4" id="bg_fade"></div>
+<div id="bg_fade"></div>
 
 <!-- Login Modal -->
-<div style="display:none;" id="signin_dialog" >
+<div id="signin_dialog" >
 
 	<div class="" id="user-session-form">
         <header>
@@ -29,7 +29,9 @@
             <div class="sectionTitle">Sign in with your email...</div>
             
             <span class="or">or</span>
-            <div style="cursor: pointer;" id="signin_exit" class="exit">X</div>
+
+            <div id="signin_exit" class="exit">X</div>
+
             <?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>                
                 <ul>
                     <li><input id="user_login" name="email" placeholder="Email" type="text" /></li>
