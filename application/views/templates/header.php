@@ -77,10 +77,10 @@
 
 				<div id="th_rightside">
 					<span id="thrs_social_networks">
-						<a href src="#"><i class="icon-facebook-sign icon-large"></i></a>
-						<a href src="#"><i class="icon-twitter icon-large"></i></a>
-						<a href src="#"><i class="icon-google-plus-sign icon-large"></i></a>
-						<a href src="#"><i class="icon-rss icon-large"></i><a/>
+						<a href id="icon-facebook-sign" src="#"><i class="icon-facebook-sign icon-large"></i></a>
+						<a href id="icon-twitter" src="#"><i class="icon-twitter icon-large"></i></a>
+						<a href id="icon-google-plus-sign" src="#"><i class="icon-google-plus-sign icon-large"></i></a>
+						<a href id="icon-rss" src="#"><i class="icon-rss icon-large"></i><a/>
 					</span>
 					<span id="thrs_sign_reg">
 						<span><a id="sign_in" href src="#">Sign In<a/></span>
