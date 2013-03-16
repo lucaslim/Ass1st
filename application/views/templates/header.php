@@ -112,6 +112,7 @@
 			            <div class="sectionTitle">Sign in with your email...</div>
 			            
 			            <span class="or">or</span>
+			            <a href src="#" class="exit">X</a>
 			            
 			            <form action="" class="" id="" method="">
 			                

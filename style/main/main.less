@@ -293,7 +293,7 @@ button {
    ========================================================================== */
 
 #signin_dialog{
-  display:none;
+  //display:none;
   position: absolute;
   right:25%;
   margin:0 auto;
@@ -508,6 +508,27 @@ button {
       border-radius: 20px;
       -webkit-border-radius: 20px;
       -moz-border-radius: 20px;
+    }
+    .exit{
+      line-height: 40px;
+      width: 40px;
+      position: absolute;
+      top: 2%;
+      left: 96%;
+      margin-top: -20px;
+      text-align: center;
+      color: WhiteSmoke;
+      border: solid 2px WhiteSmoke;
+      background: #091834;
+      border-radius: 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+
+      &:active{
+          background: black;
+          color: darkgray; 
+          border: solid 2px gray;
+        }
     }
   }
 }
