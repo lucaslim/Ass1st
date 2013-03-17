@@ -30,7 +30,7 @@
             
             <span class="or">or</span>
 
-            <div id="signin_exit" class="exit"><i class="icon-remove icon-large"></i></div>
+            <div id="signin_exit" class="exit"><i class="icon-minus icon-large"></i></div>
 
             <?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>                
                 <ul>

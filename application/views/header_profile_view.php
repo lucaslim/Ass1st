@@ -1,10 +1,12 @@
 <table style="float:right;">
 	<tr>
-		<td style="border: 2px solid black; ">
-			team <br /> image
+		<td>
+			<!-- team logo -->
+			<img style="height:24px; width:24px; border: 2px solid black;" src="<?php echo $picture; ?>">
 		</td>
-		<td style="border:2px solid black; ">
-			<img src="<?php echo $picture; ?>">
+		<td>
+			<!-- player logo -->
+			<img style="height:24px; width:24px; border: 2px solid black;" src="<?php echo $picture; ?>">
 		</td>
 		<td>
 			<?php echo $full_name; ?>
