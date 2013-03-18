@@ -42,4 +42,7 @@
 			</table>			
 		</div>
 	</div>
+	<div id="rightContent">
+		<p>Empty</p>
+	</div>
 </div>

@@ -192,25 +192,25 @@
 						</div>
 					</div>
 				</div>
-				<div id="menu">
+				<div id="menu" class="clearfix">
 					<ul>
 						<li>
-							<a href="<?php echo base_url(); ?>">Schedule</a>
+							<a href="<?php echo base_url(); ?>pages/index/schedule/">Schedule</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>">Scores</a>
+							<a href="<?php echo base_url(); ?>pages/index/scores/">Scores</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>/pages/division/">Standings</a></a>
+							<a href="<?php echo base_url(); ?>pages/division/">Standings</a></a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>">Stats</a>
+							<a href="<?php echo base_url(); ?>pages/index/stats/">Stats</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>/pages/news/">News</a>
+							<a href="<?php echo base_url(); ?>pages/news/">News</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>">About</a>
+							<a href="<?php echo base_url(); ?>pages/index/about/">About</a>
 						</li>
 					</ul>
 				</div>
