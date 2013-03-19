@@ -1,6 +1,6 @@
 <?php
 if (!defined('BASEPATH')) exit('no direct script access allowed');
-session_start();
+if(!isset($_SESSION))	session_start();
 /**
  * Assist
  *
@@ -35,7 +35,12 @@ class Logout extends CI_Controller {
 	 */
 
 	function index() {
-		$this->session->unset_userdata('authorized');
+		$this -> session -> unset_userdata('authorized');
+
+		//remove twitter access token
+		$this -> session -> unset_userdata('access_token');
+		$this -> session -> unset_userdata('access_token_secret');
+
 		session_destroy();
 		redirect('pages');
 	}

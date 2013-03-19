@@ -1,7 +1,6 @@
 <?php
 if (!defined('BASEPATH'))	exit('no direct script access allowed');
-
-session_start();
+if(!isset($_SESSION))	session_start();
 /**
  * Assist
  *
@@ -28,11 +27,11 @@ class Login_Twitter extends CI_Controller {
 		$this -> load -> helper('login_helper');
 
 		//Redirect if user is logged in
-		// if (is_loggedin())
-		// 	redirect(base_url());
+		if (is_loggedin())
+			redirect(base_url());
 
 		// Load TwitterOauth Library
-		$this -> load -> library('twitteroauth');
+		$this -> load -> library('TwitterOAuth');
 
 		// Loading twitter configuration.
 		$this -> config -> load('twitter');

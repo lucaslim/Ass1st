@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH'))	exit('no direct script access allowed');
+if(!isset($_SESSION))	session_start();
 
-session_start();
 /**
  * Assist
  *
@@ -57,10 +57,11 @@ class Login_Fb extends CI_Controller {
 	function index() {
 
 		$fb_user = $this -> facebook -> getUser();
-
+		//print_r($fb_user);
 		if ($fb_user == 0) {
 			//Generate Login Url
-			Redirect($this -> facebook -> getLoginUrl(array('scope' => 'email')));
+			Redirect($this -> facebook -> getLoginUrl(array('scope' => 'email ,user_birthday, publish_actions')));
+			//print_r($this -> facebook -> getLoginUrl(array('scope' => 'email')));
 		} else {
 			try {
 				// Get user's data and print it
