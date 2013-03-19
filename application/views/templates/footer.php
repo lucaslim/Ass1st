@@ -42,5 +42,18 @@
 					s.parentNode.insertBefore(g, s)
 				}(document, 'script'));
 			</script> -->
+
+	    <script type="text/javascript">
+	        // this script applies active class to the active page link in the navigation
+	        $(document).ready(function () {
+	            var loc = window.location.href;
+	            $("a.menuLink").each(function () {
+	                if (this.href == loc) {
+	                    $(this).addClass('active');
+	                }
+	            });
+	        });
+	    </script>
+
 		</body>
 		</html>
