@@ -10,7 +10,7 @@
 <!-- Login Modal -->
 <div id="signin_dialog" >
 
-	<div class="" id="user-session-form">
+	<div id="user-session-form">
         <header>
         	<span>Sign into your Team Assist account.</span>
         </header>

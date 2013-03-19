@@ -22,6 +22,7 @@
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 		
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/main/normalize.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/slider/nivo-slider.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/slider/dark/dark.css" />
@@ -29,7 +30,7 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/main/main.css" />
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/main/neil.css" /> <!-- merge later on -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>style/fontAwesome/font-awesome.min.css" />
-		<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>style/main/normalize.css" /> -->
+
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="<?php echo base_url(); ?>script/vendor/modernizr-2.6.2.min.js"></script>
 	</head>
@@ -69,7 +70,7 @@
 	  					<form action="/search" id="search-form" method="get" target="_top">
 	    					<input id="search-text" name="q" placeholder="Search for players, teams or tournaments" type="text"/>
 	    					<button id="search-button" type="submit">
-	    						<span ><i class="icon-search"></i></span>
+	    						<span><i class="icon-search"></i></span>
 	    					</button>
 	  					</form>
 					</div>
@@ -87,7 +88,7 @@
 			</div>
 		</div>
 		<div id="bodyWrapper" class="clearfix">
-			<div id="bodyContent" class="clearfix">
+			<div id="bodyContent">
 				<div id="scoreBoardWrapper">
 					<div id="prevScore">
 						<p>
@@ -195,22 +196,22 @@
 				<div id="menu" class="clearfix">
 					<ul>
 						<li>
-							<a href="<?php echo base_url(); ?>pages/index/schedule/">Schedule</a>
+							<a class="menuLink" href="<?php echo base_url(); ?>pages/index/schedule/">Schedule</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>pages/index/scores/">Scores</a>
+							<a class="menuLink" href="<?php echo base_url(); ?>pages/index/scores/">Scores</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>pages/division/">Standings</a></a>
+							<a class="menuLink" href="<?php echo base_url(); ?>pages/division/">Standings</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>pages/index/stats/">Stats</a>
+							<a class="menuLink" href="<?php echo base_url(); ?>pages/index/stats/">Stats</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>pages/news/">News</a>
+							<a class="menuLink" href="<?php echo base_url(); ?>pages/news/">News</a>
 						</li>
 						<li>
-							<a href="<?php echo base_url(); ?>pages/index/about/">About</a>
+							<a class="menuLink" href="<?php echo base_url(); ?>pages/index/about/">About</a>
 						</li>
 					</ul>
 				</div>

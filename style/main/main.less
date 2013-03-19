@@ -789,6 +789,14 @@ button {
    Menu Styles
    ========================================================================== */
 
+.transition (@time: 0.5s) {
+  -webkit-transition: all @time ease-in;
+  -moz-transition: all @time ease-in;
+  -o-transition: all @time ease-in;
+  -ms-transition: all @time ease-in;
+  transition: all @time ease-in;
+}
+
 #menu {
   clear:both;
 	width: 100%;
@@ -805,18 +813,19 @@ button {
       color: #fff;
       text-align: center;
 
-      a {
+      a.menuLink {
         display: block;
         padding: 10px 20px 10px;
         border: 0;
         text-decoration: none;
-      }
+        .transition(0.15s);
 
-      &:hover {
-        background-color: grey;
-        border: 0;
-        text-decoration: none;        
-      }
+         &:hover {
+          background-color: grey;
+          border: 0;
+          text-decoration: none;        
+        }
+      }      
     }
   }
 }
