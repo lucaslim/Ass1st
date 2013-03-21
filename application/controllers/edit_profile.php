@@ -3,11 +3,16 @@
 	session_start();
 	//controller for player registration
 	
-	class Playeredit extends CI_Controller
+	class Edit_profile extends CI_Controller
 	{
 		public function __construct()
 		{
 			parent::__construct();
+			$this -> load -> model('Division_Model');
+		$this -> load -> model('News_Model');
+
+		$this -> load -> helper('date');
+		$this -> load -> helper('template');
 			$this -> load -> library('session');//loads the library for all the functions
 			$this -> load -> helper('validation_helper');
 			
@@ -18,7 +23,7 @@
 		{
 			
 			$data['base']=$this->config->item('base_url');
-			$data['title'] = 'Player Edit';
+			$data['title'] = 'Edit Profile';
 			
 			$this->load->model('user_model');//loads the user_model.php
 			
@@ -31,8 +36,9 @@
 			$data['results'] = $this -> user_model -> get_user_info($user_data['id']);
 
 
-			
-			$this->load->view('playeredit_view', $data);
+			$this -> load -> view('templates/header', $data);
+			$this->load->view('edit_profile_view', $data);
+			$this -> load -> view('templates/footer', $data);
 		}
 		
 		/*
