@@ -3,7 +3,7 @@
 	<?php echo form_open("edit_profile/edit_player"); ?><!--this is the function called to enable us insert players-->
     	
         <div style="padding: 15px;">
-            <h1>Edit Profile</h1>
+            <h1 class="text-center">Edit Profile</h1>
             <p>
                 <label for="fname">First Name: </label>
                 <input type="text" name="fname" value='<?php echo $results -> FirstName ?>' />
@@ -62,7 +62,8 @@
             </p>
             
             <!--add a picture upload-->
+            <input type="submit" value="Save" />
         </div>
-        <input type="submit" value="Save" />
+
     <?php echo form_close(); ?>
 </div>
