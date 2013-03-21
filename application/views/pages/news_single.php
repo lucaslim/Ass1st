@@ -1,4 +1,4 @@
-<div id="leftContent">
+<div id="leftContent" class="span7">
 	<div id="top" class="newsDisplay">
 		<h1><?php echo $news -> Title; ?></h1>
 		<p class="subtitle">
@@ -22,15 +22,15 @@
 	</div>
 </div>
 
-<div id="rightContent" class="newsSidebar">
+<div id="rightContent" class="newsSidebar span5">
 	<h2>Latest Headlines</h2>
-			<ul>
-				<?php foreach($headlines as $news_item): ?>
+	<ul>
+		<?php foreach($headlines as $news_item): ?>
 
-				    <li>
-				    	<a href="<?php echo site_url(); ?>/pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
-				    </li>
+		    <li>
+		    	<a href="<?php echo site_url(); ?>/pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
+		    </li>
 
-				<?php endforeach ?>
-			</ul>
+		<?php endforeach ?>
+	</ul>
 </div>

@@ -1,5 +1,5 @@
-<div id="leftContent">
-	<div id="top" class="newsDisplay">
+<div id="leftContent" class="span7">
+	<div class="newsDisplay">
 		<h1>Latest Headlines</h1>
 		<div id="top" class="newsDisplay">
 			<?php foreach($news as $news_item): ?>
@@ -16,6 +16,6 @@
 	</div>
 </div>
 
-<div id="rightContent">
+<div id="rightContent" class="span5">
 	<h3>Right Sidebar</h3>
 </div>

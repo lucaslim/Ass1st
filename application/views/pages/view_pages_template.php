@@ -1,6 +1,6 @@
 	<!-- Place Main Content Here -->
 	<div id="leftContent" class="span7">
-		<h1>Scores</h1>
+		<h1>View Template</h1>
 		<p>Currently under development</p>
 	</div>
 

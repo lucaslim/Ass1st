@@ -90,6 +90,7 @@ class Pages extends CI_Controller {
 		else
 		{
 			$data['news'] = $this -> News_Model -> get_news(5, 0); // retrieve 5 latest headlines and descriptions
+			$data['title'] = "Latest News"; // Use the file as the title
 		
 			$this -> load -> view('templates/header', $data);
 			$this -> load -> view('pages/news.php', $data);

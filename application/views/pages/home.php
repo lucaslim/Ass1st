@@ -1,5 +1,4 @@
-<div id="mainContent" class="clearfix">
-	<div id="leftContent">
+	<div id="leftContent" class="span7">
 		<div id="hpImageSlider">
 			<div class="slider-wrapper theme-dark">
 				<div id="slider" class="nivoSlider">
@@ -12,7 +11,7 @@
 				<!--htmlcaption1-->
 				<div id="htmlcaption1" class="nivo-html-caption">
 					<div class="htmlcaptionLeft">
-						<h3><a href="#">TEAM THREE BECOMES NUMBER ONE</a></h3>
+						<h3><a href="#">TEAM 3 BECOMES NUMBER 1</a></h3>
 						<p>After two tough losses in the semi‘s against the top seeded Wolverines, Team 3 bounced back to win four straight in the Eastern Conference Championship.</p>
 					</div>
 					<div class="htmlcaptionRight">
@@ -31,7 +30,7 @@
 				<div id="htmlcaption2" class="nivo-html-caption">
 					<div class="htmlcaptionLeft">
 						<h3><a href="#">SCHOOLYARD PUCK</a></h3>
-						<p>It's the 4th Annual Wreckit Stadium's Road Hockey Tournament.</p>
+						<p>It's the 4th Annual Wreckit Stadium's Road Hockey Tournament. Check the tournament section for more details.</p>
 					</div>
 					<div class="htmlcaptionRight">
 						<p>
@@ -51,7 +50,7 @@
 				<div id="htmlcaption3" class="nivo-html-caption">
 					<div class="htmlcaptionLeft">
 						<h3><a href="#">LaFLAMME GROWS BRIGHTER</a></h3>
-						<p>Selected in the first round, 5th overall by Toronto, come meet our very own Jacques LaFlamme on July 23rd at 1pm, before he starts his professional career.</p>
+						<p>Selected in the first round, 5th overall by Toronto, come meet our very own Jacques LaFlamme on July 23rd at 1pm, before he starts his career.</p>
 					</div>
 					<div class="htmlcaptionRight">
 						<p>
@@ -89,202 +88,149 @@
 				</div><!--htmlcaption4-->
 			</div><!--slider-wrapper-->
 		</div><!--hpImageSlider-->
-	</div><! -- /end left content -->
+	</div><!-- /end left content -->
 
-	<div id="rightContent" class="clearfix">
-		<div id="accordion">
-			<h3>New Player Registration</h3>
-			<div>
-				
-				<div id="player_registration_form_div">
-					<div class="prf_format">
-						<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
+	<div id="rightContent" class="span5">
 
-				            <fieldset>
-				                <!-- <h3>Player Information</h3> -->
-				                
-				                <p>
+		<!-- /begin accordion-->
+		<div class="accordion" id="accordion1">
+
+			<!-- begin group -->
+			<div class="accordion-group">
+				<div class="accordion-heading">
+				  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+				    New Player Registration
+				  </a>
+				</div>
+				<div id="collapseOne" class="accordion-body collapse in">
+				  <div class="accordion-inner">
+				  	<div class="container-fluid player-register">
+				  	
+				  	<!-- begin form -->	
+					<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
+			            <fieldset>
+							<div class="row-fluid">
+					  			<div class="span6">
 				                    <!-- First Name -->
-				                    <input type="text" name="first_name" id="first_name" placeholder="First Name" class="" />
-				                    <!-- Last Name -->
-									<input type="text" name="last_name" id="last_name" placeholder="Last Name"  />
-				                </p>
-				                <p>
+				                    <input class="input-med" type="text" name="first_name" id="first_name" placeholder="First Name" class="" />				  				
+					  			</div>
+					  			<div class="span6">
+					  				<!-- Last Name -->
+					  				<input class="input-med" type="text" name="last_name" id="last_name" placeholder="Last Name"  />
+					  			</div>
+					  		</div>
+					  		<div class="row-fluid">
+					  			<div class="span12">
 				                	<!-- Email -->
-				                    <input type="text" name="email" id="email" class="long" placeholder="Email" />
-				                </p>
-				                <p>
-				                	<!-- Password -->
-				                    <input type="password" name="password" id="password" placeholder="Password"  />
-				                    <!-- Repeat Password -->
-				                    <input type="password" name="repassword" id="repassword" placeholder="Confirm Password"  />
-				                </p>
-
-				                <p>
-				                    <!-- City -->
-				                    <input type="text" placeholder="City" class="short" />
-									<!-- Province -->
-				                    <select class="ddl_province">
-				                        <option value=""> Province</option>
-
-				                       	<option value="AB">Alberta</option>
-										<option value="BC">British Columbia</option>
-										<option value="MB">Manitoba</option>
-										<option value="NB">New Brunswick</option>
-										<option value="NL">Newfoundland</option>
-										<option value="NS">Nova Scotia</option>
-										<option value="ON">Ontario</option>
-										<option value="PE">Prince Edward Island</option>
-										<option value="QC">Quebec</option>
-										<option value="SK">Saskatchewan</option>
-										<option value="NT">Northwest Territories</option>
-										<option value="NU">Nunavut</option>
-										<option value="YT">Yukon</option>
-				                    </select>
-				                </p>
-
-				                <p>
-				                	<!-- Birthday -->
-				                	<div id="ddls_birthday">
-					                    <!-- Month -->
-					                    <select name="dob_month">
-											<option value="">Month</option>
-											<?php foreach($dob_month as $item => $value):?>
-											<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
-											<?php endforeach; ?>
-										</select>
-										<!-- Day -->
-										<select name="dob_day">
-											<option value="">Day</option>
-											<?php foreach($dob_day as $item => $value):?>
-											<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
-											<?php endforeach; ?>
-										</select>
-										<!-- Year -->
-										<select name="dob_year">
-											<option value="">Year</option>
-											<?php foreach($dob_year as $item => $value):?>
-											<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
-											<?php endforeach; ?>
-										</select>
-									</div>
-
-				                	<!-- Gender Radio Options -->
-				                	<div id="rbs_gender">
-				                		<!-- Male -->					                	
-				                		<label><input type="radio" name="gender" value="Male">Male&nbsp;&nbsp;&nbsp;</label>
-										<!-- Female -->
-										<label><input type="radio" name="gender" value="Female">Female</label>
-					              	</div>
-				                </p>
-				                <p>
-				                	<div class="agreeForm">
-					                	<div class="AF_ckb_desc_submit">
-						                    <input type="checkbox" name="terms" id="terms" />
-						                    <label class="AF_desc">I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>
-					            			<input type="submit" value="Sign Up" id="submit" name="submit"/>
-					            		</div>
-				            		</div>
-				                </p>
-				            </fieldset>
-				        </form>
-
-						<!-- Lucas Table  -->
-
-						<!-- <table border="1">
-							<tr>
-								<td>
-								<input type="text" name="first_name" id="first_name" placeholder="First Name" />
-								</td>
-								<td>
-								<input type="text" name="last_name" id="last_name" placeholder="Last Name"  />
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-								<input type="text" name="email" id="email" placeholder="Email"  />
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-								<input type="password" name="password" id="password" placeholder="Password"  />
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-								<input type="password" name="repassword" id="repassword" placeholder="Re-enter Password"  />
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<select name="dob_month">
-										<option value="">MM</option>
+				                    <input class="input-full" type="text" name="email" id="email" class="long" placeholder="Email" />
+					  			</div>
+					  		</div>
+					  		<div class="row-fluid">
+					  			<div class="span12">
+									<input class="input-full" type="password" name="password" id="password" placeholder="Password"  />
+					  			</div>
+					  		</div>
+					  		<div class="row-fluid">
+					  			<div class="span4 text-right">
+				                    <!-- Month -->
+				                    <select class="input-small" name="dob_month">
+										<option value="">Month</option>
 										<?php foreach($dob_month as $item => $value):?>
 										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
 										<?php endforeach; ?>
 									</select>
-									<select name="dob_day">
-										<option value="">DD</option>
+								</div>
+								<div class="span4 text-center">
+									<!-- Day -->
+									<select class="input-small" name="dob_day">
+										<option value="">Day</option>
 										<?php foreach($dob_day as $item => $value):?>
 										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
 										<?php endforeach; ?>
-									</select>
-									<select name="dob_year">
-										<option value="">YYYY</option>
+									</select>									
+								</div>
+								<div class="span4 text-left">
+									<!-- Year -->
+									<select class="input-small" name="dob_year">
+										<option value="">Year</option>
 										<?php foreach($dob_year as $item => $value):?>
 										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
 										<?php endforeach; ?>
-									</select>
-								</td>
-								<td>
-									<input type="radio" name="gender" value="Male">Male
-									<input type="radio" name="gender" value="Female">Female
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<div>
-										<input type="checkbox" name="terms" id="terms">I agree to the <a href="terms.php">Terms</a> and have read the <a href="policy.php">Policy</a>.
-										<input type="submit" value="Submit" id="submit" name="submit"/>				
-									</div>
-								</td>
-							</tr>
-						</table> -->
-
-						<!-- End Lucas Table -->
-
-
-						<div id="error_box" title="Error">
-							<div id="error_message"></div>
-						</div>
-					</div>
+									</select>									
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span3 offset3">
+									<!-- Female -->
+									<label class="radio"><input type="radio" name="gender" value="Female">Female</label>
+								</div>
+								<div class="span6">									
+			                		<!-- Male -->					                	
+			                		<label class="radio"><input type="radio" name="gender" value="Male">Male</label>
+								</div>								
+							</div>
+							<div class="row-fluid">
+								<div class="span9">
+				                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>									
+								</div>
+								<div class="span3 text-left">
+									<input class="btn btn-info" type="submit" value="Sign Up" id="submit" name="submit"/>
+								</div>
+							</div>
+				            </fieldset>
+				        </form>				    
+				  </div>
 				</div>
 			</div>
-			<h3>New Team Registration</h3>
-			<div>
-				<p>
-					Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. 
-				</p>
-			</div>
+		  	<!-- end group -->
 
-			<h3>Upcoming Tournaments</h3>
-			<div>
-				<p>
-					Blah. Blah Blah Blah.Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-				</p>
-				<ul>
-					<li>
-						List item one
-					</li>
-					<li>
-						List item two
-					</li>
-					<li>
-						List item three
-					</li>
-				</ul>
-			</div>
-		</div><! -- /end accordion -->
+		  	<!-- begin group -->
+		  	<div class="accordion-group">
+			    <div class="accordion-heading">
+			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+			        New Team Registration
+			      </a>
+			    </div>
+			    <div id="collapseTwo" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      	<div class="container-fluid">
+			      		<div class="row-fluid">
+			      			<div class="span12">
+			      				Anim pariatur cliche...
+			      			</div>
+			      		</div>
+			      	</div>
+			      </div>
+			    </div>
+		  	</div>
+		  	<!-- end group -->
+
+		  	<!-- begin group -->
+  		  	<div class="accordion-group">
+			    <div class="accordion-heading">
+			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree">
+			        Upcoming Tournaments
+			      </a>
+			    </div>
+			    <div id="collapseThree" class="accordion-body collapse">
+			      <div class="accordion-inner">
+			      	<div class="container-fluid">
+			      		<div class="row-fluid">
+			      			<div class="span12">
+			      				Anim pariatur cliche...
+			      			</div>
+			      		</div>
+			      	</div>
+
+			      </div>
+			    </div>
+		  	</div>
+		  	<!-- end group -->
+
+		</div>
+		<!-- /end accordion-->
+
+		<!-- /begin news list-->
 		<div class="newsDisplay">
 			<h2><?php echo $archive; // display title ?></h2>
 			<ul>
@@ -298,5 +244,5 @@
 				<?php endforeach ?>
 			</ul>
 		</div>
-	</div><! -- /end right content -->
-</div>
+		<!-- /end news list-->
+	</div><!-- /end right content -->
