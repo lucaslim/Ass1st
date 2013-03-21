@@ -78,7 +78,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="brand" href="<? echo base_url(); ?>"><img src="<? echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
+              <a class="brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
               <div class="nav-collapse collapse">
                 <?php echo $login_header ?>
               </div><!--/.nav-collapse -->

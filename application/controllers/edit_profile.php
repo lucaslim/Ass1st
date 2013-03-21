@@ -9,12 +9,16 @@
 		{
 			parent::__construct();
 			$this -> load -> model('Division_Model');
-		$this -> load -> model('News_Model');
+			$this -> load -> model('News_Model');
+			$this -> load -> model('user_model');
 
-		$this -> load -> helper('date');
-		$this -> load -> helper('template');
+			$this -> load -> helper('date');
+			$this -> load -> helper(array('form', 'url'));
+
+			$this -> load -> helper('template');
 			$this -> load -> library('session');//loads the library for all the functions
 			$this -> load -> helper('validation_helper');
+			$this -> load -> helper('login_helper');
 			
 			
 		}
@@ -25,7 +29,9 @@
 			$data['base']=$this->config->item('base_url');
 			$data['title'] = 'Edit Profile';
 			
-			$this->load->model('user_model');//loads the user_model.php
+
+			//Check if logged in
+			$data['login_header'] = set_login_header(); //get from template_helper.php
 			
 			$user_data = $this->session->userdata('authorized');//stores the information array for the user into $user_data
 			
@@ -37,7 +43,7 @@
 
 
 			$this -> load -> view('templates/header', $data);
-			$this->load->view('edit_profile_view', $data);
+			$this-> load ->view('edit_profile_view.php', $data);
 			$this -> load -> view('templates/footer', $data);
 		}
 		
