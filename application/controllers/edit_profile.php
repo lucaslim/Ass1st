@@ -43,7 +43,7 @@
 
 
 			$this -> load -> view('templates/header', $data);
-			$this-> load ->view('edit_profile_view.php', $data);
+			$this-> load -> view('edit_profile_view', $data);
 			$this -> load -> view('templates/footer', $data);
 		}
 		
