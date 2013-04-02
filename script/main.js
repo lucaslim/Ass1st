@@ -180,3 +180,51 @@ $(document).ready(function() {
 
 // --------------------------------------------------------------------
 
+
+/**
+ *
+ * Attendance Login Ajax
+ * This will submit the radio button changes when the user clicks the radio button
+ *
+ */
+
+$(document).ready(function(){
+
+	$('#attendance_yes').on({
+		click: function(e) {
+			rsvpAttendance($(this));
+		}
+	});
+
+	$('#attendance_no').on({
+		click: function(e) {
+			rsvpAttendance($(this));
+		}
+	});
+});
+
+function rsvpAttendance(objRadioButton) {
+	var attendance = objRadioButton.val();
+
+	//alert(attendance);
+
+	$.ajax({
+            type: "get",
+			url: 'http://localhost:8888/ass1st/index.php/matchAttendance/addAttendance',
+            data: {"attendance" : attendance},
+            dataType: 'html',
+            success: function(data)
+            {
+            	if (data == 'Yes') {
+                	$("#msg").html('<i class="icon-ok attendance_yes_check"></i>');
+                }
+                else if (data == 'No'){
+                	$("#msg").html('<i class="icon-remove attendance_no_x"></i>');
+                }
+            }
+        });
+
+}
+
+
+
