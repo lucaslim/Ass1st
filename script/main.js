@@ -179,6 +179,7 @@ $(document).ready(function() {
 });
 
 
+<<<<<<< HEAD
 // --------------------------------------------------------------------
 /**
  *
@@ -243,3 +244,81 @@ $(document).ready(function () {
 */
 	
 	
+=======
+
+/**
+ *
+ * Attendance Login Ajax
+ * This will submit the radio button changes when the user clicks the radio button
+ *
+ */
+
+$(document).ready(function(){
+
+	$('#attendance_yes').on({
+		click: function(e) {
+			rsvpAttendance($(this));
+		}
+	});
+
+	$('#attendance_no').on({
+		click: function(e) {
+			rsvpAttendance($(this));
+		}
+	});
+});
+
+function rsvpAttendance(objRadioButton) {
+	var attendance = objRadioButton.val();
+
+	//alert(attendance);
+
+	$.ajax({
+            type: "get",
+			url: 'http://localhost:8888/ass1st/index.php/matchAttendance/addAttendance',
+            data: {"attendance" : attendance},
+            dataType: 'html',
+            success: function(data)
+            {
+            	if (data == 'Yes') {
+                	$("#msg").html('<i class="icon-ok attendance_yes_check"></i>');
+                }
+                else if (data == 'No'){
+                	$("#msg").html('<i class="icon-remove attendance_no_x"></i>');
+                }
+            }
+        });
+
+}
+
+///////////////////////
+
+$(document).ready(function() {
+ 
+        //Calculate the height of <header>
+        //Use outerHeight() instead of height() if have padding
+        var aboveHeight = $('#headerWrapper').outerHeight() + 110;
+ 
+	//when scroll
+        $(window).scroll(function(){
+ 
+	        //if scrolled down more than the header’s height
+                if ($(window).scrollTop() > aboveHeight){
+ 
+	        // if yes, add “fixed” class to the <nav>
+	        // add padding top to the #content 
+            // (value is same as the height of the nav)
+                $('.navi-menu').addClass('fixedToTopNav').css('top','0').next()
+                .css('padding-top','60px');
+ 
+                } else {
+ 
+	        // when scroll up or less than aboveHeight,
+            //remove the “fixed” class, and the padding-top
+                $('.navi-menu').removeClass('fixedToTopNav').next()
+                .css('padding-top','0');
+                }
+        });
+});
+
+>>>>>>> 87063506b2758f026dd3f6cc65277b33a387eb4a

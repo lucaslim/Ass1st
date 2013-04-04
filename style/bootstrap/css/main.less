@@ -8,6 +8,7 @@
 @smoke: whiteSmoke;
 @white: #fff;
 @grey: #ccc;
+@blue: blue;
 
 
 .menuGradient {
@@ -81,6 +82,7 @@
  * Declare Global Styles
  * ===================================================================================
  */  
+
 
 body {
     font-size: 16px;	
@@ -479,6 +481,8 @@ a {
 
 .navi-menu {
   .menuGradient;
+  margin: 0 auto;
+  width: 1200px;
 
   form {
     margin: 5px 0 0 0;
@@ -583,6 +587,7 @@ a {
 .ui-timepicker-rtl dl { text-align: right; }
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
 
+
 /* ==========================================================================
    jQuery Slider Styles
    ========================================================================== */
@@ -661,6 +666,35 @@ a {
     padding: 0 20px 20px 0;
   }
 }
+
+/* ===================================================================================
+ * MatchAttendance Styles
+ * ===================================================================================
+ */  
+
+//Check Attendance Approved Markers
+.attendance_no_x{
+  color:red;
+}
+
+.attendance_yes_check{
+  color:green;
+}
+
+/* ==========================================================================
+   Fixed Navi
+   ========================================================================== */
+
+.fixedToTopNav {
+  position: fixed;
+  z-index: 99999999; 
+  width: 100%;   
+}
+
+.navbar {
+  margin-bottom: 0px !important;
+}
+
 
 /* Begin Responsive Elements
    ================================================================================================================================================== */

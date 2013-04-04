@@ -70,7 +70,11 @@
         <!-- Header
         ====================================================================== -->
 
+<<<<<<< HEAD
         <div id="headerWrapper" class="navbar navbar-inverse">
+=======
+        <div id="headerWrapper" class="navbar navbar-inverse ">
+>>>>>>> 87063506b2758f026dd3f6cc65277b33a387eb4a
           <div class="navbar-inner">
             <div class="container">
               <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -78,7 +82,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+<<<<<<< HEAD
               <a class="brand" href="<? echo base_url(); ?>"><img src="<? echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
+=======
+              <a class="brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logos/wreckit_logo_header.png" /></a>
+>>>>>>> 87063506b2758f026dd3f6cc65277b33a387eb4a
               <div class="nav-collapse collapse">
                 <?php echo $login_header ?>
               </div><!--/.nav-collapse -->
@@ -149,13 +157,15 @@
         ====================================================================== -->
         <div id="bodyWrapper">
             <div class="contentWrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="span12">
-                        <p>Live Scores</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <p>Live Scores</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <div class="visible-phone">
                 <p>phone only</p>
             </div>
@@ -199,6 +209,8 @@
                     </div>
                 </div>
             </div>
+
+        <div class="contentWrapper">
 
         <!-- Main Content
         ====================================================================== -->

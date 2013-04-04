@@ -51,7 +51,7 @@ class Upload extends CI_Controller {
 		{
 			$data = array('upload_data' => $this->upload->data());
 			
-			$this->image_model->edit_image($user_data['id']);
+			$this->image_model->edit_image($user_data['id'],$_FILES['userfile']['name']);
 
 			$this->load->view('upload_success', $data);
 		}

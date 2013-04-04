@@ -26,9 +26,9 @@ if (!defined('BASEPATH'))
 		 * 
 		 *retrieve the file name with $_FILES['userfile']['name']
 		 */
-		function edit_image($id) {
+		function edit_image($id,$image) {
 			
-			$this->db->set('Picture',$_FILES['userfile']['name']);
+			$this->db->set('Picture',$image);
 			$this->db->where('Id',$id);
 			$this->db->update('User');
 		}
