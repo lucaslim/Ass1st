@@ -70,7 +70,7 @@
         <!-- Header
         ====================================================================== -->
 
-        <div id="headerWrapper" class="navbar navbar-inverse navbar-fixed-top">
+        <div id="headerWrapper" class="navbar navbar-inverse ">
           <div class="navbar-inner">
             <div class="container">
               <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -149,10 +149,11 @@
         ====================================================================== -->
         <div id="bodyWrapper">
             <div class="contentWrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="span12">
-                        <p>Live Scores</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <p>Live Scores</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -198,6 +199,8 @@
                     </div>
                 </div>
             </div>
+        <div class="contentWrapper">
+
 
         <!-- Main Content
         ====================================================================== -->

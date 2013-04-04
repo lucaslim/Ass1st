@@ -226,5 +226,33 @@ function rsvpAttendance(objRadioButton) {
 
 }
 
+///////////////////////
 
+$(document).ready(function() {
+ 
+        //Calculate the height of <header>
+        //Use outerHeight() instead of height() if have padding
+        var aboveHeight = $('#headerWrapper').outerHeight() + 110;
+ 
+	//when scroll
+        $(window).scroll(function(){
+ 
+	        //if scrolled down more than the header’s height
+                if ($(window).scrollTop() > aboveHeight){
+ 
+	        // if yes, add “fixed” class to the <nav>
+	        // add padding top to the #content 
+            // (value is same as the height of the nav)
+                $('.navi-menu').addClass('fixedToTopNav').css('top','0').next()
+                .css('padding-top','60px');
+ 
+                } else {
+ 
+	        // when scroll up or less than aboveHeight,
+            //remove the “fixed” class, and the padding-top
+                $('.navi-menu').removeClass('fixedToTopNav').next()
+                .css('padding-top','0');
+                }
+        });
+});
 
