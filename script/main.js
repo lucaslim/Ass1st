@@ -179,7 +179,6 @@ $(document).ready(function() {
 });
 
 
-<<<<<<< HEAD
 // --------------------------------------------------------------------
 /**
  *
@@ -243,8 +242,6 @@ $(document).ready(function () {
 });
 */
 	
-	
-=======
 
 /**
  *
@@ -291,8 +288,6 @@ function rsvpAttendance(objRadioButton) {
 
 }
 
-///////////////////////
-
 $(document).ready(function() {
  
         //Calculate the height of <header>
@@ -321,4 +316,3 @@ $(document).ready(function() {
         });
 });
 
->>>>>>> 87063506b2758f026dd3f6cc65277b33a387eb4a
