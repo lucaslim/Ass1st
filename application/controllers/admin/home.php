@@ -1,30 +1,39 @@
 <?php
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-//Start Session
-session_start();
-class Home extends CI_Controller {
+
+/**
+ * Assist
+ *
+ * This is the controller for the Home (Admin) class
+ *
+ * @package		Assist
+ * @author		Team Assist
+ */
+
+// --------------------------------------------------------------------
+
+class Home extends Admin_Controller {
 
 	function __construct() {
 		parent::__construct();
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Default index for the Home Class
+	 *
+	 * Directs user to the home_view if they are logged in
+	 *
+	 */
 	function index() {
-		if ($this -> session -> userdata('authorized')) {
-			$session_data = $this -> session -> userdata('authorized');
-			$data['fullname'] = $session_data['fullname'];
-			//$this -> load -> view('admin_view', $data);
-		} else {
-			//no session found
-			redirect('login', 'refresh');
-		}
+		$this -> load -> view('admin/template/header');
+		$this -> load -> view('admin/home_view');
+		$this -> load -> view('admin/template/footer');
 	}
 
-	function logout() {
-		$this -> session -> unset_userdata('authorized');
-		session_destroy();
-		redirect('login', 'refresh');
-	}
+	// --------------------------------------------------------------------
 
 }
 ?>

@@ -12,7 +12,7 @@ if (!defined('BASEPATH'))
 
 // --------------------------------------------------------------------
 
-class News extends CI_Controller {
+class News extends Admin_Controller {
 	/**
 	 * Constructor for the News Class
 	 *
@@ -25,6 +25,7 @@ class News extends CI_Controller {
 		$this -> load -> helper('date');
 		$this -> load -> helper(array('form', 'url'));
 		$this -> load -> helper('text');
+		$this -> load -> helper('login');
 
 		$this -> load -> model('News_Model', 'news', TRUE);
 	}
@@ -39,9 +40,8 @@ class News extends CI_Controller {
 	 *
 	 */
 	function index() {
-
 		//redirect to view
-		header('location: view');
+		header('location: edit');
 	}
 
 	// --------------------------------------------------------------------
@@ -52,19 +52,21 @@ class News extends CI_Controller {
 	 * This will display the page with all the news listed on it.
 	 *
 	 */
-	function view() {
+	function edit() {
 
 		//Get total number of rows
 		$total_rows = $this -> news -> get_news_count();
 
 		//Set pagination data
-		$data = get_pagination_data("admin/news/view", $total_rows);
+		$data = get_pagination_data("admin/news/edit", $total_rows);
 
 		//Set news data
 		$data['results'] = $this -> news -> get_news($data['per_page'], $data['current_page']);
 
 		//load view
+		$this -> load -> view('admin/template/header', $data);
 		$this -> load -> view('admin/news_list_view', $data);
+		$this -> load -> view('admin/template/footer', $data);		
 	}
 
 	// --------------------------------------------------------------------
@@ -83,7 +85,9 @@ class News extends CI_Controller {
 
 		$data['Id'] = $id;
 
+		$this -> load -> view('admin/template/header', $data);
 		$this -> load -> view('admin/news_edit_view', $data);
+		$this -> load -> view('admin/template/footer', $data);
 	}
 
 	/**
@@ -123,7 +127,7 @@ class News extends CI_Controller {
 
 		//If update pass, redirect to the list page
 		if ($query)
-			header("location: view");
+			header("location: edit");
 	}
 
 	// --------------------------------------------------------------------
@@ -134,8 +138,10 @@ class News extends CI_Controller {
 	 * This will display the Add New Post page
 	 *
 	 */
-	function new_post() {
+	function add() {
+		$this -> load -> view('admin/template/header');
 		$this -> load -> view('admin/news_add_view');
+		$this -> load -> view('admin/template/footer');
 	}
 
 	// --------------------------------------------------------------------
@@ -157,6 +163,8 @@ class News extends CI_Controller {
 
 		//Get user_id from session;
 		$this -> news -> add_news($data);
+
+		header("location: edit");
 	}
 
 	// --------------------------------------------------------------------
@@ -178,7 +186,7 @@ class News extends CI_Controller {
 			}
 		}
 
-		header("location: view");
+		header("location: edit");
 	}
 
 	// --------------------------------------------------------------------

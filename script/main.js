@@ -178,5 +178,68 @@ $(document).ready(function() {
 	});
 });
 
-// --------------------------------------------------------------------
 
+// --------------------------------------------------------------------
+/**
+ *
+ * Scorekeeper Buttons
+ *
+ * These functions prevent the user from submitting multiple goals on 
+ * scoring play.
+ *
+ */
+/*
+$.fn.disableButton = function () {
+	$(this).attr("disabled", true); // apply disabled attribute
+  	return this;
+};
+
+$.fn.clearDisabled = function () {
+	$(this).attr("disabled", false); // apply disabled attribute
+  	return this;	
+};
+
+$.fn.cancelAll = function () {
+	// clear all fields on cancel
+	$("input[name=goal]").attr("checked", false);
+	$("input[name=p_assist]").attr("checked", false);
+	$("input[name=s_assist]").attr("checked", false);
+	$("input.add-goal").attr("disabled", false); // disable disabled attribute
+	$("input.add-p_assist").attr("disabled", false); 
+	$("input.add-s_assist").attr("disabled", false);
+	$('.submitScore').disableButton();
+}
+
+$(document).ready(function () {
+	$('.submitScore').disableButton();
+
+	$(".add-goal").click(function() {
+		$(".add-goal").disableButton();
+		$('.submitScore').clearDisabled();
+		$(this).clearDisabled();			
+		$(this).closest("tr").find(".add-p_assist").disableButton(); // disable ability to give single player assist and goal
+		$(this).closest("tr").find(".add-s_assist").disableButton();
+	});
+	
+	$(".add-p_assist").click(function() {
+		$(".add-p_assist").disableButton();
+		$(this).clearDisabled();		
+		$(this).closest("tr").find(".add-goal").disableButton();
+		$(this).closest("tr").find(".add-s_assist").disableButton();
+	});
+	
+	$(".add-s_assist").click(function() {
+		$(".add-s_assist").disableButton();
+		$(this).clearDisabled();
+		$(this).closest("tr").find(".add-goal").disableButton();
+		$(this).closest("tr").find(".add-p_assist").disableButton(); 
+	});	
+
+	$("button[name=cancelAll]").click(function() {
+		$.fn.cancelAll();
+		$('select[name=add-pim]').prop('selectedIndex',0);
+	});
+});
+*/
+	
+	

@@ -29,6 +29,57 @@ class Division_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 	/**
+	 * Get Seasons
+	 *
+	 * Retrieves all seasons currently stored in the database
+	 *
+	 */
+	function get_seasons() {
+
+		$this -> db -> select('Id, YearFrom, YearTo');
+		$this -> db -> from('Season');
+
+		$query = $this -> db -> get();
+		
+		return $query -> result();
+	}	
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Arenas
+	 *
+	 * Retrieves all arenas currently stored in the database
+	 *
+	 */
+	function get_arenas() {
+
+		$this -> db -> select('Id, Name, Description');
+		$this -> db -> from('Arena');
+
+		$query = $this -> db -> get();
+		
+		return $query -> result();
+	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Match Type
+	 *
+	 * Retrieves the type of matches available in the db
+	 *
+	 */
+	function get_match_types() {
+
+		$this -> db -> select('Id, Name');
+		$this -> db -> from('MatchType');
+
+		$query = $this -> db -> get();
+		
+		return $query -> result();
+	}	
+
+	// --------------------------------------------------------------------
+	/**
 	 * Get Conference Profile
 	 *
 	 * Retrieves all the division names based on id (1 = east, 2 = west)
@@ -50,7 +101,7 @@ class Division_Model extends CI_Model {
 	/**
 	 * Get Team by Id
 	 *
-	 * Retrieves all the division names based on id (1 = east, 2 = west)
+	 * Retrieves team by ID
 	 *
 	 */
 	function get_team_by_id($id) {
@@ -71,6 +122,28 @@ class Division_Model extends CI_Model {
 		
 		return $query -> row();
 	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Teams
+	 *
+	 * Retrieves a list of the teams
+	 *
+	 */
+	function get_teams() {
+
+		// set where clause
+		$this -> db -> select('Id, Name');
+		$this -> db -> from('AllTeams');
+
+		$query = $this->db->get();
+
+		//Check if any rows returned
+		if (!$query || $query -> num_rows() <= 0)
+			return FALSE;
+		
+		return $query -> result();
+	}	
 
 	// --------------------------------------------------------------------
 

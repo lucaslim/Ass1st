@@ -1,0 +1,33 @@
+<?php
+if (!defined('BASEPATH'))
+  exit('No direct script access allowed');
+
+/**
+ * Assist
+ *
+ * This controller is used to declare global functions
+ *
+ * @package   Assist
+ * @author    Team Assist
+ */
+
+// --------------------------------------------------------------------
+
+class MY_Controller extends CI_Controller
+{
+
+  // --------------------------------------------------------------------
+
+  /**
+   * Check if post
+   *
+   * Returns true if submitted via POST
+   *
+   */
+
+  public function is_post()
+  {
+    return $_SERVER['REQUEST_METHOD'] == 'POST' ? TRUE : FALSE;
+  }
+
+}

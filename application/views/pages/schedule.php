@@ -1,9 +1,12 @@
-<div id="mainContent">
-	<div id="leftContent">
+	<!-- Place Main Content Here -->
+	<div id="leftContent" class="span7">
 		<h1>Schedule</h1>
 		<p>Currently under development</p>
 	</div>
-	<div id="rightContent">
+
+
+	<!-- Place Sidebar Content Here -->
+	<div id="rightContent" class="span5">
 		<p>Empty</p>
 	</div>
-</div>
+

@@ -12,7 +12,7 @@ if (!defined('BASEPATH'))
 
 // --------------------------------------------------------------------
 
-class User extends CI_Controller {
+class User extends Admin_Controller {
 	/**
 	 * Constructor for the News Class
 	 *
@@ -60,7 +60,9 @@ class User extends CI_Controller {
 		$data['results'] = $this -> user -> get_users($data['per_page'], $data['current_page']);
 
 		//load view
-		$this -> load -> view('admin/user_list_view', $data);			
+		$this -> load -> view('admin/template/header', $data);
+		$this -> load -> view('admin/user_list_view', $data);
+		$this -> load -> view('admin/template/footer', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -117,7 +119,9 @@ class User extends CI_Controller {
 		$data['user_roles'] = $this -> user -> get_user_roles();
 
 		//Load data to view
+		$this -> load -> view('admin/template/header', $data);
 		$this -> load -> view('admin/user_view', $data);
+		$this -> load -> view('admin/template/footer', $data);
 	}
 
 	// --------------------------------------------------------------------

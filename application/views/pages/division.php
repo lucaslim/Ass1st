@@ -1,5 +1,4 @@
-<div id="mainContent">
-	<div id="leftContent">
+	<div id="leftContent" class="span7">
 		<div class="divisionProfile bootStrap">
 			<h1>League Standings</h1>
 
@@ -42,7 +41,8 @@
 			</table>			
 		</div>
 	</div>
-	<div id="rightContent">
+
+	<div id="rightContent" class="span5">
 		<p>Empty</p>
 	</div>
-</div>
+	

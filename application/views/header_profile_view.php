@@ -1,22 +1,24 @@
-<div id="header_profile_view">
-	<table>
-		<tr>
-			<td>
-				<!-- team logo -->
-				<img id="img_team" src="<?php echo base_url(); ?>assets/images/temp/wolverine_login.jpg"/>
-			</td>
-			<td>
-				<!-- player logo -->
-				<img id="img_player" src="<?php echo $picture; ?>">
-			</td>
-			<td>
-				<div id="usr_name">
-					<a href src="#"><?php echo $full_name; ?>&nbsp;<i class="icon-caret-down icon-large"></i></a>
-				</div>
-				<div id="usr_options">
-					<a href="#<?php echo $id; ?>">Profile</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="<?php echo base_url(); ?>logout">Log Out</a>
-				</div>
-			</td>
-		</tr>
-	</table>
-</div>
+<ul class="nav pull-right player-controls">
+    <li>
+    	<!-- team logo -->
+    	<img class="img-team" src="<?php echo base_url(); ?>assets/images/temp/wolverine_login.jpg"/>
+    </li>
+    <li>
+		<!-- player logo -->
+		<img class="img-player" src="<?php echo $picture; ?>">
+    </li>
+    <li>
+    	<!-- player controls -->
+		<div class="dropdown pull-right">
+			<a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+				<?php echo $full_name; ?> <b class="caret white-caret"></b>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+				<li><a href="#">View Team</a></li>
+				<li><a href="#">Edit Profile</a></li>
+				<li class="divider"></li>
+				<li><a href="<?php echo base_url(); ?>logout">Log Out</a></li>
+			</ul>
+		</div>    	
+    </li>
+</ul>

@@ -1,5 +1,5 @@
-<div id="mainContent">
-	<div id="leftContent" class="teamProfile bootStrap">
+	<!-- Place Main Content Here -->
+	<div id="leftContent" class="teamProfile span7">
 			<h1><?php echo $team -> tname; ?></h1>
 			<p>Founded: <?php echo $team -> tfounded; ?></p>
 			
@@ -27,4 +27,8 @@
 				</tbody>
 			</table>
 	</div>
-</div>
+
+	<!-- Place Sidebar Content Here -->
+	<div id="rightContent" class="span5">
+		<p>Empty</p>
+	</div>
