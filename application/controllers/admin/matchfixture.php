@@ -12,7 +12,7 @@ if (!defined('BASEPATH'))
 
 // --------------------------------------------------------------------
 
-class Match_Fixture extends CI_Controller {
+class MatchFixture extends Admin_Controller {
 	/**
 	 * Constructor for the News Class
 	 *
@@ -21,6 +21,10 @@ class Match_Fixture extends CI_Controller {
 	 */
 	function __construct() {
 		parent::__construct();
+
+
+		// start session so we can use session variables
+		session_start();
 	}
 
 	// --------------------------------------------------------------------
@@ -45,15 +49,35 @@ class Match_Fixture extends CI_Controller {
 	 * The system will load this function by default
 	 *
 	 */
+	function generate() {
+		$data["generated_schedule"] = $this -> generate_game_schedule();
+
+		$this -> load -> view('admin/template/header');
+		$this -> load -> view('admin/matchfixture_generate_view', $data);
+		$this -> load -> view('admin/template/footer');		
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Default index for the News Class
+	 *
+	 * In case no parameters are given in the Url (e.g. path/News/).
+	 * The system will load this function by default
+	 *
+	 */
 
 	function generate_game_schedule() {
 		//Crash counter threshold
 		$threshold = 15;
 
-		///Get All Teams
-		$this -> load -> model('Team_Model', 'team', TRUE);
+		//Start of Season
+		$start_date = '2013-04-01';
 
-		$team = $this -> team -> get_all_teams();
+		///Get All Teams
+		$this -> load -> model('Division_Model', 'division', TRUE);
+
+		$team = $this -> division -> get_all_teams_by_league(1);
 
 		//Total regular games
 		$total_regular_games = 82;
@@ -79,8 +103,14 @@ class Match_Fixture extends CI_Controller {
 		//Total number of team to play against at away
 		$number_away_to_play_per_season = $number_to_play_per_season - $number_home_to_play_per_season; //10
 
+		//Days per week
+		$days_per_week = 2;
+
 		//Games per week
 		$games_per_week = 8;
+
+		//Games per day
+		$games_per_day = $games_per_week / $days_per_week;
 
 		//Games per month
 		$games_per_month = $games_per_week * 4; //8
@@ -148,32 +178,109 @@ class Match_Fixture extends CI_Controller {
 				}
 			}
 
-			print_r($daily_fixture[0]);
-			print_r('<br />');
-			print_r($daily_fixture[1]);
-			print_r('<br />');
-			print_r($daily_fixture[2]);
-			print_r('<br />');
-			print_r($daily_fixture[3]);
-			print_r('<br />');
-			print_r('<br />');
+			// print_r($daily_fixture[0]);
+			// print_r('<br />');
+			// print_r($daily_fixture[1]);
+			// print_r('<br />');
+			// print_r($daily_fixture[2]);
+			// print_r('<br />');
+			// print_r($daily_fixture[3]);
+			// print_r('<br />');
+			// print_r('<br />');
 
-			print_r($count++);
-			print_r('<br />');
-			print_r('<br />');
+			// print_r($count++);
+			// print_r('<br />');
+			// print_r('<br />');
 
 			//Merge daily fixture array to the main schedule array
 			$new_schedule = array_merge($new_schedule, $daily_fixture);
 
 			unset($daily_fixture);
 		}
-		unset($new_schedule);
 		unset($schedule);
 		unset($rand_fixture);
+
+		//Set days counter
+		$days_counter = 0;
+
+		$day_array_counter = 0;
+
+		//Set days played
+		$day_array = array("Tuesday", "Thursday");
+
+		//Set first tuesday
+		$start_date = date("D M d, Y", strtotime("Next " . $day_array[$day_array_counter], strtotime($start_date)));
+
+		$schedule_html = "";
+		$schedule_html .= "<table border='1'>";
+		$schedule_html .= "<tr><th>Date</th><th>Home Team</th><th>Visiting Team</th><th>Stadium</th></tr>";
+
+		//Set Data to be insert
+		$season_fixture = array();
+
+		foreach ($new_schedule as $games) {
+			//Reset days counter if hit the maximum games per day
+			if($days_counter == $games_per_day)	{
+
+				//reset day array counter
+				if($day_array_counter == count($day_array) - 1)
+					$day_array_counter = 0;
+				else
+					$day_array_counter++;
+
+				$days_counter = 0;
+				$start_date = date("D M d, Y", strtotime("Next " . $day_array[$day_array_counter], strtotime($start_date)));
+			}
+
+			$schedule_html .= "<tr>";
+			$schedule_html .= "<td>" . $start_date . "</td>";
+			$schedule_html .= "<td>" . $games[0]["Name"] . "</td>";
+			$schedule_html .= "<td>" . $games[1]["Name"] . "</td>";
+			$schedule_html .= "<td>" . $games[0]["ArenaId"] . "</td>";
+ 			$schedule_html .= "<tr>";
+
+ 			$daily_fixture = array('SeasonId' => 1,
+ 								   'HomeTeamId' => $games[0]["Id"],
+ 								   'AwayTeamId' => $games[1]["Id"],
+ 								   'Date' => date("Y-m-d", strtotime($start_date)),
+ 								   'Time' => date("H:i:s", strtotime('19:00')),
+ 								   'ArenaId' => $games[0]["ArenaId"],
+ 								   'MatchTypeId' => 3);
+
+ 			array_push($season_fixture, $daily_fixture);
+
+			$days_counter++;
+		}		
+
+		$this -> load -> model('MatchFixture_Model', 'matchfixture', TRUE);
+
+		$this -> matchfixture -> generate_season_fixture($season_fixture, 1);
+
+		print_r($schedule_html);
 
 		return $new_schedule;
 	}
 
 	// --------------------------------------------------------------------
+
+	function is_team_exist($daily_fixture, $rand_fixture, $new_schedule) {
+
+		if(count($daily_fixture) == 0)
+			return false;
+
+			// print_r("Count : " . count($daily_fixture) . "<br />");
+
+		foreach ($daily_fixture as $key) {
+			// print_r($key[0]["Name"] . " vs " . $daily_fixture[0][1]["Name"] . "<br />");
+			if(in_array($rand_fixture[0], $key))
+				return true;
+
+			if(in_array($rand_fixture[1], $key))
+				return true;
+		}
+
+		return false;
+
+	}
 }
 ?>

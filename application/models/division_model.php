@@ -124,6 +124,7 @@ class Division_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
+
 	/**
 	 * Get Teams
 	 *
@@ -147,7 +148,28 @@ class Division_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 
+	/**
+	 * Get Teams Based on League
+	 *
+	 * Retrieves a list of teams based on the league
+	 *
+	 */
+
+	function get_all_teams_by_league($leagueId) {
+
+		$this -> db -> select('Id, Name, ArenaId');
+		$this -> db -> where('LeagueId' , $leagueId);
+		$query = $this -> db -> get('AllTeams');
+
+		if ($query -> num_rows() > 0) {
+			return $query -> result_array() ;
+		} else {
+			return false;
+		}
+	}
+
 	// --------------------------------------------------------------------
+
 	/**
 	 * Get Team Roster by Id
 	 *

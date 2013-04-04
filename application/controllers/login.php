@@ -144,25 +144,5 @@ class Login extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------
-
-	function is_team_exist($daily_fixture, $rand_fixture, $new_schedule) {
-
-		if(count($daily_fixture) == 0)
-			return false;
-
-			// print_r("Count : " . count($daily_fixture) . "<br />");
-
-		foreach ($daily_fixture as $key) {
-			// print_r($key[0]["Name"] . " vs " . $daily_fixture[0][1]["Name"] . "<br />");
-			if(in_array($rand_fixture[0], $key))
-				return true;
-
-			if(in_array($rand_fixture[1], $key))
-				return true;
-		}
-
-		return false;
-
-	}
 }
 ?>
