@@ -43,37 +43,36 @@
 
 		<!-- Home Team Data -->
 		<div class="span6">
-				
-			<form id="homeScore" action="<?php echo base_url();?>admin/scorekeeper/save_score/<?php echo $game -> Id; ?>/<?php echo $game -> HomeTeamId; ?>" method="post">
-				<input type="hidden" name="teamside" value="home" />
-
-				<table class="table table-hover">
-					<legend>
-						<h3><?php echo $game -> HomeTeamName; ?> <small>Home Team</small> <span class="pull-right"><?php echo $homeScore; ?></span></h3>
-					</legend>
-					<thead>
+			<table class="table table-hover">
+				<legend>
+					<h3><?php echo $game -> HomeTeamName; ?> <small>Team ID: <?php echo $game -> HomeTeamId; ?> - Home Team</small> <span class="pull-right"><?php echo $homeScore; ?></span></h3>
+				</legend>
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>GP</th>
+						<th>G</th>
+						<th>A</th>
+						<th>PIM</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($hometeam as $player) : ?>
 						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>GP</th>
-							<th>G</th>
-							<th>A</th>
-							<th>PIM</th>
+							<td><?php echo $player['JerseyNo']; ?></td>
+							<td><?php echo $player['FullName']; ?> <?php if($player['Captain'] == 'Yes') { echo "<strong>(C)</strong>"; }; ?></td>
+							<td><?php echo $player['GP']; ?></td>
+							<td><?php echo $player['Goals']; ?></td>
+							<td><?php echo $player['Assists']; ?></td>
+							<td><?php if($player['PIM'] != FALSE) { echo $player['PIM']; } else { echo "0"; } ?></td>
 						</tr>
-					</thead>
-					<tbody>
-						<?php foreach($hometeam as $player) : ?>
-							<tr>
-								<td><?php echo $player['JerseyNo']; ?></td>
-								<td><?php echo $player['FullName']; ?> <?php if($player['Captain'] == 'Yes') { echo "<strong>(C)</strong>"; }; ?></td>
-								<td><?php echo $player['GP']; ?></td>
-								<td><?php echo $player['Goals']; ?></td>
-								<td><?php echo $player['Assists']; ?></td>
-								<td><?php if($player['PIM'] != FALSE) { echo $player['PIM']; } else { echo "0"; } ?></td>
-							</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			<form id="homeScore" action="<?php echo base_url();?>admin/scorekeeper/save_score/<?php echo $game -> Id; ?>" method="post">
+				<input type="hidden" name="teamside" value="home" />
+				<input type="hidden" name="teamid" value="<?php echo $game -> HomeTeamId; ?>" />				
 				<table class="table">
 					<legend>
 						Insert Home Team Scoring Play
@@ -91,7 +90,7 @@
 					<tbody>
 						<tr>
 							<td>
-								<select id="homeGoal" class="homeScoring input-mini" name="goal">
+								<select id="homeGoal" class="input-mini" name="goal">
 									<option value="">N/A</option>
 									<?php foreach($hometeam as $player) : ?>
 										<option value="<?php echo $player['PlayerId']; ?>"><?php echo $player['JerseyNo']; ?></option>
@@ -115,13 +114,13 @@
 								</select>
 							</td>															
 							<td>
-								<select class="input-mini" name="minute">
+								<select id="homeGMinute" class="input-mini" name="minute">
 									<?php foreach($twentyminutes as $minute) : ?>
 										<?php echo "<option value='$minute'>$minute</option>" ?>
 									<?php endforeach; ?>
 								</select>
 								:
-								<select class="input-mini" name="seconds">
+								<select id="homeGSeconds" class="input-mini" name="seconds">
 									<?php foreach($sixtyseconds as $seconds) : ?>
 										<?php echo "<option value='$seconds'>$seconds</option>" ?>
 									<?php endforeach; ?>
@@ -139,10 +138,10 @@
 							</td>							
 							<td>
 								<div class="pull-right">
-									<input type="submit" class="btn btn-primary submitScore" id="submitHomeScore" value="Save" /> 
+									<input type="submit" class="btn btn-primary" id="submitHomeScore" value="Save" /> 
 								</div>
 							</td>
-						</tr>						
+						</tr>							
 					</tbody>
 				</table>
 			</form>
@@ -242,7 +241,7 @@
 		<div class="span6">
 			<table class="table table-hover">
 				<legend>
-					<h3><?php echo $game -> AwayTeamName; ?> <small>Away Team</small> <span class="pull-right"><?php echo $awayScore; ?></span></h3>
+					<h3><?php echo $game -> AwayTeamName; ?> <small>Team ID: <?php echo $game -> AwayTeamId; ?> - Away Team</small> <span class="pull-right"><?php echo $awayScore; ?></span></h3>
 				</legend>				
 				<thead>
 					<tr>
@@ -267,8 +266,9 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
-			<form id="awayScore" action="<?php echo base_url();?>admin/scorekeeper/save_score/<?php echo $game -> Id; ?>/<?php echo $game -> AwayTeamId; ?>" method="post">
+			<form id="awayScore" action="<?php echo base_url();?>admin/scorekeeper/save_score/<?php echo $game -> Id; ?>" method="post">
 				<input type="hidden" name="teamside" value="away" />			
+				<input type="hidden" name="teamid" value="<?php echo $game -> AwayTeamId; ?>" />
 				<table class="table">
 					<legend>
 						Insert Away Team Scoring Play

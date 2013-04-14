@@ -54,7 +54,7 @@ class Scorekeeper_Model extends CI_Model {
 	    }
 
 	    // Perform the query
-	    $query = $this -> db -> get('AllGames');
+	    $query = $this -> db -> get('AllFixtures');
 
 	    // If query returns 1 or more results, return data as array
 	    // If query returns 0 rows, then return false
@@ -89,7 +89,7 @@ class Scorekeeper_Model extends CI_Model {
     public function get_game_by_id($gameid) {
 	    
 		// From the MatchFixture table
-		$this -> db -> from('AllGames');
+		$this -> db -> from('AllFixtures');
 
 		// Where gameid = $gameid
 	    $this -> db -> where("Id", $gameid);
@@ -211,7 +211,7 @@ class Scorekeeper_Model extends CI_Model {
 		$this -> db -> where('Id', $gameid);
 
 	    // Perform the query
-	    $query = $this -> db -> get('AllGames');
+	    $query = $this -> db -> get('AllFixtures');
 
 	    // If query returns 0 rows, then return false
 	    if ($query -> num_rows() > 0) {
@@ -269,28 +269,56 @@ class Scorekeeper_Model extends CI_Model {
 	/**
 	 * Load Roster
 	 *
-	 * Loads the roster of the team into an array
+	 * Loads the roster of the team into an array, uses team id and season
+	 * id to find the teams info
 	 *
 	 */
 
-    public function load_roster($teamid) {
+    public function load_roster($teamid, $seasonid) {
 
     	// Use the team id to load the roster
 		$this -> db -> where('TeamId', $teamid);
 
+    	// Use the team id to load the roster
+		$this -> db -> where('SeasonId', $seasonid);
+
 	    // Perform the query
-	    $query = $this -> db -> get('AllRosterPlayers');
+	    $query = $this -> db -> get('AllRosters');
 
 	    // If query returns 1 or more results, return data as array
 	    // If query returns 0 rows, then return false
 	    if ($query -> num_rows() > 0) {
 	        foreach ($query -> result() as $row) {
+	        	$playerid = $row -> UserId;
+	        	$seasonid = $row -> SeasonId;
+
+	        	// calculate games played by the user
+	        	$row -> GP = $this -> get_games_played($playerid, $seasonid);
 	            $data[] = $row;
 	        }
 	        return $data;
 	    }
 	    return false;
    	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Games Played
+	 *
+	 * Calculates the games played by a player in a season
+	 *
+	 */
+
+    public function get_games_played($playerid, $seasonid) {
+
+    	// Use the team id to load the roster
+		$this -> db -> where('PlayerId', $playerid);
+		$this -> db -> where('SeasonId', $seasonid);
+
+		// count the rows in the lineup table
+		$this -> db -> from('LineUp');
+		return $this -> db -> count_all_results();		
+   	}   	
 
 	// --------------------------------------------------------------------
 	/**
@@ -303,7 +331,7 @@ class Scorekeeper_Model extends CI_Model {
     public function load_lineup($teamid, $gameid) {
 
     	// Get a list of the player ids
-    	$this -> db -> select('PlayerId, JerseyNo, FullName, GP, Captain, SeasonId');
+    	$this -> db -> select('PlayerId, JerseyNo, FullName, Captain, SeasonId');
 
     	// Define the where clause
     	$this -> db -> where('GameId', $gameid);
@@ -312,7 +340,7 @@ class Scorekeeper_Model extends CI_Model {
     	$data = array();
 
 	    // Perform the query
-	    $query = $this -> db -> get('AllLineUpPlayers');
+	    $query = $this -> db -> get('AllLineupPlayers');
 
 	    if ($query -> num_rows() > 0) {
 	        foreach ($query -> result() as $row) {
@@ -322,8 +350,10 @@ class Scorekeeper_Model extends CI_Model {
 	            $jersey = $row -> JerseyNo;
 	            $name = $row -> FullName;
 	            $captain = $row -> Captain;
-	            $gamesplayed = $row -> GP;
 	            $seasonid = $row -> SeasonId;
+
+	            // Get the games played for this player
+	            $gamesplayed = $this -> get_games_played($player, $seasonid);
 
 	            // Get the goal totals for this game
 	            $goals = $this -> get_player_goals($player, $seasonid, $gameid);
@@ -543,31 +573,6 @@ class Scorekeeper_Model extends CI_Model {
 		// Perform the insert
 		return $this -> db -> insert('IndividualScoreHockey', $scoring_data); 
    	}    	
-
-	// --------------------------------------------------------------------
-	/**
-	 * Update Score
-	 *
-	 * Update the game score
-	 *
-	 */
-
-    public function update_score($gameid, $teamside) {
-
-    	// Update home team score
-    	if($teamside == 'home')
-			$this -> db -> set('HomeTeamScore', 'HomeTeamScore + 1', FALSE);
-
-		// Update away team score
-		if($teamside == 'away')
-			$this -> db -> set('AwayTeamScore', 'AwayTeamScore + 1', FALSE);
-
-		// Set where clause
-		$this -> db -> where('Id', $gameid);
-
-		// Perform Update for
-		return $this -> db -> update('MatchFixture');
-   	}
 
 	// --------------------------------------------------------------------
 	/**

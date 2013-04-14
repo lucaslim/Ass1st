@@ -80,17 +80,14 @@ class Division_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 	/**
-	 * Get Conference Profile
+	 * Get Standings
 	 *
-	 * Retrieves all the division names based on id (1 = east, 2 = west)
+	 * Retrieves the standings for the various divisions
 	 *
 	 */
-	function get_divisions() {
+	function get_standings() {
 
-		$this -> db -> select('ConferenceId, ConferenceName, DivisionId, DivisionName, Id, Name');
-		$this -> db -> from('AllTeams');
-
-		$query = $this -> db -> get();
+		$query = $this -> db -> get('AllTeamStandings');
 		
 		return $query -> result();
 	}

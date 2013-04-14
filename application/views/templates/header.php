@@ -177,7 +177,7 @@
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/index/scores/">Scores</a>
                                 </li>
                                 <li>
-                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/division/">Standings</a>
+                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/standings/">Standings</a>
                                 </li>
                                 <li>
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/index/stats/">Stats</a>

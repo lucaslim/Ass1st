@@ -101,23 +101,23 @@ class Pages extends CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Division Page
+	 * Standings Page
 	 *
-	 * Displays the division profile
+	 * Displays the standings for the league
 	 *
 	 */
 
-	function division() {
-		$data['teams'] = $this -> Division_Model -> get_divisions(); // retrieve teams
+	function standings() {
+		$data['teams'] = $this -> Division_Model -> get_standings(); // retrieve teams
 
 		// provide a page title
-		$data['title'] = "Division Profiles";
+		$data['title'] = "League Standings";
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		$this -> load -> view('templates/header', $data);
-		$this -> load -> view('pages/division.php', $data);
+		$this -> load -> view('pages/standings.php', $data);
 		$this -> load -> view('templates/footer');
 	}
 

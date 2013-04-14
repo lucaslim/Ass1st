@@ -78,7 +78,7 @@
 									<td><?php echo $player -> JerseyNo; ?></td>
 									<td><?php echo $player -> FullName; ?></td>
 									<td><?php echo $player -> GP; ?></td>
-									<td><input type="checkbox" name="players[]" value="<?php echo $player -> UserId; ?>" /></td>
+									<td><input type="checkbox" name="players[]" checked="checked" value="<?php echo $player -> UserId; ?>" /></td>
 								</tr>
 							<?php endforeach; ?>
 						</tbody>

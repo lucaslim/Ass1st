@@ -347,13 +347,10 @@ $(document).ready(function() {
 		var awaySAssist = $("#awaySAssist");
 		var awayGSubmit = $("#submitAwayScore");
 
-		awayGSubmit.disableButton();
-
 		$('#awayScore select').change(function() {
 		  var A = awayGoal.val();
 		  var B = awayPAssist.val();
 		  var C = awaySAssist.val();
-		  console.log(A,B,C);
 
 		  if(// case 1: only A 
 		    (A != "" && B == "" && C == "") ||  
@@ -370,32 +367,17 @@ $(document).ready(function() {
 			}
 		});
 
-        // disable submit button unless the select 'player' has a value
-        var player = $(":input[name='player']");
-        player.change(function() {
-        	var submit = $(this).closest('form').find('.submitPenalty');
-        	if($(this).val() != "") {
-        		submit.clearDisabled();
-        	}
-        	else {
-        		submit.disableButton();
-        	}
-        });
-
 		var homeGoal = $("#homeGoal");
 		var homePAssist = $("#homePAssist");
 		var homeSAssist = $("#homeSAssist");
 		var homeGSubmit = $("#submitHomeScore");
 
-		homeGSubmit.disableButton();
-
 		$('#homeScore select').change(function() {
 		  var A = homeGoal.val();
 		  var B = homePAssist.val();
 		  var C = homeSAssist.val();
-		  console.log(A,B,C);
 
-		  if(!// case 1: only A 
+		  if(// case 1: only A 
 		    (A != "" && B == "" && C == "") ||  
 
 		    // case 2: only A and B, A != B
@@ -408,7 +390,23 @@ $(document).ready(function() {
 			else {
 			    homeGSubmit.disableButton();
 			}
-		});       
+		});
+
+		awayGSubmit.disableButton();
+		homeGSubmit.disableButton();		
+
+		// Penalty Validation
+        // disable submit button unless the select 'player' has a value
+        var player = $(":input[name='player']");
+        player.change(function() {
+        	var submit = $(this).closest('form').find('.submitPenalty');
+        	if($(this).val() != "") {
+        		submit.clearDisabled();
+        	}
+        	else {
+        		submit.disableButton();
+        	}
+        });		       
 });
 
 $.fn.disableButton = function () {

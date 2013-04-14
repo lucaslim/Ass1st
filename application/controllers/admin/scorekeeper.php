@@ -184,6 +184,10 @@ class Scorekeeper extends Admin_Controller {
 	    // Load the game info into $data
 	    $data['game'] = $this -> Scorekeeper_Model -> get_game_info($gameid);
 
+	    $seasonid = $data['game'] -> SeasonId;
+	    $homeid = $data['game'] -> HomeTeamId;
+	    $awayid = $data['game'] -> AwayTeamId;
+
 		// If the game is complete, take them to view games, else take them to the scorekeeper
 		if ($data['game'] -> Progress == "complete")
 		{
@@ -196,8 +200,8 @@ class Scorekeeper extends Admin_Controller {
 		else
 		{
 			// Load the rosters
-			$data['hometeam'] = $this -> Scorekeeper_Model -> load_roster($data['game'] -> HomeTeamId);
-			$data['awayteam'] = $this -> Scorekeeper_Model -> load_roster($data['game'] -> AwayTeamId);
+			$data['hometeam'] = $this -> Scorekeeper_Model -> load_roster($homeid, $seasonid);
+			$data['awayteam'] = $this -> Scorekeeper_Model -> load_roster($awayid, $seasonid);
 
 		    // Load the view
 		    $this -> load -> view('admin/template/header');
@@ -435,7 +439,7 @@ class Scorekeeper extends Admin_Controller {
 	 *
 	 */
 
-    public function save_score($gameid, $teamid) {
+    public function save_score($gameid) {
 
 		// Grab the game data
 		$data['game'] = $this -> Scorekeeper_Model -> get_game_info($gameid);
@@ -454,7 +458,7 @@ class Scorekeeper extends Admin_Controller {
 			$s_assist = null;
 
 		$scoring_data = array(
-			'TeamId' => $teamid,			
+			'TeamId' => $this -> input -> post('teamid'),			
 			'GameId' => $gameid,
 			'SeasonId' => $data['game'] -> SeasonId,			
 			'Goal' => $this -> input -> post('goal'),
@@ -468,16 +472,13 @@ class Scorekeeper extends Admin_Controller {
 		// Save the data to the database
 	    $insert_goal = $this -> Scorekeeper_Model -> save_scoring_play($scoring_data);    	
 
-		// Update the game score
-	    $insert_score = $this -> Scorekeeper_Model -> update_score($gameid, $teamside);
-
-	    if($insert_goal == TRUE && $insert_score == TRUE)
+	    if($insert_goal == TRUE)
 	    {
 			// Provide success message via session variable
 			$_SESSION['message'] = "Success! Scoring play saved";
 
 			// Direct user to the scorekeeping application
-			header('location: ../../play_game/' . $gameid);
+			header('location: ../play_game/' . $gameid);
 	    }
 	    else
 	    {
@@ -485,7 +486,7 @@ class Scorekeeper extends Admin_Controller {
 			$_SESSION['message'] = "Error! Scoring play not saved";
 
 			// Direct user to the scorekeeping application
-			header('location: ../../play_game/' . $gameid);	    	
+			header('location: ../play_game/' . $gameid);	    	
 	    }	
    	}
 
