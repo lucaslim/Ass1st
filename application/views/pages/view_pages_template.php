@@ -1,11 +1,22 @@
-	<!-- Place Main Content Here -->
-	<div id="leftContent" class="span7">
-		<h1>View Template</h1>
-		<p>Currently under development</p>
-	</div>
+<!-- Main Content
+====================================================================== -->
+<div class="container-fluid">
+
+	<!-- New Row
+	====================================================================== -->
+	<div class="row-fluid">
+
+		<!-- Place Main Content Here -->
+		<div id="leftContent" class="span7">
+			<h1>View Template</h1>
+			<p>Currently under development</p>
+		</div>
 
 
-	<!-- Place Sidebar Content Here -->
-	<div id="rightContent" class="span5">
-		<p>Empty</p>
+		<!-- Place Sidebar Content Here -->
+		<div id="rightContent" class="span5">
+			<p>Empty</p>
+		</div>
+		
 	</div>
+</div>

@@ -1,3 +1,11 @@
+<!-- Main Content
+====================================================================== -->
+<div class="container-fluid">
+
+	<!-- New Row
+	====================================================================== -->
+	<div class="row-fluid">
+
 	<div id="leftContent" class="span7">
 		<div id="hpImageSlider">
 			<div class="slider-wrapper theme-dark">
@@ -244,5 +252,8 @@
 				<?php endforeach ?>
 			</ul>
 		</div>
-		<!-- /end news list-->
+		</div><!-- /end news list-->
 	</div><!-- /end right content -->
+
+	</div>
+</div>

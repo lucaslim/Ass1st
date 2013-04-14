@@ -151,15 +151,11 @@
             <div class="contentWrapper">
                 <div class="container">
                     <div class="row">
-                        <div class="span12">
+                        <div class="span12" style="height: 70px;">
                             <p>Live Scores</p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="visible-phone">
-                <p>phone only</p>
             </div>
 
             <div class="navi-menu hidden-phone">

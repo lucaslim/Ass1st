@@ -5,6 +5,7 @@
 	<!-- New Row 
 	====================================================================== -->
 	<div class="row-fluid">
+		
 		<div class="span12">
 			<div id="ppp_teamBanner" >
 				<div id="ppp_tb_holder">
