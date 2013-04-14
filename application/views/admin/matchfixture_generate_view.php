@@ -19,7 +19,7 @@
 			</select>
 			<label>Days to Play: </label>
 			<?php 
-			$day = strtotime('next Sunday');
+			$day = strtotime('next Monday');
 			for ( $i = 0; $i < 7 ; $i++ ): ?>
 				<div><input type="checkbox" name="day[]" value="<?php echo strftime('%A', $day); ?>"> <?php echo strftime('%A', $day); ?></div>
 				<?php $day = strtotime('+1 day', $day); ?>
