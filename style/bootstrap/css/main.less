@@ -769,7 +769,7 @@ a {
 
 
 
-#ppp_player_container{
+/*#ppp_player_container{
 
   #ppp_player_menu{ 
     top: -240px; 
@@ -790,8 +790,8 @@ a {
       margin-top: 10px;
 
       #ppp_pm_nav_divder{
-        border-bottom: 2px solid red; 
-        width:280px; 
+        border-top: 2px solid red; 
+        width: 100%;
         margin-left: -15px;
       }
       ul{
@@ -805,18 +805,52 @@ a {
       }
     }
   }
-  #ppp_content_container{
-    float:right; margin-top: -35px;
 
-    .ppp_content_section_anchors{
-      padding-bottom: 20px;
-    }
+}*/
+
+/* fixed css below */
+
+#ppp_content_container{
+  .ppp_content_section_anchors{
+    padding-bottom: 20px;
+  }
+
+  section {
+    padding-top: 35px;
   }
 }
 
 
+#ppp_menu_container {
+  width: 267px;
+  ul {
+    list-style-type: : none;
+    padding: 15px 0;
+    margin: 0;
+  }
 
+  li {
+    padding-bottom: 0.5em;
+    display: block;
+    list-style-type: : none;
 
+    hr {
+      margin: 5px 0;
+      border-top: 1px solid red;
+      border-bottom: 1px solid red;
+    }
+  }
+}
+
+.affix-top{
+  position: relative;
+  top:-236px;
+}
+
+.affix{
+  top:10px;
+  width: 267px;
+}
 
 
 /* Begin Responsive Elements

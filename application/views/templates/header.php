@@ -204,8 +204,3 @@
 
         <div class="contentWrapper">
 
-        <!-- Main Content
-        ====================================================================== -->
-        	<div class="container-fluid">
-        		<div class="row-fluid">
-        			<div id="mainContent">
