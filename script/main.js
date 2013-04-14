@@ -305,7 +305,33 @@ $(document).ready(function() {
     });
 });
 
-<<<<<<< HEAD
+//Profile menu  and team logo Snap
+$(document).ready(function() {
+ 
+    //Calculate the height of #headerWrapper
+    //Use outerHeight() instead of height() if have padding
+    var aboveHeight = $('#headerWrapper').outerHeight() + 127;
+
+	//When scrolling
+    $(window).scroll(function(){
+
+        	//if scrolled down more than the #headerWrapper's height
+            if ($(window).scrollTop() > aboveHeight){
+		        // if yes, add “fixed” class to the #ppp_player_menu'
+		        // add padding top to the content 
+        		// (value is same as the height of the #ppp_player_menu')
+            	$('#ppp_player_menu').addClass('fixedToTopNav').css('top','54px').css('position', 'fixed').css('left', '153px').css('width', '18.8%')
+            	.next().css('padding-top','0px');
+            } 
+            else{
+        		// when scroll up or less than aboveHeight,
+        		//remove the “fixed” class, and the padding-top
+            	$('#ppp_player_menu').removeClass('fixedToTopNav').css('top','-205px').css('position', 'relative').css('left', '20px').css('width', '23.1%')
+            	.next().css('padding-top','0');
+            }
+    });
+});
+
 /**
  *
  * Scorekeeper Validation jQuery
@@ -394,31 +420,4 @@ $.fn.clearDisabled = function () {
 	$(this).attr("disabled", false); // apply disabled attribute
   	return this;	
 };
-=======
-//Profile menu  and team logo Snap
-$(document).ready(function() {
- 
-    //Calculate the height of #headerWrapper
-    //Use outerHeight() instead of height() if have padding
-    var aboveHeight = $('#headerWrapper').outerHeight() + 127;
 
-	//When scrolling
-    $(window).scroll(function(){
-
-        	//if scrolled down more than the #headerWrapper's height
-            if ($(window).scrollTop() > aboveHeight){
-		        // if yes, add “fixed” class to the #ppp_player_menu'
-		        // add padding top to the content 
-        		// (value is same as the height of the #ppp_player_menu')
-            	$('#ppp_player_menu').addClass('fixedToTopNav').css('top','54px').css('position', 'fixed').css('left', '153px').css('width', '18.8%')
-            	.next().css('padding-top','0px');
-            } 
-            else{
-        		// when scroll up or less than aboveHeight,
-        		//remove the “fixed” class, and the padding-top
-            	$('#ppp_player_menu').removeClass('fixedToTopNav').css('top','-205px').css('position', 'relative').css('left', '20px').css('width', '23.1%')
-            	.next().css('padding-top','0');
-            }
-    });
-});
->>>>>>> the team banner and menu
