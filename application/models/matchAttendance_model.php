@@ -90,4 +90,43 @@ class MatchAttendance_Model extends CI_Model {
 		return $return_id;
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Set Match Attendance
+	 *
+	 * This will check whether the team is playing in that fixture
+	 *
+	 */
+
+	function set_match_attendance($data) {
+		//Check if match attendance already set
+		$this->db->where('MatchFixtureId', $data["MatchFixtureId"]);
+		$this->db->where('TeamId', $data["TeamId"]);
+		$this->db->where('UserId', $data["UserId"]);
+
+		$query = $this -> db -> get('MatchAttendance');
+
+		//If record already exist
+		if($query -> num_rows() > 0) {
+			$row = $query -> row();
+
+			//Update record
+			$this->db->where('ID', $row -> ID);
+			$this->db->update('MatchAttendance', $data);
+
+			return true;
+		}
+		else {
+			//Insert new record
+			$this->db->insert('MatchAttendance', $data);
+
+			return true;
+		}
+
+		return false;
+
+	}
+	// --------------------------------------------------------------------
+
 }

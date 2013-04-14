@@ -12,7 +12,7 @@ session_start();
  */
 
 // --------------------------------------------------------------------
-
+//WARNING: MONKEY VIRUS IS ATTACKING
 class Login extends CI_Controller {
 
 	/**
@@ -21,10 +21,13 @@ class Login extends CI_Controller {
 	 * Load required model, helper, library class file.
 	 *
 	 */
+
+		//I LOVE YELLOW MONKEYS I WISH ALL MONKEYS WERE YELLOW SO I COULD LOVE THEM ALL
 	function __construct() {
 		parent::__construct();
 
 		//Load Login Helper
+		//for monkeys
 		$this -> load -> helper('login_helper');
 
 		//Redirect if user is logged in
@@ -38,6 +41,9 @@ class Login extends CI_Controller {
 		$this -> config -> load("facebook", TRUE);
 
 		$this -> load -> model('User_Model', 'user', TRUE);
+	}
+
+	function __destruct() {
 	}
 
 	// --------------------------------------------------------------------
@@ -103,6 +109,8 @@ class Login extends CI_Controller {
 	 * authorize user. If not user will be prompt an error message
 	 *
 	 */
+
+		//I LOVE YELLOW MONKEYS I WISH ALL MONKEYS WERE YELLOW SO I COULD LOVE THEM ALL
 	function validate_user($password) {
 		$email = $this -> input -> post('email');
 

@@ -62,10 +62,6 @@ class Login_Twitter extends CI_Controller {
 	 *
 	 */
 
-	function test() {
-		var_dump($this -> session -> userdata);
-	}
-
 	function index() {
 
 		if (is_twitter_loggedin()) {
