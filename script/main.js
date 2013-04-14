@@ -281,7 +281,7 @@ $(document).ready(function() {
  
     //Calculate the height of #headerWrapper
     //Use outerHeight() instead of height() if have padding
-    var aboveHeight = $('#headerWrapper').outerHeight() + 103;
+    var aboveHeight = $('#headerWrapper').outerHeight() + 102;
 
 	//When scrolling
     $(window).scroll(function(){
@@ -305,32 +305,32 @@ $(document).ready(function() {
     });
 });
 
-//Profile menu  and team logo Snap
-$(document).ready(function() {
+// //Profile menu  and team logo Snap
+// $(document).ready(function() {
  
-    //Calculate the height of #headerWrapper
-    //Use outerHeight() instead of height() if have padding
-    var aboveHeight = $('#headerWrapper').outerHeight() + 127;
+//     //Calculate the height of #headerWrapper
+//     //Use outerHeight() instead of height() if have padding
+//     var aboveHeight = $('#headerWrapper').outerHeight() + 102;
 
-	//When scrolling
-    $(window).scroll(function(){
+// 	//When scrolling
+//     $(window).scroll(function(){
 
-        	//if scrolled down more than the #headerWrapper's height
-            if ($(window).scrollTop() > aboveHeight){
-		        // if yes, add “fixed” class to the #ppp_player_menu'
-		        // add padding top to the content 
-        		// (value is same as the height of the #ppp_player_menu')
-            	$('#ppp_player_menu').addClass('fixedToTopNav').css('top','54px').css('position', 'fixed').css('left', '153px').css('width', '18.8%')
-            	.next().css('padding-top','0px');
-            } 
-            else{
-        		// when scroll up or less than aboveHeight,
-        		//remove the “fixed” class, and the padding-top
-            	$('#ppp_player_menu').removeClass('fixedToTopNav').css('top','-205px').css('position', 'relative').css('left', '20px').css('width', '23.1%')
-            	.next().css('padding-top','0');
-            }
-    });
-});
+//         	//if scrolled down more than the #headerWrapper's height
+//             if ($(window).scrollTop() > aboveHeight){
+// 		        // if yes, add “fixed” class to the #ppp_player_menu'
+// 		        // add padding top to the content 
+//         		// (value is same as the height of the #ppp_player_menu')
+//             	$('#ppp_player_menu').addClass('fixedToTopNav').css('top','44px').css('position', 'fixed').css('left', '160px').css('width', '18.8%')
+//             	.next().css('padding-top','0px');
+//             } 
+//             else{
+//         		// when scroll up or less than aboveHeight,
+//         		//remove the “fixed” class, and the padding-top
+//             	$('#ppp_player_menu').removeClass('fixedToTopNav').css('top','-240px').css('position', 'relative').css('left', '20px').css('width', '23.1%')
+//             	.next().css('padding-top','0');
+//             }
+//     });
+// });
 
 /**
  *
