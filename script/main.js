@@ -250,42 +250,22 @@ $(document).ready(function () {
  *
  */
 
-$(document).ready(function(){
-
-	$('#attendance_yes').on({
-		click: function(e) {
-			rsvpAttendance($(this));
-		}
-	});
-
-	$('#attendance_no').on({
-		click: function(e) {
-			rsvpAttendance($(this));
-		}
-	});
-});
-
-function rsvpAttendance(objRadioButton) {
-	var attendance = objRadioButton.val();
-
-	//alert(attendance);
-
+function rsvp_attendance(match_fixture_id, radiobutton) {
 	$.ajax({
             type: "get",
-			url: 'http://localhost:8888/ass1st/index.php/matchAttendance/addAttendance',
-            data: {"attendance" : attendance},
-            dataType: 'html',
+			url: $.myURL() + 'matchAttendance/add_attendance',
+            data: {"attendance" : $(radiobutton).val(), "matchfixtureid" : match_fixture_id},
+            dataType: 'json',
             success: function(data)
             {
-            	if (data == 'Yes') {
+            	if (data.success) {
                 	$("#msg").html('<i class="icon-ok attendance_yes_check"></i>');
                 }
-                else if (data == 'No'){
+                else {
                 	$("#msg").html('<i class="icon-remove attendance_no_x"></i>');
                 }
             }
         });
-
 }
 
 $(document).ready(function() {
