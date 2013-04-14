@@ -105,6 +105,11 @@
                   <li><a href="<?php echo base_url(); ?>admin/scorekeeper/view_games">View Games</a></li>
                   <li><a href="<?php echo base_url(); ?>admin/scorekeeper/add_game">Create Game</a></li>
                 </ul>
+              </li>
+
+              <!-- Media Gallery Links -->
+              <li>
+                <a href="<?php echo base_url(); ?>admin/media/">Media</a>
               </li>                            
                             
             </ul>

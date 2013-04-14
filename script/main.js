@@ -268,34 +268,44 @@ function rsvp_attendance(match_fixture_id, radiobutton) {
         });
 }
 
+
+/**
+ *
+ * Snaping 
+ * This snaps the menu to the top of the page when the screen scrolls past a defined point
+ *
+ */
+
+//Top menu 
 $(document).ready(function() {
  
-        //Calculate the height of <header>
-        //Use outerHeight() instead of height() if have padding
-        var aboveHeight = $('#headerWrapper').outerHeight() + 110;
+    //Calculate the height of #headerWrapper
+    //Use outerHeight() instead of height() if have padding
+    var aboveHeight = $('#headerWrapper').outerHeight() + 103;
+
+	//When scrolling
+    $(window).scroll(function(){
+
+        //if scrolled down more than the header’s height
+      	if ($(window).scrollTop() > aboveHeight){
  
-	//when scroll
-        $(window).scroll(function(){
+       		// if yes, add “fixed” class to the .navi-menu
+        	// add padding top to the content 
+    	    // (value is same as the height of the .navi-menu)
+            $('.navi-menu').addClass('fixedToTopNav').css('top','0')
+            .next().css('padding-top','40px');
  
-	        //if scrolled down more than the header’s height
-                if ($(window).scrollTop() > aboveHeight){
- 
-	        // if yes, add “fixed” class to the <nav>
-	        // add padding top to the #content 
-            // (value is same as the height of the nav)
-                $('.navi-menu').addClass('fixedToTopNav').css('top','0').next()
-                .css('padding-top','60px');
- 
-                } else {
- 
+   	    } 
+       	else { 
 	        // when scroll up or less than aboveHeight,
-            //remove the “fixed” class, and the padding-top
-                $('.navi-menu').removeClass('fixedToTopNav').next()
-                .css('padding-top','0');
-                }
-        });
+	        //remove the “fixed” class, and the padding-top
+	      	 $('.navi-menu').removeClass('fixedToTopNav')
+	      	 .next().css('padding-top','0');
+        }
+    });
 });
 
+<<<<<<< HEAD
 /**
  *
  * Scorekeeper Validation jQuery
@@ -384,3 +394,31 @@ $.fn.clearDisabled = function () {
 	$(this).attr("disabled", false); // apply disabled attribute
   	return this;	
 };
+=======
+//Profile menu  and team logo Snap
+$(document).ready(function() {
+ 
+    //Calculate the height of #headerWrapper
+    //Use outerHeight() instead of height() if have padding
+    var aboveHeight = $('#headerWrapper').outerHeight() + 127;
+
+	//When scrolling
+    $(window).scroll(function(){
+
+        	//if scrolled down more than the #headerWrapper's height
+            if ($(window).scrollTop() > aboveHeight){
+		        // if yes, add “fixed” class to the #ppp_player_menu'
+		        // add padding top to the content 
+        		// (value is same as the height of the #ppp_player_menu')
+            	$('#ppp_player_menu').addClass('fixedToTopNav').css('top','54px').css('position', 'fixed').css('left', '153px').css('width', '18.8%')
+            	.next().css('padding-top','0px');
+            } 
+            else{
+        		// when scroll up or less than aboveHeight,
+        		//remove the “fixed” class, and the padding-top
+            	$('#ppp_player_menu').removeClass('fixedToTopNav').css('top','-205px').css('position', 'relative').css('left', '20px').css('width', '23.1%')
+            	.next().css('padding-top','0');
+            }
+    });
+});
+>>>>>>> the team banner and menu

@@ -147,5 +147,26 @@ class Pages extends CI_Controller {
 
 	// --------------------------------------------------------------------		
 
+	/**
+	 * Player Profile
+	 *
+	 * Displays team by id
+	 *
+	 */
+
+	function player($id) {
+
+		// Provide a page title
+		$data['title'] = "Player Profile";
+
+		//Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+
+		$this -> load -> view('templates/header', $data);
+		$this -> load -> view('pages/player_profile.php', $data);
+		$this -> load -> view('templates/footer');
+	}
+
+	// --------------------------------------------------------------------		
 }
 ?>
