@@ -60,6 +60,16 @@ class Scorekeeper_Model extends CI_Model {
 	    // If query returns 0 rows, then return false
 	    if ($query -> num_rows() > 0) {
 	        foreach ($query -> result() as $row) {
+	        	
+	        	// define variables
+	        	$gameid = $row -> Id;
+	        	$home = $row -> HomeTeamId;
+	        	$away = $row -> AwayTeamId;
+
+	        	// get the scores for home and away
+	            $row -> HomeScore = $this -> get_team_score($gameid, $home);
+	            $row -> AwayScore = $this -> get_team_score($gameid, $away);
+
 	            $data[] = $row;
 	        }
 	        return $data;
@@ -208,7 +218,25 @@ class Scorekeeper_Model extends CI_Model {
 	        return $query -> row();
 	    }
 	    return false;
-   	}   	
+   	} 
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Team Score
+	 *
+	 * Returns the score for the team provided with the game provided
+	 * Counts the number of rows in the IndividualScoreHockey table
+	 *
+	 */
+
+    public function get_team_score($gameid, $teamid) {
+
+		$this -> db -> where('GameId', $gameid);
+		$this -> db -> where('TeamId', $teamid);
+
+	    // Perform the query
+	    return $this -> db -> count_all_results('IndividualScoreHockey');
+   	}     	  	
 
 	// --------------------------------------------------------------------
 	/**
@@ -499,39 +527,21 @@ class Scorekeeper_Model extends CI_Model {
 		$this -> db -> where('Id', $gameid);
 
 		// Perform Update
-		$this -> db -> update('MatchFixture', $data);
-
-		return true;
+		return $this -> db -> update('MatchFixture', $data);
    	}
 
 	// --------------------------------------------------------------------
 	/**
 	 * Save Scoring Play
 	 *
-	 * Saves the scoring play to the database, allows for two optional 
-	 * parameters, primary and secondary assists
+	 * Saves the scoring play to the database
 	 *
 	 */
 
-    public function save_scoring_play($teamid, $gameid, $seasonid, $goal, $p_assist, $s_assist, $period, $time, $str) {
-
-    	// The data that will be inserted
-		$data = array(
-		   'TeamId' => $teamid,
-		   'GameId' => $gameid ,
-		   'SeasonId' => $seasonid,
-		   'Goal' => $goal,
-		   'P_Assist' => $p_assist,
-		   'S_Assist' => $s_assist,
-		   'Period' => $period,
-		   'Time' => $time,
-		   'Str' => $str
-		);
+    public function save_scoring_play($scoring_data) {
 
 		// Perform the insert
-		$this -> db -> insert('IndividualScoreHockey', $data); 
-
-		return true;
+		return $this -> db -> insert('IndividualScoreHockey', $scoring_data); 
    	}    	
 
 	// --------------------------------------------------------------------
@@ -556,9 +566,7 @@ class Scorekeeper_Model extends CI_Model {
 		$this -> db -> where('Id', $gameid);
 
 		// Perform Update for
-		$this -> db -> update('MatchFixture');
-
-		return true;
+		return $this -> db -> update('MatchFixture');
    	}
 
 	// --------------------------------------------------------------------
@@ -588,7 +596,7 @@ class Scorekeeper_Model extends CI_Model {
 	        return $data;
 	    }
 	    return false;
-   	}
+   	}  	
 
 	// --------------------------------------------------------------------
 	/**
@@ -600,23 +608,8 @@ class Scorekeeper_Model extends CI_Model {
 
     public function save_penalty($penalty_data) {
 
-    	// The data that will be inserted
-		$data = array(
-		   'TeamId' => $teamid,
-		   'GameId' => $gameid ,
-		   'SeasonId' => $seasonid,
-		   'Goal' => $goal,
-		   'P_Assist' => $p_assist,
-		   'S_Assist' => $s_assist,
-		   'Period' => $period,
-		   'Time' => $time,
-		   'Str' => $str
-		);
-
 		// Perform the insert
-		$this -> db -> insert('IndividualScoreHockey', $data); 
-
-		return true;
+		return $this -> db -> insert('IndividualPenaltyHockey', $penalty_data); 
    	}    	   	
 
 	// --------------------------------------------------------------------
@@ -646,5 +639,68 @@ class Scorekeeper_Model extends CI_Model {
 	        return $data;
 	    }
 	    return false;
-   	}    	 	 	
+   	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Save Win
+	 *
+	 * Saves the win in the standings table
+	 *
+	 */
+
+    public function save_win($seasonid, $teamid) {
+
+    	// update win + 1
+		$this -> db -> set('Win', 'Win + 1', FALSE);
+
+		// where season id and team id = parameters
+		$this -> db -> where('SeasonId', $seasonid);
+		$this -> db -> where('TeamId', $teamid);
+
+		// perform update
+		return $this -> db -> update('StandingHockey'); 
+   	} 
+
+	// --------------------------------------------------------------------
+	/**
+	 * Save Loss
+	 *
+	 * Saves the loss in the standings table
+	 *
+	 */
+
+    public function save_loss($seasonid, $teamid) {
+
+    	// update win + 1
+		$this -> db -> set('Lost', 'Lost + 1', FALSE);
+
+		// where season id and team id = parameters
+		$this -> db -> where('SeasonId', $seasonid);
+		$this -> db -> where('TeamId', $teamid);
+
+		// perform update
+		return $this -> db -> update('StandingHockey'); 
+   	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Save Overtime Loss
+	 *
+	 * Saves the loss in the standings table
+	 *
+	 */
+
+    public function save_ot_loss($seasonid, $teamid) {
+
+    	// update win + 1
+		$data = array('OvertimeLoss' =>  + 1);
+
+		// where season id and team id = parameters
+		$this -> db -> where('SeasonId', $seasonid);
+		$this -> db -> where('TeamId', $teamid);
+
+		// perform update
+		return $this -> db -> update('StandingHockey', $data); 
+   	}     	    	      	    	 	 	
 }

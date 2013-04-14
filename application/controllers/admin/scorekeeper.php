@@ -24,7 +24,7 @@ class Scorekeeper extends Admin_Controller {
 		// load helpers
 		$this -> load -> helper('url');
 		$this -> load -> helper('form');
-		$this -> load -> helper('date');
+		$this -> load -> helper('scoring');
 
 		// load libraries
 		$this -> load -> library('form_validation');
@@ -131,54 +131,6 @@ class Scorekeeper extends Admin_Controller {
 			header('location: view_games');
 		}
 	}
-
-	// --------------------------------------------------------------------
-	/**
-	 * Edit Game
-	 *
-	 * Edit selected game, takes one parameter, the game id you wih to
-	 * edit
-	 *
-	 */
-
-    public function edit_game($gameid) {
-
-    	// Make sure user provides valid game id
-    	if($gameid <= 0 )
-    		header('location: ../view_games');
-
-    	// If no game id provided, take user to view_games
-    	if($gameid == '' || empty($gameid) || !isset($gameid))
-    		header('location: ../scorekeeper/view_games');
-
-    	// Validate form
-		$this -> form_validation -> set_rules('date', 'Date', 'required'); // date is required
-		$this -> form_validation -> set_rules('time', 'Time', 'required'); // time is required
-		$this -> form_validation -> set_rules('scorehome', 'Home Team Score', 'required'); // home score is required
-		$this -> form_validation -> set_rules('scoreaway', 'Away Team Score', 'required'); // away score is required
-		
-		if ($this -> form_validation -> run() === FALSE)
-		{
-		    // Load the game info into $data
-		    $data["game"] = $this -> Scorekeeper_Model -> get_game_by_id($gameid);
-
-		    // Load the view
-		    $this -> load -> view('admin/template/header');
-		    $this -> load -> view("admin/scorekeeper_edit_game", $data);
-		    $this -> load -> view('admin/template/footer');
-		}
-		else
-		{
-			// If submitted & passed validation, create the new game
-			$this -> Scorekeeper_Model -> update_game($gameid);
-
-			// Provide success message via session variable
-			$_SESSION['message'] = "Game(s) edited successfully";
-
-			// Return user to view_games
-			header('location: view_games');
-		}    	      	
-   	}
 
 	// --------------------------------------------------------------------
 	/**
@@ -343,6 +295,10 @@ class Scorekeeper extends Admin_Controller {
 	    $hometeam = $data['game'] -> HomeTeamId;
 	    $awayteam = $data['game'] -> AwayTeamId;
 
+	    // Get the game scores
+		$data['homeScore'] = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	    
+		$data['awayScore'] = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteam);		
+
 	    // Load array of datas
 	    $data['twentyminutes'] = get_20_minutes();
 	    $data['sixtyseconds'] = get_60_seconds();
@@ -359,8 +315,117 @@ class Scorekeeper extends Admin_Controller {
 	    // Load the view
 	    $this -> load -> view('admin/template/header');
 	    $this -> load -> view("admin/scorekeeper_view", $data);
-	    $this -> load -> view('admin/template/footer');		
+	    $this -> load -> view('admin/template/footer');
+
+    	// Clear session message after the view loads
+    	$_SESSION['message'] = "";
    	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Change Period
+	 *
+	 * Change the current period to the period specified
+	 *
+	 */   	
+	public function change_period($gameid, $period)
+	{
+		$update = $this -> Scorekeeper_Model -> set_period($gameid, $period);
+
+	    if($update == TRUE)
+	    {
+			// Provide success message via session variable
+			$_SESSION['message'] = "Success! Period changed";
+
+			// redirect user to home if the game is complete
+			if($period == 'complete')
+				header('location: ../../view_games/');
+
+			else
+				header('location: ../../play_game/' . $gameid);
+	    }
+	    else
+	    {
+			// Provide success message via session variable
+			$_SESSION['message'] = "Error! Period not changed";
+
+			// Direct user to the scorekeeping application
+			header('location: ../../play_game/' . $gameid);    	
+	    }		
+	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Finish Game
+	 *
+	 * Take a game and marks it as complete
+	 *
+	 */   	
+	public function finish_game($gameid)
+	{
+	    // Load the game info
+	    $game = $this -> Scorekeeper_Model -> get_game_info($gameid);
+
+	    // Define variables
+	    $seasonid = $game -> SeasonId;
+	    $hometeam = $game -> HomeTeamId;
+	    $awayteam = $game -> AwayTeamId;
+
+		// Mark game as complete
+		//$this -> Scorekeeper_Model -> set_period($gameid, 'complete');
+
+	    // Get the game scores
+		$homeScore = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	    
+		$awayScore = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteam);		
+		
+		// if home team is winner
+		if($homeScore > $awayScore)
+		{
+			$this -> save_result($seasonid, $gameid, $hometeam, $awayteam);
+		}	
+		// if away team is winner
+		elseif($awayScore > $homeScore)
+		{
+			$this -> save_result($seasonid, $gameid, $awayteam, $hometeam);
+		}
+		else 
+		{
+			// Provide success message via session variable
+			$_SESSION['message'] = "Error! Game not completed";
+
+			// Direct user to the scorekeeping application
+			header('location: ../play_game/' . $gameid);
+		}
+	}	
+
+	function save_result($seasonid, $gameid, $winner, $loser)
+	{
+		$win = $this -> Scorekeeper_Model -> save_win($seasonid, $winner);
+		$loss = $this -> Scorekeeper_Model -> save_loss($seasonid, $loser);
+
+		var_dump($win);
+		var_dump($loss);
+
+		// confirm data was saved
+		if($win == TRUE && $loss == TRUE)
+		{
+			$this -> Scorekeeper_Model -> set_period($gameid, 'complete');
+
+			// Provide success message via session variable
+			$_SESSION['message'] = "Saved! Game complete";
+
+			// Direct user to the scorekeeping index
+			header('location: ../view_games/');				
+		}
+		else
+		{
+			// Provide success message via session variable
+			$_SESSION['message'] = "Error! Game not completed";
+
+			// Direct user to the scorekeeping index
+			header('location: ../play_game/' . $gameid);				
+		}		
+	}	
 
 	// --------------------------------------------------------------------
 	/**
@@ -372,28 +437,13 @@ class Scorekeeper extends Admin_Controller {
 
     public function save_score($gameid, $teamid) {
 
-		// Make sure user has at least one game selected
-		$this -> form_validation -> set_rules('goal', 'Games', 'required|xss_clean');
-
-		if ($this -> form_validation -> run() === FALSE)
-		{
-			// Provide error message via session variable
-			$_SESSION['message'] = "Error! Invalid scoring play";
-
-			// Direct user to the scorekeeping application
-			header('location: ../play_game/' . $gameid);			
-		}
-
 		// Grab the game data
 		$data['game'] = $this -> Scorekeeper_Model -> get_game_info($gameid);
 
-		// Assign game info to variables
-		$period = $data['game'] -> Progress;
-		$seasonid = $data['game'] -> SeasonId;
+		// Assign team side to variables
 		$teamside = $this -> input -> post('teamside');
 
-		// Assign the scorers to a variable
-		$goal = $this -> input -> post('goal');
+		// Assign the assists to a variable
 		$p_assist = $this -> input -> post('p_assist');
 		$s_assist = $this -> input -> post('s_assist');
 
@@ -403,21 +453,40 @@ class Scorekeeper extends Admin_Controller {
 		if(empty($s_assist))
 			$s_assist = null;
 
-		// Assign the time & strength to variables
-		$time = $this -> input -> post('minute') . ":" . $this -> input -> post('seconds');
-		$str = $this -> input -> post('strength');
+		$scoring_data = array(
+			'TeamId' => $teamid,			
+			'GameId' => $gameid,
+			'SeasonId' => $data['game'] -> SeasonId,			
+			'Goal' => $this -> input -> post('goal'),
+			'P_Assist' => $p_assist,
+			'S_Assist' => $s_assist,
+			'Period' => $data['game'] -> Progress,
+			'Time' => $this -> input -> post('minute') . ":" . $this -> input -> post('seconds'),
+			'Str' => $this -> input -> post('strength')
+		);
 
 		// Save the data to the database
-	    $this -> Scorekeeper_Model -> save_scoring_play($teamid, $gameid, $seasonid, $goal, $p_assist, $s_assist, $period, $time, $str);    	
+	    $insert_goal = $this -> Scorekeeper_Model -> save_scoring_play($scoring_data);    	
 
 		// Update the game score
-	    $this -> Scorekeeper_Model -> update_score($gameid, $teamside);
+	    $insert_score = $this -> Scorekeeper_Model -> update_score($gameid, $teamside);
 
-		// Provide success message via session variable
-		$_SESSION['message'] = "Scoring play saved";
+	    if($insert_goal == TRUE && $insert_score == TRUE)
+	    {
+			// Provide success message via session variable
+			$_SESSION['message'] = "Success! Scoring play saved";
 
-		// Direct user to the scorekeeping application
-		header('location: ../../play_game/' . $gameid);	
+			// Direct user to the scorekeeping application
+			header('location: ../../play_game/' . $gameid);
+	    }
+	    else
+	    {
+			// Provide success message via session variable
+			$_SESSION['message'] = "Error! Scoring play not saved";
+
+			// Direct user to the scorekeeping application
+			header('location: ../../play_game/' . $gameid);	    	
+	    }	
    	}
 
 	// --------------------------------------------------------------------
@@ -430,47 +499,42 @@ class Scorekeeper extends Admin_Controller {
 
     public function save_penalty($gameid, $teamid) {
 
-		// Make sure user has at least one game selected
-		$this -> form_validation -> set_rules('player', 'Player', 'required|xss_clean');
-
-		if ($this -> form_validation -> run() === FALSE)
-		{
-			// Provide error message via session variable
-			$_SESSION['message'] = "Error! Invalid penalty!";
-
-			// Direct user to the scorekeeping application
-			header('location: ../play_game/' . $gameid);			
-		}
-
 		// Grab the game data
 		$data['game'] = $this -> Scorekeeper_Model -> get_game_info($gameid);
 
 		// Assign the penalty to a variable, it comes in as 'key:value', we will use explode() to split the string into an array
 		$penalty = $this -> input -> post('penalty');
-		$arr = explode(':', $penalty);		
+		$arr = explode(':', $penalty);			
 
 		$penalty_data = array(
-			'GameId' => $gameid,
 			'TeamId' => $teamid,
-			'Period' => $data['game'] -> Progress,
-			'SeasonId' => $data['game'] -> SeasonId,
-			'TeamSide' => $this -> input -> post('teamside'),
-			'Player' => $this -> input -> post('player'),
+			'SeasonId' => $data['game'] -> SeasonId,			
+			'GameId' => $gameid,
+			'PlayerId' => $this -> input -> post('player'),
 			'PenaltyType' => $arr[1],
 			'PenaltyMin' => $arr[0],
-			'Time' => $this -> input -> post('minute') . ":" . $this -> input -> post('seconds'),
-			'Strength' => $this -> input -> post('strength')
+			'Period' => $data['game'] -> Progress,
+			'Time' => $this -> input -> post('minpim') . ":" . $this -> input -> post('secpim'),
 		);
 
-		var_dump($penalty_data);
-
 		// Save the data to the database
-	    $this -> Scorekeeper_Model -> save_penalty($penalty_data);    	
+	    $insert = $this -> Scorekeeper_Model -> save_penalty($penalty_data);    	
 
-		// Provide success message via session variable
-		$_SESSION['message'] = "Penalty saved";
+	    if($insert == TRUE)
+	    {
+			// Provide success message via session variable
+			$_SESSION['message'] = "Success! Penalty saved";
 
-		// Direct user to the scorekeeping application
-		header('location: ../../play_game/' . $gameid);
+			// Direct user to the scorekeeping application
+			header('location: ../../play_game/' . $gameid);
+	    }
+	    else
+	    {
+			// Provide success message via session variable
+			$_SESSION['message'] = "Error! Penalty not saved";
+
+			// Direct user to the scorekeeping application
+			header('location: ../../play_game/' . $gameid);	    	
+	    }
    	}   	
 }

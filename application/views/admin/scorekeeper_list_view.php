@@ -25,7 +25,6 @@
 								<th>Date</th>
 								<th>Start Time</th>
 								<th>In Progress?</th>
-								<th>Details</th>
 								<th>Delete</th>
 							</tr>
 						</thead>
@@ -56,14 +55,6 @@
 									</td>
 									<td>
 										<?php if($game -> Progress == 'false') : ?>
-											<a class="btn btn-primary" href="<?php echo base_url(); ?>admin/scorekeeper/edit_game/<?php echo $game -> Id; ?>">Edit</a></td>
-										<?php elseif ($game -> Progress == 1 || $game -> Progress == 2 || $game -> Progress == 3) : ?>
-											<a class="btn btn-primary" disabled>Edit</a></td>
-										<?php elseif ($game -> Progress == 'complete') : ?>
-											<a class="btn btn-primary" href="<?php echo base_url(); ?>admin/scorekeeper/edit_game/<?php echo $game -> Id; ?>">Edit</a></td>
-										<?php endif; ?>
-									<td>
-										<?php if($game -> Progress == 'false') : ?>
 											<input type="checkbox" name="delete[]" value="<?php echo $game -> Id; ?>" />
 										<?php elseif ($game -> Progress == 1 || $game -> Progress == 2 || $game -> Progress == 3) : ?>
 											<input type="checkbox" disabled />
@@ -76,7 +67,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="11">&nbsp;</td>
+								<td colspan="10">&nbsp;</td>
 								<td><input type="submit" class="btn btn-danger"onclick="return confirm('Confirm Delete');" value="Delete" /></td>
 							</tr>
 						</tfoot>
