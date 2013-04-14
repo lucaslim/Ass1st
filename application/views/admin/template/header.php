@@ -55,7 +55,7 @@
           changeMonth: true,
           changeYear: true,
           dateFormat: "yy-mm-dd"
-        });        
+        });      
       
       }); 
     </script>    
@@ -104,6 +104,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="<?php echo base_url(); ?>admin/scorekeeper/view_games">View Games</a></li>
                   <li><a href="<?php echo base_url(); ?>admin/scorekeeper/add_game">Create Game</a></li>
+                  <li><a href="<?php echo base_url(); ?>admin/matchfixture/">Schedule Generator</a></li>
                 </ul>
               </li>
 
