@@ -199,13 +199,27 @@ class Scorekeeper extends Admin_Controller {
 		}
 		else
 		{
-			// Load the rosters
-			$data['hometeam'] = $this -> Scorekeeper_Model -> load_roster($homeid, $seasonid);
-			$data['awayteam'] = $this -> Scorekeeper_Model -> load_roster($awayid, $seasonid);
+			// Prepare the data
+			$home['gameid'] = $gameid;
+			$home['data'] = $this -> Scorekeeper_Model -> load_roster($homeid, $seasonid);
+			$home['team'] = 'Home';
+			$home['teamid'] = $homeid;
+			$home['name'] = $data['game'] -> HomeTeamName;
+			$home['roster'] = $data['game'] -> HomeRoster;
+
+			$away['gameid'] = $gameid;
+			$away['data'] = $this -> Scorekeeper_Model -> load_roster($awayid, $seasonid);
+			$away['team'] = 'Away';
+			$away['teamid'] = $awayid;
+			$away['name'] = $data['game'] -> AwayTeamName;
+			$away['roster'] = $data['game'] -> AwayRoster;
 
 		    // Load the view
 		    $this -> load -> view('admin/template/header');
-		    $this -> load -> view("admin/scorekeeper_prepare_game", $data);
+		    $this -> load -> view("admin/template/prepare_game_header", $data);
+		    $this -> load -> view("admin/prepare_game_template", $home);
+			$this -> load -> view("admin/prepare_game_template", $away);
+			$this -> load -> view("admin/template/prepare_game_footer", $data);
 		    $this -> load -> view('admin/template/footer');
 		}
    	}  
@@ -299,18 +313,24 @@ class Scorekeeper extends Admin_Controller {
 	    $hometeam = $data['game'] -> HomeTeamId;
 	    $awayteam = $data['game'] -> AwayTeamId;
 
-	    // Get the game scores
-		$data['homeScore'] = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	    
-		$data['awayScore'] = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteam);		
-
-	    // Load array of datas
+	    // Load arrays of static data
 	    $data['twentyminutes'] = get_20_minutes();
 	    $data['sixtyseconds'] = get_60_seconds();
 	    $data['penalty_types'] = get_penalty_types();
 
-		// Load the rosters
-		$data['hometeam'] = $this -> Scorekeeper_Model -> load_lineup($hometeam, $gameid);
-		$data['awayteam'] = $this -> Scorekeeper_Model -> load_lineup($awayteam, $gameid);
+		// Load the required data for home team
+		$home['team'] = 'Home';
+		$home['teamname'] = $data['game'] -> HomeTeamName;
+		$home['teamid'] = $hometeam;
+		$home['roster'] = $this -> Scorekeeper_Model -> load_lineup($hometeam, $gameid);
+		$home['score'] = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	    
+		
+		// Load the required data for away team
+		$away['team'] = 'Away';
+		$away['teamname'] = $data['game'] -> AwayTeamName;
+		$away['teamid'] = $awayteam;
+		$away['roster'] = $this -> Scorekeeper_Model -> load_lineup($awayteam, $gameid);
+		$away['score'] = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteam);	
 
 		// Load the scoring summary
 		$data['scoring'] = $this -> Scorekeeper_Model -> get_scoring_summary($gameid);
@@ -318,7 +338,10 @@ class Scorekeeper extends Admin_Controller {
 
 	    // Load the view
 	    $this -> load -> view('admin/template/header');
-	    $this -> load -> view("admin/scorekeeper_view", $data);
+	    $this -> load -> view("admin/template/scorekeeper_game_header", $data);
+	    $this -> load -> view("admin/scorekeeper_data_template", $home);
+		$this -> load -> view("admin/scorekeeper_data_template", $away);	    
+		$this -> load -> view("admin/template/scorekeeper_game_footer", $data);	    
 	    $this -> load -> view('admin/template/footer');
 
     	// Clear session message after the view loads
@@ -372,43 +395,55 @@ class Scorekeeper extends Admin_Controller {
 
 	    // Define variables
 	    $seasonid = $game -> SeasonId;
+	    $progress = $game -> Progress;
+	    $matchtype = $game -> MatchTypeId;
 	    $hometeam = $game -> HomeTeamId;
 	    $awayteam = $game -> AwayTeamId;
-
-		// Mark game as complete
-		//$this -> Scorekeeper_Model -> set_period($gameid, 'complete');
 
 	    // Get the game scores
 		$homeScore = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	    
 		$awayScore = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteam);		
 		
-		// if home team is winner
-		if($homeScore > $awayScore)
+		switch ($matchtype) 
 		{
-			$this -> save_result($seasonid, $gameid, $hometeam, $awayteam);
-		}	
-		// if away team is winner
-		elseif($awayScore > $homeScore)
-		{
-			$this -> save_result($seasonid, $gameid, $awayteam, $hometeam);
-		}
-		else 
-		{
-			// Provide success message via session variable
-			$_SESSION['message'] = "Error! Game not completed";
+			case 1:
+				// handle exhibition games
+				break;
+			case 2:
+				 // handle practice games
+				break;
+			case 3:
+				// handle regular season games
+				if($homeScore > $awayScore) // if hometeam is winner
+					$this -> save_result($seasonid, $gameid, $hometeam, $awayteam, $progress);
+				
+				elseif($awayScore > $homeScore) // if away is winner
+					$this -> save_result($seasonid, $gameid, $awayteam, $hometeam, $progress);
+				
+				else 
+				{
+					// Provide success message via session variable
+					$_SESSION['message'] = "Error! Game not completed";
 
-			// Direct user to the scorekeeping application
-			header('location: ../play_game/' . $gameid);
+					// Direct user to the scorekeeping application
+					header('location: ../play_game/' . $gameid);
+				}
+			case 4:
+				// handle playoff games
+				break;
 		}
+		return;
+
 	}	
 
-	function save_result($seasonid, $gameid, $winner, $loser)
+	function save_result($seasonid, $gameid, $winner, $loser, $progress)
 	{
-		$win = $this -> Scorekeeper_Model -> save_win($seasonid, $winner);
-		$loss = $this -> Scorekeeper_Model -> save_loss($seasonid, $loser);
+		if ($progress == 4) // if it was in overtime, mark it as OT loss
+			$loss = $this -> Scorekeeper_Model -> save_ot_loss($seasonid, $loser);
+		else
+			$loss = $this -> Scorekeeper_Model -> save_loss($seasonid, $loser);
 
-		var_dump($win);
-		var_dump($loss);
+		$win = $this -> Scorekeeper_Model -> save_win($seasonid, $winner);
 
 		// confirm data was saved
 		if($win == TRUE && $loss == TRUE)
@@ -460,7 +495,6 @@ class Scorekeeper extends Admin_Controller {
 		$scoring_data = array(
 			'TeamId' => $this -> input -> post('teamid'),			
 			'GameId' => $gameid,
-			'SeasonId' => $data['game'] -> SeasonId,			
 			'Goal' => $this -> input -> post('goal'),
 			'P_Assist' => $p_assist,
 			'S_Assist' => $s_assist,
@@ -509,7 +543,6 @@ class Scorekeeper extends Admin_Controller {
 
 		$penalty_data = array(
 			'TeamId' => $teamid,
-			'SeasonId' => $data['game'] -> SeasonId,			
 			'GameId' => $gameid,
 			'PlayerId' => $this -> input -> post('player'),
 			'PenaltyType' => $arr[1],

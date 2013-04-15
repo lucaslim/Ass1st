@@ -147,7 +147,8 @@ class Scorekeeper_Model extends CI_Model {
 			'Date' => $this -> input -> post('date'), // get the date
 			'Time' => $this -> input -> post('time'), // get the time
 			'ArenaId' => $this -> input -> post('arena'), // get the arena
-			'MatchTypeId' => $this -> input -> post('matchtype')
+			'MatchTypeId' => $this -> input -> post('matchtype'),
+			'LeagueId' => 1
 		);			
 			
 		// Insert the $data object as a new row in the MatchFixture Table
@@ -303,7 +304,7 @@ class Scorekeeper_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 	/**
-	 * Get Games Played
+	 * Get Games Played by Player
 	 *
 	 * Calculates the games played by a player in a season
 	 *
@@ -404,10 +405,10 @@ class Scorekeeper_Model extends CI_Model {
         	$this -> db -> where('GameId', $gameid);
 
         // Set where clause
-		$this -> db -> where('Goal', $player);
+		$this -> db -> where('GoalId', $player);
 
 		// From the scores table
-		$this -> db -> from('IndividualScoreHockey');
+		$this -> db -> from('AllScoringPlays');
 
 		// Return the data
 		return $this -> db -> count_all_results();
@@ -434,11 +435,11 @@ class Scorekeeper_Model extends CI_Model {
         	$this -> db -> where('GameId', $gameid);
 
         // Set where clause
-		$this -> db -> where('P_Assist', $player);
-		$this -> db -> or_where('S_Assist', $player);
+		$this -> db -> where('P_AssistId', $player);
+		$this -> db -> or_where('S_AssistId', $player);
 
 		// From the scores table
-		$this -> db -> from('IndividualScoreHockey');
+		$this -> db -> from('AllScoringPlays');
 
 		// Return the data
 		return $this -> db -> count_all_results();
@@ -459,7 +460,7 @@ class Scorekeeper_Model extends CI_Model {
 		// Sum the penalty minutes
 		$this -> db -> select_sum('PenaltyMin');
 
-		$this -> db -> from('IndividualPenaltyHockey');
+		$this -> db -> from('AllPenaltyPlays');
 
         // If a $seasonid is provided
         if($seasonid != '')
@@ -496,10 +497,10 @@ class Scorekeeper_Model extends CI_Model {
 	function update_lineup_status($gameid, $side) {
 
 		// Set the lineup as submitted (boolean)
-		if ($side == 'home')
+		if ($side == 'Home')
 			$data = array('HomeRoster' => 1);
 		
-		if ($side == 'away')
+		if ($side == 'Away')
 			$data = array('AwayRoster' => 1);
 
 		// Set the where clause
@@ -656,7 +657,7 @@ class Scorekeeper_Model extends CI_Model {
 
     public function save_win($seasonid, $teamid) {
 
-    	// update win + 1
+    	// update + 1
 		$this -> db -> set('Win', 'Win + 1', FALSE);
 
 		// where season id and team id = parameters
@@ -677,7 +678,7 @@ class Scorekeeper_Model extends CI_Model {
 
     public function save_loss($seasonid, $teamid) {
 
-    	// update win + 1
+    	// update + 1
 		$this -> db -> set('Lost', 'Lost + 1', FALSE);
 
 		// where season id and team id = parameters
@@ -698,8 +699,8 @@ class Scorekeeper_Model extends CI_Model {
 
     public function save_ot_loss($seasonid, $teamid) {
 
-    	// update win + 1
-		$data = array('OvertimeLoss' =>  + 1);
+    	// update + 1
+		$this -> db -> set('OvertimeLoss', 'OvertimeLoss + 1', FALSE);
 
 		// where season id and team id = parameters
 		$this -> db -> where('SeasonId', $seasonid);

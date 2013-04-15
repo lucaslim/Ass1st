@@ -339,74 +339,46 @@ $(document).ready(function() {
  */
 $(document).ready(function() {
 
-        $('form input.submitPenalty').disableButton();
-        $('form input.submitScore').disableButton();
+	// disable buttons on load
+    $('form input.submitPenalty').disableButton();
+    $('form input.submitGoal').disableButton();
 
-		var awayGoal = $("#awayGoal");
-		var awayPAssist = $("#awayPAssist");
-		var awaySAssist = $("#awaySAssist");
-		var awayGSubmit = $("#submitAwayScore");
+	$('.teamScoring select').change(function() {
+		
+		// gather values
+		var submit = $(this).closest('form').find('.submitGoal');
+		var A = $(this).closest('form').find('.goalScorer').val();
+		var B = $(this).closest('form').find('.pAssist').val();
+		var C = $(this).closest('form').find('.sAssist').val();
+		//console.log(A, B, C);
 
-		$('#awayScore select').change(function() {
-		  var A = awayGoal.val();
-		  var B = awayPAssist.val();
-		  var C = awaySAssist.val();
+	  if(// case 1: only A 
+	    (A != "" && B == "" && C == "") ||  
 
-		  if(// case 1: only A 
-		    (A != "" && B == "" && C == "") ||  
+	    // case 2: only A and B, A != B
+	    (A != "" && B != "" && C == "" && A != B) || 
 
-		    // case 2: only A and B, A != B
-		    (A != "" && B != "" && C == "" && A != B) || 
+	    // case 3: A, B, C, all unique
+	    (A != "" && B != "" && C != "" && A != B && A != C && B != C) ) { 
+  			submit.clearDisabled();
+		}
+		else {
+		    submit.disableButton();
+		}
+	});
 
-		    // case 3: A, B, C, all unique
-		    (A != "" && B != "" && C != "" && A != B && A != C && B != C) ) { 
-	  			awayGSubmit.clearDisabled();
-			}
-			else {
-			    awayGSubmit.disableButton();
-			}
-		});
-
-		var homeGoal = $("#homeGoal");
-		var homePAssist = $("#homePAssist");
-		var homeSAssist = $("#homeSAssist");
-		var homeGSubmit = $("#submitHomeScore");
-
-		$('#homeScore select').change(function() {
-		  var A = homeGoal.val();
-		  var B = homePAssist.val();
-		  var C = homeSAssist.val();
-
-		  if(// case 1: only A 
-		    (A != "" && B == "" && C == "") ||  
-
-		    // case 2: only A and B, A != B
-		    (A != "" && B != "" && C == "" && A != B) || 
-
-		    // case 3: A, B, C, all unique
-		    (A != "" && B != "" && C != "" && A != B && A != C && B != C) ) { 
-	  			homeGSubmit.clearDisabled();
-			}
-			else {
-			    homeGSubmit.disableButton();
-			}
-		});
-
-		awayGSubmit.disableButton();
-		homeGSubmit.disableButton();		
-
-		// Penalty Validation
-        // disable submit button unless the select 'player' has a value
-        var player = $(":input[name='player']");
-        player.change(function() {
-        	var submit = $(this).closest('form').find('.submitPenalty');
-        	if($(this).val() != "") {
-        		submit.clearDisabled();
-        	}
-        	else {
-        		submit.disableButton();
-        	}
-        });		       
+	// Penalty Validation
+    // disable submit button unless the select 'player' has a value
+    var player = $(":input[name='player']");
+    player.change(function() {
+    	var submit = $(this).closest('form').find('.submitPenalty');
+    	if($(this).val() != "") {
+    		submit.clearDisabled();
+    	}
+    	else {
+    		submit.disableButton();
+    	}
+    });		       
 });
 
 $.fn.disableButton = function () {

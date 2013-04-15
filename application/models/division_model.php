@@ -24,7 +24,6 @@ class Division_Model extends CI_Model {
 	 */
 	function __construct() {
 		parent::__construct();
-
 	}
 
 	// --------------------------------------------------------------------
@@ -85,14 +84,98 @@ class Division_Model extends CI_Model {
 	 * Retrieves the standings for the various divisions
 	 *
 	 */
-	function get_standings() {
+	function get_standings($seasonid, $leagueid) {
+
+		$this -> db -> where('SeasonId', $seasonid);
 
 		$query = $this -> db -> get('AllTeamStandings');
-		
-		return $query -> result();
+
+	    // If query returns 1 or more results, return data as array
+	    // If query returns 0 rows, then return false
+	    if ($query -> num_rows() > 0) {
+	        foreach ($query -> result() as $row) {
+	        	$teamid = $row -> Id;
+	        	$seasonid = $row -> SeasonId;
+	        	
+	        	// get the goals against / goals for
+	        	$ga = 11;
+
+	        	// add the values back into the row object
+	        	$row -> P = ($row -> Win * 2) + $row -> OvertimeLoss;;
+	        	$row -> GP = $this -> get_games_played($teamid, $seasonid);
+	        	$row -> GF = $this -> get_goals_for($teamid, $seasonid);
+	        	$row -> GA = $ga;
+	        	$row -> DIFF = $row -> GF - $row -> GA;
+
+	        	// stash it in the array
+	            $data[] = $row;
+	        }
+	        return $data;
+	    }
+	    return false;		
 	}
 
 	// --------------------------------------------------------------------
+	/**
+	 * Get Games Played by Team
+	 *
+	 * Calculates the games played by a team (that have been completed)
+	 *
+	 */
+
+    public function get_games_played($teamid, $seasonid) {
+
+    	// where clause
+		$this -> db -> where('SeasonId', $seasonid);
+		$this -> db -> where('Id', $teamid);
+
+		// select required fields
+		$this -> db -> select('Win, Lost, OvertimeLoss');
+
+		$query = $this -> db -> get('AllTeamStandings');
+
+		// assign variables
+		$won = $query -> row() -> Win;
+		$loss = $query -> row() -> Lost;
+		$ot = $query -> row() -> OvertimeLoss;
+
+		// return total
+		return $won + $loss + $ot;
+   	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Goals For by Team
+	 *
+	 * Calculates the goals scored by the team
+	 *
+	 */
+
+    public function get_goals_for($teamid, $seasonid) {
+
+		$this -> db -> where('SeasonId', $seasonid);
+		$this -> db -> where('TeamId', $teamid);
+
+	    // Perform the query
+	    return $this -> db -> count_all_results('AllScoringPlays');
+   	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Goals Against by Team
+	 *
+	 * Calculates the goals scored by the team
+	 *
+	 */
+
+    public function get_goals_against($teamid, $seasonid) {
+
+		$this -> db -> where('SeasonId', $seasonid);
+		$this -> db -> where('TeamId', $teamid);
+
+	    // Perform the query
+	    return $this -> db -> count_all_results('AllScoringPlays');
+   	}    	   	    	  	
 
 	// --------------------------------------------------------------------
 	/**
@@ -121,7 +204,6 @@ class Division_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * Get Teams
 	 *
@@ -144,7 +226,6 @@ class Division_Model extends CI_Model {
 	}	
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * Get Teams Based on League
 	 *
@@ -166,7 +247,6 @@ class Division_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * Get Team Roster by Id
 	 *
@@ -189,6 +269,4 @@ class Division_Model extends CI_Model {
 		
 		return $query -> result();
 	}
-
-	// --------------------------------------------------------------------	
 }

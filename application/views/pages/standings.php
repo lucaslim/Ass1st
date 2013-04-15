@@ -22,11 +22,12 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th><?php echo $team -> DivisionName; // echo division name ?> Division</th>
+								<th style="width: 40%;"><?php echo $team -> DivisionName; ?> Division</th>
 								<th>GP</th>
 								<th>W</th>
 								<th>L</th>
-								<th>T</th>
+								<th>OT</th>
+								<th>P</th>
 								<th>GF</th>
 								<th>GA</th>
 								<th>DIFF</th>
@@ -35,14 +36,15 @@
 						<tbody>
 				<?php endif; ?>	
 							<tr>
-								<td class="team"><a href="<?php echo base_url(); ?>pages/team/<?php echo $team -> Id; ?>"><?php echo $team -> Name; ?></a></td>
-								<td>14</td>
-								<td>12</td>
-								<td>1</td>
-								<td>1</td>
-								<td>23</td>
-								<td>18</td>
-								<th>+5</th>
+								<td style="width: 40%;"><a href="<?php echo base_url(); ?>pages/team/<?php echo $team -> Id; ?>"><?php echo $team -> Name; ?></a></td>
+								<td><?php echo $team -> GP; ?></td>
+								<td><?php echo $team -> Win; ?></td>
+								<td><?php echo $team -> Lost; ?></td>
+								<td><?php echo $team -> OvertimeLoss; ?></td>
+								<td><?php echo $team -> P; ?></td>
+								<td><?php echo $team -> GF; ?></td>
+								<td><?php echo $team -> GA; ?></td>
+								<th><?php echo $team -> DIFF; ?></th>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>

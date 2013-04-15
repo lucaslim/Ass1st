@@ -103,12 +103,14 @@ class Pages extends CI_Controller {
 	/**
 	 * Standings Page
 	 *
-	 * Displays the standings for the league
+	 * Displays the standings for the league, defaults to 1 if none provided
+	 * TODO: Should accept league id argument, as well, if no season id provided
+	 * should take user to a page that allows them to select a season
 	 *
 	 */
 
-	function standings() {
-		$data['teams'] = $this -> Division_Model -> get_standings(); // retrieve teams
+	function standings($seasonid = '1', $leagueid = '1') {
+		$data['teams'] = $this -> Division_Model -> get_standings($seasonid, $leagueid); // retrieve teams
 
 		// provide a page title
 		$data['title'] = "League Standings";
