@@ -72,4 +72,5 @@ li [class^="icon-"].icon-large,.nav li [class^="icon-"].icon-large,li [class*=" 
 #ppp_menu_container li{padding-bottom:0.5em;display:block;list-style-type:: none;}#ppp_menu_container li hr{margin:5px 0;border-top:1px solid red;border-bottom:1px solid red;}
 .affix-top{position:relative;top:-270px;}
 .affix{top:10px;width:267px;}
+#contentBegin{padding-top:35px;}
 @media (min-width:1200px){}@media (min-width:768px) and (max-width:979px){}@media (max-width:767px){.contentWrapper{padding-top:0px;} .input-small{width:100%;} .player-register .input-full{width:98%;} .player-register .input-med{width:98%;}}@media (max-width:480px){}

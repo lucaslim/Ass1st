@@ -1,6 +1,6 @@
 <!-- Main Content
 ====================================================================== -->
-<div class="container-fluid" style="padding-top: 35px;">
+<div id="contentBegin" class="container-fluid">
 
 	<!-- New Row 
 	====================================================================== -->
