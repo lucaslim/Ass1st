@@ -63,16 +63,13 @@ li [class^="icon-"].icon-large,.nav li [class^="icon-"].icon-large,li [class*=" 
 .attendance_yes_check{color:green;}
 .fixedToTopNav{position:fixed;z-index:99999999;width:100%;}
 .navbar{margin-bottom:0px !important;}
-#ppp_teamBanner{width:100%;}#ppp_teamBanner #ppp_tb_holder{position:relative;left:0;top:0;border:4px solid black;}#ppp_teamBanner #ppp_tb_holder .ppp_tb_background{position:relative;top:0;left:0;}
-#ppp_teamBanner #ppp_tb_holder #ppp_tb_team_color_bar_one{position:absolute;top:61px;left:0px;width:100%;height:26px;}
-#ppp_teamBanner #ppp_tb_holder #ppp_tb_team_color_bar_two{position:absolute;top:26px;left:0;width:100%;height:57px;}
-#ppp_teamBanner #ppp_tb_holder #ppp_tb_team_color_bar_three{position:absolute;top:57px;left:0;width:100%;height:26px;}
-#ppp_teamBanner #ppp_tb_holder .ppp_tb_bg_overlay{position:relative;top:-83px;left:0;opacity:0.5;width:100%;}
-#ppp_teamBanner #ppp_tb_holder #ppp_tb_team_name_color{position:relative;top:-178px;left:120px;opacity:0.7;font-size:3.5em;text-align:center;text-shadow:3px 2px #000;text-transform:uppercase;}
+#teamBanner{height:250px;border:2px solid black;width:100%;background-image:url('../../../assets/images/banner/ice.jpg');}#teamBanner .color-none{height:50px;background:white;opacity:0.5;width:100%;position:relative;}
+#teamBanner .color-secondary{height:25px;background:red;opacity:0.5;width:100%;position:relative;}
+#teamBanner .color-main{height:100px;background:black;opacity:0.5;width:100%;position:relative;}#teamBanner .color-main span{float:right;text-align:left;display:block;width:65%;font-size:4.25em;color:white;opacity:1;}
 #ppp_content_container .ppp_content_section_anchors{padding-bottom:20px;}
 #ppp_content_container section{padding-top:35px;}
 #ppp_menu_container{width:267px;}#ppp_menu_container ul{list-style-type:: none;padding:15px 0;margin:0;}
 #ppp_menu_container li{padding-bottom:0.5em;display:block;list-style-type:: none;}#ppp_menu_container li hr{margin:5px 0;border-top:1px solid red;border-bottom:1px solid red;}
-.affix-top{position:relative;top:-236px;}
+.affix-top{position:relative;top:-270px;}
 .affix{top:10px;width:267px;}
 @media (min-width:1200px){}@media (min-width:768px) and (max-width:979px){}@media (max-width:767px){.contentWrapper{padding-top:0px;} .input-small{width:100%;} .player-register .input-full{width:98%;} .player-register .input-med{width:98%;}}@media (max-width:480px){}

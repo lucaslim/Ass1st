@@ -1,13 +1,13 @@
 <!-- Main Content
 ====================================================================== -->
-<div class="container-fluid">
+<div class="container-fluid" style="padding-top: 35px;">
 
 	<!-- New Row 
 	====================================================================== -->
 	<div class="row-fluid">
 		
 		<div class="span12">
-			<div id="ppp_teamBanner" >
+<!-- 			<div id="ppp_teamBanner" >
 				<div id="ppp_tb_holder">
 					<img class="ppp_tb_background" src="../../assets/images/banner/ice.jpg" />
 					<div id="ppp_tb_team_color_bar_one" style="background-color:#17854b;" ></div>
@@ -18,6 +18,15 @@
 						<?php echo $full_name; ?>
 					</div>
 				</div>
+			</div> -->
+			<div id="teamBanner">
+				<div class="color-none"></div>
+				<div class="color-secondary"></div>
+				<div class="color-main">
+					<span>Hello World</span>
+				</div>
+				<div class="color-secondary"></div>
+				<div class="color-none"></div>
 			</div>
 		</div>
 	</div>
@@ -26,7 +35,7 @@
 	====================================================================== -->
 	<div class="row-fluid">
 		<div id="ppp_menu_container" class="span3">
-			<ul id="navbar" data-spy="affix" data-offset-top="350">
+			<ul id="navbar" data-spy="affix" data-offset-top="160">
 				<li class="text-right">
 					<img src="../../assets/images/temp/teamLogo.png" />
 				</li>

@@ -712,7 +712,7 @@ a {
    ========================================================================== */
 
 
-#ppp_teamBanner{
+/*#ppp_teamBanner{
   width: 100%;
   
   #ppp_tb_holder{
@@ -765,7 +765,7 @@ a {
       text-transform:uppercase;
     }
   }
-}
+}*/
 
 
 
@@ -810,6 +810,48 @@ a {
 
 /* fixed css below */
 
+
+#teamBanner {
+  height: 250px;
+  border: 2px solid black;
+  width: 100%;
+  background-image: url('../../../assets/images/banner/ice.jpg');
+
+  .color-none {
+    height: 50px;
+    background: white;
+    opacity: 0.5;
+    width: 100%;
+    position: relative;
+  }
+
+  .color-secondary {
+    height: 25px;
+    background: red;
+    opacity: 0.5;
+    width: 100%;
+    position: relative;
+  }
+
+  .color-main {
+    height: 100px;
+    background: black;
+    opacity: 0.5;
+    width: 100%;
+    position: relative;
+    
+    span {
+      float: right;
+      text-align: left;
+      display: block;
+      width: 65%;
+      font-size: 4.25em;
+      color: white;
+      opacity: 1;
+    }    
+  }
+}
+
 #ppp_content_container{
   .ppp_content_section_anchors{
     padding-bottom: 20px;
@@ -844,7 +886,7 @@ a {
 
 .affix-top{
   position: relative;
-  top:-236px;
+  top:-270px;
 }
 
 .affix{
