@@ -27,10 +27,10 @@
 					</td>
 					<td>
 						<?php if ( $items -> IsGenerated ): ?>
-						<?php echo form_open( 'admin/matchfixture/edit' ); ?>
+						<?php echo form_open( 'admin/matchfixture/view', array('method' => 'get') ); ?>
 						<input type="hidden" id="season_id" name="season_id" value="<?php echo $items -> SeasonId ?>" />
 						<input type="hidden" id="league_id" name="league_id" value="<?php echo $items -> LeagueId ?>" />
-						<input type="submit" class="btn btn-danger" id="edit" name="edit" value="Edit" />
+						<input type="submit" class="btn btn-danger" value="View" />
 						<?php echo form_close(); ?>
 						<?php else: ?>
 						<?php echo form_open( 'admin/matchfixture/generate_new' ); ?>

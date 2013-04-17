@@ -1,7 +1,8 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h1><?php echo $title ?> - <small><?php echo $result -> LeagueName ?> (<?php echo $result -> SeasonYear; ?>)</small></h1>
+			<h1><?php echo $title ?><small><?php echo $page_links ?></small></h1>
+			<h2><small><?php echo $result -> LeagueName ?> (<?php echo $result -> SeasonYear; ?>)</small></h2>
 			<table class="table table-hover">
 				<tr>
 					<th> No. </th>
@@ -15,19 +16,19 @@
 				<tr>
 					<td>
 						<!-- Set row number -->
-						<?php echo $count++; ?>
+						<?php echo $current_page + $count++; ?>
 					</td>
 					<td>
-						<?php echo date('D M d, Y', strtotime($items -> Date)) ?>
+						<?php echo date( 'D M d, Y', strtotime( $items -> Date ) ) ?>
 					</td>
 					<td>
-						<?php echo $items -> HomeTeamName ?>	
+						<?php echo $items -> HomeTeamName ?>
 					</td>
 					<td>
 						<?php echo $items -> AwayTeamName  ?>
 					</td>
 					<td>
-						<?php echo date('g:i A', strtotime($items -> Time)) . ' ET' ?>
+						<?php echo date( 'g:i A', strtotime( $items -> Time ) ) . ' ET' ?>
 					</td>
 					<td>
 						<!-- <?php echo form_open( 'admin/matchfixture/edit' ); ?>

@@ -1,7 +1,8 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h1><?php echo $title ?> - <small><?php echo $result -> LeagueName ?> (<?php echo $result -> SeasonYear; ?>)</small></h1>
+			<h1><?php echo $title ?></h1>
+			<h2><small><?php echo $result -> LeagueName ?> (<?php echo $result -> SeasonYear; ?>)</small></h2>
 			<?php echo form_open( 'admin/matchfixture/generate' ); ?>
 			<label>Start Date of the Season: </label>
 			<input type="text" name="date" id="datepicker" required />

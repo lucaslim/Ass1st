@@ -26,8 +26,6 @@ class MatchFixture_Model extends CI_Model {
 
 	function __construct() {
 		parent::__construct();
-
-		$this -> load -> helper( "grid_helper" );
 	}
 
 	// ------------------------------------------------------------------------
@@ -35,7 +33,7 @@ class MatchFixture_Model extends CI_Model {
 	/**
 	 * Get total match fixture summary count
 	 *
-	 * Get the total number of rows in users all users table
+	 * Get the total number of rows in the table
 	 *
 	 */
 	function get_match_fixture_count() {
@@ -91,7 +89,6 @@ class MatchFixture_Model extends CI_Model {
 	 *
 	 */
 	function get_match_fixture_by_id( $id ) {
-		//Remove season fixture
 		$this -> db -> where( 'Id', $id );
 		$query = $this -> db -> get( 'MatchFixture' );
 
@@ -101,19 +98,35 @@ class MatchFixture_Model extends CI_Model {
 	// ------------------------------------------------------------------------
 
 	/**
+	 * Get total match fixture summary count
+	 *
+	 * Get the total number of rows in the table
+	 *
+	 */
+	function get_season_fixture_count( $season_id, $league_id ) {
+
+		$option = array( 'where' => array( 'SeasonId' => $season_id, 'LeagueId' => $league_id ) );
+
+		return get_row_count( "AllFixtures", $option );
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Get match fixture by id
 	 *
 	 * This function will return a single match fixture based on the given id
 	 *
 	 */
-	function get_season_fixture_by_id( $season_id, $league_id ) {
-		//Remove season fixture
-		$this -> db -> where('SeasonId', $season_id);
-		$this -> db -> where('LeagueId', $league_id);
-		$this -> db -> order_by('Date', 'asc');
-		$query = $this -> db -> get( 'AllFixtures' );
+	function get_season_fixture_by_id( $season_id, $league_id , $total_num, $start_num ) {
 
-		return $query -> result();
+		$option = array( 'table_name' => 'AllFixtures',
+			'start_number' => $start_num,
+			'total_number' => $total_num,
+			'order_by' => array( 'Date' => 'asc' ),
+			'where' => array( 'SeasonId' => $season_id, 'LeagueId' => $league_id ) );
+
+		return get_result( $option );
 	}
 
 	// ------------------------------------------------------------------------

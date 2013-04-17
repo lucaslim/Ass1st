@@ -27,7 +27,7 @@ class MatchFixture extends Admin_Controller {
 		// Load Model
 		$this -> load -> model( 'MatchFixture_Model', 'matchfixture' );
 
-
+		$this -> load -> helper('grid_helper');
 
 		// start session so we can use session variables
 		session_start();
@@ -65,26 +65,35 @@ class MatchFixture extends Admin_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Edit
+	 * View
 	 *
-	 * In case no parameters are given in the Url (e.g. path/News/).
-	 * The system will load this function by default
+	 * This would list out a list of matches for the admin to do further
+	 * editing
 	 *
 	 */
 
-	function edit() {
-		$season_id = $this -> input -> post( 'season_id' );
-		$league_id = $this -> input -> post( 'league_id' );
+	function view() {
 
-		$result = $this -> matchfixture -> get_match_fixture_summary_by_id( $league_id, $season_id );
-		if ( is_null( $result ) ) {
+		$season_id = $this -> input -> get( 'season_id' );
+		$league_id = $this -> input -> get( 'league_id' );
+
+		//Get total number of rows
+		$total_rows = $this -> matchfixture -> get_season_fixture_count( $season_id, $league_id );
+
+		if ( $total_rows == 0 ) {
 			header( 'location: ../matchfixture/' );
 		}
 
-		$data["title"] = 'Edit Schedule';
-		$data["result"] = $result;
+		//Set pagination data
+		$data = get_pagination_data( "admin/matchfixture/view", $total_rows );
+
+		//Set news data
+		$data['fixture'] = $this -> matchfixture -> get_season_fixture_by_id( $season_id, $league_id , $data['per_page'], $data['current_page'] );
+
+		$data["result"] = $this -> matchfixture -> get_match_fixture_summary_by_id( $league_id, $season_id );;
+		
+		$data["title"] = 'View Schedule';
 		$data["start_date"] = '';
-		$data['fixture'] = $this -> matchfixture -> get_season_fixture_by_id( $season_id, $league_id );
 
 		$this -> load -> view( 'admin/template/header' );
 		$this -> load -> view( 'admin/matchfixture_generate_edit_view' , $data );
