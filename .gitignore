@@ -7,4 +7,5 @@
 nbproject/*
 /.idea/*
 */.DS_Store
+.databaselogin
 ci_ide_helper.php

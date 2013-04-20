@@ -187,12 +187,9 @@ class Division_Model extends CI_Model {
 	function get_team_by_id($id) {
 
 		// set where clause
-		$this -> db -> where('Team.Id', $id);
+		$this -> db -> where('Id', $id);
 
-		$this -> db -> select('Team.Name AS tname, Team.Founded AS tfounded, Team.Picture AS tpicture, Arena.Name AS aname, Division.Name AS dname');
-		$this -> db -> from('Team');
-		$this -> db -> join('Arena', 'Arena.Id = Team.ArenaId');
-		$this -> db -> join('Division', 'Division.Id = Team.DivisionId');
+		$this -> db -> from('AllTeams');
 
 		$query = $this->db->get();
 
@@ -256,17 +253,59 @@ class Division_Model extends CI_Model {
 	function get_team_roster_by_id($id) {
 
 		// set where clause
-		$this -> db -> where('AllRosters.TeamId', $id);
+		$this -> db -> where('TeamId', $id);
 
-		$this -> db -> select('*');
-		$this -> db -> from('AllRosters');
-
-		$query = $this->db->get();
+		$query = $this->db->get('AllRosters');
 
 		//Check if any rows returned
 		if (!$query || $query -> num_rows() <= 0)
 			return FALSE;
 		
+		return $query -> result();
+	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Games by Date
+	 *
+	 * Get the games for the date provided
+	 *
+	 */
+	function get_games_by_date($date) {
+
+		// set where clause
+		$this -> db -> where('Date', $date);
+
+		$query = $this -> db -> get('AllFixtures');
+
+		//Check if any rows returned
+		if (!$query || $query -> num_rows() <= 0)
+			return FALSE;
+
+		return $query -> result();
+	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Live Scoring
+	 *
+	 * Get the scores for the games that are on today
+	 *
+	 */
+	function get_live_scores() {
+
+		// Get todays date
+		$date = '2013-04-23'; //date('Y-m-d');
+
+		// Set where clause
+		$this -> db -> where('Date', $date);
+
+		$query = $this -> db -> get('AllFixtures');
+
+		// Check if any rows returned
+		if (!$query || $query -> num_rows() <= 0)
+			return FALSE;
+
 		return $query -> result();
 	}
 }

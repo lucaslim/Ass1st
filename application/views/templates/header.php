@@ -151,8 +151,41 @@
             <div class="contentWrapper">
                 <div class="container">
                     <div class="row">
-                        <div class="span12" style="height: 70px;">
-                            <p>Live Scores</p>
+                        <div class="span12" style="margin-top: 15px; margin-bottom: 15px; height: 85px; overflow: hidden;">
+                            <?php if($livescores != FALSE) : ?>
+                                <?php foreach($livescores as $score) : ?>
+                                    <div style="width: 80px; float: left; margin: 0.5%; padding: 0.5%; border: 1px solid black; -webkit-border-radius: 5px;">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th colspan="2">
+
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width: 90%; text-align: left;">
+                                                        <?php echo strtoupper(substr($score -> HomeTeamName, 0, 3)); ?>
+                                                    </th>
+                                                    <th>
+                                                        <?php ech $score -> HomeScore; ?>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width: 90%; text-align: left;">
+                                                        <?php echo strtoupper(substr($score -> AwayTeamName, 0, 3)); ?>
+                                                    </th>
+                                                    <th>
+                                                        <?php ech $score -> AwayScore; ?>
+                                                    </th>   
+                                                </tr>
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <p>There are no games scheduled today.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -170,7 +203,7 @@
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/index/schedule/">Schedule</a>
                                 </li>
                                 <li>
-                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/index/scores/">Scores</a>
+                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/scores/">Scores</a>
                                 </li>
                                 <li>
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/standings/">Standings</a>

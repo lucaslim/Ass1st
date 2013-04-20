@@ -29,10 +29,11 @@ class Pages extends CI_Controller {
 		$this -> load -> helper('date');
 		$this -> load -> helper('template');
 		$this -> load -> helper(array('form', 'url'));
-	}
+
+		$this -> live_scores = "live scores";
+	}	
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * Default index for the Pages Class
 	 *
@@ -64,7 +65,6 @@ class Pages extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * News Page 
 	 *
@@ -99,7 +99,6 @@ class Pages extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * Standings Page
 	 *
@@ -124,7 +123,6 @@ class Pages extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------
-
 	/**
 	 * Team Profile
 	 *
@@ -148,7 +146,6 @@ class Pages extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------		
-
 	/**
 	 * Player Profile
 	 *
@@ -170,5 +167,33 @@ class Pages extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------		
+	/**
+	 * Scores
+	 *
+	 * Displays the scores for the games played today
+	 *
+	 */
+
+	function scores() {
+
+		//Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
+		// Provide a page title
+		$data['title'] = "Scores";
+
+		// Get todays date in yyyy-mm-dd format
+		$date = '2013-04-23'; //date('Y-m-d');
+
+		//Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+	
+		// Load data for todays games
+		$data['games'] = $this -> Division_Model -> get_games_by_date($date);
+
+		$this -> load -> view('templates/header', $data);
+		$this -> load -> view('pages/scores.php', $data);
+		$this -> load -> view('templates/footer');
+	}
 }
 ?>
