@@ -154,6 +154,8 @@ class Pages extends CI_Controller {
 	 */
 
 	function player($id) {
+		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
+		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 
 		// Provide a page title
 		$data['title'] = "Player Profile";
