@@ -99,83 +99,201 @@
 <!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
 			<!-- //////////////// STYLE //////////////   -->
 					<style type="text/css">
-						#red, #green, #blue {
-				            width: 300px;
-				            margin: 15px;
-			        }
-			        #swatch {
-			            width: 320px;
-			            height: 100px;
-			            margin: 5px;
-			            background-image: none;
-			        }
-			        #red .ui-slider-range { background: #ef2929; }
-			        #red .ui-slider-handle { border-color: #ef2929; }
-			        #green .ui-slider-range { background: #8ae234; }
-			        #green .ui-slider-handle { border-color: #8ae234; }
-			        #blue .ui-slider-range { background: #729fcf; }
-			        #blue .ui-slider-handle { border-color: #729fcf; }
+						#redP, #greenP, #blueP, #redS, #greenS, #blueS, #redT, #greenT, #blueT {
+				            width: 100%;
+				            margin: 15px 5px;
+				        }
+				        .swatch {
+				            width: 100%;
+				            height: 100px;
+				            margin: 5px;
+				            background-image: none;
+				        }
+				        #redP .ui-slider-range { background: #ef2929; }
+				        #redP .ui-slider-handle { border-color: #ef2929; }
+				        #greenP .ui-slider-range { background: #8ae234; }
+				        #greenP .ui-slider-handle { border-color: #8ae234; }
+				        #blueP .ui-slider-range { background: #729fcf; }
+				        #blueP .ui-slider-handle { border-color: #729fcf; }
+
+				        #redS .ui-slider-range { background: #ef2929; }
+				        #redS .ui-slider-handle { border-color: #ef2929; }
+				        #greenS .ui-slider-range { background: #8ae234; }
+				        #greenS .ui-slider-handle { border-color: #8ae234; }
+				        #blueS .ui-slider-range { background: #729fcf; }
+				        #blueS .ui-slider-handle { border-color: #729fcf; }
+
+				        #redT .ui-slider-range { background: #ef2929; }
+				        #redT .ui-slider-handle { border-color: #ef2929; }
+				        #greenT .ui-slider-range { background: #8ae234; }
+				        #greenT .ui-slider-handle { border-color: #8ae234; }
+				        #blueT .ui-slider-range { background: #729fcf; }
+				        #blueT .ui-slider-handle { border-color: #729fcf; }
 					</style>
+
 			<!-- ///////////////////// Script //////////////   -->
 					<script type="text/javascript">
-						function hexFromRGB(r, g, b) {
-				            var hex = [
+						function RGB(r, g, b) {
+				            var rgbValue = [
 				                r.toString( 16 ),
 				                g.toString( 16 ),
 				                b.toString( 16 )
 				            ];
-				            $.each( hex, function( nr, val ) {
-				                if ( val.length === 1 ) {
-				                    hex[ nr ] = "0" + val;
-				                }
-				            });
-				            return hex.join( "" ).toUpperCase();
+				            // $.each( hex, function( nr, val ) {
+				            //     if ( val.length === 1 ) {
+				            //         hex[ nr ] = "0" + val;
+				            //     }
+				            // });
+				            // return hex.join( "" ).toUpperCase();
 				        }
 				        function refreshSwatch(evt, ui) {
 				          
-				            var red = $( "#red" ).slider( "value" ),
-				                    green = $( "#green" ).slider( "option", "value" ),
-				                    blue = $( "#blue" ).slider( "value" ),
-				                    hex = hexFromRGB( red, green, blue );
+				            var redP = $( "#redP" ).slider( "value" );
+				            var greenP = $( "#greenP" ).slider( "value" );
+				            var blueP = $( "#blueP" ).slider( "value" );	
 
-				            $( "#swatch" ).css( "background-color", "#" + hex );
-				            $("#RGBcolor").val( "rgb(" + red + ", " + green + ", " +  blue + ")");
-				             $("#hexColor").val("#" + hex);
-				            $("#primaryColorR").val( red );
-				            $("#primaryColorG").val( green );
-				            $("#primaryColorB").val( blue );
+				            $("#swatchP").css( "background-color", "rgb(" + redP + "," + greenP + "," + blueP + ")"  );
+				            $("#RGBcolorP").val( "rgb(" + redP + ", " + greenP + ", " +  blueP + ")");
+				            // $("#hexColor").val("#" + hex);
+				            $("#primColorR").val( redP );
+				            $("#primColorG").val( greenP );
+				            $("#primColorB").val( blueP );
+
+
+				            var redS = $( "#redS" ).slider( "value" );
+				            var greenS = $( "#greenS" ).slider( "value" );
+				            var blueS = $( "#blueS" ).slider( "value" );				            
+
+				            $("#swatchS").css( "background-color", "rgb(" + redS+ "," + greenS + "," + blueS + ")"  );
+				            $("#RGBcolorS").val( "rgb(" + redS + ", " + greenS + ", " +  blueS + ")");
+				            $("#secColorR").val( redS );
+				            $("#secColorG").val( greenS );
+				            $("#secColorB").val( blueS );
+
+
+				            var redT = $( "#redT" ).slider( "value" );
+				            var greenT = $( "#greenT" ).slider( "value" );
+				            var blueT = $( "#blueT" ).slider( "value" );
+
+				            $("#swatchT").css( "background-color", "rgb(" + redT + "," + greenT + "," + blueT + ")"  );
+				            $("#RGBcolorT").val( "rgb(" + redT + ", " + greenT + ", " +  blueT + ")");
+				            $("#terColorR").val( redT );
+				            $("#terColorG").val( greenT );
+				            $("#terColorB").val( blueT );
 				        }
+				        
+
+
+				        // Slider 
 				        $(function() {
-				            $( "#red, #green, #blue" ).slider({
+				            $( "#redP, #greenP, #blueP, #redS, #greenS, #blueS, #redT, #greenT, #blueT" ).slider({
 				                orientation: "horizontal",
 				                range: "min",
 				                max: 255,
-				                value: 127,
 				                slide: refreshSwatch,
 				                change: refreshSwatch
 				            });
-				            $( "#red" ).slider( "value", <?php echo $team -> TPrimR; ?> );
-				            $( "#green" ).slider( "value", <?php echo $team -> TPrimG; ?>  );
-				            $( "#blue" ).slider( "value", <?php echo $team -> TPrimB; ?>  );
+							// Slider Colors -- from database
+				            // Primary 
+				            $( "#redP" ).slider( "value", <?php echo $team -> TPrimR; ?> );
+				            $( "#greenP" ).slider( "value", <?php echo $team -> TPrimG; ?>  );
+				            $( "#blueP" ).slider( "value", <?php echo $team -> TPrimB; ?>  );
+				           	
+				            // Secondary 
+				            $( "#redS" ).slider( "value", <?php echo $team -> TSecR; ?> );
+				            $( "#greenS" ).slider( "value", <?php echo $team -> TSecG; ?>  );
+				            $( "#blueS" ).slider( "value", <?php echo $team -> TSecB; ?>  );
+
+				            // Tertiary 
+				            $( "#redT" ).slider( "value", <?php echo $team -> TTerR; ?> );
+				            $( "#greenT" ).slider( "value", <?php echo $team -> TTerG; ?>  );
+				            $( "#blueT" ).slider( "value", <?php echo $team -> TTerB; ?>  );
 				        });
+
+						function resetSliderP() {
+							var $sliderRP = $("#redP");
+							$sliderRP.slider("value", <?php echo $team -> TPrimR; ?> );
+							var $sliderGP = $("#greenP");
+							$sliderGP.slider("value", <?php echo $team -> TPrimG; ?> );
+							var $sliderBP = $("#blueP");
+							$sliderBP.slider("value", <?php echo $team -> TPrimB; ?> );
+						}
+
+						function resetSliderS() {
+							var $sliderRS = $("#redS");
+							$sliderRS.slider("value", <?php echo $team -> TSecR; ?> );
+							var $sliderGS = $("#greenS");
+							$sliderGS.slider("value", <?php echo $team -> TSecG; ?> );
+							var $sliderBS = $("#blueS");
+							$sliderBS.slider("value", <?php echo $team -> TSecB; ?> );
+						}
+
+						function resetSliderT() {
+							var $sliderRT = $("#redT");
+							$sliderRT.slider("value", <?php echo $team -> TTerR; ?> );
+							var $sliderGT = $("#greenT");
+							$sliderGT.slider("value", <?php echo $team -> TTerG; ?> );
+							var $sliderBT = $("#blueT");
+							$sliderBT.slider("value", <?php echo $team -> TTerB; ?> );
+						}
 
 					</script>
 			<!-- /////////////////////  HTML  //////////////   -->
 
-					<div id="swatch" style="border: solid black 1px;" ></div>
-					<div id="red"></div>
-					<div id="green"></div>
-					<div id="blue"></div>
-					<input type="text" id="RGBcolor">
-					<input type="text" id="hexColor">
+			<div class="row-fluid">
+		
+				<div class="span4">
+					<div id="swatchP" class="swatch" style="border: solid black 1px;" ></div>
+					<div id="redP"></div>
+					<div id="greenP"></div>
+					<div id="blueP"></div>
+					<input type="text" id="RGBcolorP">
+					<!-- <input type="text" id="hexColor"> -->
 					<br />
 					<form method="POST" action="">
-						<input type="text" id="primaryColorR">
-						<input type="text" id="primaryColorG">
-						<input type="text" id="primaryColorB">
+						<input type="text" id="primColorR">
+						<input type="text" id="primColorG">
+						<input type="text" id="primColorB">
 						<br />
-						<input type="submit" name="primaryUpdate" value="Primary Color" />
+						<button type="button" onclick='resetSliderP();'>Reset</button> 
 					</form>
+				</div>
+
+				<div class="span4">
+					<div id="swatchS" class="swatch" style="border: solid black 1px;" ></div>
+					<div id="redS"></div>
+					<div id="greenS"></div>
+					<div id="blueS"></div>
+					<input type="text" id="RGBcolorS">
+					<!-- <input type="text" id="hexColor"> -->
+					<br />
+					<form method="POST" action="">
+						<input type="text" id="secColorR">
+						<input type="text" id="secColorG">
+						<input type="text" id="secColorB">
+						<br />
+						<button type="button" onclick='resetSliderS();'>Reset</button> 
+					</form>
+				</div>
+
+				<div class="span4">
+					<div id="swatchT" class="swatch" style="border: solid black 1px;" ></div>
+					<div id="redT"></div>
+					<div id="greenT"></div>
+					<div id="blueT"></div>
+					<input type="text" id="RGBcolorT">
+					<!-- <input type="text" id="hexColor"> -->
+					<br />
+					<form method="POST" action="">
+						<input type="text" id="terColorR">
+						<input type="text" id="terColorG">
+						<input type="text" id="terColorB">
+						<br />
+						<button type="button" onclick='resetSliderT();'>Reset</button> 
+					</form>
+				</div>
+
+			</div>
 				
 <!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
 
