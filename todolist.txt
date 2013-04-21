@@ -1,0 +1,114 @@
+=================================================================
+Last Updated: April 21, 2013 - 10:45AM
+=================================================================
+These are listed in no particular order
+
+User Pages:
+--------------------------------------
+	- Overall:
+		- Tablet format is fucked up (are we supporting it?)
+		- Mobile is also fucked, needs custom navigation
+		- No search
+		- Live scores needs to be added to every page (Neil currently working on this)
+
+	- Front Page:
+		- New Player Registration is missing repeat password field
+		- New Team Registration is empty
+		- Upcoming tournaments -- likely have to pull this tab
+		- Missing stats info below slider
+
+	- Standings:
+		- Needs sidebar data
+		- Shows improper data for GA (function is in DB to calculate, just needs implementation)
+
+	- Team Profile:
+		- Teams without player data, needs to be added
+		- Team profile pictures -- need to be resolved, defaults to empty avatar if doesn't exist ATM
+		- Overall record is static, needs to be calculated
+		- 
+
+	- Schedule:
+		- No data showing -- functions exist, just need to build page
+		- No sidebar data
+
+	- Scores:
+		- No sidebar data
+		- Need to resolve issue with handling overtime (need to add a DB field that says if the game entered OT (HasOvertime?) which will then flag the boxscore && livescores to show data for overtime period) OR we can make it so that instead of game switch to 'complete' for progress, it switches to 'complete-ot' which will flag the boxscores and live scores to show OT data
+		- Need to link to Boxscore
+		- Team name should like to profile
+
+	- Stats:
+		- No data showing -- functions exist, need to build page
+		- No sidebar data
+
+	- News:
+		- No sidebar data
+
+	- About:
+		- No sidebar data
+		- Page data missing -- need to add some bullshit about the league
+
+	- Privacy, Help, Terms, Contact
+		- All pages missing data
+
+User Features:
+--------------------------------------
+	- Login:
+		- Are all 4 methods of login working?
+		- We should pull any login types that are not working (Google?)
+
+	- Logged In Player:
+		- Edit Profile button leads no where
+
+	- Player Registration:
+		- Where are we at with the non-social media player registration
+		- Dead link in top right of all pages when not logged in 'Register'
+
+	- Team Registration:
+		- Where are we at with the team registration
+		- How are we handling adding a player to a team
+
+	- My Profile:
+		- Where is this page at?
+		- Are we allowing play messaging?
+
+	- Edit My Profile:
+		- Where is this page at?
+	
+	- My Team Profile(s):
+		- Same, where is this page at?
+		- Team messaging -- where is this at?
+
+	- Edit My Team Profile(s):
+		- Where is this page at?
+		- Captain can only edit this page
+
+	- Multiple Teams:
+		- How are we handling a user that is registered for multiple teams? Are we allowing this?
+
+	- Multiple Leagues: 
+		- How are we handling multiple leagues?
+
+Admin Pages:
+--------------------------------------
+
+	- Overall:
+		- How are we handling when a season is complete? Switch to next season?
+		- How are we handling playoffs?
+
+	- Login: 
+		- Multiple login systems, are combining or are we keeping seperate admin/user login
+
+	- Scorekeeper:
+		- Need to add ability to select goalie
+		- And with that create goalie stat tracking
+
+	- Users:
+		- Add user page is non-existant, do we need it?
+		- Edit user (go to view users -> click on Name of user) leads to dead link
+
+	- View Games:
+		- Do we need sorting ability on this panel or increase row limit per page (currently 10)
+
+	- Media Page:
+		- Where is this at? Doesn't load any data ATM

@@ -182,14 +182,11 @@ class Pages extends CI_Controller {
 		// Provide a page title
 		$data['title'] = "Scores";
 
-		// Get todays date in yyyy-mm-dd format
-		$date = '2013-04-23'; //date('Y-m-d');
-
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 	
 		// Load data for todays games
-		$data['games'] = $this -> Division_Model -> get_games_by_date($date);
+		$data['games'] = $this -> Division_Model -> get_mini_boxscores();
 
 		$this -> load -> view('templates/header', $data);
 		$this -> load -> view('pages/scores.php', $data);

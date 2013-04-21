@@ -230,14 +230,38 @@ class Scorekeeper_Model extends CI_Model {
 	 *
 	 */
 
-    public function get_team_score($gameid, $teamid) {
+    public function get_team_score($gameid, $teamid, $period = null) {
 
 		$this -> db -> where('GameId', $gameid);
 		$this -> db -> where('TeamId', $teamid);
 
+		if(isset($period))
+			$this -> db -> where('Period', $period);
+
 	    // Perform the query
 	    return $this -> db -> count_all_results('IndividualScoreHockey');
-   	}     	  	
+   	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Team Score Array
+	 *
+	 * Returns the score for a team seperated into an array by period
+	 *
+	 */
+
+    public function get_team_score_array($gameid, $teamid) {
+
+		$data = array(
+				'1' => $this -> get_team_score($gameid, $teamid, 1),
+				'2' => $this -> get_team_score($gameid, $teamid, 2),
+				'3' => $this -> get_team_score($gameid, $teamid, 3),
+				'OT' => $this -> get_team_score($gameid, $teamid, 4)
+			);
+
+	    // Perform the query
+	    return $data;
+   	}      	   	
 
 	// --------------------------------------------------------------------
 	/**
@@ -613,7 +637,7 @@ class Scorekeeper_Model extends CI_Model {
 	 */
 
     public function save_penalty($penalty_data) {
-
+    	
 		// Perform the insert
 		return $this -> db -> insert('IndividualPenaltyHockey', $penalty_data); 
    	}    	   	

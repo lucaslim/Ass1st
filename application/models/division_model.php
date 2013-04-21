@@ -24,6 +24,8 @@ class Division_Model extends CI_Model {
 	 */
 	function __construct() {
 		parent::__construct();
+
+		$this -> load -> model('Scorekeeper_Model');
 	}
 
 	// --------------------------------------------------------------------
@@ -266,46 +268,117 @@ class Division_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 	/**
-	 * Get Games by Date
+	 * Get Mini Boxscores
 	 *
-	 * Get the games for the date provided
+	 * Gets the game info and period scoring the games in the provided date
 	 *
 	 */
-	function get_games_by_date($date) {
+	function get_mini_boxscores($date = null) {
 
-		// set where clause
+		// If a date is not provided, get the games for today
+		if(!isset($date)) {
+			$date = date('Y-m-d');
+		}
+		
 		$this -> db -> where('Date', $date);
 
 		$query = $this -> db -> get('AllFixtures');
 
-		//Check if any rows returned
-		if (!$query || $query -> num_rows() <= 0)
-			return FALSE;
+		$data = array();
 
-		return $query -> result();
+		// Check if any rows returned
+		if ($query -> num_rows() > 0) {
+	        foreach ($query -> result() as $row) {
+
+	        	// Stash the data
+	        	$gameid = $row -> Id;
+	            $hometeamname = $row -> HomeTeamName;
+	            $hometeam = $row -> HomeTeamId;
+	            $awayteamname = $row -> AwayTeamName;
+	            $awayteam = $row -> AwayTeamId;
+	            $progress = $row -> Progress;
+	            $time = date('g:i A', strtotime($row -> Time));
+
+	            // Get the scores by period for this game
+	            $homescore = $this -> Scorekeeper_Model -> get_team_score_array($gameid, $hometeam);
+	            $awayscore = $this -> Scorekeeper_Model -> get_team_score_array($gameid, $awayteam);	 
+
+            	// Stash data in associative array
+				$push_me = array (
+					'GameId' => $gameid,
+					'HomeTeamName' => $hometeamname,
+					'HomeTeamScore' => $homescore,
+					'AwayTeamName' => $awayteamname,
+					'AwayTeamScore' =>  $awayscore,
+					'Progress' => $progress,
+					'Time' => $time
+				);
+
+				// Push it into the array
+				array_push($data, $push_me);
+	        }
+	        return $data;
+	    }
+		return false;
 	}
 
 	// --------------------------------------------------------------------
 	/**
-	 * Get Live Scoring
+	 * Get Live Scores
 	 *
-	 * Get the scores for the games that are on today
+	 * Gets the scores for the games that are on today. 
+	 * Used in the header on every user side page.
 	 *
 	 */
 	function get_live_scores() {
 
 		// Get todays date
-		$date = '2013-04-23'; //date('Y-m-d');
+		$date = date('Y-m-d');
 
 		// Set where clause
 		$this -> db -> where('Date', $date);
 
 		$query = $this -> db -> get('AllFixtures');
 
-		// Check if any rows returned
-		if (!$query || $query -> num_rows() <= 0)
-			return FALSE;
+		$data = array();
 
-		return $query -> result();
-	}
+		// Check if any rows returned
+	    if ($query -> num_rows() > 0) {
+	        foreach ($query -> result() as $row) {
+
+	        	// Stash the data
+	        	$gameid = $row -> Id;
+	            $hometeamname = $row -> HomeTeamName;
+	            $hometeam = $row -> HomeTeamId;
+	            $awayteamname = $row -> AwayTeamName;
+	            $awayteam = $row -> AwayTeamId;
+	            $progress = $row -> Progress;
+	            $date = date('g:i A', strtotime($row -> Time));
+
+	            // Get the score for the home team
+	            $homescore = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	 
+
+	            // Get the goal totals for this game
+	            $awayscore = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteam);	 
+
+            	// Stash data in associative array
+				$push_me = array (
+					'GameId' => $gameid,
+					'HomeTeamName' => $hometeamname,
+					'HomeTeamScore' => $homescore,
+					'AwayTeamName' => $awayteamname,
+					'AwayTeamScore' =>  $awayscore,
+					'Progress' => $progress,
+					'Date' => $date
+				);
+
+				// Push it into the array
+				array_push($data, $push_me);
+	        }
+	        return $data;
+	    }
+	    else {
+			return false;
+	    }
+   	}
 }

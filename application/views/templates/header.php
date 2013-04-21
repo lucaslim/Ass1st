@@ -151,31 +151,35 @@
             <div class="contentWrapper">
                 <div class="container">
                     <div class="row">
-                        <div class="span12" style="margin-top: 15px; margin-bottom: 15px; height: 85px; overflow: hidden;">
+                        <div class="span12" style="margin-top: 15px; margin-bottom: 15px; overflow: hidden;">
                             <?php if($livescores != FALSE) : ?>
                                 <?php foreach($livescores as $score) : ?>
                                     <div style="width: 80px; float: left; margin: 0.5%; padding: 0.5%; border: 1px solid black; -webkit-border-radius: 5px;">
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    <th colspan="2">
-
+                                                    <th colspan="2" style="text-align: left;">
+                                                        <?php if($score['Progress'] == 'false') : ?>
+                                                            <?php echo $score['Date']; ?>
+                                                        <?php else : ?>
+                                                            <?php echo $score['Progress']; ?>
+                                                        <?php endif; ?>
                                                     </th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 90%; text-align: left;">
-                                                        <?php echo strtoupper(substr($score -> HomeTeamName, 0, 3)); ?>
+                                                        <?php echo strtoupper(substr($score['HomeTeamName'], 0, 3)); ?>
                                                     </th>
                                                     <th>
-                                                        <?php ech $score -> HomeScore; ?>
+                                                        <?php echo $score['HomeTeamScore']; ?>
                                                     </th>
                                                 </tr>
                                                 <tr>
                                                     <th style="width: 90%; text-align: left;">
-                                                        <?php echo strtoupper(substr($score -> AwayTeamName, 0, 3)); ?>
+                                                        <?php echo strtoupper(substr($score['AwayTeamName'], 0, 3)); ?>
                                                     </th>
                                                     <th>
-                                                        <?php ech $score -> AwayScore; ?>
+                                                        <?php echo $score['AwayTeamScore']; ?>
                                                     </th>   
                                                 </tr>
                                             </tbody>
@@ -184,7 +188,7 @@
                                     </div>
                                 <?php endforeach; ?>
                             <?php else : ?>
-                                <p>There are no games scheduled today.</p>
+                                <p>There are no games scheduled today. <?php echo date('Y-m-d'); ?></p>
                             <?php endif; ?>
                         </div>
                     </div>
