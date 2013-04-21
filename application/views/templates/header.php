@@ -154,16 +154,12 @@
                         <div class="span12" style="margin-top: 15px; margin-bottom: 15px; overflow: hidden;">
                             <?php if($livescores != FALSE) : ?>
                                 <?php foreach($livescores as $score) : ?>
-                                    <div style="width: 80px; float: left; margin: 0.5%; padding: 0.5%; border: 1px solid black; -webkit-border-radius: 5px;">
+                                    <div style="width: 120px; float: left; margin: 0.5%; padding: 0.5%; border: 1px solid black; -webkit-border-radius: 5px;">
                                         <table>
                                             <tbody>
                                                 <tr>
                                                     <th colspan="2" style="text-align: left;">
-                                                        <?php if($score['Progress'] == 'false') : ?>
-                                                            <?php echo $score['Date']; ?>
-                                                        <?php else : ?>
-                                                            <?php echo $score['Progress']; ?>
-                                                        <?php endif; ?>
+                                                        <small><?php echo $score['Date']; ?></small>
                                                     </th>
                                                 </tr>
                                                 <tr>
@@ -182,6 +178,15 @@
                                                         <?php echo $score['AwayTeamScore']; ?>
                                                     </th>   
                                                 </tr>
+                                                <tr>
+                                                    <th colspan="2" style="text-align: left;">
+                                                        <?php if($score['Progress'] == 'false') : ?>
+                                                            <?php echo $score['Time']; ?>
+                                                        <?php else : ?>
+                                                            <?php echo $score['Progress']; ?>
+                                                        <?php endif; ?>
+                                                    </th>
+                                                </tr>                                                
                                             </tbody>
                                             
                                         </table>

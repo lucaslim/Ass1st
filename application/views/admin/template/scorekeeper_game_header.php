@@ -22,17 +22,17 @@
 					<a class="btn btn-inverse btn-small" disabled>1</a>
 					<a class="btn btn-inverse btn-small" disabled>2</a>
 					<a class="btn btn-primary btn-small active" disabled>3</a>
-					<a class="btn btn-inverse btn-small" onclick="return confirm('Are you sure you wish to enter overtime?');" href="<?php echo base_url(); ?>admin/scorekeeper/change_period/<?php echo $game -> Id; ?>/4">OT</a>
+					<a class="btn btn-inverse btn-small" onclick="return confirm('Are you sure you wish to enter overtime?');" href="<?php echo base_url(); ?>admin/scorekeeper/change_period/<?php echo $game -> Id; ?>/OT">OT</a>
 				<?php endif; ?>									
 
-				<?php if($game -> Progress == 4) : ?>
+				<?php if($game -> Progress == 'OT') : ?>
 					<a class="btn btn-inverse btn-small" disabled>1</a>
 					<a class="btn btn-inverse btn-small" disabled>2</a>
 					<a class="btn btn-inverse btn-small" disabled>3</a>
 					<a class="btn btn-primary btn-small active" disabled>OT</a>
 				<?php endif; ?>
 			</div>
-			<?php if($game -> Progress == 3 || $game -> Progress == 4) : ?>
+			<?php if($game -> Progress == 3 || $game -> Progress == 'OT') : ?>
 				<a class="btn btn-primary btn-small" onclick="return confirm('Are you sure you wish to finish the game?');" href="<?php echo base_url(); ?>admin/scorekeeper/finish_game/<?php echo $game -> Id; ?>">Finish Game</a>
 			<?php endif; ?>			
 		</div>			

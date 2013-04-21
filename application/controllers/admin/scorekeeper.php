@@ -438,7 +438,7 @@ class Scorekeeper extends Admin_Controller {
 
 	function save_result($seasonid, $gameid, $winner, $loser, $progress)
 	{
-		if ($progress == 4) // if it was in overtime, mark it as OT loss
+		if ($progress == 'OT') // if it was in overtime, mark it as OT loss
 			$loss = $this -> Scorekeeper_Model -> save_ot_loss($seasonid, $loser);
 		else
 			$loss = $this -> Scorekeeper_Model -> save_loss($seasonid, $loser);

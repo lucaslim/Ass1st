@@ -25,7 +25,11 @@ class Division_Model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 
+		// Load models
 		$this -> load -> model('Scorekeeper_Model');
+
+		// Load helpers
+		$this -> load -> helper('scoring');		
 	}
 
 	// --------------------------------------------------------------------
@@ -296,7 +300,7 @@ class Division_Model extends CI_Model {
 	            $hometeam = $row -> HomeTeamId;
 	            $awayteamname = $row -> AwayTeamName;
 	            $awayteam = $row -> AwayTeamId;
-	            $progress = $row -> Progress;
+	            $progress = convert_period_string($row -> Progress);
 	            $time = date('g:i A', strtotime($row -> Time));
 
 	            // Get the scores by period for this game
@@ -352,8 +356,9 @@ class Division_Model extends CI_Model {
 	            $hometeam = $row -> HomeTeamId;
 	            $awayteamname = $row -> AwayTeamName;
 	            $awayteam = $row -> AwayTeamId;
-	            $progress = $row -> Progress;
-	            $date = date('g:i A', strtotime($row -> Time));
+	            $progress = convert_period_string($row -> Progress);
+	            $date = convert_date_to_daymmdd($row -> Date);
+	            $time = date('g:i A', strtotime($row -> Time));
 
 	            // Get the score for the home team
 	            $homescore = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	 
@@ -369,7 +374,8 @@ class Division_Model extends CI_Model {
 					'AwayTeamName' => $awayteamname,
 					'AwayTeamScore' =>  $awayscore,
 					'Progress' => $progress,
-					'Date' => $date
+					'Date' => $date,
+					'Time' => $time
 				);
 
 				// Push it into the array
@@ -380,5 +386,5 @@ class Division_Model extends CI_Model {
 	    else {
 			return false;
 	    }
-   	}
+   	}   	
 }

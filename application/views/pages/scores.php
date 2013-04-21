@@ -26,7 +26,7 @@
 									<th>1st</th>
 									<th>2nd</th>
 									<th>3rd</th>
-									<?php if($game['Progress'] == 4) : ?>
+									<?php if($game['Progress'] == 'OT') : ?>
 										<th>OT</th>
 									<?php endif; ?>
 									<th>T</th>
@@ -46,7 +46,7 @@
 									<td>
 										<?php echo $game['HomeTeamScore'][3]; ?>
 									</td>
-									<?php if($game['Progress'] == 4) : ?>
+									<?php if($game['Progress'] == 'OT') : ?>
 										<td>
 											<?php echo $game['HomeTeamScore']['OT']; ?>
 										</td>
@@ -68,7 +68,7 @@
 									<td>
 										<?php echo $game['AwayTeamScore'][3]; ?>
 									</td>
-									<?php if($game['Progress'] == 4) : ?>
+									<?php if($game['Progress'] == 'OT') : ?>
 										<td>
 											<?php echo $game['AwayTeamScore']['OT']; ?>
 										</td>

@@ -49,7 +49,7 @@
 											<a class="btn btn-warning" style="width: 50%;" href="<?php echo base_url(); ?>admin/scorekeeper/play_game/<?php echo $game -> Id; ?>">2nd</a>
 										<?php elseif ($game -> Progress == 3) : ?>
 											<a class="btn btn-warning" style="width: 50%;" href="<?php echo base_url(); ?>admin/scorekeeper/play_game/<?php echo $game -> Id; ?>">3rd</a>											
-										<?php elseif ($game -> Progress == 4) : ?>
+										<?php elseif ($game -> Progress == 'OT') : ?>
 											<a class="btn btn-warning" style="width: 50%;" href="<?php echo base_url(); ?>admin/scorekeeper/play_game/<?php echo $game -> Id; ?>">Overtime</a>																					
 										<?php elseif ($game -> Progress == 'complete') : ?>
 											<span class="btn btn-inverse disabled" style="width: 50%;">Complete</span>

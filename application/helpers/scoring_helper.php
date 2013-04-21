@@ -109,3 +109,46 @@ function get_penalty_types() {
 
 	return $array;
 }
+
+// --------------------------------------------------------------------
+/**
+ * Convert Period String
+ *
+ * Takes the number of the period and converts it to an easy to read
+ * string (1 = 1st, 2 = 2nd, 3 = 3rd, OT = Overtime)
+ *
+ */
+function convert_period_string($period) {
+	switch($period)
+	{
+		case "1":
+			$period = '1st';
+			break;
+		case "2":
+			$period = '2nd';
+			break;
+		case "3":
+			$period = '3rd';
+			break;
+		case "OT":
+			$period = 'Overtime';
+			break;
+		case "complete":
+			$period = 'Final';
+			break;
+	}
+	return $period;
+}
+
+// --------------------------------------------------------------------
+/**
+ * Convert Date to: Day of Week MM/DD
+ *
+ * Takes date as input and converts it to: Monday 04/20
+ *
+ */
+function convert_date_to_daymmdd($date) {
+	$date = date('l m/d', strtotime($date));
+
+	return $date;
+}
