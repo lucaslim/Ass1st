@@ -33,7 +33,7 @@
 						<!--Tertiary Color - Import - ffffff -->
 						<span style="color: rgb(<?php echo $team -> TTerR; ?>, <?php echo $team -> TTerG; ?>, <?php echo $team -> TTerB; ?>)"> 
 							<!-- Team Name - Import -->
-							<?php echo $team -> tname; ?>
+							<?php echo $team -> Name; ?>
 						</span>
 					</div>
 				</div>
@@ -49,17 +49,18 @@
 	<!-- New Row 
 	====================================================================== -->
 	<div class="row-fluid">
+
 		<div id="ppp_menu_container" class="span3">
 			<ul id="navbar" data-spy="affix" data-offset-top="160">
 				<li class="text-right">
-					<img class="team-logo" src="<?php echo base_url(); ?>/assets/images/team-logos/<?php echo $team -> tpicture; ?>" />
+					<img class="team-logo" src="<?php echo base_url(); ?>/assets/images/team-logos/<?php echo $team -> Picture; ?>" />
 				</li>
 				<li>
 					<h3><?php echo $full_name; ?></h3>
 				</li>
 				<li><hr /></li>
 				<li>
-					<strong> <?php echo $team -> tname; ?> </strong>
+					<strong> <?php echo $team -> Name; ?> </strong>
 				</li>
 				<li>
 					<strong>Rams</strong>
@@ -159,7 +160,7 @@
 				        });
 
 					</script>
-			<!-- /////////////////////HTML  //////////////   -->
+			<!-- /////////////////////  HTML  //////////////   -->
 
 					<div id="swatch" style="border: solid black 1px;" ></div>
 					<div id="red"></div>
