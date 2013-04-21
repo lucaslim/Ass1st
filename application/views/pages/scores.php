@@ -26,7 +26,7 @@
 									<th>1st</th>
 									<th>2nd</th>
 									<th>3rd</th>
-									<?php if($game['Progress'] == 'OT') : ?>
+									<?php if($game['Progress'] == 'Overtime') : ?>
 										<th>OT</th>
 									<?php endif; ?>
 									<th>T</th>
@@ -46,13 +46,13 @@
 									<td>
 										<?php echo $game['HomeTeamScore'][3]; ?>
 									</td>
-									<?php if($game['Progress'] == 'OT') : ?>
+									<?php if($game['Progress'] == 'Overtime') : ?>
 										<td>
-											<?php echo $game['HomeTeamScore']['OT']; ?>
+											<?php echo $game['HomeTeamScore'][4]; ?>
 										</td>
 									<?php endif; ?>
 									<td>
-										<?php echo ($game['HomeTeamScore'][1] + $game['HomeTeamScore'][2] + $game['HomeTeamScore'][3] + $game['HomeTeamScore']['OT']); ?>
+										<?php echo ($game['HomeTeamScore'][1] + $game['HomeTeamScore'][2] + $game['HomeTeamScore'][3] + $game['HomeTeamScore'][4]); ?>
 									</td>
 								</tr>
 								<tr>
@@ -68,19 +68,19 @@
 									<td>
 										<?php echo $game['AwayTeamScore'][3]; ?>
 									</td>
-									<?php if($game['Progress'] == 'OT') : ?>
+									<?php if($game['Progress'] == 'Overtime') : ?>
 										<td>
-											<?php echo $game['AwayTeamScore']['OT']; ?>
+											<?php echo $game['AwayTeamScore'][4]; ?>
 										</td>
 									<?php endif; ?>	
 									<td>
-										<?php echo ($game['AwayTeamScore'][1] + $game['AwayTeamScore'][2] + $game['AwayTeamScore'][3] + $game['AwayTeamScore']['OT']); ?>
+										<?php echo ($game['AwayTeamScore'][1] + $game['AwayTeamScore'][2] + $game['AwayTeamScore'][3] + $game['AwayTeamScore'][4]); ?>
 									</td>																	
 								</tr>																								
 							</tbody>
 						</table>
 						<?php if($game['Progress'] != 'false') : ?>
-							<p>View Box Score</p>
+							<p><a href="<?php echo base_url(); ?>pages/boxscore/<?php echo $game['GameId']; ?>">View Box Score</a></p>
 						<?php endif; ?>
 					</div>
 				<?php endforeach; ?>

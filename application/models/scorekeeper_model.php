@@ -256,7 +256,7 @@ class Scorekeeper_Model extends CI_Model {
 				'1' => $this -> get_team_score($gameid, $teamid, 1),
 				'2' => $this -> get_team_score($gameid, $teamid, 2),
 				'3' => $this -> get_team_score($gameid, $teamid, 3),
-				'OT' => $this -> get_team_score($gameid, $teamid, 4)
+				'4' => $this -> get_team_score($gameid, $teamid, 'OT')
 			);
 
 	    // Perform the query
