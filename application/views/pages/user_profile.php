@@ -56,16 +56,17 @@
 					<img class="team-logo" src="<?php echo base_url(); ?>/assets/images/team-logos/<?php echo $team -> Picture; ?>" />
 				</li>
 				<li>
-					<h3><?php echo $full_name; ?></h3>
+					<h4> <?php echo $full_name; ?> <img class="img-player" src="<?php echo $picture; ?>"> </h4>
 				</li>
 				<li><hr /></li>
 				<li>
-					<strong> <?php echo $team -> Name; ?> </strong>
+					<a href="#"><strong> <?php echo $team -> Name; ?> </strong> <img class="img-team" src="<?php echo base_url(); ?>assets/images/team-logos/<?php echo $team -> Picture; ?>" /></a>
 				</li>
 				<li>
-					<strong>Rams</strong>
+					<a href="#"><strong>Rams</strong> <img class="img-team" src="<?php echo base_url(); ?>assets/images/temp/wolverine_login.jpg"/> </a>
 				</li>
 				<!-- <li>Profile</li> //have profile link to the players name?-->
+				<li><a href="#colorSelector">Color Selector</a></li>
 				<li><a href="#schedule">Schedule</a></li>
 				<li><a href="#standings">Standings</a></li>
 				<li><a href="#stats">Stats</a></li>
@@ -78,25 +79,10 @@
 		</div>
 
 		<div id="ppp_content_container" class="span9">
-			<section id="schedule">
-				<h4>Schedule</h4>
-				<p>
-					Maecenas ut varius sapien. Phasellus eu placerat neque. Integer sollicitudin urna sit amet felis dignissim sagittis. Vivamus bibendum interdum neque accumsan cursus. Quisque non est et ipsum consequat sollicitudin. Donec non augue non tortor accumsan molestie. Cras aliquam magna nec leo lacinia elementum. Cras elementum pretium nulla vel sollicitudin. In hac habitasse platea dictumst.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
-			</section>
-
-			<section id="standings">
-				<h4>Standings</h4>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
-<!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
+			<section id="colorSelector">
+				<h4>Color Selector</h4>
+			
+			<!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
 			<!-- //////////////// STYLE //////////////   -->
 					<style type="text/css">
 						#redP, #greenP, #blueP, #redS, #greenS, #blueS, #redT, #greenT, #blueT {
@@ -106,7 +92,9 @@
 				        .swatch {
 				            width: 100%;
 				            height: 100px;
-				            background-image: none;
+				            -moz-border-radius: 10px;
+							-webkit-border-radius: 10px;
+							border-radius: 10px;
 				        }
 				        #redP .ui-slider-range { background: #ef2929; }
 				        #redP .ui-slider-handle { border-color: #ef2929; }
@@ -208,6 +196,9 @@
 				            $( "#blueT" ).slider( "value", <?php echo $team -> TTerB; ?>  );
 				        });
 
+
+						// Reset Slider
+						// Primary
 						function resetSliderP() {
 							var $sliderRP = $("#redP");
 							$sliderRP.slider("value", <?php echo $team -> TPrimR; ?> );
@@ -216,7 +207,7 @@
 							var $sliderBP = $("#blueP");
 							$sliderBP.slider("value", <?php echo $team -> TPrimB; ?> );
 						}
-
+						//Secondary
 						function resetSliderS() {
 							var $sliderRS = $("#redS");
 							$sliderRS.slider("value", <?php echo $team -> TSecR; ?> );
@@ -225,7 +216,7 @@
 							var $sliderBS = $("#blueS");
 							$sliderBS.slider("value", <?php echo $team -> TSecB; ?> );
 						}
-
+						// Tertiary
 						function resetSliderT() {
 							var $sliderRT = $("#redT");
 							$sliderRT.slider("value", <?php echo $team -> TTerR; ?> );
@@ -240,34 +231,34 @@
 
 			<div class="row-fluid">
 		
-				<div class="span4">
+				<div class="span4 text-center">
 					<div id="swatchP" class="swatch" style="border: solid black 1px;" ></div>
 					<div id="redP"></div>
 					<div id="greenP"></div>
 					<div id="blueP"></div>
-					<div style="text-align: center;">
-						<button class="btn" type="button" onclick='resetSliderP();'>Reset</button>
+					<div>
+						<button class="btn btn-info" type="button" onclick='resetSliderP();'>Reset</button>
 					</div> 
 				</div>
 
-				<div class="span4">
+				<div class="span4 text-center">
 					<div id="swatchS" class="swatch" style="border: solid black 1px;" ></div>
 					<div id="redS"></div>
 					<div id="greenS"></div>
 					<div id="blueS"></div>
-					<div style="text-align: center;">
-						<button class="btn" type="button" onclick='resetSliderS();'>Reset</button> 
+					<div>
+						<button class="btn btn-info" type="button" onclick='resetSliderS();'>Reset</button> 
 					</div>
 				</div>
 
-				<div class="span4">
+				<div class="span4 text-center">
 						<div id="swatchT" class="swatch" style="border: solid black 1px;" ></div>
 						<div id="redT"></div>
 						<div id="greenT"></div>
 						<div id="blueT"></div>
-					<div style="text-align: center;">
-						<button class="btn" type="button" onclick='resetSliderT();'>Reset</button>
-					</div>
+						<div>
+							<button class="btn btn-info" type="button" onclick='resetSliderT();'>Reset</button>
+						</div>
 				</div>
 
 				<!-- Hidden Form to hide values // Submits to Database -->
@@ -301,8 +292,8 @@
 				<!-- Id for team -->
 					<input type="hidden" id="team_id" name="team_id" value='<?php echo $team -> Id; ?>' />
 				<!-- Submit new colors to database -->
-					<div style="text-align: center;">
-						<input class="btn" type="submit" value="Update Team Colors" />
+					<div class="text-center">
+						<input class="btn btn-info" type="submit" value="UPDATE TEAM COLORS" />
 					</div>
 
 				</form>
@@ -311,6 +302,24 @@
 				
 <!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
 
+			<section id="schedule">
+				<h4>Schedule</h4>
+				<p>
+					Maecenas ut varius sapien. Phasellus eu placerat neque. Integer sollicitudin urna sit amet felis dignissim sagittis. Vivamus bibendum interdum neque accumsan cursus. Quisque non est et ipsum consequat sollicitudin. Donec non augue non tortor accumsan molestie. Cras aliquam magna nec leo lacinia elementum. Cras elementum pretium nulla vel sollicitudin. In hac habitasse platea dictumst.
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
+				</p>
+			</section>
+
+			<section id="standings">
+				<h4>Standings</h4>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
+				</p>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
 				</p>

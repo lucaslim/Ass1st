@@ -567,16 +567,21 @@ a {
  }
 
 /* ==========================================================================
- Player Registration From Styles
+ Player / Team Registration From Styles
  ========================================================================== */
 
-.player-register {
+.player-register, .team-register {
   .input-med {
     width: 90%;
   }
 
   .input-full {
     width: 95%;
+  }
+
+  .label-description{
+    margin-top: -10px;
+    font-size: 0.75em;
   }
 }
 
@@ -802,10 +807,19 @@ a {
     list-style-type: : none;
 
     hr {
-      margin: 5px 0;
+      margin: -10px 0 5px 0;
       border-top: 1px solid red;
       border-bottom: 1px solid red;
     }
+
+    .img-team, .img-player {
+        .rounded-corners;
+        margin-right: 15px;
+        border: 1px solid @black;
+        width: 24px;
+        height: 24px;
+        float: right;
+      }
   }
 
   .team-logo{
@@ -857,10 +871,10 @@ a {
   .input-small {
     width: 100%;
   }
-  .player-register .input-full {
+  .player-register, .player-register .input-full {
     width: 98%;
   }
-  .player-register .input-med {
+  .player-register, .player-register .input-med {
     width: 98%;
   }
 }

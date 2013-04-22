@@ -143,7 +143,7 @@
 							<div class="row-fluid">
 					  			<div class="span6">
 				                    <!-- First Name -->
-				                    <input class="input-med" type="text" name="first_name" id="first_name" placeholder="First Name" class="" />				  				
+				                    <input class="input-med" type="text" name="first_name" id="first_name" placeholder="First Name" class="" />
 					  			</div>
 					  			<div class="span6">
 					  				<!-- Last Name -->
@@ -216,20 +216,68 @@
 		  	<!-- end group -->
 
 		  	<!-- begin group -->
-		  	<div class="accordion-group">
-			    <div class="accordion-heading">
-			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
-			        New Team Registration
-			      </a>
-			    </div>
-			    <div id="collapseTwo" class="accordion-body collapse">
-			      <div class="accordion-inner">
-			      	<div class="container-fluid">
-			      		<div class="row-fluid">
-			      			<div class="span12">
-			      				Anim pariatur cliche...
-			      			</div>
-			      		</div>
+
+			<div class="accordion-group">
+				<div class="accordion-heading">
+				  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+				    New Team Registration
+				  </a>
+				</div>
+				<div id="collapseTwo" class="accordion-body collapse">
+				  <div class="accordion-inner">
+				  	<div class="container-fluid team-register">
+			      		
+			            <!-- begin form -->	
+
+			            <fieldset>
+							<div class="row-fluid">
+					  			<div class="span12">
+				                    <!-- Team Name -->
+				                    <input class="input-full" type="text" name="team_name" id="team_name" placeholder="Team Name" />
+				                </div>
+					  		</div>
+					  		<div class="row-fluid">
+					  				<!-- Day -->
+					  				<div class="span6 text-center">
+									<select class="input-med" name="ddl_gender">
+										<option value="">Gender</option>
+										<?php foreach($dob_day as $item => $value):?>
+										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+										<?php endforeach; ?>
+									</select>									
+								</div>
+								<div class="span6 text-center">
+									<!-- Year -->
+									<select class="input-med" name="ddl_division">
+										<option value="">Division</option>
+										<?php foreach($dob_year as $item => $value):?>
+										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+										<?php endforeach; ?>
+									</select>									
+								</div>
+					  		</div>
+					  		<div class="row-fluid">
+					  			<div class="span12 text-center">
+				                    <!-- League -->
+				                    <select class="input-full" name="ddl_league">
+										<option value="">League</option>
+										<?php foreach($dob_month as $item => $value):?>
+										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<div class="span9">
+				                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>									
+								</div>
+								<div class="span3 text-left">
+									<input class="btn btn-info" type="submit" value="Register" id="submit" name="submit"/>
+								</div>
+							</div>
+				            </fieldset>
+				        </form>
+
 			      	</div>
 			      </div>
 			    </div>

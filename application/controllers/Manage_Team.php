@@ -51,7 +51,7 @@ class Manage_Team extends CI_Controller
 
 		$id = $this -> input -> post('team_id');
 
-		$data = array('PrimaryR' => $TPrimR, 'PrimaryG' => $TPrimG, 'PrimaryB' => $TPrimB);
+		$data = array('PrimaryR' => $TPrimR, 'PrimaryG' => $TPrimG, 'PrimaryB' => $TPrimB, 'SecondaryR' => $TSecR, 'SecondaryG' => $TSecG, 'SecondaryB' => $TSecB, 'TertiaryR' => $TTerR, 'TertiaryG' => $TTerG, 'TertiaryB' => $TTerB );
 
 		$query = $this -> Division_Model -> update_colors($id, $data);
 
