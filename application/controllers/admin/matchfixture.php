@@ -1,6 +1,5 @@
 <?php
-if ( !defined( 'BASEPATH' ) )
-	exit( 'No direct script access allowed' );
+if ( !defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 /**
  * Assist
  *
@@ -27,7 +26,7 @@ class MatchFixture extends Admin_Controller {
 		// Load Model
 		$this -> load -> model( 'MatchFixture_Model', 'matchfixture' );
 
-		$this -> load -> helper('grid_helper');
+		$this -> load -> helper( 'grid_helper' );
 
 		// start session so we can use session variables
 		session_start();
@@ -77,7 +76,7 @@ class MatchFixture extends Admin_Controller {
 		$season_id = $this -> input -> get( 'season_id' );
 		$league_id = $this -> input -> get( 'league_id' );
 
-		 $this -> session -> set_flashdata('seasonid', $season_id); 
+		$this -> session -> set_flashdata( 'seasonid', $season_id );
 
 		//Get total number of rows
 		$total_rows = $this -> matchfixture -> get_season_fixture_count( $season_id, $league_id );
@@ -93,7 +92,7 @@ class MatchFixture extends Admin_Controller {
 		$data['fixture'] = $this -> matchfixture -> get_season_fixture_by_id( $season_id, $league_id , $data['per_page'], $data['current_page'] );
 
 		$data["result"] = $this -> matchfixture -> get_match_fixture_summary_by_id( $league_id, $season_id );;
-		
+
 		$data["title"] = 'View Schedule';
 		$data["start_date"] = '';
 
@@ -118,15 +117,15 @@ class MatchFixture extends Admin_Controller {
 		$league_id = $this -> input -> post( 'league_id' );
 		$fixture_id = $this -> input -> post( 'fixture_id' );
 
-		$data = array("Date" => date( "Y-m-d", strtotime( $this -> input -> post('date') ) ),
-					  "Time" => date( "H:i:s", strtotime( $this -> input -> post('time') ) ),
-					  "HomeTeamId" => $this -> input -> post('home_team'),
-					  "AwayTeamId" => $this -> input -> post('visiting_team')
-					  );
+		$data = array( "Date" => date( "Y-m-d", strtotime( $this -> input -> post( 'date' ) ) ),
+			"Time" => date( "H:i:s", strtotime( $this -> input -> post( 'time' ) ) ),
+			"HomeTeamId" => $this -> input -> post( 'home_team' ),
+			"AwayTeamId" => $this -> input -> post( 'visiting_team' )
+		);
 
-		$this -> matchfixture -> update_fixture_by_fixture_id($fixture_id, $data);
+		$this -> matchfixture -> update_fixture_by_fixture_id( $fixture_id, $data );
 
-		header('location: view?season_id='. $season_id . '&league_id=' . $league_id); 
+		header( 'location: view?season_id='. $season_id . '&league_id=' . $league_id );
 	}
 
 	// --------------------------------------------------------------------
@@ -144,15 +143,15 @@ class MatchFixture extends Admin_Controller {
 		$season_id = $this -> input -> post( 'season_id' );
 		$league_id = $this -> input -> post( 'league_id' );
 		$fixture_id = $this -> input -> post( 'fixture_id' );
-		
+
 		$data["title"] = 'View Schedule';
 
-		$data["result"] = $this -> matchfixture -> get_match_fixture_by_id($fixture_id);
+		$data["result"] = $this -> matchfixture -> get_match_fixture_by_id( $fixture_id );
 
 		// Load Team Model
 		$this -> load -> model( 'Team_Model', 'team' );
 
-		$data["teams"] = $this -> team -> get_all_teams_by_league_id($league_id);
+		$data["teams"] = $this -> team -> get_all_teams_by_league_id( $league_id );
 
 		$this -> load -> view( 'admin/template/header' );
 		$this -> load -> view( 'admin/matchfixture_generate_edit_view' , $data );
@@ -174,11 +173,11 @@ class MatchFixture extends Admin_Controller {
 		$league_id = $this -> input -> post( 'league_id' );
 		$season_id = $this -> input -> post( 'season_id' );
 
-		
 
-		$this -> matchfixture -> soft_remove_fixture_by_id($fixture_id);
 
-		header('location: view?season_id='. $season_id . '&league_id=' . $league_id); 
+		$this -> matchfixture -> soft_remove_fixture_by_id( $fixture_id );
+
+		header( 'location: view?season_id='. $season_id . '&league_id=' . $league_id );
 	}
 
 	// --------------------------------------------------------------------
