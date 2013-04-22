@@ -39,7 +39,9 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> -->
 
-        <script src="<?php echo base_url(); ?>/style/bootstrap/js/vendor/jquery-1.9.1.min.js"></script>
+        <!-- jQuery -->
+        <script src="<?php echo base_url(); ?>/style/bootstrap/js/vendor/jquery-1.9.1.min.js"></script>        
+
         <script src="<?php echo base_url(); ?>/style/bootstrap/js/vendor/bootstrap.min.js"></script>
 
 		<script type="text/javascript" src="<?php echo base_url(); ?>script/vendor/jquery.nivo.slider.js"></script>

@@ -7,7 +7,7 @@
 	<div class="row-fluid">
 
 	<div id="leftContent" class="span7">
-		<div id="hpImageSlider">
+		<div id="hpImageSlider" style="margin-bottom: 35px;">
 			<div class="slider-wrapper theme-dark">
 				<div id="slider" class="nivoSlider">
 					<!--Image Size - 720 X 360-->
@@ -96,6 +96,29 @@
 				</div><!--htmlcaption4-->
 			</div><!--slider-wrapper-->
 		</div><!--hpImageSlider-->
+
+		<legend>Offensive Leaders</legend>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Points Leader</th>
+					<th></th>
+				</tr>
+				<tr>
+					<td>
+						<?php echo $leadingscorers[0] -> PlayerName; ?>
+					</td>
+					<td>
+						<?php echo $leadingscorers[0] -> PlayerGoals; ?>
+					</td>
+					<td>
+						<?php echo $leadingscorers[0] -> TeamName; ?>
+					</td>										
+				</tr>
+			</tbody>
+		</table>
+
 	</div><!-- /end left content -->
 
 	<div id="rightContent" class="span5">
@@ -212,45 +235,22 @@
 			    </div>
 		  	</div>
 		  	<!-- end group -->
-
-		  	<!-- begin group -->
-  		  	<div class="accordion-group">
-			    <div class="accordion-heading">
-			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree">
-			        Upcoming Tournaments
-			      </a>
-			    </div>
-			    <div id="collapseThree" class="accordion-body collapse">
-			      <div class="accordion-inner">
-			      	<div class="container-fluid">
-			      		<div class="row-fluid">
-			      			<div class="span12">
-			      				Anim pariatur cliche...
-			      			</div>
-			      		</div>
-			      	</div>
-
-			      </div>
-			    </div>
-		  	</div>
-		  	<!-- end group -->
-
 		</div>
 		<!-- /end accordion-->
 
 		<!-- /begin news list-->
-		<div class="newsDisplay">
-			<h2><?php echo $archive; // display title ?></h2>
-			<ul>
-				<?php foreach($news as $news_item): ?>
+		<div class="newsDisplay" style="margin-top: 35px;">
+			<legend><?php echo $archive; // display title ?></legend>
+			<?php foreach($news as $news_item): ?>
+		    	<span class="lead">
+		    		<a href="<?php echo base_url(); ?>pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
+		    	</span>		    		
+	    		<p class="subtitle">
+	    			<p class="subtitle"><small>Posted: <?php echo $news_item -> PostDate; ?></small></p>
+	    			<?php echo $news_item -> Description ?>
+	    		</p>
 
-				    <li>
-				    	<a href="<?php echo base_url(); ?>pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
-				    	<p><?php echo $news_item -> Description ?></p>
-				    </li>
-
-				<?php endforeach ?>
-			</ul>
+			<?php endforeach ?>
 		</div>
 		</div><!-- /end news list-->
 	</div><!-- /end right content -->

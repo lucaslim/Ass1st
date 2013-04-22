@@ -8,10 +8,10 @@
 
 		<div id="leftContent" class="span7">
 			<div class="newsDisplay">
-				<h1>Latest Headlines</h1>
+				<legend>Latest Headlines</legend>
 				<div id="top" class="newsDisplay">
 					<?php foreach($news as $news_item): ?>
-						<h2><a href="<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a></h2>
+						<legend><a href="<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a></legend>
 						<p class="subtitle">
 							Posted By: <?php echo $news_item -> Author; ?> | Date Posted: <?php echo $news_item -> PostDate; ?>
 						</p>

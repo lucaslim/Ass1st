@@ -8,14 +8,14 @@
 
 		<div id="leftContent" class="span7">
 			<div class="divisionProfile bootStrap">
-				<h1>League Standings</h1>
+				<legend>Division Standings</legend>
 
 				<h4></h4>
 				<?php $conference_name = ''; $division_name = '';?>
 
 			<?php foreach($teams as $team): ?>
 				<?php if($conference_name != $team -> ConferenceName): $conference_name = $team -> ConferenceName;  // check if division name exists already?>
-					<h4><?php echo $team -> ConferenceName; // echo division name ?> Conference</h4>
+					<p class="lead"><?php echo $team -> ConferenceName; // echo division name ?> Conference</p>
 				<?php endif; ?>
 
 				<?php if($division_name != $team -> DivisionName): $division_name = $team -> DivisionName;  // check if division name exists already?>
@@ -44,7 +44,7 @@
 								<td><?php echo $team -> P; ?></td>
 								<td><?php echo $team -> GF; ?></td>
 								<td><?php echo $team -> GA; ?></td>
-								<th><?php echo $team -> DIFF; ?></th>
+								<td><?php echo $team -> DIFF; ?></td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>

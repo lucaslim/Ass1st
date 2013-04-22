@@ -77,6 +77,8 @@ class MatchFixture extends Admin_Controller {
 		$season_id = $this -> input -> get( 'season_id' );
 		$league_id = $this -> input -> get( 'league_id' );
 
+		 $this -> session -> set_flashdata('seasonid', $season_id); 
+
 		//Get total number of rows
 		$total_rows = $this -> matchfixture -> get_season_fixture_count( $season_id, $league_id );
 
@@ -96,8 +98,87 @@ class MatchFixture extends Admin_Controller {
 		$data["start_date"] = '';
 
 		$this -> load -> view( 'admin/template/header' );
+		$this -> load -> view( 'admin/matchfixture_generate_view_view' , $data );
+		$this -> load -> view( 'admin/template/footer' );
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Edit
+	 *
+	 * This would list out a list of matches for the admin to do further
+	 * editing
+	 *
+	 */
+
+	function update() {
+
+		$season_id = $this -> input -> post( 'season_id' );
+		$league_id = $this -> input -> post( 'league_id' );
+		$fixture_id = $this -> input -> post( 'fixture_id' );
+
+		$data = array("Date" => date( "Y-m-d", strtotime( $this -> input -> post('date') ) ),
+					  "Time" => date( "H:i:s", strtotime( $this -> input -> post('time') ) ),
+					  "HomeTeamId" => $this -> input -> post('home_team'),
+					  "AwayTeamId" => $this -> input -> post('visiting_team')
+					  );
+
+		$this -> matchfixture -> update_fixture_by_fixture_id($fixture_id, $data);
+
+		header('location: view?season_id='. $season_id . '&league_id=' . $league_id); 
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Edit
+	 *
+	 * This would list out a list of matches for the admin to do further
+	 * editing
+	 *
+	 */
+
+	function edit() {
+
+		$season_id = $this -> input -> post( 'season_id' );
+		$league_id = $this -> input -> post( 'league_id' );
+		$fixture_id = $this -> input -> post( 'fixture_id' );
+		
+		$data["title"] = 'View Schedule';
+
+		$data["result"] = $this -> matchfixture -> get_match_fixture_by_id($fixture_id);
+
+		// Load Team Model
+		$this -> load -> model( 'Team_Model', 'team' );
+
+		$data["teams"] = $this -> team -> get_all_teams_by_league_id($league_id);
+
+		$this -> load -> view( 'admin/template/header' );
 		$this -> load -> view( 'admin/matchfixture_generate_edit_view' , $data );
 		$this -> load -> view( 'admin/template/footer' );
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Delete
+	 *
+	 * This would list out a list of matches for the admin to do further
+	 * editing
+	 *
+	 */
+
+	function delete() {
+		$fixture_id = $this -> input -> post( 'fixture_id' );
+		$league_id = $this -> input -> post( 'league_id' );
+		$season_id = $this -> input -> post( 'season_id' );
+
+		
+
+		$this -> matchfixture -> soft_remove_fixture_by_id($fixture_id);
+
+		header('location: view?season_id='. $season_id . '&league_id=' . $league_id); 
 	}
 
 	// --------------------------------------------------------------------

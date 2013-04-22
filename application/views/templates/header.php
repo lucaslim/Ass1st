@@ -31,9 +31,6 @@
 
         <!-- Modernizr -->
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-
-		<!-- jQuery (needed?) -->
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>       
     </head>
     <body>
 		<div id="fb-root"></div>
@@ -117,7 +114,7 @@
     		            
     		            <span class="or">or</span>
 
-    		            <?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>                
+    		            <?php echo form_open('login/login_verify'); ?>                
     		                <ul>
     		                    <li><input id="user_login" name="email" placeholder="Email" type="text" /></li>
     		                    <li><input id="user_password" name="password" placeholder="Password" type="password" /></li>
@@ -193,7 +190,7 @@
                                     </div>
                                 <?php endforeach; ?>
                             <?php else : ?>
-                                <p>There are no games scheduled today. <?php echo date('Y-m-d'); ?></p>
+                                <p>There are no games scheduled today.</p>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -209,7 +206,7 @@
                                     <a class="menuLink" href="<?php echo base_url(); ?>">Home</a>
                                 </li>
                                 <li>
-                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/index/schedule/">Schedule</a>
+                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/schedule/">Schedule</a>
                                 </li>
                                 <li>
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/scores/">Scores</a>
