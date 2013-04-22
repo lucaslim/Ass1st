@@ -28,18 +28,25 @@ class Search extends CI_Controller {
 		$this -> load -> helper('login_helper');
 	}	
 
+
 	public function index()
 	{
 		$this-> load -> model('search_model');
-		$data['search'] = $this->input->post('q');
+		$search = $this->input->post('q');
 		$data['login_header'] = set_login_header(); //get from template_helper.php
+		
+		
+		 $data['query'] = $this->search_model->get_search($this->input->post('q'));
 
-		$data['query'] = $this->search_model->get_search($this->input->post('q'));
-
-		$this -> load -> view('templates/header', $data);
+		 $this -> load -> view('templates/header', $data);
 		$this-> load -> view('search_view',$data);
+		
 		$this -> load -> view('templates/footer', $data);
 
 	}
+	
+
+
+	
 }
 ?>

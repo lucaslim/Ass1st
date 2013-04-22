@@ -39,4 +39,26 @@ class Search_Model extends CI_Model {
 
 		return $query->result();
 	}
+
+	/*function get_search_row($match,$limit,$start)
+	{
+		//$this->db->limit($limit, $start);
+		$this-> db-> select('Id, Title, Description');
+		$this-> db-> from('News');
+		$this->db->like('Title',$match);
+		$this->db->or_like('Description',$match);
+		
+		//$query = $this->db->get('News');
+		$query = $this->db->get();
+
+		if ($query -> num_rows() > 0) 
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
+	}*/
+
 }

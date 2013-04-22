@@ -18,7 +18,8 @@
 		<!--retrieving the link-->
 		<a href="http://localhost/Ass1st/Pages/News/<?= $item->Id ?>">View Page</a>
 
-		<?php endforeach;?>
+
+		<?php endforeach; ?>
 	</div>
 </div>
 </div>
