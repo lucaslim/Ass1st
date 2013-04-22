@@ -42,7 +42,7 @@ if (!defined('BASEPATH'))
 		 *retrieve the file name with $_FILES['userfile']['name']
 		 */
 		function edit_sliderimage($id,$image,$imageTitle,$imageDescription,$imageUrlMain,$imageLink2Title,$imageLink2Url,$imageLink3Title,$imageLink3Url,$imageLink4Title,$imageLink4Url) 
-{
+		{
 			
 			$this->load->helper('security');
 
@@ -63,6 +63,17 @@ if (!defined('BASEPATH'))
 			
 			$this->db->update('MediaSlider');
 
+		}
+
+		function get_mediaImages()
+		{
+			//$results = $this -> db -> get('MediaSlider', array('Id' => 1));
+			$query = $this -> db -> get('MediaSlider');
+
+			// $data = $results -> row();
+			// return $data;
+
+			return $query->result();
 		}
 	}
 
