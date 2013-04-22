@@ -35,7 +35,8 @@
 
 
 
-Slider Position: <select><?php for ($i=1; $i<5; $i++){ echo "<option name='Id' value='" . $i . "'>" . $i . "</option>";} ?></select>
+Slider Position: <select name="Id"><?php for ($i=1; $i<5; $i++){ echo "<option value='" . $i . "'>" . $i . "</option>";} ?></select>
+<!--<input type="text" name="Id" />-->
 <br/><br />
 
 Image Title: <input type="text" name="imageTitle" /> <br />

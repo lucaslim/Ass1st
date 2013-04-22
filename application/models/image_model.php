@@ -41,13 +41,14 @@ if (!defined('BASEPATH'))
 		 * 
 		 *retrieve the file name with $_FILES['userfile']['name']
 		 */
-		function edit_sliderimage($id,$image,$imageTitle,$imageDescription,$imageUrlMain,$imageLink2Title,$imageLink2Url,$imageLink3Title,$imageLink3Url,$imageLink4Title,$imageLink4Url) {
+		function edit_sliderimage($id,$image,$imageTitle,$imageDescription,$imageUrlMain,$imageLink2Title,$imageLink2Url,$imageLink3Title,$imageLink3Url,$imageLink4Title,$imageLink4Url) 
+{
 			
 			$this->load->helper('security');
 
-			//set object for array
-			//$data = array('Image' => $image, 'Title' => $imageTitle, 'Description' => $imageDescription, 'Urlmain' => $imageUrlMain, 'link2title' => $imageLink2Title, 'Link2' =>  $imageLink2Url, 'Link3title' => $imageLink3Title, 'Link3' => $imageLink3Url, 'Link4title' => $imageLink4Title, 'Link4' => $imageLink4Url );
 			
+			
+			$this->db->where('Id',$id);
 			$this->db->set('Image',$image);
 			$this->db->set('Title',$imageTitle);
 			$this->db->set('Description',$imageDescription);
@@ -59,7 +60,7 @@ if (!defined('BASEPATH'))
 			$this->db->set('Link4title',$imageLink4Title);
 			$this->db->set('Link4',$imageLink4Url);
 
-			$this->db->where('Id',$id);
+			
 			$this->db->update('MediaSlider');
 
 		}

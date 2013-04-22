@@ -18,7 +18,7 @@ class Media extends Admin_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('image_model');
-		$this->load->helper('form');
+		$this->load->helper(array('form', 'url'));
 	}
 
 	// --------------------------------------------------------------------
@@ -51,11 +51,11 @@ class Media extends Admin_Controller {
 		$imgDesc = $this->input->post('imageDescription');
 		$imgMainUrl = $this->input->post('imageUrlMain');
 		$img2ndTitle = $this->input->post('imageLink2Title');
-		$img2ndLink = $this->input->post('imageLink2Title');
-		$img3rdTitle = $this->input->post('imageLink2Title');
-		$img3rdLink = $this->input->post('imageLink2Title');
-		$img4thTitle = $this->input->post('imageLink2Title');
-		$img4thLink = $this->input->post('imageLink2Title');
+		$img2ndLink = $this->input->post('imageLink2Url');
+		$img3rdTitle = $this->input->post('imageLink3Title');
+		$img3rdLink = $this->input->post('imageLink3Url');
+		$img4thTitle = $this->input->post('imageLink4Title');
+		$img4thLink = $this->input->post('imageLink4Url');
 
 
 		if ( ! $this->upload->do_upload())
@@ -70,7 +70,7 @@ class Media extends Admin_Controller {
 			$data = array('upload_data' => $this->upload->data());
 
 			$this->image_model->edit_sliderimage($id,$_FILES['userfile']['name'],$imgTitle,$imgDesc,$imgMainUrl,$img2ndTitle,$img2ndLink,$img3rdTitle,$img3rdLink,$img4thTitle,$img4thLink);
-			// $this->image_model->edit_image($user_data['id'],$_FILES['userfile']['name']);
+			
 
 			$this->load->view('media_success_view', $data);
 		}
