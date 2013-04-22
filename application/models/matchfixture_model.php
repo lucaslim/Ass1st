@@ -98,6 +98,20 @@ class MatchFixture_Model extends CI_Model {
 	// ------------------------------------------------------------------------
 
 	/**
+	 * Get match fixture by id
+	 *
+	 * This function will return a single match fixture based on the given id
+	 *
+	 */
+
+	function update_fixture_by_fixture_id($fixture_id, $data) {
+		$this -> db -> where('Id', $fixture_id);
+		$result = $this -> db -> update('MatchFixture', $data);
+	}
+
+	// ------------------------------------------------------------------------
+
+	/**
 	 * Get total match fixture summary count
 	 *
 	 * Get the total number of rows in the table
@@ -105,7 +119,7 @@ class MatchFixture_Model extends CI_Model {
 	 */
 	function get_season_fixture_count( $season_id, $league_id ) {
 
-		$option = array( 'where' => array( 'SeasonId' => $season_id, 'LeagueId' => $league_id ) );
+		$option = array( 'where' => array( 'SeasonId' => $season_id, 'LeagueId' => $league_id, 'IsRemove' => 'No' ) );
 
 		return get_row_count( "AllFixtures", $option );
 	}
@@ -124,7 +138,7 @@ class MatchFixture_Model extends CI_Model {
 			'start_number' => $start_num,
 			'total_number' => $total_num,
 			'order_by' => array( 'Date' => 'asc' ),
-			'where' => array( 'SeasonId' => $season_id, 'LeagueId' => $league_id ) );
+			'where' => array( 'SeasonId' => $season_id, 'LeagueId' => $league_id, 'IsRemove' => 'No' ) );
 
 		return get_result( $option );
 	}
@@ -161,6 +175,21 @@ class MatchFixture_Model extends CI_Model {
 		$this -> db -> where( 'LeagueId', $league_id );
 
 		$this -> db -> delete( 'MatchFixture' );
+	}
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Remove fixture by Id
+	 *
+	 * This function will remove all season fixture and re-insert a new
+	 * generated fixture
+	 *
+	 */
+
+	function soft_remove_fixture_by_id( $fixture_id ) {
+		$this -> db -> where( 'Id' , $fixture_id );
+		$this -> db -> update( 'MatchFixture' , array('IsRemove' => 'Yes') );
 	}
 
 	// ------------------------------------------------------------------------

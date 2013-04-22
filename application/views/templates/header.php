@@ -114,7 +114,7 @@
     		            
     		            <span class="or">or</span>
 
-    		            <?php echo form_open('login/login_verify', array('id' => 'login_header_form')); ?>                
+    		            <?php echo form_open('login/login_verify'); ?>                
     		                <ul>
     		                    <li><input id="user_login" name="email" placeholder="Email" type="text" /></li>
     		                    <li><input id="user_password" name="password" placeholder="Password" type="password" /></li>
