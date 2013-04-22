@@ -97,27 +97,81 @@
 			</div><!--slider-wrapper-->
 		</div><!--hpImageSlider-->
 
-		<legend>Offensive Leaders</legend>
-
-		<table class="table">
+		<!-- Leading Goal Scorers -->
+		<legend>Goal Scoring Leader</legend>
+		<table class="table table-condensed table-hover">
+			<thead>
+				<tr>
+					<th>&nbsp;</th>
+					<th>Player</th>
+					<th>Goals</th>
+					<th>Team</th>
+				</tr>
+			</thead>
 			<tbody>
-				<tr>
-					<th>Points Leader</th>
-					<th></th>
-				</tr>
-				<tr>
-					<td>
-						<?php echo $leadingscorers[0] -> PlayerName; ?>
-					</td>
-					<td>
-						<?php echo $leadingscorers[0] -> PlayerGoals; ?>
-					</td>
-					<td>
-						<?php echo $leadingscorers[0] -> TeamName; ?>
-					</td>										
-				</tr>
+				<?php if($leadingscorers != FALSE) : ?>
+					<?php foreach($leadingscorers as $number => $player) : ?>
+						<tr>
+							<td>
+								<?php echo $number + 1; ?>
+							</td>
+							<td>
+								<?php echo $player -> PlayerFirstName; ?> <?php echo $player -> PlayerLastName; ?>
+							</td>
+							<td>
+								<?php echo $player -> Goals; ?>
+							</td>
+							<td>
+								<a href="<?php echo base_url(); ?>pages/team/<?php echo $player -> TeamId; ?>"><?php echo strtoupper(substr($player -> TeamName, 0, 3)); ?></a>
+							</td>										
+						</tr>
+					<?php endforeach; ?>
+				<?php else : ?>
+					<tr>
+						<td>No data found</td>
+					</tr>
+				<?php endif; ?>
 			</tbody>
 		</table>
+		<!-- /end Leading Goal Scorers -->
+
+		<!-- Leading Assist -->
+		<legend>Assists Leader</legend>
+		<table class="table table-condensed table-hover">
+			<thead>
+				<tr>
+					<th>&nbsp;</th>
+					<th>Assist Leader</th>
+					<th>Assists</th>
+					<th>Team</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php if($leadingassists != FALSE) : ?>
+					<?php foreach($leadingassists as $number => $player) : ?>
+						<tr>
+							<td>
+								<?php echo $number + 1; ?>
+							</td>
+							<td>
+								<?php echo $player -> PlayerFirstName; ?> <?php echo $player -> PlayerLastName; ?>
+							</td>
+							<td>
+								<?php echo $player -> Assists; ?>
+							</td>
+							<td>
+								<a href="<?php echo base_url(); ?>pages/team/<?php echo $player -> TeamId; ?>"><?php echo strtoupper(substr($player -> TeamName, 0, 3)); ?></a>
+							</td>										
+						</tr>
+					<?php endforeach; ?>
+				<?php else : ?>
+					<tr>
+						<td>No data found</td>
+					</tr>
+				<?php endif; ?>
+			</tbody>
+		</table>
+		<!-- /end Leading Goal Scorers -->
 
 	</div><!-- /end left content -->
 

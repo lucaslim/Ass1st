@@ -64,7 +64,8 @@ class Pages extends CI_Controller {
 		$data['archive'] = "News Archive";
 
 		// Get leader stat data
-		$data['leadingscorers'] = $this -> Division_Model -> get_leading_scorers();
+		$data['leadingscorers'] = $this -> Division_Model -> get_leading_scorers('Goals', 5);
+		$data['leadingassists'] = $this -> Division_Model -> get_leading_scorers('Assists', 5);
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php

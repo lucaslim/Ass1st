@@ -93,6 +93,7 @@ class Division_Model extends CI_Model {
 	function get_standings($seasonid, $leagueid) {
 
 		$this -> db -> where('SeasonId', $seasonid);
+		$this -> db -> where('LeagueId', $leagueid);
 
 		$query = $this -> db -> get('AllTeamStandings');
 
@@ -196,11 +197,6 @@ class Division_Model extends CI_Model {
 		$this -> db -> where('Id', $id);
 
 		$this -> db -> from('AllTeams');
-
-		// $this -> db -> select('Team.Name AS tname, Team.Founded AS tfounded, Team.Picture AS tpicture, Team.PrimaryR AS TPrimR, Team.PrimaryG AS TPrimG, Team.PrimaryB AS TPrimB, Team.SecondaryR	AS TSecR, Team.SecondaryG	AS TSecG, Team.SecondaryB AS TSecB, Team.TertiaryR AS TTerR, Team.TertiaryG AS TTerG, Team.TertiaryB AS TTerB, Arena.Name AS aname, Division.Name AS dname');
-		// $this -> db -> from('Team');
-		// $this -> db -> join('Arena', 'Arena.Id = Team.ArenaId');
-		// $this -> db -> join('Division', 'Division.Id = Team.DivisionId');
 
 		$query = $this->db->get();
 
@@ -419,30 +415,34 @@ class Division_Model extends CI_Model {
 	/**
 	 * Get Leading Scorers
 	 *
-	 * Gets the leading scorer for 
+	 * Gets the leading scorer for the league/season specified
 	 *
 	 */
-	function get_leading_scorers($leagueid = 1, $seasonid = 1) {
+	function get_leading_scorers($orderby, $limit = 0, $leagueid = 1, $seasonid = 1) {
 
-		// Call stored procedure
-		
+		// Set where clause if values are provided
+		if ($leagueid != 1)
+			$this -> db -> where('LeagueId', $leagueid);
 
-		///////////////////////////////////////////////////
-		/// Commented out by Lucas. Couldn't load any page
-		///////////////////////////////////////////////////
-		
-		// $stored_procedure = "CALL get_lead_scorer(?, ?)";
+		if ($seasonid != 1)
+			$this -> db -> where('SeasonId', $seasonid);
 
-		// // Peform query
-		// $query = $this -> db -> query($stored_procedure, array($leagueid, $seasonid));
+		$this -> db -> order_by($orderby, "DESC");
+		$this -> db -> order_by("PlayerLastName", "ASC");
 
-	 //    // If query returns 1 or more results, return data as array, if query returns 0 rows, then return false
-	 //    if ($query -> num_rows() > 0) {
-	 //        foreach ($query -> result() as $row) {
-	 //            $data[] = $row;
-	 //        }
-	 //        return $data;
-	 //    }
+		if($limit != 0)
+			$this -> db -> limit($limit);
+
+		// Perform query
+		$query = $this -> db -> get('AllStatsLeaders');
+
+	    // If query returns 1 or more results, return data as array, if query returns 0 rows, then return false
+	    if ($query -> num_rows() > 0) {
+	        foreach ($query -> result() as $row) {
+	            $data[] = $row;
+	        }
+	        return $data;
+	    }
 	    return false;		
 	}
 }
