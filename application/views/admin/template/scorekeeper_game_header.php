@@ -7,15 +7,15 @@
 				<?php if($game -> Progress == 1) : ?>
 					<a class="btn btn-primary btn-small active" disabled>1</a>
 					<a class="btn btn-inverse btn-small" href="<?php echo base_url(); ?>admin/scorekeeper/change_period/<?php echo $game -> Id; ?>/2">2</a>
-					<a class="btn btn-inverse btn-small">3</a>
-					<a class="btn btn-inverse btn-small">OT</a>
+					<a class="btn btn-inverse btn-small" disabled>3</a>
+					<a class="btn btn-inverse btn-small" disabled>OT</a>
 				<?php endif; ?>
 				
 				<?php if($game -> Progress == 2) : ?>
 					<a class="btn btn-inverse btn-small" disabled>1</a>
 					<a class="btn btn-primary btn-small active" disabled>2</a>
 					<a class="btn btn-inverse btn-small" href="<?php echo base_url(); ?>admin/scorekeeper/change_period/<?php echo $game -> Id; ?>/3">3</a>
-					<a class="btn btn-inverse btn-small">OT</a>
+					<a class="btn btn-inverse btn-small" disabled>OT</a>
 				<?php endif; ?>	
 
 				<?php if($game -> Progress == 3) : ?>

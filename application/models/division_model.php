@@ -195,14 +195,7 @@ class Division_Model extends CI_Model {
 		// set where clause
 		$this -> db -> where('Id', $id);
 
-
 		$this -> db -> from('AllTeams');
-
-		// $this -> db -> select('Team.Name AS tname, Team.Founded AS tfounded, Team.Picture AS tpicture, Team.PrimaryR AS TPrimR, Team.PrimaryG AS TPrimG, Team.PrimaryB AS TPrimB, Team.SecondaryR	AS TSecR, Team.SecondaryG	AS TSecG, Team.SecondaryB AS TSecB, Team.TertiaryR AS TTerR, Team.TertiaryG AS TTerG, Team.TertiaryB AS TTerB, Arena.Name AS aname, Division.Name AS dname');
-		// $this -> db -> from('Team');
-		// $this -> db -> join('Arena', 'Arena.Id = Team.ArenaId');
-		// $this -> db -> join('Division', 'Division.Id = Team.DivisionId');
-
 
 		$query = $this->db->get();
 
@@ -393,5 +386,5 @@ class Division_Model extends CI_Model {
 	    else {
 			return false;
 	    }
-   	}   	
+   	} 
 }

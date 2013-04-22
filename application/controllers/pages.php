@@ -23,14 +23,16 @@ class Pages extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
+		// Load Models
 		$this -> load -> model('Division_Model');
+		$this -> load -> model('Scorekeeper_Model');
 		$this -> load -> model('News_Model');
 
+		// Load Helpers
 		$this -> load -> helper('date');
 		$this -> load -> helper('template');
+		$this -> load -> helper('scoring');
 		$this -> load -> helper(array('form', 'url'));
-
-		$this -> live_scores = "live scores";
 	}	
 
 	// --------------------------------------------------------------------
@@ -178,13 +180,13 @@ class Pages extends CI_Controller {
 
 	function scores() {
 
-		//Get live scoring
+		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
 		// Provide a page title
 		$data['title'] = "Scores";
 
-		//Check if logged in
+		// Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 	
 		// Load data for todays games
@@ -194,5 +196,64 @@ class Pages extends CI_Controller {
 		$this -> load -> view('pages/scores.php', $data);
 		$this -> load -> view('templates/footer');
 	}
+
+	// --------------------------------------------------------------------		
+	/**
+	 * Box Score
+	 *
+	 * Displays the full score details for the selected game id
+	 *
+	 */
+
+	function boxscore($gameid) {
+		// Redirect if no id provided
+		if (!isset($gameid))
+			header('Location: ../scores');
+
+		// Get game info
+		$data['gameinfo'] = $this -> Scorekeeper_Model -> get_game_by_id($gameid);		
+
+		// If game hasn't started, then redirect
+		if($data['gameinfo'] -> Progress == 'false')
+			header('Location: ../scores');
+
+		// Variables for teams
+		$hometeamid = $data['gameinfo'] -> HomeTeamId;
+		$awayteamid = $data['gameinfo'] -> AwayTeamId;
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
+		// Provide a page title
+		$data['title'] = "Boxscore - " . $gameid;
+
+		//Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+	
+		// Load data for todays games
+		$data['progress'] = convert_period_string($data['gameinfo'] -> Progress); 
+
+		$data['hometeaminfo'] = $this -> Division_Model -> get_team_by_id($hometeamid);
+		$data['awayteaminfo'] = $this -> Division_Model -> get_team_by_id($awayteamid);
+
+		$data['hometeamscore'] = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeamid);
+		$data['awayteamscore'] = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteamid);
+
+		$data['hometeamboxscore'] = $this -> Scorekeeper_Model -> get_team_score_array($gameid, $hometeamid);
+		$data['awayteamboxscore'] = $this -> Scorekeeper_Model -> get_team_score_array($gameid, $awayteamid);
+
+		$data['hometeamstats'] = $this -> Scorekeeper_Model -> load_lineup($hometeamid, $gameid);
+		$data['awayteamstats'] = $this -> Scorekeeper_Model -> load_lineup($awayteamid, $gameid);
+
+		$data['scoring'] = $this -> Scorekeeper_Model -> get_scoring_summary($gameid);
+		$data['penalties'] = $this -> Scorekeeper_Model -> get_penalty_summary($gameid);
+
+		// Load additional data
+		$data['time'] = date('g:i A', strtotime($data['gameinfo'] -> Time)) . " -  " . date('l, F, j', strtotime($data['gameinfo'] -> Date));
+
+		$this -> load -> view('templates/header', $data);
+		$this -> load -> view('pages/boxscore.php', $data);
+		$this -> load -> view('templates/footer');
+	}	
 }
 ?>
