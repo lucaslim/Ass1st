@@ -43,11 +43,11 @@
 					<div class="htmlcaptionRight">
 						<p>
 							<a href="#">» Register Now</a>
-							
+
 						</p>
 						<p>
 							<a href="#">» 2012 Champions</a>
-							
+
 						</p>
 						<p>
 							<a href="#">» Volunteer</a>
@@ -63,11 +63,11 @@
 					<div class="htmlcaptionRight">
 						<p>
 							<a href="#">» Career Stats</a>
-							
+
 						</p>
 						<p>
 							<a href="#">» 2013 Highlights</a>
-							
+
 						</p>
 						<p>
 							<a href="#">» Press Release</a>
@@ -83,11 +83,11 @@
 					<div class="htmlcaptionRight">
 						<p>
 							<a href="#">» Visit the ProShop</a>
-							
+
 						</p>
 						<p>
 							<a href="#">» Store Hours</a>
-							
+
 						</p>
 						<p>
 							<a href="#">» Contact</a>
@@ -114,7 +114,7 @@
 					</td>
 					<td>
 						<?php echo $leadingscorers[0] -> TeamName; ?>
-					</td>										
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -136,14 +136,14 @@
 				<div id="collapseOne" class="accordion-body collapse in">
 				  <div class="accordion-inner">
 				  	<div class="container-fluid player-register">
-				  	
-				  	<!-- begin form -->	
-					<?php echo form_open("quick_register/register_user", array('id' => 'quick_register_form')); ?>
+
+				  	<!-- begin form -->
+					<?php echo form_open( "quick_register/register_user", array( 'id' => 'quick_register_form' ) ); ?>
 			            <fieldset>
 							<div class="row-fluid">
 					  			<div class="span6">
 				                    <!-- First Name -->
-				                    <input class="input-med" type="text" name="first_name" id="first_name" placeholder="First Name" class="" />				  				
+				                    <input class="input-med" type="text" name="first_name" id="first_name" placeholder="First Name" />
 					  			</div>
 					  			<div class="span6">
 					  				<!-- Last Name -->
@@ -166,7 +166,7 @@
 				                    <!-- Month -->
 				                    <select class="input-small" name="dob_month">
 										<option value="">Month</option>
-										<?php foreach($dob_month as $item => $value):?>
+										<?php foreach ( $dob_month as $item => $value ):?>
 										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
 										<?php endforeach; ?>
 									</select>
@@ -175,19 +175,19 @@
 									<!-- Day -->
 									<select class="input-small" name="dob_day">
 										<option value="">Day</option>
-										<?php foreach($dob_day as $item => $value):?>
+										<?php foreach ( $dob_day as $item => $value ):?>
 										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
 										<?php endforeach; ?>
-									</select>									
+									</select>
 								</div>
 								<div class="span4 text-left">
 									<!-- Year -->
 									<select class="input-small" name="dob_year">
-										<option value="">Year</option>
-										<?php foreach($dob_year as $item => $value):?>
+										<option value="">Year </option>
+										<?php foreach ( $dob_year as $item => $value ):?>
 										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
 										<?php endforeach; ?>
-									</select>									
+									</select>
 								</div>
 							</div>
 							<div class="row-fluid">
@@ -195,21 +195,21 @@
 									<!-- Female -->
 									<label class="radio"><input type="radio" name="gender" value="Female">Female</label>
 								</div>
-								<div class="span6">									
-			                		<!-- Male -->					                	
+								<div class="span6">
+			                		<!-- Male -->
 			                		<label class="radio"><input type="radio" name="gender" value="Male">Male</label>
-								</div>								
+								</div>
 							</div>
 							<div class="row-fluid">
 								<div class="span9">
-				                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>									
+				                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>
 								</div>
 								<div class="span3 text-left">
 									<input class="btn btn-info" type="submit" value="Sign Up" id="submit" name="submit"/>
 								</div>
 							</div>
 				            </fieldset>
-				        </form>				    
+				        </form>
 				  </div>
 				</div>
 			</div>
@@ -226,56 +226,55 @@
 				<div id="collapseTwo" class="accordion-body collapse">
 				  <div class="accordion-inner">
 				  	<div class="container-fluid team-register">
-			      		
-			            <!-- begin form -->	
 
+			            <!-- begin form -->
+			            <?php echo form_open( "quick_team_register/register_team", array( 'id' => 'quick_team_register_form' ) ); ?>
 			            <fieldset>
 							<div class="row-fluid">
 					  			<div class="span12">
 				                    <!-- Team Name -->
-				                    <input class="input-full" type="text" name="team_name" id="team_name" placeholder="Team Name" />
+				                    <input class="input-full" type="text" name="team_name" id="team_name" placeholder="Team Name"/>
 				                </div>
-					  		</div>
-					  		<div class="row-fluid">
-					  				<!-- Day -->
-					  				<div class="span6 text-center">
-									<select class="input-med" name="ddl_gender">
-										<option value="">Gender</option>
-										<?php foreach($dob_day as $item => $value):?>
-										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
-										<?php endforeach; ?>
-									</select>									
-								</div>
-								<div class="span6 text-center">
-									<!-- Year -->
-									<select class="input-med" name="ddl_division">
-										<option value="">Division</option>
-										<?php foreach($dob_year as $item => $value):?>
-										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
-										<?php endforeach; ?>
-									</select>									
-								</div>
 					  		</div>
 					  		<div class="row-fluid">
 					  			<div class="span12 text-center">
 				                    <!-- League -->
-				                    <select class="input-full" name="ddl_league">
+				                    <select class="input-full" name="ddl_league" id="ddl_league">
 										<option value="">League</option>
-										<?php foreach($dob_month as $item => $value):?>
-										<option value="<?php echo $value; ?>"><?php echo $item; ?></option>
+										<?php foreach ( $league as $value ):?>
+										<option value="<?php echo $value -> Id; ?>"><?php echo $value -> Name; ?></option>
 										<?php endforeach; ?>
 									</select>
 								</div>
 							</div>
+					  		<div class="row-fluid">
+					  				<!-- Day -->
+					  				<div class="span6 text-center">
+									<select class="input-med" name="ddl_gender" id="ddl_gender">
+										<option value="">Gender</option>
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+										<option value="Mixed">Mixed</option>
+									</select>
+								</div>
+								<div class="span6 text-center">
+									<!-- Year -->
+									<select class="input-med" name="ddl_division" id="ddl_division">
+										<option value="">Division</option>
+									</select>
+								</div>
+					  		</div>
+
 							<div class="row-fluid">
 								<div class="span9">
-				                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>									
+				                    <label class="checkbox"><input type="checkbox" name="team_terms" id="team_terms"/> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>
 								</div>
 								<div class="span3 text-left">
-									<input class="btn btn-info" type="submit" value="Sign Up" id="submit" name="submit"/>
+									<input class="btn btn-info" type="submit" value="Sign Up" id="team_submit" name="team_submit" />
 								</div>
 							</div>
 			            </fieldset>
+			            <?php echo form_close(); ?>
 			        </form>
 
 		      	</div>
@@ -289,10 +288,10 @@
 		<!-- /begin news list-->
 		<div class="newsDisplay" style="margin-top: 35px;">
 			<legend><?php echo $archive; // display title ?></legend>
-			<?php foreach($news as $news_item): ?>
+			<?php foreach ( $news as $news_item ): ?>
 		    	<span class="lead">
 		    		<a href="<?php echo base_url(); ?>pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
-		    	</span>		    		
+		    	</span>
 	    		<p class="subtitle">
 	    			<p class="subtitle"><small>Posted: <?php echo $news_item -> PostDate; ?></small></p>
 	    			<?php echo $news_item -> Description ?>

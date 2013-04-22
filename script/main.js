@@ -89,6 +89,51 @@
 
  // --------------------------------------------------------------------
 
+ /**
+ * 
+ * Ajax for Quick Team Register
+ *
+ */
+
+ $(document).ready(function() {
+		//Form
+		$('#quick_team_register_form').submit(function(e) {
+			e.preventDefault();
+
+			dataString = $(this).serialize();
+
+			$.ajax({
+				type : $(this).attr("method"),
+				url : $(this).attr("action"),
+				data : dataString,
+				dataType : "json",
+				success : function(data) {
+					if(data.success){
+						window.location.replace($.myURL());
+						return;
+					}
+
+					$('#error_message').html(data.message);
+					$('#error_box').dialog("open");
+				}
+			});
+		});
+
+		//Error Box
+		$('#error_box').dialog({
+			resizable : false,
+			autoOpen : false,
+			modal : true,
+			buttons : {
+				Cancel : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+
+ // --------------------------------------------------------------------
+
 /**
  *
  * User Login
@@ -393,4 +438,69 @@ $.fn.clearDisabled = function () {
 	$(this).attr("disabled", false); // apply disabled attribute
   	return this;	
 };
+
+/**
+ * Set Division
+ * 
+ * Set divison based on the given league id
+ *
+ */
+$(function() {
+	$('#ddl_league').on({
+		change: function(e){
+			e.preventDefault();
+
+			$.ajax({
+				type : "POST",
+				url : "quick_team_register/get_division",
+				data : {"id": $(this).val()},
+				dataType : "json",
+				success : function(data) {
+					var str = '';
+					$.each(data, function(key, val) {
+						str += '<option value="' + val + '">' + key + '</option>';
+					});
+					$('#ddl_division').html(str);
+				}
+			});
+		}
+	});
+});
+
+/**
+ * Team Name Check
+ * 
+ * Check if team name exist;
+ *
+ */
+$(function() {
+	var time_out = 0;
+
+	$('#team_name').after('<div id="team_name_exist" style="color:red; font-style:italic;">Team name already exist</div>');
+	$('#team_name_exist').hide();
+
+	$('#team_name').on({
+		keyup: function(e){
+			e.preventDefault();
+
+			clearTimeout(time_out);
+
+			time_out = setTimeout(function(){
+				$.ajax({
+					type : "POST",
+					url : "quick_team_register/check_team_name",
+					data : {"s": $('#team_name').val()},
+					dataType : "json",
+					success : function(data) {
+						if(!data.success)
+							$('#team_name_exist').show();
+						else
+							$('#team_name_exist').hide();
+				}
+			});
+
+			}, 500);
+		}
+	});
+});
 
