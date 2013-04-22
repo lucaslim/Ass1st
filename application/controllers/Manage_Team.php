@@ -2,10 +2,10 @@
 
 session_start();
 
-class MatchAttendance extends CI_Controller
+class Manage_Team extends CI_Controller
 {
 	/**
-	 * Constructor for the Match Attendance Controller Class
+	 * Constructor for the Team Color Controller Class
 	 *
 	 * Load required model, helper, library class file.
 	 *
@@ -31,42 +31,35 @@ class MatchAttendance extends CI_Controller
 	// --------------------------------------------------------------------
 
 	/**
-	 * Insert Attendance
+	 * Update Team Colors
 	 *
-	 * This allows to add attendance to the database.
+	 * This will update the team colors to the database
 	 *
 	 */
+	function update_colors() {
+		$TPrimR = $this -> input -> post('primColorR');
+		$TPrimG = $this -> input -> post('primColorG');
+		$TPrimB = $this -> input -> post('primColorB');
 
-	public function add_attendance(){
-		//Get user data from session
-		$user_data = $this -> session -> userdata('authorized');
+		$TSecR = $this -> input -> post('secColorR');
+		$TSecG = $this -> input -> post('secColorG');
+		$TSecB = $this -> input -> post('secColorB');
 
-		$user_id = 1;
-		$team_id = 1;
-		$attendance = $this -> input -> get('attendance');
-		$match_fixture_id = $this -> input -> get('matchfixtureid');
+		$TTerR = $this -> input -> post('terColorR');
+		$TTerG = $this -> input -> post('terColorG');
+		$TTerB = $this -> input -> post('terColorB');
 
-		//Load Match Fixture Model
-		$this -> load -> model('MatchFixture_Model', 'matchfixture');
+		$id = $this -> input -> post('team_id');
 
-		//Check if team is playing in the fixture
-		if($this -> matchfixture -> is_team_playing($match_fixture_id, $team_id)) {
-			//Load Match Attendance Model
-			$this -> load -> model('MatchAttendance_Model', 'matchattendance');
+		$data = array('PrimaryR' => $TPrimR, 'PrimaryG' => $TPrimG, 'PrimaryB' => $TPrimB);
 
-			//Set Match Fixture data
-			$data = array('MatchFixtureId' => $match_fixture_id,
-				'TeamId' => $team_id,
-				'UserId' => $user_id,
-				'attendance' => $attendance);
+		$query = $this -> Division_Model -> update_colors($id, $data);
 
-			//Set Match Attendance
-			echo json_encode(array('success' => $this -> matchattendance ->  set_match_attendance($data)));
-			return;
-		}
-
-		echo json_encode(array('success' => false));
+		//If update passes, redirect to the player page
+		if ($query)
+		 	header("location: ../pages/user_profile/" . $id );
 	}
+
 	
 	// --------------------------------------------------------------------
 

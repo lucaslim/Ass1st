@@ -10,7 +10,7 @@
 		<div id="hpImageSlider">
 			<div class="slider-wrapper theme-dark">
 				<div id="slider" class="nivoSlider">
-					<!--Image Size -- 720 X 360-->
+					<!--Image Size - 720 X 360-->
 					<a href="#"><img src="<?php echo base_url(); ?>assets/images/championship.jpg" data-thumb="<?php echo base_url(); ?>assets/images/skates.jpg" alt="" title="#htmlcaption1" /></a>
 					<a href="#"><img src="<?php echo base_url(); ?>assets/images/roadhockey.jpg" data-thumb="<?php echo base_url(); ?>assets/images/roadhockey.jpg" alt="" title="#htmlcaption2" /></a>
 					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skillscomp.jpg" data-thumb="<?php echo base_url(); ?>assets/images/skillscomp.jpg" alt="" title="#htmlcaption3" /></a>
@@ -20,7 +20,7 @@
 				<div id="htmlcaption1" class="nivo-html-caption">
 					<div class="htmlcaptionLeft">
 						<h3><a href="#">TEAM 3 BECOMES NUMBER 1</a></h3>
-						<p>After two tough losses in the semi‘s against the top seeded Wolverines, Team 3 bounced back to win four straight in the Eastern Conference Championship.</p>
+						<p>After two tough losses in the semi‘s against the top seeded Wolverines, Team 3 bounced back to win four straight in the Eastern Championship x.</p>
 					</div>
 					<div class="htmlcaptionRight">
 						<p>
@@ -66,7 +66,7 @@
 							
 						</p>
 						<p>
-							<a href="#">» 2013 Draft Highlights</a>
+							<a href="#">» 2013 Highlights</a>
 							
 						</p>
 						<p>

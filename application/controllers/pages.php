@@ -147,13 +147,13 @@ class Pages extends CI_Controller {
 
 	// --------------------------------------------------------------------		
 	/**
-	 * Player Profile
+	 * User Profile
 	 *
 	 * Displays team by id
 	 *
 	 */
 
-	function player($id) {
+	function user_profile($id) {
 		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 
@@ -164,7 +164,7 @@ class Pages extends CI_Controller {
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		$this -> load -> view('templates/header', $data);
-		$this -> load -> view('pages/player_profile.php', $data);
+		$this -> load -> view('pages/user_profile.php', $data);
 		$this -> load -> view('templates/footer');
 	}
 

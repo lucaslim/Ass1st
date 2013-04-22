@@ -203,7 +203,6 @@ class Division_Model extends CI_Model {
 		// $this -> db -> join('Arena', 'Arena.Id = Team.ArenaId');
 		// $this -> db -> join('Division', 'Division.Id = Team.DivisionId');
 
-
 		$query = $this->db->get();
 
 		//Check if any rows returned
@@ -212,6 +211,28 @@ class Division_Model extends CI_Model {
 		
 		return $query -> row();
 	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Update Team Colors
+	 *
+	 * This allows Captain / Coach to update the Team Colors to the database.
+	 *
+	 */
+
+	function update_colors($id, $data) {
+
+		//Set where clause
+		$this -> db -> where('Id', $id);
+
+		// var_dump($data);
+
+		//update database
+		return $this -> db -> update('Team', $data);
+
+	}
+
 
 	// --------------------------------------------------------------------
 	/**
