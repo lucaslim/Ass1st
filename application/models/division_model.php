@@ -197,14 +197,11 @@ class Division_Model extends CI_Model {
 
 		$this -> db -> from('AllTeams');
 
-<<<<<<< HEAD
 		// $this -> db -> select('Team.Name AS tname, Team.Founded AS tfounded, Team.Picture AS tpicture, Team.PrimaryR AS TPrimR, Team.PrimaryG AS TPrimG, Team.PrimaryB AS TPrimB, Team.SecondaryR	AS TSecR, Team.SecondaryG	AS TSecG, Team.SecondaryB AS TSecB, Team.TertiaryR AS TTerR, Team.TertiaryG AS TTerG, Team.TertiaryB AS TTerB, Arena.Name AS aname, Division.Name AS dname');
 		// $this -> db -> from('Team');
 		// $this -> db -> join('Arena', 'Arena.Id = Team.ArenaId');
 		// $this -> db -> join('Division', 'Division.Id = Team.DivisionId');
 
-=======
->>>>>>> 59b607d84e04bdeef123aebfa7062825ecdebb1d
 		$query = $this->db->get();
 
 		//Check if any rows returned
@@ -428,18 +425,24 @@ class Division_Model extends CI_Model {
 	function get_leading_scorers($leagueid = 1, $seasonid = 1) {
 
 		// Call stored procedure
-		$stored_procedure = "CALL get_lead_scorer(?, ?)";
+		
 
-		// Peform query
-		$query = $this -> db -> query($stored_procedure, array($leagueid, $seasonid));
+		///////////////////////////////////////////////////
+		/// Commented out by Lucas. Couldn't load any page
+		///////////////////////////////////////////////////
+		
+		// $stored_procedure = "CALL get_lead_scorer(?, ?)";
 
-	    // If query returns 1 or more results, return data as array, if query returns 0 rows, then return false
-	    if ($query -> num_rows() > 0) {
-	        foreach ($query -> result() as $row) {
-	            $data[] = $row;
-	        }
-	        return $data;
-	    }
+		// // Peform query
+		// $query = $this -> db -> query($stored_procedure, array($leagueid, $seasonid));
+
+	 //    // If query returns 1 or more results, return data as array, if query returns 0 rows, then return false
+	 //    if ($query -> num_rows() > 0) {
+	 //        foreach ($query -> result() as $row) {
+	 //            $data[] = $row;
+	 //        }
+	 //        return $data;
+	 //    }
 	    return false;		
 	}
 }

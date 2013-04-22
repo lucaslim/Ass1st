@@ -101,19 +101,11 @@
 					<style type="text/css">
 						#redP, #greenP, #blueP, #redS, #greenS, #blueS, #redT, #greenT, #blueT {
 				            width: 100%;
-<<<<<<< HEAD:application/views/pages/user_profile.php
 				            margin: 15px 0;
-=======
-				            margin: 15px 5px;
->>>>>>> 59b607d84e04bdeef123aebfa7062825ecdebb1d:application/views/pages/player_profile.php
 				        }
 				        .swatch {
 				            width: 100%;
 				            height: 100px;
-<<<<<<< HEAD:application/views/pages/user_profile.php
-=======
-				            margin: 5px;
->>>>>>> 59b607d84e04bdeef123aebfa7062825ecdebb1d:application/views/pages/player_profile.php
 				            background-image: none;
 				        }
 				        #redP .ui-slider-range { background: #ef2929; }
@@ -188,7 +180,6 @@
 				            $("#terColorG").val( greenT );
 				            $("#terColorB").val( blueT );
 				        }
-				        
 
 
 				        // Slider 
@@ -254,7 +245,6 @@
 					<div id="redP"></div>
 					<div id="greenP"></div>
 					<div id="blueP"></div>
-<<<<<<< HEAD:application/views/pages/user_profile.php
 					<div style="text-align: center;">
 						<button class="btn" type="button" onclick='resetSliderP();'>Reset</button>
 					</div> 
@@ -316,53 +306,6 @@
 					</div>
 
 				</form>
-=======
-					<input type="text" id="RGBcolorP">
-					<!-- <input type="text" id="hexColor"> -->
-					<br />
-					<form method="POST" action="">
-						<input type="text" id="primColorR">
-						<input type="text" id="primColorG">
-						<input type="text" id="primColorB">
-						<br />
-						<button type="button" onclick='resetSliderP();'>Reset</button> 
-					</form>
-				</div>
-
-				<div class="span4">
-					<div id="swatchS" class="swatch" style="border: solid black 1px;" ></div>
-					<div id="redS"></div>
-					<div id="greenS"></div>
-					<div id="blueS"></div>
-					<input type="text" id="RGBcolorS">
-					<!-- <input type="text" id="hexColor"> -->
-					<br />
-					<form method="POST" action="">
-						<input type="text" id="secColorR">
-						<input type="text" id="secColorG">
-						<input type="text" id="secColorB">
-						<br />
-						<button type="button" onclick='resetSliderS();'>Reset</button> 
-					</form>
-				</div>
-
-				<div class="span4">
-					<div id="swatchT" class="swatch" style="border: solid black 1px;" ></div>
-					<div id="redT"></div>
-					<div id="greenT"></div>
-					<div id="blueT"></div>
-					<input type="text" id="RGBcolorT">
-					<!-- <input type="text" id="hexColor"> -->
-					<br />
-					<form method="POST" action="">
-						<input type="text" id="terColorR">
-						<input type="text" id="terColorG">
-						<input type="text" id="terColorB">
-						<br />
-						<button type="button" onclick='resetSliderT();'>Reset</button> 
-					</form>
-				</div>
->>>>>>> 59b607d84e04bdeef123aebfa7062825ecdebb1d:application/views/pages/player_profile.php
 
 			</div>
 				

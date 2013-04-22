@@ -220,16 +220,12 @@ class Pages extends CI_Controller {
 	 * Displays team by id
 	 *
 	 */
-
-<<<<<<< HEAD
 	function user_profile($id) {
-=======
-	function player($id) {
+
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 		
->>>>>>> 59b607d84e04bdeef123aebfa7062825ecdebb1d
 		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 
