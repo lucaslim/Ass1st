@@ -143,7 +143,7 @@
 							<div class="row-fluid">
 					  			<div class="span6">
 				                    <!-- First Name -->
-				                    <input class="input-med" type="text" name="first_name" id="first_name" placeholder="First Name" class="" />
+				                    <input class="input-med" type="text" name="first_name" id="first_name" placeholder="First Name" class="" />				  				
 					  			</div>
 					  			<div class="span6">
 					  				<!-- Last Name -->
@@ -272,19 +272,19 @@
 				                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>									
 								</div>
 								<div class="span3 text-left">
-									<input class="btn btn-info" type="submit" value="Register" id="submit" name="submit"/>
+									<input class="btn btn-info" type="submit" value="Sign Up" id="submit" name="submit"/>
 								</div>
 							</div>
-				            </fieldset>
-				        </form>
+			            </fieldset>
+			        </form>
 
-			      	</div>
-			      </div>
-			    </div>
-		  	</div>
-		  	<!-- end group -->
-		</div>
-		<!-- /end accordion-->
+		      	</div>
+		      </div>
+		    </div>
+	  	</div>
+	  	<!-- end group -->
+	</div>
+	<!-- /end accordion-->
 
 		<!-- /begin news list-->
 		<div class="newsDisplay" style="margin-top: 35px;">
