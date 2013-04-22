@@ -69,5 +69,25 @@ class Team_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 
+	/**
+	 * Get All Team Name
+	 *
+	 * Get all Team Name
+	 *
+	 */
+
+	function get_all_team_name(){
+		$this -> db -> select('Id, Name');
+		$query = $this -> db -> get('Team');
+
+		return $query -> result();
+	}
+
+	// --------------------------------------------------------------------
+
+	function quick_team_register($data) {
+		$this -> db -> insert('Team', $data);
+	}
+
 }
 ?>

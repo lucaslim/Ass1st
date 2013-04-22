@@ -445,4 +445,22 @@ class Division_Model extends CI_Model {
 	    }
 	    return false;		
 	}
+
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Get Division
+	 *
+	 * Gets a list of division based on the league Id
+	 *
+	 */
+	function get_division_by_league_id($league_id){
+		$this -> db -> where('LeagueId', $league_id);
+		$query = $this -> db -> get('Division');
+
+		return $query -> result();
+	}
+
+	// --------------------------------------------------------------------
 }
