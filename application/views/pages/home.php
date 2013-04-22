@@ -23,83 +23,30 @@
 					 -->
 				</div>
 				<!--htmlcaption1-->
-				<div id="htmlcaption1" class="nivo-html-caption">
+				<?php foreach($query as $item):?>
+				<div id='htmlcaption<?php echo $item -> Id ?>' class="nivo-html-caption">
 					<div class="htmlcaptionLeft">
-						<h3 style="text-transform:uppercase;"><a href="#">TEAM 3 BECOMES NUMBER 1</a></h3>
-						<p>After two tough losses in the semi‘s against the top seeded Wolverines, Team 3 bounced back to win four straight in the Eastern Championship.</p>
+						
+							<h3><?php echo $item -> Title ?><a href="#"></h3>
+							<p><?php echo $item -> Description ?></p>
+						<!-- <h3 style="text-transform:uppercase;"><a href="#">TEAM 3 BECOMES NUMBER 1</a></h3>
+						<p>After two tough losses in the semi‘s against the top seeded Wolverines, Team 3 bounced back to win four straight in the Eastern Championship.</p> -->
+						
 					</div>
 					<div class="htmlcaptionRight">
 						<p>
-							<a href="#">» Finals Preview</a>
+							<a href="#">» <?php echo $item -> link2title ?></a>
 						</p>
 						<p>
-							<a href="#">» Game Recap</a>
+							<a href="#">» <?php echo $item -> Link3title ?></a>
 						</p>
 						<p>
-							<a href="#">» Playoff Standings</a>
+							<a href="#">» <?php echo $item -> Link4title ?></a>
 						</p>
 					</div>
 				</div><!--htmlcaption1-->
-				<!--htmlcaption2-->
-				<div id="htmlcaption2" class="nivo-html-caption">
-					<div class="htmlcaptionLeft">
-						<h3><a href="#">SCHOOLYARD PUCK</a></h3>
-						<p>It's the 4th Annual Wreckit Stadium's Road Hockey Tournament. Check the tournament section for more details.</p>
-					</div>
-					<div class="htmlcaptionRight">
-						<p>
-							<a href="#">» Register Now</a>
-
-						</p>
-						<p>
-							<a href="#">» 2012 Champions</a>
-
-						</p>
-						<p>
-							<a href="#">» Volunteer</a>
-						</p>
-					</div>
-				</div><!--htmlcaption2-->
-				<!--htmlcaption3-->
-				<div id="htmlcaption3" class="nivo-html-caption">
-					<div class="htmlcaptionLeft">
-						<h3><a href="#">LaFLAMME GROWS BRIGHTER</a></h3>
-						<p>Selected in the first round, 5th overall by Toronto, come meet our very own Jacques LaFlamme on July 23rd at 1pm, before he starts his career.</p>
-					</div>
-					<div class="htmlcaptionRight">
-						<p>
-							<a href="#">» Career Stats</a>
-
-						</p>
-						<p>
-							<a href="#">» 2013 Highlights</a>
-
-						</p>
-						<p>
-							<a href="#">» Press Release</a>
-						</p>
-					</div>
-				</div><!--htmlcaption3-->
-				<!--htmlcaption4-->
-				<div id="htmlcaption4" class="nivo-html-caption">
-					<div class="htmlcaptionLeft">
-						<h3><a href="#">DON'T BE DULL!</a></h3>
-						<p>Be on the edge of your game. Every Wednesday Night, Wreckit Stadium offer's half price skate sharpenings for all league players.</p>
-					</div>
-					<div class="htmlcaptionRight">
-						<p>
-							<a href="#">» Visit the ProShop</a>
-
-						</p>
-						<p>
-							<a href="#">» Store Hours</a>
-
-						</p>
-						<p>
-							<a href="#">» Contact</a>
-						</p>
-					</div>
-				</div><!--htmlcaption4-->
+				<?php endforeach ?>
+				
 			</div><!--slider-wrapper-->
 		</div><!--hpImageSlider-->
 
