@@ -110,7 +110,7 @@ class Division_Model extends CI_Model {
 	        	$row -> P = ($row -> Win * 2) + $row -> OvertimeLoss;;
 	        	$row -> GP = $this -> get_games_played($teamid, $seasonid);
 	        	$row -> GF = $this -> get_goals_for($teamid, $seasonid);
-	        	$row -> GA = $ga;
+	        	$row -> GA = $this -> get_goals_against($teamid, $seasonid);;
 	        	$row -> DIFF = $row -> GF - $row -> GA;
 
 	        	// stash it in the array
@@ -177,7 +177,7 @@ class Division_Model extends CI_Model {
     public function get_goals_against($teamid, $seasonid) {
 
 		$this -> db -> where('SeasonId', $seasonid);
-		$this -> db -> where('TeamId', $teamid);
+		$this -> db -> where('OpponentId', $teamid);
 
 	    // Perform the query
 	    return $this -> db -> count_all_results('AllScoringPlays');
@@ -387,4 +387,29 @@ class Division_Model extends CI_Model {
 			return false;
 	    }
    	} 
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get Leading Scorers
+	 *
+	 * Gets the leading scorer for 
+	 *
+	 */
+	function get_leading_scorers($leagueid = 1, $seasonid = 1) {
+
+		// Call stored procedure
+		$stored_procedure = "CALL get_lead_scorer(?, ?)";
+
+		// Peform query
+		$query = $this -> db -> query($stored_procedure, array($leagueid, $seasonid));
+
+	    // If query returns 1 or more results, return data as array, if query returns 0 rows, then return false
+	    if ($query -> num_rows() > 0) {
+	        foreach ($query -> result() as $row) {
+	            $data[] = $row;
+	        }
+	        return $data;
+	    }
+	    return false;		
+	}
 }

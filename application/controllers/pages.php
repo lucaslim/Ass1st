@@ -28,6 +28,9 @@ class Pages extends CI_Controller {
 		$this -> load -> model('Scorekeeper_Model');
 		$this -> load -> model('News_Model');
 
+		// Load Libraries	
+		$this -> load -> library('pagination');	
+
 		// Load Helpers
 		$this -> load -> helper('date');
 		$this -> load -> helper('template');
@@ -51,11 +54,17 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
 		$data['dob_year'] = get_birth_years(); //Get Birth Year
 		$data['dob_month'] = get_months_short(); //Get Birth Month
 		$data['dob_day'] = get_days(); //Get Birth Day
 		$data['news'] = $this -> News_Model -> get_news(5, 0); // retrieve news
 		$data['archive'] = "News Archive";
+
+		// Get leader stat data
+		$data['leadingscorers'] = $this -> Division_Model -> get_leading_scorers();
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
@@ -75,6 +84,9 @@ class Pages extends CI_Controller {
 	 */
 
 	function news($id = FALSE) {
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
@@ -111,6 +123,10 @@ class Pages extends CI_Controller {
 	 */
 
 	function standings($seasonid = '1', $leagueid = '1') {
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
 		$data['teams'] = $this -> Division_Model -> get_standings($seasonid, $leagueid); // retrieve teams
 
 		// provide a page title
@@ -126,6 +142,52 @@ class Pages extends CI_Controller {
 
 	// --------------------------------------------------------------------
 	/**
+	 * Schedule Page
+	 *
+	 * Displays the scheduled upcoming games
+	 *
+	 */
+
+	function schedule($seasonid = 1) {
+
+		// Configuration options for pagination
+		$config['base_url'] = base_url() . '/pages/schedule/' . $seasonid; 
+		$config['total_rows'] = $this -> Scorekeeper_Model -> game_count($seasonid); // Returns total rows
+		$config['per_page'] = 50; // Determines how many games per page
+		$config['uri_segment'] = 4; // 5th segment of the URI contains the page # (for ex. controller/function/seasonid/pagenumber)
+
+		// Initialize pagination using the $config options
+		$this -> pagination -> initialize($config); 
+
+		// Determine which page number we are on
+        $page = ($this -> uri -> segment(4)) ? $this -> uri -> segment(4) : 0;
+
+        // Load the results per page
+        $data['games'] = $this -> Scorekeeper_Model -> get_schedule($seasonid, $config['per_page'], $page);
+        
+        // Create the pagination links
+        $data['links'] = $this -> pagination -> create_links();
+
+        // Count total games
+        $data['totalrow'] = $this -> Scorekeeper_Model -> game_count($seasonid);       
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
+		// Provide a page title
+		$data['title'] = "League Schedule";
+
+		// Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+
+		// Load the view
+		$this -> load -> view('templates/header', $data);
+		$this -> load -> view('pages/schedule.php', $data);
+		$this -> load -> view('templates/footer');
+	}	
+
+	// --------------------------------------------------------------------
+	/**
 	 * Team Profile
 	 *
 	 * Displays team by id
@@ -133,6 +195,10 @@ class Pages extends CI_Controller {
 	 */
 
 	function team($id) {
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
 		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 
@@ -156,6 +222,10 @@ class Pages extends CI_Controller {
 	 */
 
 	function player($id) {
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+		
 		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 

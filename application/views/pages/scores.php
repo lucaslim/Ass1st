@@ -8,7 +8,7 @@
 
 		<!-- Place Main Content Here -->
 		<div id="leftContent" class="span7">
-			<h1 style="margin-bottom: 35px;">Scores for <?php echo date('F d, Y'); ?></h1>
+			<legend>Scores for <?php echo date('F d, Y'); ?></legend>
 
 			<?php if($games != FALSE) : ?>
 				<?php foreach($games as $game) : ?>

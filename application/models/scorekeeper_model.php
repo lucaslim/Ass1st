@@ -29,6 +29,7 @@ class Scorekeeper_Model extends CI_Model {
 
 		// Load helpers
 		$this -> load -> helper('url');
+		$this -> load -> helper('scoring');
 	}
 
 	// --------------------------------------------------------------------
@@ -69,6 +70,46 @@ class Scorekeeper_Model extends CI_Model {
 	        	// get the scores for home and away
 	            $row -> HomeScore = $this -> get_team_score($gameid, $home);
 	            $row -> AwayScore = $this -> get_team_score($gameid, $away);
+
+	            $data[] = $row;
+	        }
+	        return $data;
+	    }
+	    return false;
+   	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Fetch Schedule
+	 *
+	 * Retrieves the listing of games from AllFixtures. Does not provide
+	 * scoring results.
+	 *
+	 */
+
+    public function get_schedule($seasonid, $limit, $start) {
+	    
+	    // Limit the Query based on parameters
+	    $this -> db -> limit($limit, $start);
+
+	    // If a season id is provided, use it in the query
+	    if ($seasonid != 0) 
+	    {
+			$this -> db -> where('SeasonId', $seasonid);
+	    }
+
+	    // Perform the query
+	    $query = $this -> db -> get('AllFixtures');
+
+	    // If query returns 1 or more results, return data as array
+	    // If query returns 0 rows, then return false
+	    if ($query -> num_rows() > 0) {
+	        foreach ($query -> result() as $row) {
+				$time = $row -> Time;
+				$date = $row -> Date;
+
+				$row -> Time = convert_time($time);
+				$row -> Date = convert_date_to_mmdd($date);
 
 	            $data[] = $row;
 	        }

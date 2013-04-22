@@ -152,3 +152,29 @@ function convert_date_to_daymmdd($date) {
 
 	return $date;
 }
+
+// --------------------------------------------------------------------
+/**
+ * Convert Date to: MM/DD
+ *
+ * Takes date as input and converts it to: Monday 04/20
+ *
+ */
+function convert_date_to_mmdd($date) {
+	$date = date('m/d', strtotime($date));
+
+	return $date;
+}
+
+// --------------------------------------------------------------------
+/**
+ * Convert Time from 00:00:00 to 00:00 AM/PM
+ *
+ * Takes date as input and converts it to: Monday 04/20
+ *
+ */
+function convert_time($time) {
+	$date = date('g:i A', strtotime($time));
+
+	return $date;
+}
