@@ -31,8 +31,14 @@
 <img id="displayImage" src="<?php echo base_url();?>/uploads/blank_avatar.png" alt="your image" />
 
 <br /><br />
-
 <input type="file" name="userfile" size="20" onchange="readURL(this);" /> <br />
+
+
+
+Slider Position: <select name="Id"><?php for ($i=1; $i<5; $i++){ echo "<option value='" . $i . "'>" . $i . "</option>";} ?></select>
+<!--<input type="text" name="Id" />-->
+<br/><br />
+
 Image Title: <input type="text" name="imageTitle" /> <br />
 Image Description: <textarea name="imageDescription" ></textarea> <br />
 Image Main URL: <input type="text" name="imageUrlMain" width="50px" /> <br />

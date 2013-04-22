@@ -229,7 +229,7 @@
                             </ul>                                                  
                         </div>   
                         <div class="span4">
-                            <form class="form-search pull-right">
+                            <form class="form-search pull-right" method="post" action="<?php echo base_url(); ?>search">
                               <div class="input-prepend">
                                 <button type="submit" class="btn">Search</button>
                                 <input type="text" class="span2 search-query">
