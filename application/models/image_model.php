@@ -49,7 +49,7 @@ if (!defined('BASEPATH'))
 			$data = array('Image' => $image, 'Title' => $imageTitle, 'Description' => $imageDescription, 'Urlmain' => $imageUrlMain, 'link2title' => $imageLink2Title, 'Link2' =>  $imageLink2Url, 'Link3title' => $imageLink3Title, 'Link3' => $imageLink3Url, 'Link4title' => $imageLink4Title, 'Link4' => $imageLink4Url );
 		
 
-			$this->db->insert('Slideshow',$data);
+			$this->db->insert('MediaSlider',$data);
 
 		}
 	}
