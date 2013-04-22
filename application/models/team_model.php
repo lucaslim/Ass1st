@@ -51,5 +51,23 @@ class Team_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
+
+	/**
+	 * Get all teams
+	 *
+	 * This function will make sure that at least one value is return
+	 * upon querying the database. If not it will return false.
+	 *
+	 */
+
+	function get_teams_by_user_id($user_id) {
+		$this -> db -> where('UserId', $user_id);
+		$query = $this -> db -> get('AllRosters');
+
+		return $query -> result();
+	}
+
+	// --------------------------------------------------------------------
+
 }
 ?>

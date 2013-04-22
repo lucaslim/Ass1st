@@ -41,7 +41,7 @@ class User_Model extends CI_Model {
 
 	function authenticate_user($email, $password) {
 
-		$this -> db -> select('Id, FullName');
+		$this -> db -> select('Id, FullName, Picture');
 		$this -> db -> from('AllUsers');
 		$this -> db -> where('Email', $email);
 		$this -> db -> where('Password', do_hash($password, 'md5'));

@@ -12,7 +12,7 @@ session_start();
  */
 
 // --------------------------------------------------------------------
-//WARNING: MONKEY VIRUS IS ATTACKING
+
 class Login extends CI_Controller {
 
 	/**
@@ -22,12 +22,10 @@ class Login extends CI_Controller {
 	 *
 	 */
 
-		//I LOVE YELLOW MONKEYS I WISH ALL MONKEYS WERE YELLOW SO I COULD LOVE THEM ALL
 	function __construct() {
 		parent::__construct();
 
 		//Load Login Helper
-		//for monkeys
 		$this -> load -> helper('login_helper');
 
 		//Redirect if user is logged in
@@ -93,9 +91,7 @@ class Login extends CI_Controller {
 			// Redirect('login');
 
 		} else {
-			echo json_encode(array("success" => true));
-
-			Redirect(base_url());
+			header('location: '. base_url());
 		}
 	}
 
@@ -110,7 +106,6 @@ class Login extends CI_Controller {
 	 *
 	 */
 
-		//I LOVE YELLOW MONKEYS I WISH ALL MONKEYS WERE YELLOW SO I COULD LOVE THEM ALL
 	function validate_user($password) {
 		$email = $this -> input -> post('email');
 
@@ -121,7 +116,9 @@ class Login extends CI_Controller {
 
 			$sess_array = array(
 				'id' => $result -> Id,
-				'fullname' => $row -> FullName,
+				'fullname' => $result -> FullName,
+				'picture' => $result -> Picture,
+				'team' => $this -> get_user_teams($result -> Id)
 				);
 
 			$this -> session -> set_userdata('authorized', $sess_array);
@@ -131,6 +128,23 @@ class Login extends CI_Controller {
 			$this -> form_validation -> set_message('authenticate_user', 'Invalid username or password');
 			return FALSE;
 		}
+	}
+
+	function get_user_teams($user_id) {
+		$this -> load -> model('Team_Model', 'team');
+
+		$result = $this -> team -> get_teams_by_user_id($user_id);
+
+		if($result){
+			$team_id = array();
+			foreach ($result as $value) {
+				array_push($team_id, $value -> TeamId);
+			}
+
+			return $team_id;
+		}
+
+		return null;
 	}
 
 	// --------------------------------------------------------------------
