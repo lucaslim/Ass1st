@@ -29,21 +29,22 @@ class Team_Model extends CI_Model {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Authenticates user based on given password and email address.
+	 * Get all teams
 	 *
 	 * This function will make sure that at least one value is return
 	 * upon querying the database. If not it will return false.
 	 *
 	 */
 
-	function get_all_teams() {
+	function get_all_teams_by_league_id($league_id) {
 
 		$this -> db -> select('Id, Name, ArenaId');
-		$this -> db -> where('LeagueId' , 1);
+		$this -> db -> where('LeagueId' , $league_id);
+		$this -> db -> order_by('Name', 'Asc');
 		$query = $this -> db -> get('AllTeams');
 
 		if ($query -> num_rows() > 0) {
-			return $query -> result_array() ;
+			return $query -> result() ;
 		} else {
 			return false;
 		}
