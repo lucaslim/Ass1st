@@ -46,6 +46,7 @@ class Media extends Admin_Controller {
 		$this->load->library('upload', $config);
 
 		//filling the data
+		$id = $this->input->post('Id');
 		$imgTitle = $this->input->post('imageTitle');
 		$imgDesc = $this->input->post('imageDescription');
 		$imgMainUrl = $this->input->post('imageUrlMain');
@@ -68,7 +69,7 @@ class Media extends Admin_Controller {
 		{
 			$data = array('upload_data' => $this->upload->data());
 
-			$this->image_model->edit_sliderimage($_FILES['userfile']['name'],$imgTitle,$imgDesc,$imgMainUrl,$img2ndTitle,$img2ndLink,$img3rdTitle,$img3rdLink,$img4thTitle,$img4thLink);
+			$this->image_model->edit_sliderimage($id,$_FILES['userfile']['name'],$imgTitle,$imgDesc,$imgMainUrl,$img2ndTitle,$img2ndLink,$img3rdTitle,$img3rdLink,$img4thTitle,$img4thLink);
 			// $this->image_model->edit_image($user_data['id'],$_FILES['userfile']['name']);
 
 			$this->load->view('media_success_view', $data);
