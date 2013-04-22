@@ -30,6 +30,7 @@ class Media extends Admin_Controller {
 	 *
 	 */
 	function index() {
+
 		$this -> load -> view('admin/template/header');
 		$this -> load -> view('admin/media_view');
 		$this -> load -> view('admin/template/footer');
