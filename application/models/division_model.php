@@ -107,10 +107,13 @@ class Division_Model extends CI_Model {
 	 * Retrieves the standings for the various divisions
 	 *
 	 */
-	function get_standings($seasonid, $leagueid) {
+	function get_standings($seasonid, $leagueid, $divisionid = '') {
 
 		$this -> db -> where('SeasonId', $seasonid);
 		$this -> db -> where('LeagueId', $leagueid);
+
+		if($divisionid != '')
+			$this -> db -> where('DivisionId', $divisionid);
 
 		$query = $this -> db -> get('AllTeamStandings');
 

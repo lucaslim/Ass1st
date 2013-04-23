@@ -118,6 +118,29 @@ class Scorekeeper_Model extends CI_Model {
 	    return false;
    	}
 
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Get Attendance based on User Id
+	 *
+	 * This will return the information based on the selected Id
+	 *
+	 */
+	function get_MatchAttendance_for_player($game, $player) {
+		//Set where clause
+		$this -> db -> where('MatchFixtureId', $game);
+		$this -> db -> where('UserId', $player);
+		
+		//Execute select statement
+		$query = $this -> db -> get("MatchAttendance");
+
+		//Check if any rows returned
+		if (!$query || $query -> num_rows() <= 0)
+			return FALSE;
+
+		return $query -> row('Attendance');
+	}	   	
+
 	// --------------------------------------------------------------------
 	/**
 	 * Fetch Schedule By Tean
@@ -126,7 +149,7 @@ class Scorekeeper_Model extends CI_Model {
 	 *
 	 */
 
-    public function get_schedule_by_team($teamid, $seasonid, $limit) {
+    public function get_schedule_by_team($teamid, $seasonid, $limit, $player) {
 
 	    // Set where clause
 		$sql = 'SELECT * FROM teamassist13.AllFixtures WHERE SeasonId = ? AND (HomeTeamId =  ? OR AwayTeamId = ?) AND Date >= CURDATE() LIMIT ?';
@@ -140,7 +163,9 @@ class Scorekeeper_Model extends CI_Model {
 	        foreach ($query -> result() as $row) {
 				$time = $row -> Time;
 				$date = $row -> Date;
-
+				$game = $row -> Id;
+				
+				$row -> MatchAttendance = $this -> get_MatchAttendance_for_player($game, $player);
 				$row -> Time = convert_time($time);
 				$row -> Date = convert_date_to_mmdd($date);
 
@@ -484,6 +509,26 @@ class Scorekeeper_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 	/**
+	 * Get Player Stats
+	 *
+	 * Gets the stats for a player id
+	 *
+	 */
+
+	public function get_player_stats($player, $seasonid) {         
+
+		$data = array(
+			"GP" => $this -> get_games_played($player, $seasonid), 
+			"Goals" => $this -> get_player_goals($player, $seasonid), 
+			"Assists" => $this -> get_player_assists($player, $seasonid), 
+			"PIM" => $this -> get_player_pim($player, $seasonid)
+		);
+
+		return $data;
+	}   	
+
+	// --------------------------------------------------------------------
+	/**
 	 * Get Player Goals
 	 *
 	 * Gets the goals for the provided player, also takes an optional 
@@ -570,7 +615,7 @@ class Scorekeeper_Model extends CI_Model {
 	    if ($query -> num_rows() > 0) {
 	        return $query -> row('PenaltyMin');
 	    }
-	    return false;
+	    return 0;
 	} 		
 
 	// --------------------------------------------------------------------

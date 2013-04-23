@@ -35,6 +35,7 @@ class Pages extends CI_Controller {
 
 		// Load Helpers
 		$this -> load -> helper( 'date' );
+		$this -> load -> helper( 'login' );
 		$this -> load -> helper( 'template' );
 		$this -> load -> helper( 'scoring' );
 		$this -> load -> helper( array( 'form', 'url' ) );
@@ -93,7 +94,7 @@ class Pages extends CI_Controller {
 	 *
 	 */
 
-	function news( $id = FALSE ) {
+	function news( $id = '' ) {
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
@@ -101,7 +102,7 @@ class Pages extends CI_Controller {
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
-		if ( $id != FALSE ) {
+		if ( $id != '' ) {
 			$data['news'] = $this -> News_Model -> get_news_by_id( $id ); // retrieve news
 			$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news titles
 			$data['title'] = "View News Item";
@@ -136,7 +137,7 @@ class Pages extends CI_Controller {
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
-		$data['teams'] = $this -> Division_Model -> get_standings( $seasonid, $leagueid ); // retrieve teams
+		$data['teams'] = $this -> Division_Model -> get_standings($seasonid, $leagueid); // retrieve teams
 
 		// provide a page title
 		$data['title'] = "League Standings";
@@ -231,27 +232,50 @@ class Pages extends CI_Controller {
 	 */
 	function user_profile() {
 
+		// Check user is logged in
+		if(!is_loggedin())
+			header('Location: ../');
+
+		// Load the chat data / functions 
+		$this-> load -> model('chat_model');
+		$data['user_id'] = $this -> session -> userdata('authorized');
+		$user_data = $this -> session -> userdata('authorized');
+		$data['chat_id'] = $user_data['team'][0];
+		$this -> session -> set_userdata('last_chat_message_id_' . $data['chat_id'], 0);		
+
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();		
 
 		// Get user data from session
 		$user_data = $this -> session -> userdata('authorized');
-		$user_id = $user_data['id'];
+		$playerid = $user_data['id'];
+
+		// Hard code season id for now
+		$seasonid = 1;
 
 		// Get user team info
-		$user_team_data = $this -> Division_Model -> get_user_teams($user_id);
+		$user_team_data = $this -> Division_Model -> get_user_teams($playerid);
 		$teamid = $user_team_data -> TeamId;
-		
-		// Get team schedule, limit 15 results
-		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_by_team($teamid, 1, 10);
-
 		$data['team'] = $this -> Division_Model -> get_team_by_id($teamid); // retrieve team info
-		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($teamid); // retrieve team roster
+		$divisionid = $data['team'] -> DivisionId;
+		$leagueid = $data['team'] -> LeagueId;
+
+		// Get user stats info
+		$data['statistics'] = $this -> Scorekeeper_Model -> get_player_stats($playerid, $seasonid);
+
+		// Get team schedule, limit 15 results
+		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_by_team($teamid, $seasonid, 10, $playerid);
+
+		// Get team standings for the division
+		$data['standings'] = $this -> Division_Model -> get_standings($seasonid, $leagueid, $divisionid);
+
+		// Get latest news
+		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news title
 
 		// Provide a page title
 		$data['title'] = "User Profile";
 
-		//Check if logged in
+		// Check if logged in, show header based on login
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		$this -> load -> view( 'templates/header', $data );
@@ -367,7 +391,7 @@ class Pages extends CI_Controller {
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'pages/stats.php', $data );
 		$this -> load -> view( 'templates/footer' );
-	}
+	}	
 
 }
 ?>

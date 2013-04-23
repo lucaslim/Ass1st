@@ -46,7 +46,8 @@ function set_oauth_data($id, $username) {
 function set_session_data($id, $full_name, $picture = NULL) {
 	return array('id' => $id,
 				 'fullname' => $full_name,
-				 'picture' => $picture);
+				 'picture' => $picture,
+				 'team' => get_user_teams( $id ));
 }
 
 // --------------------------------------------------------------------
@@ -78,4 +79,23 @@ function is_twitter_authenticating() {
 }
 
 // --------------------------------------------------------------------
+
+function get_user_teams( $user_id ) {
+		$CI =& get_instance();
+
+		$CI -> load -> model( 'Team_Model', 'team' );
+
+		$result = $CI -> team -> get_teams_by_user_id( $user_id );
+
+		if ( $result ) {
+			$team_id = array();
+			foreach ( $result as $value ) {
+				array_push( $team_id, $value -> TeamId );
+			}
+
+			return $team_id;
+		}
+
+		return null;
+	}
 ?>

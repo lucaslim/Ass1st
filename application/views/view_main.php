@@ -75,7 +75,7 @@ text-align:center;
 
 
 </div>
-<?php $this->load->view($page_content); ?>
+
 
 <div id="footer">
 

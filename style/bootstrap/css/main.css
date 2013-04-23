@@ -70,7 +70,7 @@ li [class^="icon-"].icon-large,.nav li [class^="icon-"].icon-large,li [class*=" 
 .attendance_yes_check{color:green;}
 .fixedToTopNav{position:fixed;z-index:99999999;width:100%;}
 .navbar{margin-bottom:0px !important;}
-#ppp_content_container section{margin:25px 0;}
+#ppp_content_container section{padding:50px 0 0 0;}
 #teamBanner{height:250px;border:4px solid black;width:1152px;background-image:url('../../../assets/images/banner/ice.jpg');}#teamBanner .transparent-ice{width:100%;opacity:0.4;}
 #teamBanner .secondary-ice{height:26px;}
 #teamBanner .main-ice{height:60px;}

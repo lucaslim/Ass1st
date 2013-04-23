@@ -24,7 +24,7 @@
 							<td><?php echo $player['GP']; ?></td>
 							<td><?php echo $player['Goals']; ?></td>
 							<td><?php echo $player['Assists']; ?></td>
-							<td><?php if($player['PIM'] != FALSE) { echo $player['PIM']; } else { echo "0"; } ?></td>
+							<td><?php echo $player['PIM']; ?></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
