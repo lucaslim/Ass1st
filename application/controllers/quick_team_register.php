@@ -133,7 +133,7 @@ class Quick_Team_Register extends CI_Controller {
 		$this -> load -> view( 'pages/team_registration.php', $data );
 		$this -> load -> view( 'templates/footer' );
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -210,9 +210,9 @@ class Quick_Team_Register extends CI_Controller {
 					$this -> session -> unset_userdata('teamdata');
 
 					//set variables for invite page
-					$this -> session -> userdata('invitedata', array("team_id" => $return_id));
+					$this -> session -> set_userdata('invitedata', array("team_id" => $return_id));
 
-					header('location: invite');
+					header('location: '. base_url() . 'pages/invite_user');
 				}
 			}
 

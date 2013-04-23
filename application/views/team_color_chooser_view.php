@@ -6,9 +6,9 @@
 		.swatch {
 			width: 100%;
 			height: 100px;
-			-moz-border-radius: 10px;
-			-webkit-border-radius: 10px;
-			border-radius: 10px;
+			border-radius: 0 80px 0 80px;
+			-moz-border-radius: 0 80px 0 80px;
+			-webkit-border-radius: 0 80px 0 80px;;
 		}
 		#redP .ui-slider-range { background: #ef2929; }
 		#redP .ui-slider-handle { border-color: #ef2929; }
@@ -31,11 +31,9 @@
 		#blueT .ui-slider-range { background: #729fcf; }
 		#blueT .ui-slider-handle { border-color: #729fcf; }
 </style>
-<div id="ppp_content_container" class="span9">
 	<section id="colorSelector">
-		<h4>
-			Color Selector
-		</h4><!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
+		<h4></h4>
+		<!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
 		<!-- //////////////// STYLE //////////////   -->
 		<!-- ///////////////////// Script //////////////   -->
 		<script typevar TPrimG = '="text/javascript"'>
@@ -170,7 +168,7 @@
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#displayImage').attr('src', e.target.result);
+                    $('.displayImage').attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(input.files[0]);
@@ -201,9 +199,14 @@
 			</div>
 			<div class="color-none-bottom"></div>
 		</div>
-		<br />
+		<h3>
+			Select Team Colors
+		</h3>
 		<div class="row-fluid">
 			<div class="span4 text-center">
+				<h4>
+					Primary Color
+				</h4>
 				<div id="swatchP" class="swatch" style="border: solid black 1px;"></div>
 				<div id="redP"></div>
 				<div id="greenP"></div>
@@ -213,6 +216,9 @@
 				</div>
 			</div>
 			<div class="span4 text-center">
+				<h4>
+					Secondary Color
+				</h4>
 				<div id="swatchS" class="swatch" style="border: solid black 1px;"></div>
 				<div id="redS"></div>
 				<div id="greenS"></div>
@@ -222,6 +228,9 @@
 				</div>
 			</div>
 			<div class="span4 text-center">
+				<h4>
+					Tertiary Color
+				</h4>
 				<div id="swatchT" class="swatch" style="border: solid black 1px;"></div>
 				<div id="redT"></div>
 				<div id="greenT"></div>
@@ -258,13 +267,31 @@
 			<?php endif ?>
 			<?php if($default["ShowUpdate"]): ?>
 			</form>
-		<?php endif ?>
+			<?php endif ?>
+			
+			<div style="margin-top:175px;"><h3>
+				Upload Photo
+			</h3></div>
+		 	<div>
+            	<input type="file" name="userfile" id="userfile" size="20" onchange="readURL(this);" />
+        	</div>
 			<div class="span4">
-	            <img id="displayImage" src="" alt="your image" />
-
-	            <br /><br />
-	            <input type="file" name="userfile" id="userfile" size="20" onchange="readURL(this);" /> <br />
-	        </div> 
+	           	<div class="visible-desktop hidden-phone visible-tablet" style="position:relative; top:-703px; z-index:1;">
+	            	<img class="displayImage" src="" alt="Upload Your Team Logo" style="-webkit-filter: drop-shadow(-3px 3px 1px #2F2F2F);
+																		            	min-height: 235px;
+																					    min-width: 235px;
+																					    max-height: 235px;
+																					    max-width: 235px;
+																					    margin: 6px 0;" />
+	            </div>
+	            <div class="visible-phone hidden-tablet hidden-desktop" style="position:relative; z-index:1;">
+	            	<img class="displayImage" src="" alt="Upload Your Team Logo" style="-webkit-filter: drop-shadow(-3px 3px 1px #2F2F2F);
+																		            	min-height: 235px;
+																					    min-width: 235px;
+																					    max-height: 235px;
+																					    max-width: 235px;
+																					    margin: 6px 0;" />
+	            </div>
+	        </div>
 		</div>
 	</section>
-</div>

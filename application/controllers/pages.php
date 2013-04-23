@@ -393,5 +393,86 @@ class Pages extends CI_Controller {
 		$this -> load -> view( 'templates/footer' );
 	}	
 
+	// --------------------------------------------------------------------
+	/**
+	 * Invite Users
+	 *
+	 * Invite users to the team
+	 *
+	 */
+
+	function invite_users() {
+
+		$this -> session -> set_userdata( 'invitedata', array( "team_id" => 36 ) );
+		$invite_data = $this -> session -> userdata["invitedata"];
+
+		//Get total number of rows
+		$total_rows = $this -> User_Model -> get_all_eligible_users_for_team_count( $invite_data["team_id"] );
+
+		//Set pagination data
+		$data = get_pagination_data( "pages/invite_users", $total_rows );
+
+		//set data
+		$data['results'] = $this -> User_Model -> get_all_eligible_users_for_team( $invite_data["team_id"], $data['per_page'], $data['current_page'] );
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
+		// Provide a page title
+		$data['title'] = "Invite Users";
+
+		// Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+
+		$data['team_data'] = $this -> Team_Model -> get_team_by_id($invite_data["team_id"]);
+
+		//load view
+		$this -> load -> view( 'templates/header', $data );
+		$this -> load -> view( 'pages/invite_users.php', $data );
+		$this -> load -> view( 'templates/footer' );
+	}
+
+
+
+	// --------------------------------------------------------------------
+	/**
+	 * Invite Users
+	 *
+	 * Invite users to the team
+	 *
+	 */
+
+	function send_invite() {
+		$checkbox_list = $this -> input -> post( 'select' );
+
+		$this -> load -> library( 'email' );
+
+		$config['protocol'] = 'sendmail';
+		$config['mailpath'] = '/usr/sbin/sendmail';
+		$config['charset'] = 'iso-8859-1';
+		$config['wordwrap'] = TRUE;
+
+		$this -> email -> initialize( $config );
+
+		foreach ( $checkbox_list as $value ) {
+			$result = $this -> User_Model -> get_user_by_id( $value );
+
+			if ( $result ) {
+				$email = $result -> Email;
+
+				if ( isset( $email ) && !empty( $email ) ) {
+					$this -> email -> from( $email );
+					$this -> email -> to( $email );
+					$this -> email -> subject( 'You have been invited to join '  );
+					$this -> email -> message( 'testing' );
+
+					$send_email = $this -> email -> send();
+					var_dump( $email );
+					var_dump( $send_email );
+				}
+			}
+		}
+	}
+
 }
 ?>

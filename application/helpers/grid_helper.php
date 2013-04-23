@@ -22,15 +22,38 @@ function get_row_count( $table_name, $option = null ) {
 	$CI = &get_instance();
 
 	if ( isset( $option ) ) {
+
+		//Set column names
+		if ( isset( $option['column_names'] ) ){			
+			$CI -> db -> select( $option['column_names'] );
+		}
+
+		//Set distinct
+		if ( isset( $option['distinct'] ) ) {
+
+			if ( $option['distinct'] ) {
+				$CI -> db -> distinct();
+			}
+		}
+
 		//Set Where Clause
 		if ( isset( $option['where'] ) ) {
-			foreach ( $option['where'] as $column_name => $value ) {
-				$CI -> db -> where( $column_name, $value );
+			if ( is_array( $option['where'] ) ) {
+				foreach ( $option['where'] as $column_name => $value ) {
+					$CI -> db -> where( $column_name, $value );
+				}
+			}
+			else {
+				$CI -> db -> where( $option['where'] );
 			}
 		}
 	}
 
-	return $CI -> db -> count_all( $table_name );
+	// $result = $CI -> db -> get( $table_name );
+
+	// return $result -> num_rows());
+
+	return $CI -> db -> count_all_results( $table_name );
 }
 
 // --------------------------------------------------------------------
@@ -53,9 +76,18 @@ function get_result( $option ) {
 	//Create a new instance of CI
 	$CI = &get_instance();
 
+	//Set distinct
+	if ( isset( $option['distinct'] ) ) {
+
+		if ( $option['distinct'] ) {
+
+			$CI -> db -> distinct();
+		}
+	}
+
 	//Set column names
 	if ( isset( $option['column_names'] ) )
-		$CI -> db -> select( $column_names );
+		$CI -> db -> select( $option['column_names']  );
 
 	//Set the limit on the database query
 	if ( isset( $option['start_number'] ) && isset( $option['total_number'] ) )
@@ -72,8 +104,13 @@ function get_result( $option ) {
 	}
 
 	if ( isset( $option['where'] ) ) {
-		foreach ( $option['where'] as $column_name => $value ) {
-			$CI -> db -> where( $column_name, $value );
+		if ( is_array( $option['where'] ) ) {
+			foreach ( $option['where'] as $column_name => $value ) {
+				$CI -> db -> where( $column_name, $value );
+			}
+		}
+		else {
+			$CI -> db -> where( $option['where'] );
 		}
 	}
 

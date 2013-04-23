@@ -230,7 +230,7 @@ class User_Model extends CI_Model {
 	 *
 	 *
 	 */
-	function edit_user($id) {
+	function edit_user($id,$pic) {
 		$this -> db -> set('FirstName', $_POST['fname']);
 		$this -> db -> set('LastName', $_POST['lname']);
 		$this -> db -> set('Email', $_POST['email']);
@@ -242,6 +242,7 @@ class User_Model extends CI_Model {
 		$this -> db -> set('PostalCode', $_POST['pcode']);
 		$this -> db -> set('ContactNumber', $_POST['phone1']);
 		$this -> db -> set('OtherNumber', $_POST['phone2']);
+		$this -> db -> set('Picture', $pic);
 		$this -> db -> where('Id', $id);
 		$this -> db -> update('User');
 	}
@@ -398,6 +399,43 @@ class User_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
+
+	/**
+	 *
+	 * Get Users with League and Division
+	 *
+	 * Check if twitter id is attached to any user account
+	 *
+	 */
+
+	function get_all_eligible_users_for_team($team_id, $total_num, $start_num) {
+		$this -> load -> model('Team_Model');
+
+		$team_data = $this -> Team_Model -> get_team_by_id($team_id);
+
+		$option = array( 'table_name' => 'AllUsersWithLeagueDivision',
+			'start_number' => $start_num,
+			'total_number' => $total_num,
+			'column_names' => 'UserId, FullName, Email',
+			'distinct' => true,
+			'order_by' => array( 'FullName' => 'asc' ),
+			'where' => "TeamId != " . $team_id . ' OR TeamId IS NULL AND LeagueId != ' . $team_data -> LeagueId . ' OR LeagueId IS NULL');
+
+		return get_result( $option );
+	}
+
+	// --------------------------------------------------------------------
+
+	function get_all_eligible_users_for_team_count($team_id) {
+		$this -> load -> model('Team_Model');
+
+		$team_data = $this -> Team_Model -> get_team_by_id($team_id);
+
+		$option = array('column_names' => 'UserId, FullName, Email',
+			'distinct' => true, 'where' => "TeamId != " . $team_id . ' OR TeamId IS NULL AND LeagueId != ' . $team_data -> LeagueId . ' OR LeagueId IS NULL' );
+
+		return get_row_count( "AllUsersWithLeagueDivision", $option );
+	}
 
 }
 ?>
