@@ -6,7 +6,7 @@
 	====================================================================== -->
 	<div class="row-fluid">
 
-		<div id="leftContent" class="span7">
+		<div id="leftContent" class="span8">
 			<div class="newsDisplay">
 				<legend>Latest Headlines</legend>
 				<div id="top" class="newsDisplay">
@@ -24,8 +24,24 @@
 			</div>
 		</div>
 
-		<div id="rightContent" class="span5">
-			<h3>Right Sidebar</h3>
+		<div id="rightContent" class="newsSidebar span4">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Latest Headlines</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach($headlines as $news_item): ?>
+				    <tr>
+				    	<td style="font-weight: 200;">
+				    		<a href="<?php echo site_url(); ?>/pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a><br />
+				    		<small style="font-size: .8em;">Posted: <?php echo $news_item -> PostDate; ?></small>
+				    	</td>
+				    </tr>
+				<?php endforeach ?>
+				</tbody>
+			</table>
 		</div>
 
 	</div>

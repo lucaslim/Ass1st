@@ -7,7 +7,19 @@
 	<div class="row-fluid">
 		
 		<div class="span12">
-
+<!-- 			<div id="ppp_teamBanner" >
+				<div id="ppp_tb_holder">
+					<img class="ppp_tb_background" src="../../assets/images/banner/ice.jpg" />
+					<div id="ppp_tb_team_color_bar_one" style="background-color:#17854b;" ></div>
+					<div id="ppp_tb_team_color_bar_two" style="background-color:#152a51;" ></div>
+					<div id="ppp_tb_team_color_bar_three" style="background-color:#17854b;" ></div>
+					<img class="ppp_tb_bg_overlay" src="../../assets/images/banner/ice_overlay.jpg" />
+					<div id="ppp_tb_team_name_color" style="color: #fff;">
+						<?php echo $full_name; ?>
+					</div>
+				</div>
+			</div> -->
+			
 			<div id="teamBanner">
 				<div class="color-none-top"></div>
 				<!--Secondary Color - Import - 17854b -->
