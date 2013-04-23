@@ -14,8 +14,8 @@
 				<?php echo $full_name; ?> <b class="caret white-caret"></b>
 			</a>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-				<li><a href="<?php base_url(); ?>pages/user_profile">My Profile</a></li>
-				<li><a href="#">Edit Profile</a></li>
+				<li><a href="<?php echo base_url(); ?>pages/user_profile">My Profile</a></li>
+				<li><a href="<?php echo base_url(); ?>edit_profile">Edit Profile</a></li>
 				<li class="divider"></li>
 				<li><a href="<?php echo base_url(); ?>logout">Log Out</a></li>
 			</ul>

@@ -320,7 +320,7 @@ class Pages extends CI_Controller {
 
 	function boxscore( $gameid ) {
 		// Redirect if no id provided
-		if ( !isset( $gameid ) )
+		if (!isset($gameid))
 			header( 'Location: ../scores' );
 
 		// Get game info

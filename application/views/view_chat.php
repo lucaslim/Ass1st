@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url(); ?>script/chat.js"></script>
+
 <script type="text/javascript">
 
 var chat_id = "<?php echo $chat_id; ?>";
@@ -11,9 +13,8 @@ var user_id = "<?php echo $user_id; ?>";
 div#chat_viewport {
 	font-family:Verdana, Arial, sans-serif;
 	padding:5px;
-	min-height:300px;
 	color:black;
-	max-height:650px;
+	height:350px;
 	overflow:auto;
 	margin-bottom:10px;
 	width:100%;
@@ -65,12 +66,13 @@ div#chat_viewport ul li.by_current_user span.chat_message_header {
 
 </style>
 
-<div id="chat_viewport">
-
-</div>
-
 <div id="chat_input">
 	<input id="chat_message" name="chat_message" type="text" value="" tabindex="1" />
 	<?php echo anchor('#', 'Say it', array('title' => 'Send this chat message', 'id' => 'submit_message'));?>
 	<div class="clearer"></div>
 </div>
+
+<div id="chat_viewport">
+</div>
+
+

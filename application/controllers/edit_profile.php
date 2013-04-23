@@ -29,17 +29,16 @@
 			$data['base']=$this->config->item('base_url');
 			$data['title'] = 'Edit Profile';
 			
-
-			//Check if logged in
-			if (! $this->session->userdata('authorized')) 
-			{
-				redirect('index.php');
-			}
+			// Check user is logged in
+			if(!is_loggedin())
+				header('Location: /');
 
 			$data['login_header'] = set_login_header();//get from template_helper.php
 			
 			$user_data = $this->session->userdata('authorized');//stores the information array for the user into $user_data
 			
+			// Get live scoring
+			$data['livescores'] = $this -> Division_Model -> get_live_scores();			
 			
 			$data['query']=$this->user_model->get_user_by_id($user_data['id']);
 
