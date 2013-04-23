@@ -7,7 +7,7 @@
 	<div class="row-fluid">
 
 		<!-- Place Main Content Here -->
-		<div id="leftContent" class="span7">
+		<div id="leftContent" class="span8">
 			<legend>Scores for <?php echo date('F d, Y'); ?></legend>
 
 			<?php if($games != FALSE) : ?>
@@ -91,7 +91,7 @@
 
 
 		<!-- Place Sidebar Content Here -->
-		<div id="rightContent" class="span5">
+		<div id="rightContent" class="span4">
 			<p>Empty</p>
 		</div>
 		

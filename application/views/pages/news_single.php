@@ -6,16 +6,15 @@
 	====================================================================== -->
 	<div class="row-fluid">
 
-		<div id="leftContent" class="span7">
+		<div id="leftContent" class="span8">
 			<div id="top" class="newsDisplay">
-				<h1><?php echo $news -> Title; ?></h1>
+				<legend><?php echo $news -> Title; ?></legend>
 				<p class="subtitle">
 					Posted By: <?php echo $news -> Author; ?> | Date Posted: <?php echo $news -> PostDate; ?>
 				</p>
 				<p>
 					<!-- Social Media Buttons -->
-					<div class="fb-like" data-href="<?php echo current_url(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
-					&nbsp;
+					<a style="top: -4px;" class="fb-like" data-href="<?php echo current_url(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></a>
 					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo current_url(); ?>" data-via="teamassist_" data-count="noneπ" data-lang="en">Tweet</a>
 				</p>
 				<?php echo $news -> Content; ?>
@@ -30,17 +29,24 @@
 			</div>
 		</div>
 
-		<div id="rightContent" class="newsSidebar span5">
-			<h2>Latest Headlines</h2>
-			<ul>
+		<div id="rightContent" class="newsSidebar span4">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Latest Headlines</th>
+					</tr>
+				</thead>
+				<tbody>
 				<?php foreach($headlines as $news_item): ?>
-
-				    <li>
-				    	<a href="<?php echo site_url(); ?>/pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
-				    </li>
-
+				    <tr>
+				    	<td style="font-weight: 200;">
+				    		<a href="<?php echo site_url(); ?>/pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a><br />
+				    		<small style="font-size: .8em;">Posted: <?php echo $news_item -> PostDate; ?></small>
+				    	</td>
+				    </tr>
 				<?php endforeach ?>
-			</ul>
+				</tbody>
+			</table>
 		</div>
 
 	</div>

@@ -7,13 +7,13 @@
 	<div class="row-fluid">
 
 		<!-- Place Main Content Here -->
-		<div id="leftContent" class="span7">
-			<h1>About</h1>
+		<div id="leftContent" class="span8">
+			<legend>About</legend>
 			<p>Currently under development</p>
 		</div>
 
 		<!-- Place Sidebar Content Here -->
-		<div id="rightContent" class="span5">
+		<div id="rightContent" class="span4">
 			<p>Empty</p>
 		</div>
 

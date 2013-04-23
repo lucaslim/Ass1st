@@ -149,56 +149,99 @@
         ====================================================================== -->
         <div id="bodyWrapper">
             <div class="contentWrapper">
+                <div style="background: black;">
                 <div class="container">
                     <div class="row">
-                        <div class="span12" style="margin-top: 15px; margin-bottom: 15px; overflow: hidden;">
+                        <div class="span12" style="margin-top: 15px; margin-bottom: 15px;">
                             <?php if($livescores != FALSE) : ?>
-                                <?php foreach($livescores as $score) : ?>
-                                    <div style="width: 120px; float: left; margin: 0.5%; padding: 0.5%; border: 1px solid black; -webkit-border-radius: 5px;">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <th colspan="2" style="text-align: left;">
-                                                        <small><?php echo $score['Date']; ?></small>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <th style="width: 90%; text-align: left;">
-                                                        <?php echo strtoupper(substr($score['HomeTeamName'], 0, 3)); ?>
-                                                    </th>
-                                                    <th>
-                                                        <?php echo $score['HomeTeamScore']; ?>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <th style="width: 90%; text-align: left;">
-                                                        <?php echo strtoupper(substr($score['AwayTeamName'], 0, 3)); ?>
-                                                    </th>
-                                                    <th>
-                                                        <?php echo $score['AwayTeamScore']; ?>
-                                                    </th>   
-                                                </tr>
-                                                <tr>
-                                                    <th colspan="2" style="text-align: left;">
-                                                        <?php if($score['Progress'] == 'false') : ?>
-                                                            <?php echo $score['Time']; ?>
-                                                        <?php else : ?>
-                                                            <?php echo $score['Progress']; ?>
-                                                        <?php endif; ?>
-                                                    </th>
-                                                </tr>                                                
-                                            </tbody>
-                                            
-                                        </table>
+                                <div id="arrowL">
+                                    <i class="icon-caret-left icon-large"></i>
+                                </div>
+                                <div id="arrowR">
+                                    <i class="icon-caret-right icon-large"></i>
+                                </div>
+                                <div id="liveScoresHeader">
+                                    <div class="liveScores">
+                                        <?php foreach($livescores as $score) : ?>
+                                            <div class="liveScoreItem">
+                                                <div class="boxScoreLink">Link</div>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th colspan="2" style="text-align: left;">
+                                                                <small style="font-weight: 200;"><?php echo $score['Date']; ?></small>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="width: 90%; text-align: left;">
+                                                                <?php echo strtoupper(substr($score['HomeTeamName'], 0, 3)); ?>
+                                                            </th>
+                                                            <th>
+                                                                <?php echo $score['HomeTeamScore']; ?>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="width: 90%; text-align: left;">
+                                                                <?php echo strtoupper(substr($score['AwayTeamName'], 0, 3)); ?>
+                                                            </th>
+                                                            <th>
+                                                                <?php echo $score['AwayTeamScore']; ?>
+                                                            </th>   
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="2" style="text-align: left;">
+                                                                <?php if($score['Progress'] == 'false') : ?>
+                                                                    <small style="font-weight: 200;"><?php echo $score['Time']; ?></small>
+                                                                <?php else : ?>
+                                                                    <small style="font-weight: 200;"><?php echo $score['Progress']; ?></small>
+                                                                <?php endif; ?>
+                                                            </th>
+                                                        </tr>                                                
+                                                    </tbody>
+                                                </table>                                                
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                <?php endforeach; ?>
+                                </div>                                
                             <?php else : ?>
                                 <p>There are no games scheduled today.</p>
-                            <?php endif; ?>
+                            <?php endif; ?>   
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
+
+            <!-- Begin Horizontal Scroll Script
+                    Adapted from: http://jsfiddle.net/mattblancarte/stfzy/21/ -->
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    
+                    var $item = $('div.liveScoreItem'), //Cache your DOM selector
+                        visible = 2, //Set the number of items that will be visible
+                        index = 0, //Starting index
+                        endIndex = ( $item.length / visible ) - 1; //End index
+                    
+                    $('div#arrowR').click(function(){
+                        if(index < endIndex ){
+                          index++;
+                          $item.animate({'left':'-=300px'});
+                        }
+                    });
+                    
+                    $('div#arrowL').click(function(){
+                        if(index > 0){
+                          index--;            
+                          $item.animate({'left':'+=300px'});
+                        }
+                    });
+                    
+                });
+            </script>
+
+            <!-- End Horizontal Scroll Script -->
+
 
             <div class="navi-menu hidden-phone">
                 <div class="container">
@@ -218,7 +261,7 @@
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/standings/">Standings</a>
                                 </li>
                                 <li>
-                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/index/stats/">Stats</a>
+                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/stats/">Stats</a>
                                 </li>
                                 <li>
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/news/">News</a>

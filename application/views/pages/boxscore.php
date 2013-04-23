@@ -2,10 +2,10 @@
 ====================================================================== -->
 <div id="contentBegin" class="container-fluid">
 
-			<div class="row-fluid">
+			<div class="row-fluid" id="boxscoreHeader">
 				<div class="span2">
 					<p class="text-center">
-						<img class="teamLogo" src="<?php echo base_url(); ?>assets/images/team-logos/<?php echo $hometeaminfo -> Picture; ?>" />
+						<img class="teamLogo" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $hometeaminfo -> Picture; ?>" />
 					</p>
 				</div>
 				<div class="span3">
@@ -29,7 +29,7 @@
 				</div>
 				<div class="span2">
 					<p class="text-center">
-						<img class="teamLogo" src="<?php echo base_url(); ?>assets/images/team-logos/<?php echo $awayteaminfo -> Picture; ?>" />
+						<img class="teamLogo" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $awayteaminfo -> Picture; ?>" />
 					</p>
 				</div>								
 			</div>	
@@ -42,7 +42,6 @@
 		<div class="span8">		
 
 			<legend>Scoring Summary</legend>
-			<?php if(isset($scoring)) : ?>
 				<table class="table table-hover">
 					<thead>
 						<th>Period</th>
@@ -54,7 +53,8 @@
 						<th>Strength</th>
 					</thead>
 					<tbody>
-						<?php foreach($scoring as $score) : ?>
+						<?php if(isset($scoring)) : ?>
+							<?php foreach($scoring as $score) : ?>
 							<tr>
 								<td><?php echo $score -> Period; ?></td>
 								<td><?php echo $score -> TeamName; ?></td>
@@ -64,15 +64,18 @@
 								<td><?php echo $score -> SecondaryAssistName; ?></td>
 								<td><?php echo $score -> Strength; ?></td>
 							</tr>
-						<?php endforeach; ?>
+							<?php endforeach; ?>
+						<?php else : ?>
+							<tr>
+								<td colspan="7">No penalties</td>
+							</tr>
+						<?php endif; ?>							
 					</tbody>
 				</table>
-			<?php else : ?>
-				<span class="lead">None</span>
-			<?php endif; ?>
+
 
 			<legend>Penalty Summary</legend>
-			<?php if(isset($penalties)) : ?>
+			
 				<table class="table table-hover">
 					<thead>
 						<th>Period</th>
@@ -83,7 +86,8 @@
 						<th>PIM</th>
 					</thead>
 					<tbody>
-					<?php foreach($penalties as $penalty_data) : ?>
+					<?php if($penalties != FALSE) : ?>
+						<?php foreach($penalties as $penalty_data) : ?>
 						<tr>
 							<td><?php echo $penalty_data -> Period; ?></td>
 							<td><?php echo $penalty_data -> TeamName; ?></td>
@@ -92,12 +96,14 @@
 							<td><?php echo $penalty_data -> PenaltyType; ?></td>
 							<td><?php echo $penalty_data -> PenaltyMin; ?></td>
 						</tr>
-					<?php endforeach; ?>
+						<?php endforeach; ?>
+					<?php else : ?>
+						<tr>
+							<td colspan="6">No penalties</td>
+						</tr>
+					<?php endif; ?>
 					</tbody>
-				</table>
-			<?php else : ?>
-				<span class="lead">None</span>
-			<?php endif; ?>	
+				</table>	
 
 			<legend><?php echo $hometeaminfo -> Name; ?> Stats</legend>
 			<?php if($gameinfo -> HomeRoster == 1) : ?>
