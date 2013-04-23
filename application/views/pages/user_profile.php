@@ -43,12 +43,13 @@
 				<li class="text-right">
 					<img class="team-logo" src="<?php echo base_url(); ?>/uploads/teamlogos/<?php echo $team -> Picture; ?>" />
 				</li>
-				<li style="margin-top: 25px;">
+				<li style="margin-top: 50px;">
 					<legend><?php echo $full_name; ?> <img class="img-player" src="<?php echo $picture; ?>"></legend>
 				</li>
 				<li>
 					<a href="#"><strong><?php echo $team -> Name; ?> </strong> <img class="img-team" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $team -> Picture; ?>" /></a>
 				</li>
+				<li><a href="#chat">Chat</a></li>
 				<li><a href="#schedule">Schedule</a></li>
 				<li><a href="#standings">Standings</a></li>
 				<li><a href="#stats">Stats</a></li>
@@ -59,9 +60,19 @@
 			</ul>
 		</div>
 
-				
-<!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
 		<div class="span9" id="ppp_content_container">
+
+			<script type="text/javascript">
+				var base_url = "<?php echo base_url();?>";
+				var chat_id;
+				var user_id;
+			</script>
+
+			<section id="chat">
+				<legend>Team Messages</legend>
+				<?php $this->load->view('view_chat'); ?>
+			</section>
+
 			<section id="schedule">
 				<legend>Schedule</legend>
 				<table class="table table-hover">
@@ -86,7 +97,16 @@
 									<td><a href="<?php echo base_url(); ?>pages/team/<?php echo $game -> AwayTeamId; ?>"><?php echo $game -> AwayTeamName; ?></a></td>
 									<td><?php echo $game -> ArenaName; ?></td>
 									<td><?php echo $game -> MatchTypeName; ?></td>
-									<td>Yes / No</td>
+									<td>
+										<?php if($game -> MatchAttendance == 'Yes') : ?>
+								            <input type="radio" id="attendance_yes" name="<?php echo $game -> Id; ?>" checked value="Yes" onclick="rsvp_attendance('<?php echo $game -> Id; ?>', this);"> Yes
+								            <input type="radio" id="attendance_no" name="<?php echo $game -> Id; ?>" value="No" onclick="rsvp_attendance('<?php echo $game -> Id; ?>', this);"> No										
+										<?php else : ?>
+								            <input type="radio" id="attendance_yes" name="<?php echo $game -> Id; ?>" value="Yes" onclick="rsvp_attendance('<?php echo $game -> Id; ?>', this);"> Yes
+								            <input type="radio" id="attendance_no" name="<?php echo $game -> Id; ?>" checked value="No" onclick="rsvp_attendance('<?php echo $game -> Id; ?>', this);"> No										
+										<?php endif; ?>
+							        	<!-- Set Match Fixture Id Dynamically -->
+									</td>
 								</tr>
 							<?php endforeach; ?>
 						<?php else : ?>
@@ -96,48 +116,87 @@
 						<?php endif; ?>
 					</tbody>
 				</table>
-			</section>
+			</section>			
 
 			<section id="standings">
 				<legend>Standings</legend>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
-				<p>
-					Maecenas ut varius sapien. Phasellus eu placerat neque. Integer sollicitudin urna sit amet felis dignissim sagittis. Vivamus bibendum interdum neque accumsan cursus. Quisque non est et ipsum consequat sollicitudin. Donec non augue non tortor accumsan molestie. Cras aliquam magna nec leo lacinia elementum. Cras elementum pretium nulla vel sollicitudin. In hac habitasse platea dictumst.
-				</p>
+				<table class="table table-hover">
+					<thead>
+						<th><?php echo $team -> DivisionName; ?> Division</th>
+						<th>GP</th>
+						<th>W</th>
+						<th>L</th>
+						<th>OT</th>
+						<th>P</th>
+						<th>GF</th>
+						<th>GA</th>
+						<th>DIFF</th>
+					</thead>
+					<tbody>
+					<?php if($standings != FALSE) : ?>	
+						<?php foreach($standings as $team) : ?>
+						<tr>
+							<td><a href="<?php echo base_url(); ?>pages/team/<?php echo $team -> Id; ?>"><?php echo $team -> Name; ?></a></td>
+							<td><?php echo $team -> GP; ?></td>
+							<td><?php echo $team -> Win; ?></td>
+							<td><?php echo $team -> Lost; ?></td>
+							<td><?php echo $team -> OvertimeLoss; ?></td>
+							<td><?php echo $team -> P; ?></td>
+							<td><?php echo $team -> GF; ?></td>
+							<td><?php echo $team -> GA; ?></td>
+							<td><?php echo $team -> DIFF; ?></td>
+						</tr>
+						<?php endforeach; ?>
+					<?php else : ?>
+						<tr>
+							<td colspan="9">No data available</td>
+						</tr>
+					<?php endif; ?>
+					</tbody>
+				</table>
 			</section>
 
 			<section id="stats">
-				<legend>Stats</legend>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
-				<p>
-					Maecenas ut varius sapien. Phasellus eu placerat neque. Integer sollicitudin urna sit amet felis dignissim sagittis. Vivamus bibendum interdum neque accumsan cursus. Quisque non est et ipsum consequat sollicitudin. Donec non augue non tortor accumsan molestie. Cras aliquam magna nec leo lacinia elementum. Cras elementum pretium nulla vel sollicitudin. In hac habitasse platea dictumst.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
+				<legend>My Player Statistics</legend>
+				<table class="table">
+					<thead>
+						<th>Games Played</th>
+						<th>Goals</th>
+						<th>Assists</th>
+						<th>Points</th>
+						<th>Penalties</th>
+					</thead>
+					<tbody>
+					<?php if($statistics != FALSE) : ?>	
+						<tr>
+							<td><?php echo $statistics['GP']; ?></td>
+							<td><?php echo $statistics['Goals']; ?></td>
+							<td><?php echo $statistics['Assists']; ?></td>
+							<td><?php echo $statistics['Goals'] + $statistics['Assists']; ?></td>
+							<td><?php echo $statistics['PIM']; ?></td>
+						</tr>
+					<?php else : ?>
+						<tr>
+							<td colspan="9">No data available</td>
+						</tr>
+					<?php endif; ?>
+					</tbody>
+				</table>
 			</section>
 
 			<section id="news">
-				<legend>News</legend>
-
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
-				<p>
-					Maecenas ut varius sapien. Phasellus eu placerat neque. Integer sollicitudin urna sit amet felis dignissim sagittis. Vivamus bibendum interdum neque accumsan cursus. Quisque non est et ipsum consequat sollicitudin. Donec non augue non tortor accumsan molestie. Cras aliquam magna nec leo lacinia elementum. Cras elementum pretium nulla vel sollicitudin. In hac habitasse platea dictumst.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec massa vel lectus placerat scelerisque at ut mi. Sed vulputate viverra odio, eget malesuada arcu vestibulum ut. Suspendisse hendrerit euismod bibendum. Nulla fermentum fringilla enim id interdum. Curabitur eu elit sit amet neque suscipit fringilla vitae eget purus. Morbi et congue tellus. Donec facilisis nunc at nunc ultrices ac consequat mi vestibulum. Phasellus vel massa sit amet diam tristique convallis ac vitae nisl. Nulla euismod sem et leo feugiat placerat accumsan tellus rhoncus. Cras augue enim, sodales et eleifend id, lacinia non justo. Duis faucibus tortor id nisl pulvinar tincidunt.
-				</p>
+				<legend>League News</legend>
+				<dl>
+					<?php foreach($headlines as $news_item): ?>
+					    <dd>
+					    	<a href="<?php echo base_url(); ?>pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a><br />
+				    	</dd>
+				    	<dd style="margin-bottom: 15px;">
+				    		<small style="font-size: .8em;">Posted: <?php echo $news_item -> PostDate; ?></small>
+					    </dd>
+					<?php endforeach ?>
+				</dl>
 			</section>
 		</div>
 	</div>
-</div>
+</div>	

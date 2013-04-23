@@ -33,7 +33,7 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
         <!-- jQuery (needed?) Needed for inline jQuery. -->
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>          
     </head>
     <body>
 		<div id="fb-root"></div>

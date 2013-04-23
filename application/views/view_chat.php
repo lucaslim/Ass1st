@@ -11,13 +11,12 @@ var user_id = "<?php echo $user_id; ?>";
 div#chat_viewport {
 	font-family:Verdana, Arial, sans-serif;
 	padding:5px;
-	border-top:2px dashed #585858;
 	min-height:300px;
 	color:black;
 	max-height:650px;
 	overflow:auto;
 	margin-bottom:10px;
-	width:750px;
+	width:100%;
 	}
 
 div#chat_viewport ul {
@@ -65,9 +64,6 @@ div#chat_viewport ul li.by_current_user span.chat_message_header {
 	}
 
 </style>
-
-
-<h1>Let's do some chatting</h1>
 
 <div id="chat_viewport">
 

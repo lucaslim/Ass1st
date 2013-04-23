@@ -52,7 +52,7 @@ class MatchAttendance extends CI_Controller
 		//Check if team is playing in the fixture
 		if($this -> matchfixture -> is_team_playing($match_fixture_id, $team_id)) {
 			//Load Match Attendance Model
-			$this -> load -> model('MatchAttendance_Model', 'matchattendance');
+			$this -> load -> model('matchAttendance_model', 'matchattendance');
 
 			//Set Match Fixture data
 			$data = array('MatchFixtureId' => $match_fixture_id,
@@ -88,7 +88,7 @@ class MatchAttendance extends CI_Controller
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 		
-		$user_data = $this->session->userdata('authorized');//stores the information array for the user into $user_data
+		$user_data = $this -> session -> userdata('authorized');//stores the information array for the user into $user_data
 		
 		
 		$data['query']=$this->user_model->get_user_by_id($user_data['id']);
@@ -97,7 +97,7 @@ class MatchAttendance extends CI_Controller
 		$data['results'] = $this -> user_model -> get_user_info($user_data['id']);
 
 		$this -> load -> view('templates/header', $data);
-		$this -> load ->view('MatchAttendance_view.php', $data);
+		$this -> load -> view('MatchAttendance_view.php', $data);
 		$this -> load -> view('templates/footer', $data);
 	}
 

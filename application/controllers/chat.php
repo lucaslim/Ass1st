@@ -20,12 +20,12 @@ class Chat extends CI_Controller {
 			redirect('index.php');
 		}
 		
-		$data['user_id'] = $this->session->userdata('authorized');
-		$user_data = $this->session->userdata('authorized');
+		$data['user_id'] = $this -> session -> userdata('authorized');
+		$user_data = $this -> session -> userdata('authorized');
 		$data['chat_id'] = $user_data['team'][0];
 
 		
-		$this->session->set_userdata('last_chat_message_id_' . $data['chat_id'], 0);
+		$this -> session -> set_userdata('last_chat_message_id_' . $data['chat_id'], 0);
 		
 		$data['page_title'] = '';
 		$data['page_content'] = 'view_chat';

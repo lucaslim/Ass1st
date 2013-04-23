@@ -297,7 +297,7 @@ $(document).ready(function () {
 function rsvp_attendance(match_fixture_id, radiobutton) {
 	$.ajax({
             type: "get",
-			url: $.myURL() + 'matchAttendance/add_attendance',
+			url: $.myURL() + 'MatchAttendance/add_attendance',
             data: {"attendance" : $(radiobutton).val(), "matchfixtureid" : match_fixture_id},
             dataType: 'json',
             success: function(data)
