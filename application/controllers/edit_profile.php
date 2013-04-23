@@ -85,6 +85,8 @@
 
 			$this->load->model('user_model');
 			$this->user_model->edit_user($user_data['id'], $pic);
+
+			header('Location: ../');
 		}
 
 		// function check_fname($p)
