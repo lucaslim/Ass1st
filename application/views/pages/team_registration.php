@@ -41,7 +41,7 @@
 		</div>
 	</div>
 	<?php else: ?>
-	<?php form_open('url', '', $hidden); ?>
+	<?php echo form_open_multipart('quick_team_register/add_team'); ?>
 	<div class="row-fluid">
 		<!-- if logged in -->
 		<div style="width:100%; background-color:darkred; color:white;
@@ -232,5 +232,8 @@
 			<p>Empty</p>
 		</div>
 	</div>
-	<?php form_close(); ?>
+	<div class="row-fluid">
+		<input type="submit" id="add_team" name="add_team" value="Submit" />
+	</div>
+	<?php echo form_close(); ?>
 	<?php endif; ?>

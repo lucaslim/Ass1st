@@ -38,11 +38,6 @@
 		</h4><!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
 		<!-- //////////////// STYLE //////////////   -->
 		<!-- ///////////////////// Script //////////////   -->
-		<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-		<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-		<!--[if IE]>
-		  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
 		<script typevar TPrimG = '="text/javascript"'>
 
 		// Primary
@@ -235,7 +230,9 @@
 					<button class="btn btn-info" type="button" onclick='resetSliderT();'>Reset</button>
 				</div>
 			</div><!-- Hidden Form to hide values // Submits to Database -->
+			<?php if($default["ShowUpdate"]): ?>
 			<form action="../../Manage_Team/update_colors" method="post">
+			<?php endif ?>
 				<!-- Primary -->
 				<!-- rgb(value) -->
 				<input type="hidden" id="RGBcolorP"><br>
@@ -256,9 +253,18 @@
 				<?php if($default["ShowUpdate"]): ?>
 				<div class="text-center">
 					<input class="btn btn-info" type="submit" value="UPDATE TEAM COLORS">
-				</div>
-				<?php endif ?>
+				</div>	
+
+			<?php endif ?>
+			<?php if($default["ShowUpdate"]): ?>
 			</form>
+		<?php endif ?>
+			<div class="span4">
+	            <img id="displayImage" src="" alt="your image" />
+
+	            <br /><br />
+	            <input type="file" name="userfile" id="userfile" size="20" onchange="readURL(this);" /> <br />
+	        </div> 
 		</div>
 	</section>
 </div>
