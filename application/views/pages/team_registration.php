@@ -216,7 +216,7 @@
 				<!-- Place Sidebar Content Here -->
 				
 			<div class="row-fluid">
-				<input type="btn" id="add_team" name="add_team" value="Submit" />
+				<input type="submit" class="btn btn-info" id="add_team" name="add_team" value="Submit" />
 			</div>
 			<?php echo form_close(); ?>
 			<?php endif; ?>
