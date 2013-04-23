@@ -39,7 +39,7 @@
                     <input type="text" name="lname" id="lname" value='<?php echo $results -> LastName ?>' />                    
 
                     <label for="email">Email Address: </label>
-                    <input type="email" name="email" id="email" value='<?php echo $results -> Email ?>' />                    
+                    <input type="email" name="email" id="email" value='<?php echo $results -> Email ?>' disabled="disabled" />                    
 
                     <label for="height">Height: </label>
                     <input type="number" name="height" id="height" value='<?php echo $results -> Height ?>' />
