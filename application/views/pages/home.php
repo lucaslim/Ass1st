@@ -12,39 +12,32 @@
 				<div id="slider" class="nivoSlider">
 					<!--Image Size - 720 X 360-->
 					<?php foreach($query as $item):?>
-
-						<a href="#"><img src="<?php echo base_url(); ?>uploads/<?php echo $item -> Image ?>" data-thumb="<?php echo base_url(); ?>assets/images/skates.jpg" alt="" title="#htmlcaption<?php echo $item -> Id ?>" /></a>
-
+						<a href="<?php echo $item -> Urlmain ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $item -> Image ?>" data-thumb="<?php echo base_url(); ?>assets/images/skates.jpg" alt="" title="#htmlcaption<?php echo $item -> Id ?>" /></a>
 					<?php endforeach ?>
-					<!-- <a href="#"><img src="<?php echo base_url(); ?>assets/images/championship.jpg" data-thumb="<?php echo base_url(); ?>assets/images/skates.jpg" alt="" title="#htmlcaption1" /></a>
-					<a href="#"><img src="<?php echo base_url(); ?>assets/images/roadhockey.jpg" data-thumb="<?php echo base_url(); ?>assets/images/roadhockey.jpg" alt="" title="#htmlcaption2" /></a>
-					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skillscomp.jpg" data-thumb="<?php echo base_url(); ?>assets/images/skillscomp.jpg" alt="" title="#htmlcaption3" /></a>
-					<a href="#"><img src="<?php echo base_url(); ?>assets/images/skates.jpg" data-thumb="<?php echo base_url(); ?>assets/images/championship.jpg" alt="" title="#htmlcaption4" data-transition="" /></a>
-					 -->
 				</div>
-				<!--htmlcaption1-->
+				<!-- Captions from Database -->
 				<?php foreach($query as $item):?>
-				<div id='htmlcaption<?php echo $item -> Id ?>' class="nivo-html-caption">
-					<div class="htmlcaptionLeft">
-						
+					<div id='htmlcaption<?php echo $item -> Id ?>' class="nivo-html-caption">
+						<!--Captions Left Side-->
+						<div class="htmlcaptionLeft">
+							<!-- Title -->
 							<h3><?php echo $item -> Title ?><a href="#"></h3>
+							<!-- Description -->
 							<p><?php echo $item -> Description ?></p>
-						<!-- <h3 style="text-transform:uppercase;"><a href="#">TEAM 3 BECOMES NUMBER 1</a></h3>
-						<p>After two tough losses in the semi‘s against the top seeded Wolverines, Team 3 bounced back to win four straight in the Eastern Championship.</p> -->
-						
+						</div>
+						<!-- Captions Right Side -->
+						<div class="htmlcaptionRight">
+							<p>
+								<a href="<?php echo $item -> Link2 ?>">» <?php echo $item -> link2title ?></a>
+							</p>
+							<p>
+								<a href="<?php echo $item -> Link3 ?>">» <?php echo $item -> Link3title ?></a>
+							</p>
+							<p>
+								<a href="<?php echo $item -> Link4 ?>">» <?php echo $item -> Link4title ?></a>
+							</p>
+						</div>
 					</div>
-					<div class="htmlcaptionRight">
-						<p>
-							<a href="#">» <?php echo $item -> link2title ?></a>
-						</p>
-						<p>
-							<a href="#">» <?php echo $item -> Link3title ?></a>
-						</p>
-						<p>
-							<a href="#">» <?php echo $item -> Link4title ?></a>
-						</p>
-					</div>
-				</div><!--htmlcaption1-->
 				<?php endforeach ?>
 				
 			</div><!--slider-wrapper-->
