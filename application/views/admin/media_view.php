@@ -28,30 +28,40 @@
 
 <?php echo form_open_multipart('admin/media/do_upload');?>
 
-<img id="displayImage" src="<?php echo base_url();?>/uploads/blank_avatar.png" alt="your image" />
+<div id="content-begin" class="container-fluid">
+    <?php foreach($query as $item):?>
+    <div class="row-fluid">
 
-<br /><br />
-<input type="file" name="userfile" size="20" onchange="readURL(this);" /> <br />
+        <div class="span4">
+            <img id="displayImage" src="<?php echo base_url();?>/uploads/<?php echo $item -> Image; ?>" alt="your image" />
 
+            <br /><br />
+            <input type="file" name="userfile" size="20" onchange="readURL(this);" /> <br />
+        </div> 
+<style>
+.input-full{
+    width: 100%;
+}
+.input-med{
+    width:50%;
+}
+</style>
 
+        <div class="span8">
+            Image Title: <input class="input-med" type="text" name="imageTitle" maxlength="25" /><br />
+            Image Description: <textarea class="input-med" name="imageDescription" maxlength="145" required="required" placeholder="http://www.example.ca" ></textarea><br />
+            Image Main URL: <input class="input-med" type="url" name="imageUrlMain" width="50px" maxlength="50" required="required" placeholder="http://www.example.ca" /> <br />
+            Image Link 2 Title: <input class="input-full" type="text" name="imageLink2Title" maxlength="15" required="required" placeholder="http://www.example.ca" /> 
+            Image Link 2 URL: <input class="input-full" type="url" name="imageLink2Url" width="50px" maxlength="50" required="required" placeholder="http://www.example.ca" /><br />
+            Image Link 3 Title: <input type="text" name="imageLink3Title" maxlength="15" required="required" placeholder="http://www.example.ca" /> 
+            Image Link 3 URL: <input type="url" name="imageLink3Url" width="50px" maxlength="50" required="required"  placeholder="http://www.example.ca" /><br />
+            Image Link 4 Title: <input type="text" name="imageLink4Title" maxlength="15" required="required" placeholder="http://www.example.ca" />
+            Image Link 4 URL: <input type="url" name="imageLink4Url" width="50px" maxlength="50" required="required" placeholder="http://www.example.ca" /> <br />
 
-Slider Position: <select name="Id"><?php for ($i=1; $i<5; $i++){ echo "<option value='" . $i . "'>" . $i . "</option>";} ?></select>
-<!--<input type="text" name="Id" />-->
-<br/><br />
-
-Image Title: <input type="text" name="imageTitle" /> <br />
-Image Description: <textarea name="imageDescription" ></textarea> <br />
-Image Main URL: <input type="text" name="imageUrlMain" width="50px" /> <br />
-Image Link 2 Title: <input type="text" name="imageLink2Title" /> 
-Image Link 2 URL: <input type="text" name="imageLink2Url" width="50px" /><br />
-Image Link 3 Title: <input type="text" name="imageLink3Title" /> 
-Image Link 3 URL: <input type="text" name="imageLink3Url" width="50px" /><br />
-Image Link 4 Title: <input type="text" name="imageLink4Title" />
-Image Link 4 URL: <input type="text" name="imageLink4Url" width="50px" /> <br />
-
-<br /><br />
-
-<input type="submit" value="upload" />
-
+            <input type="submit" value="update" />
+        </div>
+    </div>
+    <?php endforeach ?>
+</div>
 </form>
 </div>

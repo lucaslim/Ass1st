@@ -65,15 +65,35 @@ if (!defined('BASEPATH'))
 
 		}
 
+
+		/*
+		*
+		*function to edit images inside the image slider
+		*
+		*
+		*/
 		function get_mediaImages()
 		{
-			//$results = $this -> db -> get('MediaSlider', array('Id' => 1));
 			$query = $this -> db -> get('MediaSlider');
 
-			// $data = $results -> row();
-			// return $data;
 
 			return $query->result();
+		}
+
+
+		/*
+		*
+		*function to insert images inside the image slider
+		*
+		*
+		*/
+		function add_image($image,$imageTitle,$imageDescription,$imageUrlMain,$imageLink2Title,$imageLink2Url,$imageLink3Title,$imageLink3Url,$imageLink4Title,$imageLink4Url)
+		{
+			$this -> load -> helper('security');
+
+			$data = array('Image' => $image, 'Title' => $imageTitle, 'Description' => $imageDescription, 'Urlmain' => $imageUrlMain, 'link2title' => $imageLink2Title, 'Link2' => $imageLink2Url, 'Link3title' => $imageLink3Title, 'Link3' => $imageLink3Url, 'Link4title' => $imageLink4Title, 'Link4' => $imageLink4Url);
+
+			$this -> db -> insert('MediaSlider', $data);
 		}
 	}
 
