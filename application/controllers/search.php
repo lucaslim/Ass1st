@@ -36,7 +36,7 @@ class Search extends CI_Controller {
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 		
 		
-		 $data['query'] = $this->search_model->get_search($this->input->post('q'));
+		 $data['query'] = $this->search_model->get_search_news($search);
 
 		 $this -> load -> view('templates/header', $data);
 		$this-> load -> view('search_view',$data);

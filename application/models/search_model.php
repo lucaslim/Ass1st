@@ -29,16 +29,29 @@ class Search_Model extends CI_Model {
 	}
 
 
-	function get_search($match)
+	function get_search_news($match)
 	{
-		
+		$this->db->from('News');
 		$this->db->like('Title',$match);
 		$this->db->or_like('Description',$match);
 		
-		$query = $this->db->get('News');
+		$query = $this->db->get();
 
 		return $query->result();
 	}
+
+	function get_search_player($match)
+	{
+
+	}
+
+	function all_searches($match)
+	{
+		$this -> get_search_news($match);
+		$this -> get_search_player($match);
+	}
+
+	// function count_
 
 	/*function get_search_row($match,$limit,$start)
 	{
