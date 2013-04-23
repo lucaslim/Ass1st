@@ -157,17 +157,21 @@ a {
 
 .boxScoreLink {
   position: absolute;
-  top: 25%;
-  left: 5%;
-  width:90%;
-  height: 50%;
-  background: #efefef;
+  top: 73%;
+  width:93%;
+  height: 20px;
+  padding: 1% 0;
+  .facebookGradient;
   text-align: center;
   display: none;
-  color: @black;
-  opacity: 0.85;
   .rounded-corners;
   .transition;
+  a {
+    color: @black;
+    &:hover {
+      color: @white;
+    }
+  }
 }
 
 #liveScoresHeader {
@@ -538,12 +542,6 @@ a {
 }
 
 
- /* ===================================================================================
- * Scoreboard Styles
- * ===================================================================================
- */
-
-
 /* ===================================================================================
  * Body Wrapper Styles
  * ===================================================================================
@@ -805,6 +803,17 @@ a {
 //   left: 20px;
 // }
 
+
+ /* ===================================================================================
+ * Player Profile Styles
+ * ===================================================================================
+ */
+#ppp_content_container {
+  section {
+    margin: 25px 0;
+  }
+}
+
 /* ==========================================================================
    Team Banner for the Player Profile Page
    ========================================================================== */
@@ -812,7 +821,7 @@ a {
 #teamBanner {
   height: 250px;
   border: 4px solid black;
-  width: 100%;
+  width: 1152px;
   background-image: url('../../../assets/images/banner/ice.jpg');
 
   .transparent-ice{
@@ -892,8 +901,7 @@ a {
     list-style-type: : none;
 
     hr {
-      margin: -10px 0 5px 0;
-      border-top: 1px solid red;
+      margin: 0 0 20px 0;      
       border-bottom: 1px solid red;
     }
 

@@ -231,16 +231,22 @@ class Pages extends CI_Controller {
 	 */
 	function user_profile() {
 
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();		
+
 		// Get user data from session
 		$user_data = $this -> session -> userdata('authorized');
+		$user_id = $user_data['id'];
 
-		$id = 5;
+		// Get user team info
+		$user_team_data = $this -> Division_Model -> get_user_teams($user_id);
+		$teamid = $user_team_data -> TeamId;
 
-		// Get live scoring
-		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+		// Get team schedule, limit 15 results
+		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_by_team($teamid, 1, 10);
 
-		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
-		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
+		$data['team'] = $this -> Division_Model -> get_team_by_id($teamid); // retrieve team info
+		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($teamid); // retrieve team roster
 
 		// Provide a page title
 		$data['title'] = "Player Profile";

@@ -120,6 +120,39 @@ class Scorekeeper_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 	/**
+	 * Fetch Schedule By Tean
+	 *
+	 * Retrieves the listing of games from AllFixtures for specified team
+	 *
+	 */
+
+    public function get_schedule_by_team($teamid, $seasonid, $limit) {
+
+	    // Set where clause
+		$sql = 'SELECT * FROM teamassist13.AllFixtures WHERE SeasonId = ? AND (HomeTeamId =  ? OR AwayTeamId = ?) AND Date >= CURDATE() LIMIT ?';
+		
+		// Run query using array data as bindings
+		$query = $this -> db -> query($sql, array($seasonid, $teamid, $teamid, $limit));
+
+	    // If query returns 1 or more results, return data as array
+	    // If query returns 0 rows, then return false
+	    if ($query -> num_rows() > 0) {
+	        foreach ($query -> result() as $row) {
+				$time = $row -> Time;
+				$date = $row -> Date;
+
+				$row -> Time = convert_time($time);
+				$row -> Date = convert_date_to_mmdd($date);
+
+	            $data[] = $row;
+	        }
+	        return $data;
+	    }
+	    return false;
+   	}   	
+
+	// --------------------------------------------------------------------
+	/**
 	 * Fetch Game by ID
 	 *
 	 * Retrieves the selected game for the user, accepts one argument

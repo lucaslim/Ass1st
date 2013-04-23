@@ -81,7 +81,24 @@ class Division_Model extends CI_Model {
 		$query = $this -> db -> get();
 		
 		return $query -> result();
-	}	
+	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Get User Teams
+	 *
+	 * Retrieves the list of the users teams
+	 *
+	 */
+	function get_user_teams($id) {
+
+		$this -> db -> from('Roster');
+		$this -> db -> where('UserId', $id);
+
+		$query = $this -> db -> get();
+		
+		return $query -> row();
+	}		
 
 	// --------------------------------------------------------------------
 	/**
@@ -364,6 +381,9 @@ class Division_Model extends CI_Model {
 
 		// Set where clause
 		$this -> db -> where('Date', $date);
+
+		// Sort games by progress
+		$this -> db -> order_by('Progress', 'asc');
 
 		$query = $this -> db -> get('AllFixtures');
 
