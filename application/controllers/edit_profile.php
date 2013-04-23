@@ -74,19 +74,26 @@
 		        else {}
 			}*/
 
+			if ( ! $this->upload->do_upload())
+			{
+				$error = array('error' => $this->upload->display_errors());
 
+				$this->load->view('edit_profile_view', $error);
+			}
+			else
+			{
+				$user_data = $this->session->userdata('authorized');
 
-			$user_data = $this->session->userdata('authorized');
+				$data = array('upload_data' => $this->upload->data());
+				
+				$pic = $_FILES['userfile']['name'];
+				
 
-			$data = array('upload_data' => $this->upload->data());
-			
-			$pic = $_FILES['userfile']['name'];
-			
+				$this->load->model('user_model');
+				$this->user_model->edit_user($user_data['id'], $pic);
 
-			$this->load->model('user_model');
-			$this->user_model->edit_user($user_data['id'], $pic);
-
-			header('Location: ../');
+				header('Location: ../');
+			}
 		}
 
 		// function check_fname($p)
