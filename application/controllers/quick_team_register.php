@@ -20,8 +20,11 @@ class Quick_Team_Register extends CI_Controller {
 		//Load required helper and models
 		$this -> load -> model( 'Team_Model', 'team', TRUE );
 		$this -> load -> model( 'Division_Model', 'division', TRUE );
+		$this -> load -> model( 'User_Model', 'user', TRUE );
 		$this -> load -> library( 'form_validation' );
 		$this -> load -> helper( 'validation_helper' );
+		$this -> load -> helper( 'template' );
+		$this -> load -> helper( 'login_helper' );
 	}
 
 	public function index() {
@@ -80,11 +83,55 @@ class Quick_Team_Register extends CI_Controller {
 
 		}
 
-		$this -> team -> quick_team_register( array( 'Name' => $result["team_name"], 'LeagueId' => $result["ddl_league"], 'DivisionId' => $result["ddl_division"], 'Gender' => $result["ddl_gender"] ) );
+		//$this -> team -> quick_team_register( array( 'Name' => $result["team_name"], 'LeagueId' => $result["ddl_league"], 'DivisionId' => $result["ddl_division"], 'Gender' => $result["ddl_gender"] ) );
+		$this -> session -> set_userdata('teamdata', array( 'Name' => $result["team_name"], 'LeagueId' => $result["ddl_league"], 'DivisionId' => $result["ddl_division"], 'Gender' => $result["ddl_gender"] ) );
 
-		echo json_encode(array("success" => true));
+		echo json_encode( array("success" => true, "url" => base_url() . 'quick_team_register/more_info'));
+	}
 
-			return;
+	function more_info(){
+		$sess_data = $this -> session -> userdata('teamdata');
+
+		$data['title'] = "Team Registration";
+
+		// Get live scoring
+		//$data['livescores'] = $this -> division -> get_live_scores();
+
+		//Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+
+		$data['is_logged_in'] = is_loggedin();
+
+		if(is_loggedin()){
+
+			//Team Representitve Information
+			$sess_user = $this -> session -> userdata('authorized');
+			
+			$user_id = $sess_user["id"];
+
+			if(!isset($user_id) || empty($user_id))
+				return;	
+
+			$data['user_data'] = $this -> user -> get_user_by_id($user_id);
+
+			$dob = explode('-',date('Y-F-d', strtotime($data['user_data'] -> DateOfBirth)));
+
+			$data['dob_day'] = $dob[2];
+			$data['dob_month'] = $dob[1];
+			$data['dob_year'] = $dob[0];
+
+			$data['provinces'] = array('Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Québec', 'Saskatchewan', 'Others');
+
+			//Team Design
+			$color_chooser_data['default'] = array("TeamName" => $sess_data["Name"], "ShowUpdate" => false); 
+			$data['color_chooser'] = $this -> load -> view('team_color_chooser_view', $color_chooser_data, true);
+		}
+
+
+
+		$this -> load -> view( 'templates/header', $data );
+		$this -> load -> view( 'pages/team_registration.php', $data );
+		$this -> load -> view( 'templates/footer' );
 	}
 
 	// --------------------------------------------------------------------
