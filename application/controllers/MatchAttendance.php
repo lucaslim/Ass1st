@@ -41,8 +41,8 @@ class MatchAttendance extends CI_Controller
 		//Get user data from session
 		$user_data = $this -> session -> userdata('authorized');
 
-		$user_id = 1;
-		$team_id = 1;
+		$user_id = $user_data["id"];
+		$team_id = $user_data["team"][0];
 		$attendance = $this -> input -> get('attendance');
 		$match_fixture_id = $this -> input -> get('matchfixtureid');
 
@@ -82,16 +82,19 @@ class MatchAttendance extends CI_Controller
 		$data['base'] = $this -> config -> item('base_url');
 		$data['title'] = 'Attendance';
 
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 		
 		$user_data = $this->session->userdata('authorized');//stores the information array for the user into $user_data
 		
 		
-		$data['query']=$this->user_model->get_user_by_id($user_data['ID']);
+		$data['query']=$this->user_model->get_user_by_id($user_data['id']);
 
 		
-		$data['results'] = $this -> user_model -> get_user_info($user_data['ID']);
+		$data['results'] = $this -> user_model -> get_user_info($user_data['id']);
 
 		$this -> load -> view('templates/header', $data);
 		$this -> load ->view('MatchAttendance_view.php', $data);
