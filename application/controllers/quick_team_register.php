@@ -144,6 +144,7 @@ class Quick_Team_Register extends CI_Controller {
 
 		$post_data = $this -> input -> post( NULL, TRUE );
 		$sess_data = $this -> session -> userdata( 'teamdata' );
+		$sess_user_data = $this -> session -> userdata( 'authorized' );
 
 		//Create and add team to database
 
@@ -152,14 +153,11 @@ class Quick_Team_Register extends CI_Controller {
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size'] = '250';
 		$config['overwrite'] = true;
-		$config['file_name'] = str_replace( ' ', '_', $sess_data["Name"] ) . '_logo';
+		$config['file_name'] = strtolower(str_replace( ' ', '_', $sess_data["Name"] ) . '_logo');
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
 
 		$this->load->library( 'upload', $config );
-
-		 //var_dump( $post_data );
-		// var_dump( $sess_data );
 
 		$result = $this -> upload -> do_upload();
 
@@ -185,7 +183,38 @@ class Quick_Team_Register extends CI_Controller {
 
 			$return_id = $this -> team -> add_team($team_data);
 
-			var_dump($return_id);
+			// Add player to roster
+			$roster_data = array("UserId" => $sess_user_data["id"], "SeasonId" => 1, "TeamId" => $return_id, "JerseyNo" => 1, "Captain" => 1);
+
+			//Load roster model
+			$this -> load -> model('Roster_Model', 'roster');
+
+
+			$result = $this -> roster -> add_roster($roster_data);
+			if($result > 0){
+				//Update User Information
+
+				$user_data = array("ContactNumber" => $post_data["phone"],
+								   "Address" => $post_data["address"],
+								   "City" => $post_data["city"],
+								   "Province" => $post_data["ddl_province"],
+								   "PostalCode" => $post_data["postalcode"]);
+
+				$result = $this -> user -> update_user($user_data, array('Id' => $sess_user_data["id"]));
+
+				//Update session
+				$sess_user_data["team"] = array($return_id);
+
+				if($result){
+					//unset session
+					$this -> session -> unset_userdata('teamdata');
+
+					//set variables for invite page
+					$this -> session -> userdata('invitedata', array("team_id" => $return_id));
+
+					header('location: invite');
+				}
+			}
 
 		}
 	}

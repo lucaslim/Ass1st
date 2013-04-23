@@ -262,6 +262,8 @@ class User_Model extends CI_Model {
 
 		$this -> db -> where($where_clause);
 		$this -> db -> update('User', $data);
+
+		return true;
 	}
 
 	// --------------------------------------------------------------------

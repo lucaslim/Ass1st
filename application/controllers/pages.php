@@ -234,12 +234,13 @@ class Pages extends CI_Controller {
 		// Get user data from session
 		$user_data = $this -> session -> userdata('authorized');
 
-		$id = 5;
+		$id = $user_data["team"][0];
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
 		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
+
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 
 		// Provide a page title
