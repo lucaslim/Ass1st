@@ -243,7 +243,7 @@ class Pages extends CI_Controller {
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 
 		// Provide a page title
-		$data['title'] = "Player Profile";
+		$data['title'] = "User Profile";
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php

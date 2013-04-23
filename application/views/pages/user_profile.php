@@ -19,7 +19,7 @@
 					<img class="transparent-ice main-ice" src="<?php echo base_url(); ?>/assets/images/banner/ice_overlay.jpg" />
 					<div id="team-name-banner">
 						<!--Tertiary Color - Import - ffffff -->
-						<span style="color: rgb(<?php echo $team -> TTerR; ?>, <?php echo $team -> TTerG; ?>, <?php echo $team -> TTerB; ?>)"> 
+						<span id="bannerT" style="color: rgb(<?php echo $team -> TTerR; ?>, <?php echo $team -> TTerG; ?>, <?php echo $team -> TTerB; ?>)"> 
 							<!-- Team Name - Import -->
 							<?php echo $team -> Name; ?>
 						</span>
@@ -80,9 +80,9 @@
 				        .swatch {
 				            width: 100%;
 				            height: 100px;
-				            -moz-border-radius: 10px;
-							-webkit-border-radius: 10px;
-							border-radius: 10px;
+				            border-radius: 0 80px 0 80px;
+							-moz-border-radius: 0 80px 0 80px;
+							-webkit-border-radius: 0 80px 0 80px;
 				        }
 				        #redP .ui-slider-range { background: #ef2929; }
 				        #redP .ui-slider-handle { border-color: #ef2929; }
@@ -114,12 +114,6 @@
 				                g.toString( 16 ),
 				                b.toString( 16 )
 				            ];
-				            // $.each( hex, function( nr, val ) {
-				            //     if ( val.length === 1 ) {
-				            //         hex[ nr ] = "0" + val;
-				            //     }
-				            // });
-				            // return hex.join( "" ).toUpperCase();
 				        }
 				        function refreshSwatch(evt, ui) {
 				          
@@ -127,6 +121,7 @@
 				            var greenP = $( "#greenP" ).slider( "value" );
 				            var blueP = $( "#blueP" ).slider( "value" );	
 
+				            $(".color-main").css( "background-color", "rgb(" + redP + "," + greenP + "," + blueP + ")"  );
 				            $("#swatchP").css( "background-color", "rgb(" + redP + "," + greenP + "," + blueP + ")"  );
 				            $("#RGBcolorP").val( "rgb(" + redP + ", " + greenP + ", " +  blueP + ")");
 				            // $("#hexColor").val("#" + hex);
@@ -137,8 +132,9 @@
 
 				            var redS = $( "#redS" ).slider( "value" );
 				            var greenS = $( "#greenS" ).slider( "value" );
-				            var blueS = $( "#blueS" ).slider( "value" );				            
+				            var blueS = $( "#blueS" ).slider( "value" );
 
+				            $(".color-secondary").css( "background-color", "rgb(" + redS+ "," + greenS + "," + blueS + ")"  );				            
 				            $("#swatchS").css( "background-color", "rgb(" + redS+ "," + greenS + "," + blueS + ")"  );
 				            $("#RGBcolorS").val( "rgb(" + redS + ", " + greenS + ", " +  blueS + ")");
 				            $("#secColorR").val( redS );
@@ -150,13 +146,13 @@
 				            var greenT = $( "#greenT" ).slider( "value" );
 				            var blueT = $( "#blueT" ).slider( "value" );
 
+							$("#bannerT").css( "color", "rgb(" + redT + "," + greenT + "," + blueT + ")"  );
 				            $("#swatchT").css( "background-color", "rgb(" + redT + "," + greenT + "," + blueT + ")"  );
 				            $("#RGBcolorT").val( "rgb(" + redT + ", " + greenT + ", " +  blueT + ")");
 				            $("#terColorR").val( redT );
 				            $("#terColorG").val( greenT );
 				            $("#terColorB").val( blueT );
 				        }
-
 
 				        // Slider 
 				        $(function() {
