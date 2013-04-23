@@ -230,7 +230,7 @@ class User_Model extends CI_Model {
 	 *
 	 *
 	 */
-	function edit_user($id) {
+	function edit_user($id,$pic) {
 		$this -> db -> set('FirstName', $_POST['fname']);
 		$this -> db -> set('LastName', $_POST['lname']);
 		$this -> db -> set('Email', $_POST['email']);
@@ -242,6 +242,7 @@ class User_Model extends CI_Model {
 		$this -> db -> set('PostalCode', $_POST['pcode']);
 		$this -> db -> set('ContactNumber', $_POST['phone1']);
 		$this -> db -> set('OtherNumber', $_POST['phone2']);
+		$this -> db -> set('Picture', $pic);
 		$this -> db -> where('Id', $id);
 		$this -> db -> update('User');
 	}

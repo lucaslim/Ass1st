@@ -59,36 +59,48 @@
 		public function edit_player()
 		{
 			
-			if ($_POST){
+			$config['upload_path'] = './uploads/playerlogo/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+
+			$this->load->library('upload', $config);
+
+			/*if ($_POST){
 				$this -> form_validation->set_rules('fname', 'First Name', 'required|callback_check_fname');
 				if ($this->form_validation->run() == FALSE){            
 		            echo validation_errors();       
 		        }
 		        else {}
-			}
+			}*/
 
 
 
 			$user_data = $this->session->userdata('authorized');
+
+			$data = array('upload_data' => $this->upload->data());
 			
+			$pic = $_FILES['userfile']['name'];
 			
+
 			$this->load->model('user_model');
-			$this->user_model->edit_user($user_data['id']);
+			$this->user_model->edit_user($user_data['id'], $pic);
 		}
 
-		function check_fname($p)
-		{
-			$p = $this -> input -> post('fname');
+		// function check_fname($p)
+		// {
+		// 	$p = $this -> input -> post('fname');
 
 
-			$pattern = '/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/';
+		// 	$pattern = '/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/';
 
-			if (preg_match($pattern, $p))
-				return true;
-			else{
-				$this->form_validation->set_message('check_fname', 'check your first name');
-				return false;
-			}
-		}
+		// 	if (preg_match($pattern, $p))
+		// 		return true;
+		// 	else{
+		// 		$this->form_validation->set_message('check_fname', 'check your first name');
+		// 		return false;
+		// 	}
+		// }
 	}
 ?>
