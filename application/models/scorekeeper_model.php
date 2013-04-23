@@ -491,23 +491,13 @@ class Scorekeeper_Model extends CI_Model {
 
 	public function get_player_assists($player, $seasonid = '', $gameid = '') { 
 
-        // If a $seasonid is provided
-        if($seasonid != '')
-        	$this -> db -> where('SeasonId', $seasonid);
+		// Count assists
+		$sql = 'SELECT COUNT(*) AS Assists FROM teamassist13.AllScoringPlays WHERE GameId = ? AND SeasonId = ? AND (P_AssistId =  ? OR S_AssistId = ?)';
+		
+		// Run query using array data as bindings
+		$query = $this -> db -> query($sql, array($gameid, $seasonid, $player, $player));
 
-		// If a $gameid is provided
-		if($gameid != '')
-        	$this -> db -> where('GameId', $gameid);
-
-        // Set where clause
-		$this -> db -> where('P_AssistId', $player);
-		$this -> db -> or_where('S_AssistId', $player);
-
-		// From the scores table
-		$this -> db -> from('AllScoringPlays');
-
-		// Return the data
-		return $this -> db -> count_all_results();
+		return $query -> row('Assists');
 	}
 
 	// --------------------------------------------------------------------

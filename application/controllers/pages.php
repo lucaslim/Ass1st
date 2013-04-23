@@ -112,6 +112,7 @@ class Pages extends CI_Controller {
 		}
 		else {
 			$data['news'] = $this -> News_Model -> get_news( 5, 0 ); // retrieve 5 latest headlines and descriptions
+			$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news title
 			$data['title'] = "Latest News"; // Use the file as the title
 
 			$this -> load -> view( 'templates/header', $data );
@@ -225,17 +226,21 @@ class Pages extends CI_Controller {
 	/**
 	 * User Profile
 	 *
-	 * Displays team by id
+	 * Displays the profile for the user currently logged in
 	 *
 	 */
-	function user_profile( $id ) {
+	function user_profile() {
 
+		// Get user data from session
+		$user_data = $this -> session -> userdata('authorized');
+
+		$id = 5;
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
-		$data['team'] = $this -> Division_Model -> get_team_by_id( $id ); // retrieve team info
-		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id( $id ); // retrieve team roster
+		$data['team'] = $this -> Division_Model -> get_team_by_id($id); // retrieve team info
+		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($id); // retrieve team roster
 
 		// Provide a page title
 		$data['title'] = "Player Profile";
@@ -335,6 +340,28 @@ class Pages extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------
+	/**
+	 * Stats
+	 *
+	 * Displays the stats leaders for the current season
+	 *
+	 */
+
+	function stats($seasonid = 1, $leagueid = 1) {
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
+		// Provide a page title
+		$data['title'] = "Statistics";
+
+		// Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+
+		$this -> load -> view( 'templates/header', $data );
+		$this -> load -> view( 'pages/stats.php', $data );
+		$this -> load -> view( 'templates/footer' );
+	}
 
 }
 ?>
