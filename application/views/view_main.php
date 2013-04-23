@@ -73,14 +73,12 @@ text-align:center;
 
 <div id="banner">
 
-<!--<h1>Welcome to this tutorial</h1>-->
 
 </div>
 <?php $this->load->view($page_content); ?>
 
 <div id="footer">
 
-<!--<p>Tutorials &copy; 2011 More at www.simplycodeigniter.com.</p>-->
 
 </div>
 
