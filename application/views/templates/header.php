@@ -122,14 +122,13 @@
     		                    <li><input id="user_login" name="email" placeholder="Email" type="text" /></li>
     		                    <li><input id="user_password" name="password" placeholder="Password" type="password" /></li>
     		                </ul>
-    		                
+    		                <input type="hidden" id="return_url" name="return_url" value="<?php echo base_url() . $this -> uri -> uri_string() ?>" />
     		                <div class="forgot-password">
     		                    <a href="#">Forgot your password?</a>
                         	</div>
                         	<div class="create-account">
     		                    <p>No account yet? <a href="#">Sign Up</a></p>
                         	</div>
-
     			        </div>
     			        <div id="error_box" title="Incorrect Login">
     			            <div id="error_message"></div>
@@ -139,6 +138,7 @@
 
 			  </div>
 			  <div class="modal-footer">
+
 			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 			    <input class="btn btn-primary" name="commit" type="submit" value="Login" />
 			  </div>

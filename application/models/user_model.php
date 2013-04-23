@@ -105,7 +105,7 @@ class User_Model extends CI_Model {
 			$query = $this -> db -> get('AllUsers');
 
 			if ($query -> num_rows() > 0)
-				return $query -> result();
+				return $query -> row();
 
 			return null;
 		}
@@ -262,6 +262,8 @@ class User_Model extends CI_Model {
 
 		$this -> db -> where($where_clause);
 		$this -> db -> update('User', $data);
+
+		return true;
 	}
 
 	// --------------------------------------------------------------------

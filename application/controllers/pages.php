@@ -241,7 +241,7 @@ class Pages extends CI_Controller {
 		// Get user team info
 		$user_team_data = $this -> Division_Model -> get_user_teams($user_id);
 		$teamid = $user_team_data -> TeamId;
-
+		
 		// Get team schedule, limit 15 results
 		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_by_team($teamid, 1, 10);
 
@@ -249,7 +249,7 @@ class Pages extends CI_Controller {
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id($teamid); // retrieve team roster
 
 		// Provide a page title
-		$data['title'] = "Player Profile";
+		$data['title'] = "User Profile";
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php

@@ -85,8 +85,10 @@ class Team_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 
-	function quick_team_register($data) {
-		$this -> db -> insert('Team', $data);
+	function add_team($data) {
+		$query = $this -> db -> insert('Team', $data);
+
+		return $this -> db -> insert_id();
 	}
 
 }

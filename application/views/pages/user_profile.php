@@ -19,7 +19,7 @@
 					<img class="transparent-ice main-ice" src="<?php echo base_url(); ?>/assets/images/banner/ice_overlay.jpg" />
 					<div id="team-name-banner">
 						<!--Tertiary Color - Import - ffffff -->
-						<span style="color: rgb(<?php echo $team -> TTerR; ?>, <?php echo $team -> TTerG; ?>, <?php echo $team -> TTerB; ?>)"> 
+						<span id="bannerT" style="color: rgb(<?php echo $team -> TTerR; ?>, <?php echo $team -> TTerG; ?>, <?php echo $team -> TTerB; ?>)"> 
 							<!-- Team Name - Import -->
 							<?php echo $team -> Name; ?>
 						</span>
@@ -59,11 +59,9 @@
 			</ul>
 		</div>
 
-		<div id="ppp_content_container" class="span9">
-
 				
 <!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
-
+		<div class="span9" id="ppp_content_container">
 			<section id="schedule">
 				<legend>Schedule</legend>
 				<table class="table table-hover">

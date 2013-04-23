@@ -109,7 +109,7 @@
 				dataType : "json",
 				success : function(data) {
 					if(data.success){
-						window.location.replace($.myURL());
+						window.location.replace(data.url);
 						return;
 					}
 
@@ -155,7 +155,6 @@ $(document).ready(function() {
 			success : function(data) {
 				if(!data.success)
 				{
-					alert('hi');
 					$('#error_message').html(data.message);
 					$('#error_box').dialog("open");
 				}
