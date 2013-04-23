@@ -15,7 +15,6 @@
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    // $('#displayImage2').attr('src', e.target.result);
                     $(imgtag).attr('src', e.target.result);
                 }
 
