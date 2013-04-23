@@ -16,9 +16,9 @@ class Chat extends CI_Controller {
 		
 		
 		// check they are logged in
-		/*if (! $this->session->userdata('logged_in')) {
-			redirect('user/login');
-		}*/
+		if (! $this->session->userdata('authorized')) {
+			redirect('index.php');
+		}
 		
 		$data['user_id'] = $this->session->userdata('authorized');
 		$user_data = $this->session->userdata('authorized');
@@ -45,7 +45,7 @@ class Chat extends CI_Controller {
 		 */
 		$user_data = $this->session->userdata('authorized');
 
-		$chat_id = $this->input->post('chat_id');
+		$chat_id = $user_data['team'][0];
 		$user_id = $user_data['id'];
 
 		$teamid = $user_data['team'][0];//retrieves the first team in which the player is found

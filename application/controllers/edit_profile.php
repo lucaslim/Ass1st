@@ -31,7 +31,12 @@
 			
 
 			//Check if logged in
-			$data['login_header'] = set_login_header(); //get from template_helper.php
+			if (! $this->session->userdata('authorized')) 
+			{
+				redirect('index.php');
+			}
+
+			$data['login_header'] = set_login_header();//get from template_helper.php
 			
 			$user_data = $this->session->userdata('authorized');//stores the information array for the user into $user_data
 			
