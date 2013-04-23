@@ -91,5 +91,11 @@ class Team_Model extends CI_Model {
 		return $this -> db -> insert_id();
 	}
 
+	function get_team_by_id($team_id) {
+		$this -> db -> where('Id', $team_id);
+
+		return $this -> db -> get('AllTeams') -> row();
+	}
+
 }
 ?>
