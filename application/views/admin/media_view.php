@@ -26,7 +26,7 @@
 <?php $this->load->helper('form'); ?>
  <!-- <?php echo $error;?> -->
 
-<!-- <?php echo form_open_multipart('admin/media/do_upload');?> -->
+
 
 <div id="content-begin" class="container-fluid">
     
@@ -132,5 +132,4 @@
     <?php endforeach; ?>
 
 </div>
-<!-- </form> -->
 </div>
