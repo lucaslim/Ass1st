@@ -50,7 +50,7 @@ class Media extends Admin_Controller {
 		$this->load->library('upload', $config);
 
 
-
+		
 		//filling the data
 		$id = $this->input->post('Id');
 		$imgTitle = $this->input->post('imageTitle');
@@ -66,7 +66,7 @@ class Media extends Admin_Controller {
 
 		if ( ! $this->upload->do_upload())
 		{
-			echo 'check';
+			echo 'Error Encountered while trying to upload';
 			$error = array('error' => $this->upload->display_errors());
 
 			$this->load->view('admin/media_view', $error);

@@ -10,12 +10,13 @@
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <script type="text/javascript">
-        function readURL(input) {
+        function readURL(input, imgtag) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#displayImage').attr('src', e.target.result);
+                    // $('#displayImage2').attr('src', e.target.result);
+                    $(imgtag).attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(input.files[0]);
@@ -26,17 +27,21 @@
 <?php $this->load->helper('form'); ?>
  <!-- <?php echo $error;?> -->
 
-<?php echo form_open_multipart('admin/media/do_upload');?>
+<!-- <?php echo form_open_multipart('admin/media/do_upload');?> -->
 
 <div id="content-begin" class="container-fluid">
-    <?php foreach($query as $item):?>
-    <div class="row-fluid" style="margin:40px 0 50px 0;">
+    
+    <?php foreach($query as $item): ?>
+    <?php echo form_open_multipart('admin/media/do_upload', array('class' => 'row-fluid', 'style' => 'margin:40px 0 50px 0;'));?>
 
+      <!--<form class="row-fluid" style="margin:40px 0 50px 0;" action="media/do_upload" method="post" accept-charset="utf-8" enctype="multipart/form-data">-->
+ 
         <div class="span4">
-            <img id="displayImage" src="<?php echo base_url();?>/uploads/<?php echo $item -> Image; ?>" alt="your image" />
+            <input type="hidden" name="Id" value="<?=  $item -> Id ?>" />
+            <img id="displayImage<?=  $item -> Id ?>" src="<?=  base_url();?>/uploads/<?=  $item -> Image; ?>" alt="your image" />
 
             <br /><br />
-            <input type="file" name="userfile" size="20" onchange="readURL(this);" /> <br />
+            <input type="file" name="userfile" size="20" onchange="readURL(this, '#displayImage<?=  $item -> Id ?>');" /> <br />
         </div> 
 <style>
 .input-full{
@@ -123,9 +128,10 @@
                 </div>
             </div>
         </div> 
-    </div>
+    </form>
     <hr style="border-color: navy !important;">
-    <?php endforeach ?>
+    <?php endforeach; ?>
+
 </div>
-</form>
+<!-- </form> -->
 </div>
