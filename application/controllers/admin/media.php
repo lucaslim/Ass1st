@@ -30,8 +30,12 @@ class Media extends Admin_Controller {
 	 *
 	 */
 	function index() {
+
+
+		$data['query'] = $this -> image_model -> get_mediaImages();
+
 		$this -> load -> view('admin/template/header');
-		$this -> load -> view('admin/media_view');
+		$this -> load -> view('admin/media_view', $data);
 		$this -> load -> view('admin/template/footer');
 	}
 
@@ -39,11 +43,13 @@ class Media extends Admin_Controller {
 	{
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '100';
+		$config['max_size']	= '250';
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
 
 		$this->load->library('upload', $config);
+
+
 
 		//filling the data
 		$id = $this->input->post('Id');

@@ -38,6 +38,7 @@ class Pages extends CI_Controller {
 		$this -> load -> helper( 'template' );
 		$this -> load -> helper( 'scoring' );
 		$this -> load -> helper( array( 'form', 'url' ) );
+		$this -> load -> model('image_model');
 	}
 
 	// --------------------------------------------------------------------
@@ -67,6 +68,9 @@ class Pages extends CI_Controller {
 
 		//Team Registration
 		$data['league'] = $this -> League_Model -> get_all_league();
+
+		// Get image Data
+		$data['query'] = $this -> image_model -> get_mediaImages();
 
 		// Get leader stat data
 		$data['leadingscorers'] = $this -> Division_Model -> get_leading_scorers('Goals', 5);
