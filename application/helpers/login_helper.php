@@ -47,7 +47,8 @@ function set_session_data($id, $full_name, $picture = NULL) {
 	return array('id' => $id,
 				 'fullname' => $full_name,
 				 'picture' => $picture,
-				 'team' => get_user_teams( $id ));
+				 'team' => get_user_teams( $id )
+			 	);
 }
 
 // --------------------------------------------------------------------
@@ -98,4 +99,5 @@ function get_user_teams( $user_id ) {
 
 		return null;
 	}
+
 ?>
