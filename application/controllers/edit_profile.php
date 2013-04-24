@@ -29,17 +29,16 @@
 			$data['base']=$this->config->item('base_url');
 			$data['title'] = 'Edit Profile';
 			
-
-			//Check if logged in
-			if (! $this->session->userdata('authorized')) 
-			{
-				redirect('index.php');
-			}
+			// Check user is logged in
+			if(!is_loggedin())
+				header('Location: /');
 
 			$data['login_header'] = set_login_header();//get from template_helper.php
 			
 			$user_data = $this->session->userdata('authorized');//stores the information array for the user into $user_data
 			
+			// Get live scoring
+			$data['livescores'] = $this -> Division_Model -> get_live_scores();			
 			
 			$data['query']=$this->user_model->get_user_by_id($user_data['id']);
 
@@ -59,36 +58,57 @@
 		public function edit_player()
 		{
 			
-			if ($_POST){
+			$config['upload_path'] = './uploads/playerlogo/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+
+			$this->load->library('upload', $config);
+
+			/*if ($_POST){
 				$this -> form_validation->set_rules('fname', 'First Name', 'required|callback_check_fname');
 				if ($this->form_validation->run() == FALSE){            
 		            echo validation_errors();       
 		        }
 		        else {}
+			}*/
+
+			if ( ! $this->upload->do_upload())
+			{
+				$error = array('error' => $this->upload->display_errors());
+
+				$this->load->view('edit_profile_view', $error);
 			}
+			else
+			{
+				$user_data = $this->session->userdata('authorized');
 
+				$data = array('upload_data' => $this->upload->data());
+				
+				$pic = $_FILES['userfile']['name'];
+				
 
+				$this->load->model('user_model');
+				$this->user_model->edit_user($user_data['id'], $pic);
 
-			$user_data = $this->session->userdata('authorized');
-			
-			
-			$this->load->model('user_model');
-			$this->user_model->edit_user($user_data['id']);
-		}
-
-		function check_fname($p)
-		{
-			$p = $this -> input -> post('fname');
-
-
-			$pattern = '/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/';
-
-			if (preg_match($pattern, $p))
-				return true;
-			else{
-				$this->form_validation->set_message('check_fname', 'check your first name');
-				return false;
+				header('Location: ../');
 			}
 		}
+
+		// function check_fname($p)
+		// {
+		// 	$p = $this -> input -> post('fname');
+
+
+		// 	$pattern = '/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/';
+
+		// 	if (preg_match($pattern, $p))
+		// 		return true;
+		// 	else{
+		// 		$this->form_validation->set_message('check_fname', 'check your first name');
+		// 		return false;
+		// 	}
+		// }
 	}
 ?>

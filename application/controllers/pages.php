@@ -296,7 +296,8 @@ class Pages extends CI_Controller {
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
-
+		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news titles
+		
 		// Provide a page title
 		$data['title'] = "Scores";
 
@@ -321,7 +322,7 @@ class Pages extends CI_Controller {
 
 	function boxscore( $gameid ) {
 		// Redirect if no id provided
-		if ( !isset( $gameid ) )
+		if (!isset($gameid))
 			header( 'Location: ../scores' );
 
 		// Get game info
