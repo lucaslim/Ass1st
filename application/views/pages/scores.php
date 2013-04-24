@@ -91,8 +91,24 @@
 
 
 		<!-- Place Sidebar Content Here -->
-		<div id="rightContent" class="span4">
-			<p>Empty</p>
+		<div id="rightContent" class="newsSidebar span4">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Latest Headlines</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach($headlines as $news_item): ?>
+				    <tr>
+				    	<td style="font-weight: 200;">
+				    		<a href="<?php echo site_url(); ?>pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a><br />
+				    		<small style="font-size: .8em;">Posted: <?php echo $news_item -> PostDate; ?></small>
+				    	</td>
+				    </tr>
+				<?php endforeach ?>
+				</tbody>
+			</table>
 		</div>
 		
 	</div>

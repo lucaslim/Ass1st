@@ -295,7 +295,8 @@ class Pages extends CI_Controller {
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
-
+		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news titles
+		
 		// Provide a page title
 		$data['title'] = "Scores";
 
