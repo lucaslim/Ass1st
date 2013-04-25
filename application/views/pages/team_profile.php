@@ -50,20 +50,25 @@
 		<!-- Place Sidebar Content Here -->
 		<div id="rightContent" class="span4">
 			<!-- /begin news list-->
-			<div class="newsDisplay" style="margin-top: 35px;">
-				<legend><?php echo $archive; // display title ?></legend>
-				<?php foreach ( $news as $news_item ): ?>
-			    	<span class="lead">
-			    		<a href="<?php echo base_url(); ?>pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
-			    	</span>
-		    		<p class="subtitle">
-		    			<p class="subtitle"><small>Posted: <?php echo $news_item -> PostDate; ?></small></p>
-		    			<?php echo $news_item -> Description ?>
-		    		</p>
-
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Latest Headlines</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach($headlines as $news_item): ?>
+				    <tr>
+				    	<td style="font-weight: 200;">
+				    		<a href="<?php echo site_url(); ?>pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a><br />
+				    		<small style="font-size: .8em;">Posted: <?php echo $news_item -> PostDate; ?></small>
+				    	</td>
+				    </tr>
 				<?php endforeach ?>
-			</div>
+				</tbody>
+			</table>
 		</div><!-- /end news list-->
+		
 		</div>
 
 	</div>
