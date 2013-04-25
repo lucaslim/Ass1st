@@ -303,7 +303,7 @@ class Pages extends CI_Controller {
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news titles
-		
+
 		// Provide a page title
 		$data['title'] = "Scores";
 
@@ -328,7 +328,7 @@ class Pages extends CI_Controller {
 
 	function boxscore( $gameid ) {
 		// Redirect if no id provided
-		if (!isset($gameid))
+		if ( !isset( $gameid ) )
 			header( 'Location: ../scores' );
 
 		// Get game info
@@ -525,10 +525,10 @@ class Pages extends CI_Controller {
 			if ( $result > 0 ) {
 				$data["result"] = "Success";
 
-				$team_data = $this -> Team_Model -> get_team_by_id($team_id);
+				$team_data = $this -> Team_Model -> get_team_by_id( $team_id );
 
 				// $config['image_library'] = 'gd';
-				// $config['source_image']	= '/uploads/teamlogos/' . $team_data -> Picture;
+				// $config['source_image'] = '/uploads/teamlogos/' . $team_data -> Picture;
 				// $config['create_thumb'] = TRUE;
 				// $config['maintain_ratio'] = TRUE;
 				// $config['width'] = 235;
@@ -570,5 +570,32 @@ class Pages extends CI_Controller {
 		$this -> load -> view( 'templates/footer' );
 	}
 
+	function search() {
+		$keyword = $this -> input -> get( 'k' );
+
+		$this->load->model( 'Search_Model' );
+
+		//Get total number of rows
+		$total_rows = $this -> Search_Model -> search_count( $keyword );
+		
+		//Set pagination data
+		$data = get_pagination_data( "pages/search", $total_rows );
+
+		//set data
+		$player_data = $this -> Search_Model -> search_all_keywords( $keyword, $data['per_page'], $data['current_page'], $total_rows );
+		$data['results'] = $player_data;
+
+		$data['title'] = "Search Result(s)";
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+		
+		// Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+
+		$this -> load -> view( 'templates/header', $data );
+		$this -> load -> view( 'pages/search.php', $data );
+		$this -> load -> view( 'templates/footer' );
+	}
 }
 ?>

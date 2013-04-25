@@ -49,7 +49,7 @@ class Search extends CI_Controller {
 	public function index() {
 		$keyword = $this -> input -> get('k');
 
-		$result = $this -> search_model -> search_keyword($keyword);
+		$result = $this -> search_model -> search_keyword($keyword, 3);
 
 		if($result > 0)
 			$return_array = array('success' => true, 'result' => $result);
