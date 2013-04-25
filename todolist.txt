@@ -86,3 +86,6 @@ Bug Reports:
 ---------------------------------------------------------------------
 - Signin: If you don't have a facebook account and attempt to login
 - Picture not displaying correctly
+	- If user isn't using FB image, the url is displaying incorrectly
+	- Need to handle with if statement
+- Chat is creating a load error

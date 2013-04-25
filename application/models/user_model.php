@@ -114,6 +114,46 @@ class User_Model extends CI_Model {
 	// --------------------------------------------------------------------
 
 	/**
+	 * Gets a users roster info
+	 *
+	 * Returns the data for the users team
+	 *
+	 */
+
+	function get_user_roster_by_id($id) {
+		if (isset($id) && !empty($id)) {
+			$this -> db -> where('UserId', $id);
+
+			//Execute query
+			$query = $this -> db -> get('AllRosters');
+
+			if ($query -> num_rows() > 0)
+				return $query -> row();
+
+			return null;
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check if user is a captain
+	 *
+	 * Returns true if user is a captain
+	 *
+	 */
+	function is_captain($id) {
+		$user = $this -> get_user_roster_by_id($id);
+
+		if($user -> Captain == 'Yes')
+			return true;
+		else
+			return false;
+	}	
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Get a array of user information
 	 *
 	 * This will return an array of user information

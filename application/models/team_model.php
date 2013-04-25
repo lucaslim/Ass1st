@@ -84,6 +84,73 @@ class Team_Model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
+	/**
+	 * Get Team Roster
+	 *
+	 * Get a list of all the users on a team
+	 *
+	 */
+
+	function get_team_roster($teamid){
+		$this -> db -> where('TeamId', $teamid);
+		$query = $this -> db -> get('AllRosters');
+
+		return $query -> result();
+	}	
+
+	// --------------------------------------------------------------------
+	/**
+	 * Delete User From Roster
+	 *
+	 * Delete user from the team roster
+	 *
+	 */
+
+	function delete_user_from_roster($playerid, $teamid) {
+		$this -> db -> where('TeamId', $teamid);
+		$this -> db -> where('UserId', $playerid);
+
+		return $this -> db -> delete('Roster');
+	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Update Team Roster
+	 *
+	 * Update the team roster jersey numbers and captain status
+	 *
+	 */
+
+	function update_team_roster($players) {
+		$data = array();
+
+		foreach($players as $player)
+		{
+			// Default captain to 0
+			$captain = 0;
+
+			// If captain is checked, then change to 1
+			if(isset($player['Captain']))
+				$captain = 1;
+
+			// Build array of data to process update
+			$array = array(
+				'UserId' => $player['Id'],
+				'SeasonId' => 1,
+				'TeamId' => $player['TeamId'],
+				'JerseyNo' => $player['JerseyNo'],
+				'Captain' => $captain
+			);
+
+			array_push($data, $array);
+		}	
+
+		// Codeigniter has a bug, update_batch does not return true / false
+		// instead returns NULL or FALSE only
+		return $this -> db -> update_batch('Roster', $data, 'UserId');
+	}		
+
+	// --------------------------------------------------------------------
 
 	function add_team($data) {
 		$query = $this -> db -> insert('Team', $data);
