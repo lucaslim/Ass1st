@@ -213,17 +213,13 @@ class Pages extends CI_Controller {
 		$data['team'] = $this -> Division_Model -> get_team_by_id( $id ); // retrieve team info
 		$data['standings'] = $this -> Division_Model -> get_team_standing( $id, 1 ); // retrieve teams
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id( $id ); // retrieve team roster
+		$data['scoring'] = $this -> Scorekeeper_Model -> load_team_scoring($id);
 
 		// Provide a page title
 		$data['title'] = "Team Profile";
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
-
-		// Get latest news
-		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news title
-		$data['news'] = $this -> News_Model -> get_news( 5, 0 ); // retrieve news
-		$data['archive'] = "News Archive";
 
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'pages/team_profile.php', $data );
@@ -403,6 +399,36 @@ class Pages extends CI_Controller {
 
 	// --------------------------------------------------------------------
 	/**
+	 * Player
+	 *
+	 * Displays the stats for the player
+	 *
+	 */
+
+	function player($playerid, $seasonid = 1) {
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+
+		// Provide a page title
+		$data['title'] = "Player Profile";
+
+		// Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+
+		// Get player data
+		$data['playerscoring'] = $this -> Scorekeeper_Model -> get_player_stats($playerid, 1);
+		$data['playerinfo'] = $this -> Scorekeeper_Model -> get_player_info($playerid);
+		$data['teaminfo'] = $this -> Team_Model -> get_teams_by_user_id($playerid);
+
+
+		$this -> load -> view( 'templates/header', $data );
+		$this -> load -> view( 'pages/players.php', $data );
+		$this -> load -> view( 'templates/footer' );
+	}	
+
+	// --------------------------------------------------------------------
+	/**
 	 * Invite Users
 	 *
 	 * Invite users to the team
@@ -410,6 +436,14 @@ class Pages extends CI_Controller {
 	 */
 
 	function invite_users() {
+
+		$user_data = $this -> session -> userdata('authorized');
+
+		// If user is not captain, send then to index
+	    if(!$this -> User_Model -> is_captain($user_data['id'])) {
+	    	// Redirect home
+	    	redirect('', 'location');
+		}			
 
 		$this -> session -> set_userdata( 'invitedata', array( "team_id" => 36 ) );
 		$invite_data = $this -> session -> userdata["invitedata"];

@@ -6,7 +6,7 @@
 	====================================================================== -->
 	<div class="row-fluid">
 
-		<div id="leftContent" class="span8">
+		<div id="leftContent" class="span12">
 			<div class="divisionProfile bootStrap">
 				<legend>Division Standings</legend>
 
@@ -50,10 +50,6 @@
 					</tbody>
 				</table>			
 			</div>
-		</div>
-
-		<div id="rightContent" class="span4">
-			<p>Empty</p>
 		</div>
 	
 	</div>

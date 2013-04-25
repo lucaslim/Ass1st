@@ -62,7 +62,7 @@
 								<?php echo $number + 1; ?>
 							</td>
 							<td>
-								<?php echo $player -> PlayerFirstName; ?> <?php echo $player -> PlayerLastName; ?>
+								<a href="<?php echo base_url(); ?>pages/player/<?= $player -> PlayerId; ?>"><?php echo $player -> PlayerFirstName; ?> <?php echo $player -> PlayerLastName; ?></a>
 							</td>
 							<td>
 								<?php echo $player -> Goals; ?>
@@ -100,7 +100,7 @@
 								<?php echo $number + 1; ?>
 							</td>
 							<td>
-								<?php echo $player -> PlayerFirstName; ?> <?php echo $player -> PlayerLastName; ?>
+								<a href="<?php echo base_url(); ?>pages/player/<?= $player -> PlayerId; ?>"><?php echo $player -> PlayerFirstName; ?> <?php echo $player -> PlayerLastName; ?></a>
 							</td>
 							<td>
 								<?php echo $player -> Assists; ?>

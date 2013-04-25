@@ -89,7 +89,7 @@
 					<?php if($penalties != FALSE) : ?>
 						<?php foreach($penalties as $penalty_data) : ?>
 						<tr>
-							<td><?php echo $penalty_data -> Period; ?></td>
+							<td><a href="<?php echo base_url(); ?>pages/player/<?= $stats['PlayerId']; ?>"><?php echo $penalty_data -> Period; ?></a></td>
 							<td><?php echo $penalty_data -> TeamName; ?></td>
 							<td><?php echo $penalty_data -> Time; ?></td>
 							<td><?php echo $penalty_data -> PlayerName; ?></td>
@@ -122,7 +122,7 @@
 						<?php foreach($hometeamstats as $stats) : ?>
 							<tr>
 								<td><?php echo $stats['JerseyNo']; ?></td>
-								<td><?php echo $stats['FullName']; ?></td>
+								<td><a href="<?php echo base_url(); ?>pages/player/<?= $stats['PlayerId']; ?>"><?php echo $stats['FullName']; ?></a></td>
 								<td><?php echo $stats['Goals']; ?></td>
 								<td><?php echo $stats['Assists']; ?></td>
 								<td><?php echo ($stats['Goals'] + $stats['Assists']); ?></td>
