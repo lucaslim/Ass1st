@@ -94,7 +94,11 @@ $(function() {
 								if (value.Picture.indexOf("https://fbcdn-profile") < 0)
 								{
 									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/playerlogo/' + value.Picture;
-								}else
+								// }else if (value.Url.indexOf("team") > 0) 
+								// {
+								// 	output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture;
+								// }
+								else
 								{
 									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + value.Picture;
 								}
