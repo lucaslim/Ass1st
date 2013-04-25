@@ -23,22 +23,28 @@
         <div class="span12">
 
             <section id="chat">
-                <legend>Edit Profile</legend>
-
 	<?php $this->load->helper('form'); ?><!--loads the form helper to help us create a form-->
+
+    <legend>Edit Player Image</legend>
 	<?php echo form_open_multipart("edit_profile/edit_player"); ?><!--this is the function called to enable us insert players-->
                     <?php 
                         $string = 'https://fbcdn-profile';
                         $imgpath = $results -> Picture;
-                        if (strpos($imgpath, $string) === false ) {
+                        if (strpos($imgpath, $string) === false ) :
                     ?>
                     <img id="img" src="<?php echo base_url();?>uploads/playerlogo/<?= $results -> Picture ?>" alt="your image" />
-                    <?php }else { ?>
+                    <?php else : ?>
                         <img id="img" src="<?= $results -> Picture ?>" alt="your image" />
-                    <?php } ?>
-                    <br /><br />
-                    <input type="file" name="userfile" size="20" onchange="readURL(this);" />
-                    
+                    <?php endif; ?>
+        <p>
+            <input type="file" name="userfile" size="20" onchange="readURL(this);" />
+            <br/><br/>
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </p>
+   <?php echo form_close(); ?>             
+
+    <legend>Edit Player Info</legend>
+     <?php echo form_open_multipart("edit_profile/edit_player"); ?><!--this is the function called to enable us insert players-->               
                     <label for="fname">First Name: </label>
                     <input type="text" name="fname" value='<?php echo $results -> FirstName ?>' />
 
@@ -75,7 +81,7 @@
                     <br /><br />
                     <input type="submit" value="Save" class="btn btn-primary" />
                     <a href="<?php base_url(); ?>pages/user_profile" class="btn btn-danger">Cancel</a>
-                <?php echo form_close(); ?>
+                <?php echo form_close(); ?>   
 
             </section>         
         </div>
