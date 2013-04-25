@@ -55,6 +55,8 @@ $(function() {
 
 	var search;
 
+	
+
 	//auto complete
 	$('#search_box').on({
 		keyup: function(e) {
@@ -83,7 +85,7 @@ $(function() {
 							var output = "<table>";
 							$.each(data.result, function(index, value){
 								if(header_text != value.Type){
-									output += "<tr><th>" + value.Type + "<hr /></th></tr>";
+									output += "<tr><th>" + value.Type + "<hr style='width:231px' /></th></tr>";
 									header_text = value.Type;
 								}
 								
@@ -103,7 +105,7 @@ $(function() {
 									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + value.Picture;
 								}
 
-								output += "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr /></td></tr>";
+								output += "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:231px'/></td></tr>";
 							});
 
 							//View more
@@ -113,6 +115,8 @@ $(function() {
 							output += "</table>";
 
 							$('#search_results').html(output);
+
+
 						}	
 						else{
 							$('#search_results').html('No results found');
