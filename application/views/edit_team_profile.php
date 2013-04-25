@@ -13,7 +13,7 @@
 				  <button type="button" class="close" data-dismiss="alert">&times;</button>
 				  <strong><?php echo $userdata['message']; ?></strong> 
 				</div>
-			<? endif;?>
+			<?php endif;?>
 
 			<label>Team Name:</label>
 			<input class="input" disabled type="text" name="Name" value="<?php echo $team -> Name; ?>" />
@@ -52,5 +52,4 @@
 			<?php echo form_close(); ?>
      	</div>
     </div>  
-</div>
-    	
+</div>  	
