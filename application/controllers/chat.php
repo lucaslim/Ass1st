@@ -50,7 +50,7 @@ class Chat extends CI_Controller {
 		$user_id = $user_data['id'];
 		//$user_id = $this->input->post('user_id');
 
-		$teamid = $user_data['team'][0];//retrieves the first team in which the player is found
+		//$teamid = $user_data['team'][0];//retrieves the first team in which the player is found
 
 		$chat_message_content = $this->input->post('chat_message_content', TRUE);
 		
@@ -62,8 +62,8 @@ class Chat extends CI_Controller {
 	
 	function ajax_get_chat_messages()
 	{
-		
-		//$chat_id = $this->input->post('chat_id');
+
+		$chat_id = $this->input->post('chat_id');
 
 		echo $this->_get_chat_messages($chat_id);
 	}
