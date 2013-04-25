@@ -89,6 +89,7 @@ $(function() {
 									header_text = value.Type;
 								}
 								
+								var site = $.myURL() + value.Url + value.Id ;
 								//Joel: commented this out and added the if statement below
 								// output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr /></td><tr>";
 
@@ -97,9 +98,6 @@ $(function() {
 								{
 									output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + $.myURL() + 'uploads/playerlogo/' + value.Picture;
 
-								// }else if (value.Url.indexOf("team") > 0) 
-								// {
-								// 	output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture;
 								}
 								else
 								{
