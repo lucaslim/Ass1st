@@ -44,7 +44,17 @@
 					<img class="team-logo" src="<?php echo base_url(); ?>/uploads/teamlogos/<?php echo $team -> Picture; ?>" />
 				</li>
 				<li style="margin-top: 50px;">
-					<legend><?php echo $full_name; ?> <img class="img-player" src="<?php echo $picture; ?>"></legend>
+					<legend>
+						<?php echo $full_name; ?>
+				        <?php $string = 'https://fbcdn-profile';
+				            $imgpath = $picture; ?>
+				        
+				        <?php if (strpos($imgpath, $string) === false ) : ?>
+				    		<img class="img-player" id="img" src="<?php echo base_url();?>uploads/playerlogo/<?php echo $picture; ?>" alt="your image" />
+				        <?php else : ?>
+				            <img class="img-player" id="img" src="<?php echo $picture ?>" alt="your image" />
+				        <?php endif; ?>
+					</legend>
 				</li>
 				<li>
 					<a href="#"><strong><?php echo $team -> Name; ?> </strong> <img class="img-team" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $team -> Picture; ?>" /></a>

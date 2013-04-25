@@ -139,7 +139,24 @@ class Scorekeeper_Model extends CI_Model {
 			return FALSE;
 
 		return $query -> row('Attendance');
-	}	   	
+	}
+
+	// ------------------------------------------------------------------------
+	/**
+	 * Get Player Info
+	 *
+	 * This will return the information based on the selected Id
+	 *
+	 */
+	function get_player_info($player) {
+		//Set where clause
+		$this -> db -> where('Id', $player);
+		
+		//Execute select statement
+		$query = $this -> db -> get("AllUsers");
+
+		return $query -> row();
+	}			   	
 
 	// --------------------------------------------------------------------
 	/**
@@ -459,6 +476,7 @@ class Scorekeeper_Model extends CI_Model {
 
     	// Define the where clause
     	$this -> db -> where('GameId', $gameid);
+    	
     	$this -> db -> where('TeamId', $teamid);
 
     	$data = array();
@@ -487,6 +505,67 @@ class Scorekeeper_Model extends CI_Model {
 
 				// Get the PIM totals
 				$pim = $this -> get_player_pim($player, $seasonid, $gameid);
+
+				$push_me = array (
+					'PlayerId' => $player,
+					'JerseyNo' => $jersey,
+					'FullName' => $name,
+					'GP' => $gamesplayed,
+					'Goals' =>  $goals,
+					'Assists' => $assists,
+					'PIM' => $pim,
+					'Captain' => $captain
+				);
+
+				// Push it into the array
+				array_push($data, $push_me);
+	        }
+	        return $data;
+	    }
+	    return false;
+   	} 
+
+	// --------------------------------------------------------------------
+	/**
+	 * Load Lineup
+	 *
+	 * Loads the lineup of the team into an array
+	 *
+	 */
+
+    public function load_team_scoring($teamid) {
+
+    	// Get a list of the player ids
+    	$this -> db -> select('UserId, JerseyNo, FullName, Captain, SeasonId');
+    	
+    	$this -> db -> where('TeamId', $teamid);
+
+    	$data = array();
+
+	    // Perform the query
+	    $query = $this -> db -> get('AllRosters');
+
+	    if ($query -> num_rows() > 0) {
+	        foreach ($query -> result() as $row) {
+
+	        	// Stash player data
+	            $player = $row -> UserId;
+	            $jersey = $row -> JerseyNo;
+	            $name = $row -> FullName;
+	            $captain = $row -> Captain;
+	            $seasonid = $row -> SeasonId;
+
+	            // Get the games played for this player
+	            $gamesplayed = $this -> get_games_played($player, $seasonid);
+
+	            // Get the goal totals for this game
+	            $goals = $this -> get_player_goals($player, $seasonid);
+
+	            // Get the assist totals for this game
+	            $assists = $this -> get_player_assists($player, $seasonid);
+
+				// Get the PIM totals
+				$pim = $this -> get_player_pim($player, $seasonid);
 
 				$push_me = array (
 					'PlayerId' => $player,

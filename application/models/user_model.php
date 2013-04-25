@@ -275,7 +275,6 @@ class User_Model extends CI_Model {
 	function edit_user($id) {
 		$this -> db -> set('FirstName', $_POST['fname']);
 		$this -> db -> set('LastName', $_POST['lname']);
-		//$this -> db -> set('Email', $_POST['email']);
 		$this -> db -> set('Height', $_POST['height']);
 		$this -> db -> set('Weight', $_POST['weight']);
 		$this -> db -> set('City', $_POST['city']);

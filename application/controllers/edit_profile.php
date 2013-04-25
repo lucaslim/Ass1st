@@ -91,7 +91,7 @@
 				
 				$pic = $_FILES['userfile']['name'];
 
-				$this -> user_model->edit_image($user_data['id'], $pic);
+				$this -> image_model -> edit_image($user_data['id'], $pic);
 
 				header('Location: edit_profile');
 			}
