@@ -68,8 +68,13 @@
 				data : dataString,
 				dataType : "json",
 				success : function(data) {
-					$('#error_message').html(data.message);
-					$('#error_box').dialog("open");
+					if(!data.success){
+						$('#error_message').html(data.message);
+						$('#error_box').dialog("open");
+					}
+					else{
+						window.location.replace($.myURL());
+					}
 				}
 			});
 		});
@@ -326,7 +331,7 @@ $(document).ready(function() {
  
     //Calculate the height of #headerWrapper
     //Use outerHeight() instead of height() if have padding
-    var aboveHeight = $('#headerWrapper').outerHeight() + 69;
+    var aboveHeight = $('#headerWrapper').outerHeight() + 128;
 
 	//When scrolling
     $(window).scroll(function(){

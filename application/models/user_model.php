@@ -193,6 +193,8 @@ class User_Model extends CI_Model {
 
 		//Inser user role
 		$this -> insert_user_role($return_id, 7);
+
+		return $return_id;
 	}
 
 	// --------------------------------------------------------------------

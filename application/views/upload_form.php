@@ -28,7 +28,7 @@
 <?php echo form_open_multipart('upload/do_upload');?>
 
 
-<img id="blah" src="<?php echo base_url();?>/uploads/blank_avatar.png" alt="your image" />
+<img id="blah" src="<?php echo site_url();?>uploads/blank_avatar.png" alt="your image" />
 
 <br /><br />
 

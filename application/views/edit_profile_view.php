@@ -27,8 +27,15 @@
 
 	<?php $this->load->helper('form'); ?><!--loads the form helper to help us create a form-->
 	<?php echo form_open_multipart("edit_profile/edit_player"); ?><!--this is the function called to enable us insert players-->
-                    
+                    <?php 
+                        $string = 'https://fbcdn-profile';
+                        $imgpath = $results -> Picture;
+                        if (strpos($imgpath, $string) === false ) {
+                    ?>
                     <img id="img" src="<?php echo base_url();?>uploads/playerlogo/<?= $results -> Picture ?>" alt="your image" />
+                    <?php }else { ?>
+                        <img id="img" src="<?= $results -> Picture ?>" alt="your image" />
+                    <?php } ?>
                     <br /><br />
                     <input type="file" name="userfile" size="20" onchange="readURL(this);" />
                     
