@@ -155,11 +155,11 @@
 										<input class="input-full" type="password" name="password" id="password" placeholder="Password"  />
 						  			</div>
 						  		</div>
-						  		<div class="row-fluid">
+						  		<!-- <div class="row-fluid">
 						  			<div class="span12">
 										<input class="input-full" type="password" name="repassword" id="repassword" placeholder="Password"  />
 						  			</div>
-						  		</div>
+						  		</div> -->
 						  		<div class="row-fluid">
 						  			<div class="span4 text-right">
 					                    <!-- Month -->

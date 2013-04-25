@@ -68,8 +68,13 @@
 				data : dataString,
 				dataType : "json",
 				success : function(data) {
-					$('#error_message').html(data.message);
-					$('#error_box').dialog("open");
+					if(!data.success){
+						$('#error_message').html(data.message);
+						$('#error_box').dialog("open");
+					}
+					else{
+						window.location.replace($.myURL());
+					}
 				}
 			});
 		});
