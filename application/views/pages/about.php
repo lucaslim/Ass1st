@@ -12,8 +12,8 @@
 	<div class="row-fluid">
 		<!-- Place Main Content Here -->
 		<div id="leftContent" class="span4">
-			<img src="<?= base_url()?>/uploads/identity.png" alt="Team Assist" title="Team Assist" /><br /><!--team logo-->
-			image logo
+			<img src="<?= base_url()?>/uploads/assistlogo/AssistLogo.png" alt="Team Assist" title="Team Assist" /><br /><!--team logo-->
+			Team Assist Logo
 		</div>
 		<div id="rightContent" class="span8">
 			<legend>About</legend>
@@ -26,7 +26,7 @@
 	<hr>
 	<div class="row-fluid">
 		<div class="span2">
-			<img src="<?= base_url()?>/uploads/identity.png" alt="Team Assist" title="Team Assist" />
+			<img src="<?= base_url()?>/uploads/assistlogo/mike.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/mike.jpg'" alt="Team Assist" title="Team Assist" />
 		</div>
 		<div class="span10">
 			<strong>Michael Mandarino – Developer &amp; Project Leader</strong>
@@ -38,10 +38,10 @@
 	<hr>
 	<div class="row-fluid">
 		<div class="span2">
-			<img src="<?= base_url()?>/uploads/identity.png" alt="Team Assist" title="Team Assist" />
+			<img src="<?= base_url()?>/uploads/assistlogo/lucas.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/lucas.jpg'" alt="Team Assist" title="Team Assist" />
 		</div>
 		<div class="span10">
-			<strong>Neil Fenton – Developer </strong>
+			<strong>Lucas Lim – Developer </strong>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus elit tortor, ultrices vel consectetur quis, facilisis ut mauris. Sed pulvinar diam rhoncus augue vestibulum varius. Morbi libero metus, adipiscing a tristique at, vulputate ac felis. Sed faucibus nisi id eros fermentum luctus. Nullam sit amet neque augue. Pellentesque ornare arcu non libero tincidunt tincidunt. Nam faucibus interdum erat, a ornare diam cursus id.</p>
 
 			<p>Proin sit amet mauris nisl. Nulla facilisi. Morbi id mi sapien, vitae fermentum mauris. Sed metus nunc, convallis a egestas vitae, tristique ut nisl. Suspendisse convallis vestibulum hendrerit. Duis quis est nulla. Integer rhoncus mauris sit amet diam varius cursus. Integer blandit vehicula quam, non consectetur dui ultrices eget. Mauris dictum tempor diam, eget tempus purus condimentum ac. Nullam eleifend congue lectus, eget ornare enim tincidunt eu. Suspendisse potenti. Cras condimentum bibendum sapien, laoreet porta metus dignissim id. Donec auctor sapien quis sapien porta ut pretium ipsum tempor. Cras consectetur odio vel ligula sagittis pellentesque. Nullam malesuada urna vel felis ultrices sed interdum magna ornare. Pellentesque pulvinar, justo ut luctus congue, lectus sem egestas lorem, at fringilla libero diam sit amet velit.</p>
@@ -50,7 +50,7 @@
 	<hr>
 	<div class="row-fluid">
 		<div class="span2">
-			<img src="<?= base_url()?>/uploads/identity.png" alt="Team Assist" title="Team Assist" />
+			<img src="<?= base_url()?>/uploads/assistlogo/neil.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/mike.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" alt="Team Assist" title="Team Assist" />
 		</div>
 		<div class="span10">
 			<strong>Neil Fenton – Developer</strong>
@@ -62,7 +62,7 @@
 	<hr>
 	<div class="row-fluid">
 		<div class="span2">
-			<img src="<?= base_url()?>/uploads/identity.png" alt="Team Assist" title="Team Assist" />
+			<img src="<?= base_url()?>/uploads/assistlogo/joel.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/joel.jpg'" alt="Team Assist" title="Team Assist" />
 		</div>
 		<div class="span10">
 			<strong>Joel Ymele – Developer</strong>
