@@ -95,7 +95,7 @@ class Search_Model extends CI_Model {
 
 	function search_keyword( $keyword, $num_results = null ) {
 		//Get top 5 player data
-		$this -> db -> select( 'Id, FullName as `Name`, Picture as `Picture`, \'Players\' as `Type`, \'\' as `Url`, City, Province, CountryName ', FALSE );
+		$this -> db -> select( 'Id, FullName as `Name`, Picture as `Picture`, \'Players\' as `Type`, \'pages/player/\' as `Url`, City, Province, CountryName ', FALSE );
 		$this -> db -> like( 'FullName', $keyword );
 		$this -> db -> order_by( 'FullName', 'asc' );
 		if ( $num_results != null )

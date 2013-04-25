@@ -213,7 +213,7 @@ class Pages extends CI_Controller {
 		$data['team'] = $this -> Division_Model -> get_team_by_id( $id ); // retrieve team info
 		$data['standings'] = $this -> Division_Model -> get_team_standing( $id, 1 ); // retrieve teams
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id( $id ); // retrieve team roster
-		$data['scoring'] = $this -> Scorekeeper_Model -> load_team_scoring($id);
+		$data['scoring'] = $this -> Scorekeeper_Model -> load_team_scoring( $id );
 
 		// Provide a page title
 		$data['title'] = "Team Profile";
@@ -405,7 +405,7 @@ class Pages extends CI_Controller {
 	 *
 	 */
 
-	function player($playerid, $seasonid = 1) {
+	function player( $playerid, $seasonid = 1 ) {
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
@@ -417,15 +417,15 @@ class Pages extends CI_Controller {
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
 		// Get player data
-		$data['playerscoring'] = $this -> Scorekeeper_Model -> get_player_stats($playerid, 1);
-		$data['playerinfo'] = $this -> Scorekeeper_Model -> get_player_info($playerid);
-		$data['teaminfo'] = $this -> Team_Model -> get_teams_by_user_id($playerid);
+		$data['playerscoring'] = $this -> Scorekeeper_Model -> get_player_stats( $playerid, 1 );
+		$data['playerinfo'] = $this -> Scorekeeper_Model -> get_player_info( $playerid );
+		$data['teaminfo'] = $this -> Team_Model -> get_teams_by_user_id( $playerid );
 
 
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'pages/players.php', $data );
 		$this -> load -> view( 'templates/footer' );
-	}	
+	}
 
 	// --------------------------------------------------------------------
 	/**
@@ -437,13 +437,13 @@ class Pages extends CI_Controller {
 
 	function invite_users() {
 
-		$user_data = $this -> session -> userdata('authorized');
+		$user_data = $this -> session -> userdata( 'authorized' );
 
 		// If user is not captain, send then to index
-	    if(!$this -> User_Model -> is_captain($user_data['id'])) {
-	    	// Redirect home
-	    	redirect('', 'location');
-		}			
+		if ( !$this -> User_Model -> is_captain( $user_data['id'] ) ) {
+			// Redirect home
+			redirect( '', 'location' );
+		}
 
 		$this -> session -> set_userdata( 'invitedata', array( "team_id" => 36 ) );
 		$invite_data = $this -> session -> userdata["invitedata"];
@@ -611,7 +611,7 @@ class Pages extends CI_Controller {
 
 		//Get total number of rows
 		$total_rows = $this -> Search_Model -> search_count( $keyword );
-		
+
 		//Set pagination data
 		$data = get_pagination_data( "pages/search", $total_rows );
 
@@ -623,7 +623,7 @@ class Pages extends CI_Controller {
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
-		
+
 		// Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
