@@ -100,7 +100,7 @@ $(function() {
 
 									var picture = value.Picture;
 
-									if(picture.indexOf("http") > 0)
+									if(picture.indexOf("http") == 0)
 										img_src = picture;
 									else if (picture != '' && value.Type == 'Team')
 										img_src = $.myURL() + 'uploads/teamlogos/' + picture;
