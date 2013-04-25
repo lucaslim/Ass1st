@@ -46,8 +46,8 @@ class Search extends CI_Controller {
 	// }
 
 
-	public function index() {
-		$keyword = $this -> input -> get('k');
+	public function query() {
+		$keyword = $this -> input -> get('q');
 
 		$result = $this -> search_model -> search_keyword($keyword, 3);
 

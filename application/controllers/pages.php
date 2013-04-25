@@ -605,7 +605,10 @@ class Pages extends CI_Controller {
 	}
 
 	function search() {
-		$keyword = $this -> input -> get( 'k' );
+		$keyword = $this -> input -> get( 'q' );
+
+		if(!isset($keyword) || empty($keyword))
+			header('location: ' . base_url());
 
 		$this->load->model( 'Search_Model' );
 
@@ -613,10 +616,13 @@ class Pages extends CI_Controller {
 		$total_rows = $this -> Search_Model -> search_count( $keyword );
 
 		//Set pagination data
-		$data = get_pagination_data( "pages/search", $total_rows );
+		$data = get_pagination_data( "pages/search/query", $total_rows );
 
 		//set data
 		$player_data = $this -> Search_Model -> search_all_keywords( $keyword, $data['per_page'], $data['current_page'], $total_rows );
+
+		$data['total_rows'] = $total_rows;
+
 		$data['results'] = $player_data;
 
 		$data['title'] = "Search Result(s)";

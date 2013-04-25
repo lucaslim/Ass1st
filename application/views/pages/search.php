@@ -2,6 +2,7 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<h1><?php echo $title ?><small><?php echo $page_links ?></small></h1>
+			<h2><small>About <?php echo $total_rows; ?> result(s)</small></h2>
 			<table>
 				<?php foreach ( $results as $value ): ?>
 					<tr>

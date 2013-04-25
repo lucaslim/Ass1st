@@ -50,6 +50,14 @@
 // --------------------------------------------------------------------
 
 $(function() {
+	$('#btn_search').on({
+		click: function(e) {
+			e.preventDefault();
+
+			window.location.replace($.myURL() + 'pages/search/?q=' + $('#search_box').val());
+		}
+	})
+
 	//hide search box
 	$('#search_results').hide();
 
@@ -72,8 +80,8 @@ $(function() {
 				{
 					$.ajax({
 						type : 'get',
-						url : $.myURL() + 'search/',
-						data : {'k' : $('#search_box').val() },
+						url : $.myURL() + 'search/query/',
+						data : {'q' : $('#search_box').val() },
 						dataType : "json",
 						success : function(data) {
 								//show result
@@ -107,7 +115,7 @@ $(function() {
 
 							//View more
 							output += "<tr><td>&nbsp;</td></tr>";
-							output += "<tr><td bgcolor='#07bbff' height='40' width='300'><a href='" + $.myURL() + "pages/search/?k=" + $('#search_box').val() + "'>&nbsp;&nbsp;&nbsp;View more results...</a></td></tr>";
+							output += "<tr><td bgcolor='#07bbff' height='40' width='300'><a href='" + $.myURL() + "pages/search/?q=" + $('#search_box').val() + "'>&nbsp;&nbsp;&nbsp;View more results...</a></td></tr>";
 
 							output += "</table>";
 
