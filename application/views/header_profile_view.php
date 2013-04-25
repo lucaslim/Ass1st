@@ -10,8 +10,14 @@
 				<?php echo $full_name; ?> <b class="caret white-caret"></b>
 			</a>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-				<li><a href="<?php echo base_url(); ?>pages/user_profile">My Profile</a></li>
-				<li><a href="<?php echo base_url(); ?>edit_profile">Edit Profile</a></li>
+				<?php if($team) : ?>
+					<li><a href="<?php echo base_url(); ?>pages/user_profile"><?php echo $team[1]; ?></a></li>
+				<?php endif; ?>				
+				<li><a href="<?php echo base_url(); ?>edit_profile">Edit My Info</a></li>
+				<?php if($captain == 1) : ?>
+						<li class="divider"></li>
+					<li><a href="<?php echo base_url(); ?>edit_team_profile">Edit Team Profile</a></li>
+				<?php endif; ?>				
 				<li class="divider"></li>
 				<li><a href="<?php echo base_url(); ?>logout">Log Out</a></li>
 			</ul>

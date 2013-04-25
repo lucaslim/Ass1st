@@ -31,7 +31,7 @@ if (!defined('BASEPATH'))
 			$this->db->set('Picture',$image);
 			$this->db->where('Id',$id);
 			$this->db->update('User');
-		}
+		}		
 
 		/**
 		 *

@@ -23,6 +23,7 @@ class Edit_Team_Profile extends CI_Controller {
 		$this -> load -> model('News_Model');
 		$this -> load -> model('User_Model');
 		$this -> load -> model('Team_Model');
+		$this -> load -> model('image_model');
 
 		$this -> load -> helper(array('form', 'url' ,'date', 'template'));
 		$this -> load -> helper('validation_helper');
@@ -30,14 +31,13 @@ class Edit_Team_Profile extends CI_Controller {
 
 		$this -> load -> library('session');//loads the library for all the functions
 
-		$user_data = $this -> session -> userdata('authorized');	
+		$user_data = $this -> session -> userdata('authorized');
 
-	    if($this -> User_Model -> is_captain($user_data['id'])) {
-	    	//echo "captain";
-		}
-		else {
-		    //echo "not captain";
-		}
+		// If user is not captain, send then to index
+	    if(!$this -> User_Model -> is_captain($user_data['id'])) {
+	    	// Redirect home
+	    	redirect('', 'location');
+		}		
 	}
 
 	// --------------------------------------------------------------------
@@ -73,12 +73,17 @@ class Edit_Team_Profile extends CI_Controller {
 		// Set title
 		$data['title'] = "Edit Team Profile"; // Use the file as the title
 
+		// Team Design
+		$sess_data = $this -> session -> userdata( 'teamdata' );
+		$data['default'] = array( "TeamName" => $sess_data["Name"], "ShowUpdate" => true, "ShowUpload" => false );
+		$data['color_chooser'] = $this -> load -> view( 'team_color_chooser_view', $data, true ); 
+
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'edit_team_profile', $data );
 		$this -> load -> view( 'templates/footer', $data);
 
     	// Clear session message after the view loads
-    	$this -> session -> set_userdata('message', '');
+    	$this -> session -> set_userdata('message', '');   	
 	}
 
 	// --------------------------------------------------------------------
@@ -120,5 +125,50 @@ class Edit_Team_Profile extends CI_Controller {
 		// Return to index
 		header("Location: ./");
 	}
+
+	// --------------------------------------------------------------------
+	/**
+	 * Do Upload
+	 *
+	 * Perform uploading of team profile picture
+	 *
+	 */	
+
+	function do_upload()
+	{
+		$teamid = $_POST['TeamId'];
+
+		// Create variable with the files extension attached
+		$ext = end(explode(".", $_FILES['userfile']['name']));		
+		
+		// Configure upload class
+		$config['upload_path'] = './uploads/teamlogos';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '100';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		$config['overwrite'] = true;
+		$config['file_name'] = 'team-logo-id-' . $teamid . '.' . $ext;
+
+		// Load upload library
+		$this -> load -> library('upload', $config);
+
+		// Get session data
+		$user_data = $this -> session -> userdata('authorized');
+
+		if (!$this -> upload -> do_upload())
+		{
+			$error = $this -> upload -> display_errors();
+			$this -> session -> set_userdata('message', 'ERROR: ' . $error);
+			header("Location: ./");
+		}
+		else
+		{
+			$this -> session -> set_userdata('message', 'Image successfully uploaded');
+			$fileupload = $this -> upload -> data();
+			$upload = $this -> Team_Model -> save_team_image($teamid, $config['file_name']);
+			header("Location: ./");
+		}
+	}	
 }
 ?>

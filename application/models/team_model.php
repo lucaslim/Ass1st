@@ -115,6 +115,20 @@ class Team_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 	/**
+	 * Save Team Image
+	 *
+	 * Update the database with the new image title
+	 *
+	 */
+	function save_team_image($teamid, $image) {
+		
+		$this -> db -> set('Picture', $image);
+		$this -> db -> where('Id', $teamid);
+		$this -> db -> update('Team');
+	}	
+
+	// --------------------------------------------------------------------
+	/**
 	 * Update Team Roster
 	 *
 	 * Update the team roster jersey numbers and captain status
