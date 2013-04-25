@@ -91,13 +91,7 @@ class Login_Fb extends CI_Controller {
 					$gender = array_key_exists('gender', $fb_user) ? $fb_user['gender'] : '';
 
 					$picture = array_key_exists('picture', $fb_user) ? $fb_user['picture']['data']['url'] : NULL;
-					//joel modified this to store the image---------------------------------------------------------------------
-					//$file = file_get_contents('https://graph.facebook.com/'.$fb_id.'/picture?type=large');//link to the facebook image
-					//$fb_id is the user's facebook id
-					//$picture = $first_name . '.jpg';
-					//file_put_contents(base_url().'uploads/playerlogo/'. $picture, $file);
 					
-					//----------------------------------------------------------------------------------------------------------
 
 					$email = array_key_exists('email', $fb_user) ? $fb_user['email'] : '';
 
