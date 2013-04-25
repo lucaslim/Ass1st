@@ -64,7 +64,12 @@ $(function() {
 			clearTimeout(search);
 			
 			search = setTimeout(function () {
-				$.ajax({
+
+				if ($('#search_box').val() == '')
+				{
+					$('#search_results').hide();
+				}else
+				{$.ajax({
 					type : 'get',
 					url : $.myURL() + 'search/',
 					data : {'k' : $('#search_box').val() },
@@ -82,8 +87,19 @@ $(function() {
 									header_text = value.Type;
 								}
 								
-								output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr /></td></tr>";
-								
+								//Joel: commented this out and added the if statement below
+								// output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr /></td><tr>";
+
+								//checks if the image comes from facebook or from the website
+								if (value.Picture.indexOf("https://fbcdn-profile") < 0)
+								{
+									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/playerlogo/' + value.Picture;
+								}else
+								{
+									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + value.Picture;
+								}
+
+								output += "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr /></td></tr>";
 							});
 
 							//View more
@@ -98,7 +114,7 @@ $(function() {
 							$('#search_results').html('No results found');
 						}					
 					}
-				});
+				})};
 			}, 200);
 		}
 	});
