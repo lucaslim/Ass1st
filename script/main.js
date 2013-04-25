@@ -50,12 +50,18 @@
 // --------------------------------------------------------------------
 
 $(function() {
+	$('#btn_search').on({
+		click: function(e) {
+			e.preventDefault();
+
+			window.location.replace($.myURL() + 'pages/search/?q=' + $('#search_box').val());
+		}
+	})
+
 	//hide search box
 	$('#search_results').hide();
 
 	var search;
-
-	
 
 	//auto complete
 	$('#search_box').on({
@@ -67,49 +73,49 @@ $(function() {
 			
 			search = setTimeout(function () {
 
-				if ($('#search_box').val() == '')
-				{
+				if ($('#search_box').val() == '') {
 					$('#search_results').hide();
-				}else
-				{$.ajax({
-					type : 'get',
-					url : $.myURL() + 'search/',
-					data : {'k' : $('#search_box').val() },
-					dataType : "json",
-					success : function(data) {
-							//show result
-						$('#search_results').show();
+				}
+				else
+				{
+					$.ajax({
+						type : 'get',
+						url : $.myURL() + 'search/query/',
+						data : {'q' : $('#search_box').val() },
+						dataType : "json",
+						success : function(data) {
+								//show result
+							$('#search_results').show();
 
-						if(data.success){
-							var header_text ="";
-							var output = "<table>";
-							$.each(data.result, function(index, value){
-								if(header_text != value.Type){
-									output += "<tr><th>" + value.Type + "<hr style='width:228px' /></th></tr>";
-									header_text = value.Type;
-								}
+							if(data.success){
+								var header_text ="";
+								var output = "<table>";
+								$.each(data.result, function(index, value){
+									if(header_text != value.Type){
+										output += "<tr><th>" + value.Type + "<hr style='width:228px' /></th></tr>";
+										header_text = value.Type;
+									}
+
+									var img_src;
+
+									var picture = value.Picture;
+
+									if(picture.indexOf("http") > 0)
+										img_src = picture;
+									else if (picture != '' && value.Type == 'Team')
+										img_src = $.myURL() + 'uploads/teamlogos/' + picture;
+									else if (picture != '' && value.Type == 'Players')
+										img_src = $.myURL() + 'uploads/playerlogo/' + picture;
+									else
+										img_src = $.myURL() + 'uploads/teamlogos/blank_avatar/png';
+									
+									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + img_src + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:228px'/></td></tr>";
 								
-								var site = $.myURL() + value.Url + value.Id ;
-								//Joel: commented this out and added the if statement below
-								// output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr /></td><tr>";
-
-								//checks if the image comes from facebook or from the website
-								if (value.Picture.indexOf("https://fbcdn-profile") < 0)
-								{
-									output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + $.myURL() + 'uploads/playerlogo/' + value.Picture;
-
-								}
-								else
-								{
-									output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + value.Picture;
-								}
-
-								output += "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:228px'/></td></tr>";
-							});
+								});
 
 							//View more
 							output += "<tr><td>&nbsp;</td></tr>";
-							output += "<tr><td bgcolor='#07bbff' height='40' width='300'><a href='" + $.myURL() + "pages/search/?k=" + $('#search_box').val() + "'>&nbsp;&nbsp;&nbsp;View more results...</a></td></tr>";
+							output += "<tr><td bgcolor='#07bbff' height='40' width='300'><a href='" + $.myURL() + "pages/search/?q=" + $('#search_box').val() + "'>&nbsp;&nbsp;&nbsp;View more results...</a></td></tr>";
 
 							output += "</table>";
 

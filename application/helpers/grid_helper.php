@@ -36,10 +36,22 @@ function get_row_count( $table_name, $option = null ) {
 			}
 		}
 
+		//Set Like Clause
+		if ( isset( $option['like'] ) ) {
+			if ( is_array( $option['like'] ) ) {
+				foreach ( $option['like'] as $column_name => $value ) {
+					
+					$CI -> db -> like( $column_name, $value );
+				}
+			}
+		}
+
 		//Set Where Clause
 		if ( isset( $option['where'] ) ) {
 			if ( is_array( $option['where'] ) ) {
 				foreach ( $option['where'] as $column_name => $value ) {
+					var_dump($column_name);
+					exit;
 					$CI -> db -> where( $column_name, $value );
 				}
 			}
@@ -87,7 +99,7 @@ function get_result( $option ) {
 
 	//Set column names
 	if ( isset( $option['column_names'] ) )
-		$CI -> db -> select( $option['column_names']  );
+		$CI -> db -> select( $option['column_names'] , FALSE );
 
 	//Set the limit on the database query
 	if ( isset( $option['start_number'] ) && isset( $option['total_number'] ) )
@@ -100,6 +112,15 @@ function get_result( $option ) {
 	if ( isset( $option['order_by'] ) ) {
 		foreach ( $option['order_by'] as $column_name => $direction ) {
 			$CI -> db -> order_by( $column_name, $direction );
+		}
+	}
+
+	//Set Like Clause
+	if ( isset( $option['like'] ) ) {
+		if ( is_array( $option['like'] ) ) {
+			foreach ( $option['like'] as $column_name => $value ) {
+				$CI -> db -> like( $column_name, $value );
+			}
 		}
 	}
 

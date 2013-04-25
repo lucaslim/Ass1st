@@ -1,5 +1,12 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>script/chat.js"></script>
 
+<script type="text/javascript">
+
+var chat_id = "<?php echo $chat_id; ?>";
+var user_id = "<?php echo $user_id; ?>";
+
+</script>
+
 <style type="text/css">
 
 div#chat_viewport {
@@ -67,10 +74,3 @@ div#chat_viewport ul li.by_current_user span.chat_message_header {
 <div id="chat_viewport">
 </div>
 
-
-<script type="text/javascript">
-
-var chat_id = "<?php echo $chat_id; ?>";
-var user_id = "<?php echo $user_id; ?>";
-
-</script>

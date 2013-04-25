@@ -46,17 +46,17 @@ class Search extends CI_Controller {
 	// }
 
 
-	public function index() {
-		$keyword = $this -> input -> get('k');
+	public function query() {
+		$keyword = $this -> input -> get('q');
 
-		$result = $this -> search_model -> search_keyword($keyword);
+		$result = $this -> search_model -> search_keyword($keyword, 3);
 
 		if($result > 0)
 			$return_array = array('success' => true, 'result' => $result);
 		else
 			$return_array = array('success' => false);
 
-		$this -> output -> set_content_type('application/json') -> set_output(json_encode($return_array));
+		echo json_encode($return_array);
 	}
 
 
