@@ -47,8 +47,8 @@ class Chat extends CI_Controller {
 		$user_data = $this->session->userdata('authorized');
 
 		$chat_id = $user_data['team'][0];
-		//$user_id = $user_data['id'];
-		$user_id = $this->input->post('user_id');
+		$user_id = $user_data['id'];
+		//$user_id = $this->input->post('user_id');
 
 		$teamid = $user_data['team'][0];//retrieves the first team in which the player is found
 
