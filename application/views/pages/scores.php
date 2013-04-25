@@ -35,7 +35,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<?php echo $game['HomeTeamName']; ?>
+										<a href="<?php echo base_url(); ?>pages/team/<?php echo $game['HomeTeamId']; ?>"><?php echo $game['HomeTeamName']; ?></a>
 									</td>
 									<td>
 										<?php echo $game['HomeTeamScore'][1]; ?>
@@ -57,7 +57,7 @@
 								</tr>
 								<tr>
 									<td>
-										<?php echo $game['AwayTeamName']; ?>
+										<a href="<?php echo base_url(); ?>pages/team/<?php echo $game['AwayTeamId']; ?>"><?php echo $game['AwayTeamName']; ?></a>
 									</td>
 									<td>
 										<?php echo $game['AwayTeamScore'][1]; ?>

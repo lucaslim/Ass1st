@@ -377,8 +377,10 @@ class Division_Model extends CI_Model {
             	// Stash data in associative array
 				$push_me = array (
 					'GameId' => $gameid,
+					'HomeTeamId' => $hometeam,
 					'HomeTeamName' => $hometeamname,
 					'HomeTeamScore' => $homescore,
+					'AwayTeamId' => $awayteam,
 					'AwayTeamName' => $awayteamname,
 					'AwayTeamScore' =>  $awayscore,
 					'Progress' => $progress,

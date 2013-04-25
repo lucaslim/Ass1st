@@ -35,7 +35,7 @@
 					<?php endforeach ?>
 				<?php else : ?>
 					<tr>
-						<td>
+						<td colspan="6">
 							No Roster Data Found
 						</td>
 					</tr>

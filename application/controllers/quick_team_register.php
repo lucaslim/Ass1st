@@ -127,8 +127,6 @@ class Quick_Team_Register extends CI_Controller {
 			$data['color_chooser'] = $this -> load -> view( 'team_color_chooser_view', $color_chooser_data, true );
 		}
 
-
-
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'pages/team_registration.php', $data );
 		$this -> load -> view( 'templates/footer' );
