@@ -58,19 +58,11 @@
 		 */
 		public function edit_player()
 		{
-			
-			
 				$user_data = $this->session->userdata('authorized');
-
-				$data = array('upload_data' => $this->upload->data());
-				
-				$pic = $_FILES['userfile']['name'];
-				
-
 				
 				$this->user_model->edit_user($user_data['id']);
 
-				
+				header('Location: edit_profile');				
 		}
 
 		public function edit_player_img()
@@ -101,7 +93,7 @@
 
 				$this -> user_model->edit_image($user_data['id'], $pic);
 
-				header('Location: ../');
+				header('Location: edit_profile');
 			}
 		}
 	}
