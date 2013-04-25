@@ -109,7 +109,7 @@ $(function() {
 									else
 										img_src = $.myURL() + 'uploads/teamlogos/blank_avatar/png';
 									
-									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + img_src + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:228px'/></td></tr>";
+									output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + img_src + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:228px'/></td></tr>";
 								
 								});
 
