@@ -13,15 +13,15 @@ class Chat extends CI_Controller {
 	{
 		/* send in chat id and user id */
 		
-		
-		
+
 		// check they are logged in
 		if (! $this->session->userdata('authorized')) {
 			redirect('index.php');
 		}
 		
-		$data['user_id'] = $this -> session -> userdata('authorized');
+		
 		$user_data = $this -> session -> userdata('authorized');
+		$data['user_id'] = $user_data['id'];
 		$data['chat_id'] = $user_data['team'][0];
 
 		
@@ -30,6 +30,7 @@ class Chat extends CI_Controller {
 		$data['page_title'] = '';
 		$data['page_content'] = 'view_chat';
 		$this->load->view('view_main', $data);	
+		
 	}
 	
 	
@@ -46,7 +47,8 @@ class Chat extends CI_Controller {
 		$user_data = $this->session->userdata('authorized');
 
 		$chat_id = $user_data['team'][0];
-		$user_id = $user_data['id'];
+		//$user_id = $user_data['id'];
+		$user_id = $this->input->post('user_id');
 
 		$teamid = $user_data['team'][0];//retrieves the first team in which the player is found
 
@@ -60,11 +62,8 @@ class Chat extends CI_Controller {
 	
 	function ajax_get_chat_messages()
 	{
-		$user_data = $this->session->userdata('authorized');
-
-		$teamid = $user_data['team'][0];//retrieves the first team in which the player is found
+		
 		//$chat_id = $this->input->post('chat_id');
-		$chat_id = $user_data['team'][0];
 
 		echo $this->_get_chat_messages($chat_id);
 	}
@@ -103,7 +102,7 @@ class Chat extends CI_Controller {
 		else
 		{
 			// we have no chat yet
-			$result = array('status' => 'ok', 'content' => '');
+			$result = array('status' => 'no chat', 'content' => '');
 			
 			return json_encode($result);
 			exit();
