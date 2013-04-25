@@ -404,35 +404,21 @@ class Scorekeeper extends Admin_Controller {
 		$homeScore = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	    
 		$awayScore = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteam);		
 		
-		switch ($matchtype) 
-		{
-			case 1:
-				// handle exhibition games
-				break;
-			case 2:
-				 // handle practice games
-				break;
-			case 3:
-				// handle regular season games
-				if($homeScore > $awayScore) // if hometeam is winner
-					$this -> save_result($seasonid, $gameid, $hometeam, $awayteam, $progress);
-				
-				elseif($awayScore > $homeScore) // if away is winner
-					$this -> save_result($seasonid, $gameid, $awayteam, $hometeam, $progress);
-				
-				else 
-				{
-					// Provide success message via session variable
-					$_SESSION['message'] = "Error! Game not completed";
 
-					// Direct user to the scorekeeping application
-					header('location: ../play_game/' . $gameid);
-				}
-			case 4:
-				// handle playoff games
-				break;
+		if($homeScore > $awayScore) // if hometeam is winner
+			$this -> save_result($seasonid, $gameid, $hometeam, $awayteam, $progress);
+		
+		elseif($awayScore > $homeScore) // if away is winner
+			$this -> save_result($seasonid, $gameid, $awayteam, $hometeam, $progress);
+		
+		else 
+		{
+			// Provide success message via session variable
+			$_SESSION['message'] = "Error! Game not completed";
+
+			// Direct user to the scorekeeping application
+			header('location: ../play_game/' . $gameid);
 		}
-		return;
 
 	}	
 

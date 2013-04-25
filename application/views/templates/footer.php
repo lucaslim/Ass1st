@@ -13,19 +13,15 @@
                         <div id="footerLinks" class="pull-right">
                             <ul>
                                 <li>
-                                    <a href="#">Privacy</a>
+                                    <a href="<?php echo base_url(); ?>">Home</a>
                                 </li>
                                 <li>•</li>
                                 <li>
-                                    <a href="#">Terms</a>
+                                    <a href="<?php echo base_url(); ?>pages/news">News</a>
                                 </li>
                                 <li>•</li>
                                 <li>
-                                    <a href="#">Help</a>
-                                </li>
-                                <li>•</li>
-                                <li>
-                                    <a href="#">Contact</a>
+                                    <a href="<?php echo base_url(); ?>pages/about">About</a>
                                 </li>
                             </ul>
                         </div>                            
