@@ -479,6 +479,8 @@ class Scorekeeper_Model extends CI_Model {
     	
     	$this -> db -> where('TeamId', $teamid);
 
+    	$this -> db -> where('SeasonId', 1);
+
     	$data = array();
 
 	    // Perform the query

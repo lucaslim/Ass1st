@@ -107,7 +107,6 @@
     		            <ul>
     		            	<li><button class="btn btn-inverse btn-primary" id="signup_facebook" onclick="window.location.href = '<?php echo site_url('login_fb') ?>'"><span><i class="icon-facebook"></i></span> | Sign in with Facebook</button></li>
     		                <li><button class="btn btn-inverse btn-primary" id="signup_twitter" onclick="window.location.href = '<?php echo site_url('login_twitter') ?>'"><span><i class="icon-twitter"></i></span> | Sign in with Twitter</button></li>
-    		                <li><button class="btn btn-inverse btn-primary" id="signup_google"><span><i class="icon-google-plus"></i></span> | Sign in with Google+</button></li>
     		            </ul>
     		        </div>
     		   

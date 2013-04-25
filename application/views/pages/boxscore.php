@@ -10,7 +10,7 @@
 				</div>
 				<div class="span3">
 					<p class="lead text-left">
-						<?php echo $hometeaminfo -> Name; ?>
+						<a href="<?php echo base_url(); ?>pages/team/<?php echo $hometeaminfo -> Id; ?>"><?php echo $hometeaminfo -> Name; ?></a>
 						<br /><small><strong>VISITOR</strong></small>
 						<h1 class="text-left"><?php echo $hometeamscore; ?></h1>
 					</p>
@@ -22,7 +22,7 @@
 				</div>
 				<div class="span3">
 					<p class="lead text-right">
-						<?php echo $awayteaminfo -> Name; ?>
+						<a href="<?php echo base_url(); ?>pages/team/<?php echo $awayteaminfo -> Id; ?>"><?php echo $awayteaminfo -> Name; ?></a>
 						<br /><small><strong>HOME</strong></small>
 						<h1 class="text-right"><?php echo $awayteamscore; ?></h1>
 					</p>

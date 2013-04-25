@@ -20,9 +20,6 @@
 		<a href="#" target="_blank"><i class="icon-rss icon-large"></i></a>
 	</li>			
     <li>
-        <div class="btn-group">
-          <button href="#signIn" class="btn btn-small btn-inverse" data-toggle="modal">Sign In</button>
-          <button class="btn btn-small btn-inverse">Register</button>
-        </div>
+      <button href="#signIn" class="btn btn-small btn-inverse" data-toggle="modal">Sign In</button>
     </li>
 </ul>

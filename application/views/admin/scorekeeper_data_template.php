@@ -1,5 +1,4 @@
 <div class="span6">
-
 	<!-- Read Template -->
 	<table class="table table-hover">
 		<legend>
