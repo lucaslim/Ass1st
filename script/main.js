@@ -95,14 +95,14 @@ $(function() {
 								//checks if the image comes from facebook or from the website
 								if (value.Picture.indexOf("https://fbcdn-profile") < 0)
 								{
-									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/playerlogo/' + value.Picture;
+									output += "<tr><td><img class='search_results_images' style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/playerlogo/' + value.Picture;
 								// }else if (value.Url.indexOf("team") > 0) 
 								// {
 								// 	output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture;
 								}
 								else
 								{
-									output += "<tr><td><img style='width: 20px; height: 20px;' src='" + value.Picture;
+									output += "<tr><td><img class='search_results_images' style='width: 20px; height: 20px;' src='" + value.Picture;
 								}
 
 								output += "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:231px'/></td></tr>";
@@ -110,7 +110,7 @@ $(function() {
 
 							//View more
 							output += "<tr><td>&nbsp;</td></tr>";
-							output += "<tr><td><a href='" + $.myURL() + "pages/search/?k=" + $('#search_box').val() + "'>View more results...</a></td></tr>";
+							output += "<tr><td bgcolor='#07bbff' height='40' width='300'><a href='" + $.myURL() + "pages/search/?k=" + $('#search_box').val() + "'>&nbsp;&nbsp;&nbsp;View more results...</a></td></tr>";
 
 							output += "</table>";
 
