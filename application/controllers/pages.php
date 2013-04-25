@@ -219,6 +219,11 @@ class Pages extends CI_Controller {
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
+		// Get latest news
+		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news title
+		$data['news'] = $this -> News_Model -> get_news( 5, 0 ); // retrieve news
+		$data['archive'] = "News Archive";
+
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'pages/team_profile.php', $data );
 		$this -> load -> view( 'templates/footer' );
