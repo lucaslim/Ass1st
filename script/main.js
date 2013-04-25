@@ -78,11 +78,11 @@ $(function() {
 							var output = "<table>";
 							$.each(data.result, function(index, value){
 								if(header_text != value.Type){
-									output += "<tr><th>" + value.Type + "</th></tr>";
+									output += "<tr><th>" + value.Type + "<hr /></th></tr>";
 									header_text = value.Type;
 								}
 								
-								output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a></td></tr>";
+								output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr /></td></tr>";
 								
 							});
 
