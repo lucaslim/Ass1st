@@ -6,7 +6,10 @@
             <div class="container">
                 <div class="row">
                     <div class="span12">
-                        <span class="branding pull-left"><a id="assistlogo_small_href" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logos/AssistLogo_small.png" /></a> TEAM ASSIST - &copy; 2013</span>
+                        <span class="branding pull-left">
+                            <a id="assistlogo_small_href" href="https://www.facebook.com/pages/Team-Assist/522491314469799?ref=notif&notif_t=fbpage_presence">
+                                <img src="<?php echo base_url(); ?>assets/images/logos/AssistLogo_small.png" />
+                            </a> TEAM ASSIST &trade; - &copy; 2013</span>
                         <div id="footerLinks" class="pull-right">
                             <ul>
                                 <li>
