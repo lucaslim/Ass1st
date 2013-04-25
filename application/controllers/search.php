@@ -56,7 +56,7 @@ class Search extends CI_Controller {
 		else
 			$return_array = array('success' => false);
 
-		$this -> output -> set_content_type('application/json') -> set_output(json_encode($return_array));
+		echo json_encode($return_array);
 	}
 
 
