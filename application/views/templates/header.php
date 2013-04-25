@@ -270,19 +270,18 @@
                                 </li>
                             </ul>                                                  
                         </div>   
-                        <div class="span4">
+                        <div class="span4" style="position: relative;">
                             <form class="form-search pull-right" method="post" action="<?php echo base_url(); ?>search">
-                              <div class="input-prepend">
+                              <div class="input-prepend" >
                                 <button type="submit" class="btn">Search</button>
                                 <input type="text" id="search_box" class="span2 search-query">
                               </div>
-                              
+                                <div id="search_results" style="position: absolute; overflow-y:scroll; max-height:400px; width:233px; z-index: 123; top:37px; right:10px; border: 1px solid #ccf; background: rgba(255,255,255, 0.95)"> </div>
                             </form>                             
                         </div>                     
                     </div>
                 </div>
             </div>
-<div id="search_results" style="border: 1px solid white; background: white;">
-                              </div>
+            
         <div class="contentWrapper">
 
