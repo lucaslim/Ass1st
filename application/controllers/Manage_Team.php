@@ -57,7 +57,7 @@ class Manage_Team extends CI_Controller
 
 		//If update passes, redirect to the player page
 		if ($query)
-		 	header("location: ../pages/user_profile/" . $id );
+		 	header("location: ../pages/user_profile/");
 	}
 
 	

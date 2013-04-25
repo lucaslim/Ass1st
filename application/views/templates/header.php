@@ -263,9 +263,6 @@
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/standings/">Standings</a>
                                 </li>
                                 <li>
-                                    <a class="menuLink" href="<?php echo base_url(); ?>pages/stats/">Stats</a>
-                                </li>
-                                <li>
                                     <a class="menuLink" href="<?php echo base_url(); ?>pages/news/">News</a>
                                 </li>
                                 <li>

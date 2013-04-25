@@ -119,7 +119,8 @@ class Login extends CI_Controller {
 				'id' => $result -> Id,
 				'fullname' => $result -> FullName,
 				'picture' => $result -> Picture,
-				'team' => $this -> get_user_teams( $result -> Id )
+				'team' => $this -> get_user_teams( $result -> Id ),
+				'captain' => $this -> is_captain( $result -> Id )
 			);
 
 			$this -> session -> set_userdata( 'authorized', $sess_array );
@@ -147,6 +148,17 @@ class Login extends CI_Controller {
 
 		return null;
 	}
+
+	function is_captain($id) {
+		$CI =& get_instance();
+
+		$CI -> db -> where('UserId', $id);
+
+		//Execute query
+		$query = $CI -> db -> get('Roster');
+
+		return $query -> row('Captain');
+	}	
 
 	// --------------------------------------------------------------------
 

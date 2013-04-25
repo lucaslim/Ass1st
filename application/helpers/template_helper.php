@@ -23,12 +23,15 @@ function set_login_header() {
 	$CI = &get_instance();
 
 	$userdata = $CI -> session -> userdata('authorized');
+	$CI -> load -> model('User_Model');
 
 	if($userdata) {
 			// Set Profile Data
 		$profile['full_name'] = $userdata['fullname'];
 		$profile['id'] = $userdata['id'];
 		$profile['picture'] = $userdata['picture'];
+		$profile['captain'] = $userdata['captain'];
+		$profile['team'] = $userdata['team'];
 
 		return $CI -> load -> view('header_profile_view', $profile, true);
 	}
@@ -37,5 +40,4 @@ function set_login_header() {
 	}
 }
 
-// --------------------------------------------------------------------
 ?>

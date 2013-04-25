@@ -49,7 +49,7 @@
 				<li>
 					<a href="#"><strong><?php echo $team -> Name; ?> </strong> <img class="img-team" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $team -> Picture; ?>" /></a>
 				</li>
-				<li><a href="#chat">Chat</a></li>
+				<li><a href="#chat">Team Messages</a></li>
 				<li><a href="#schedule">Schedule</a></li>
 				<li><a href="#standings">Standings</a></li>
 				<li><a href="#stats">Stats</a></li>

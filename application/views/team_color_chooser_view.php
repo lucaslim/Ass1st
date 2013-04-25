@@ -240,7 +240,7 @@
 				</div>
 			</div><!-- Hidden Form to hide values // Submits to Database -->
 			<?php if($default["ShowUpdate"]): ?>
-			<form action="../../Manage_Team/update_colors" method="post">
+			<form action="<?php echo base_url();?>Manage_Team/update_colors" method="post">
 			<?php endif ?>
 				<!-- Primary -->
 				<!-- rgb(value) -->
@@ -268,7 +268,7 @@
 			<?php if($default["ShowUpdate"]): ?>
 			</form>
 			<?php endif ?>
-			
+			<?php if($default["ShowUpload"]): ?>
 			<div style="margin-top:175px;"><h3>
 				Upload Photo
 			</h3></div>
@@ -293,5 +293,6 @@
 																					    margin: 6px 0;" />
 	            </div>
 	        </div>
+	    	<? endif; ?>
 		</div>
 	</section>

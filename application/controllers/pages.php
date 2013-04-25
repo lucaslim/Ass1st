@@ -211,6 +211,7 @@ class Pages extends CI_Controller {
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
 		$data['team'] = $this -> Division_Model -> get_team_by_id( $id ); // retrieve team info
+		$data['standings'] = $this -> Division_Model -> get_team_standing( $id, 1 ); // retrieve teams
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id( $id ); // retrieve team roster
 
 		// Provide a page title

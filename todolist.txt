@@ -35,9 +35,6 @@ User Pages:
 
 User Features:
 --------------------------------------
-	- Login:
-		- Are all 4 methods of login working?
-		- We should pull any login types that are not working (Google?)
 
 	- Player Registration:
 		- Dead link in top right of all pages when not logged in 'Register'

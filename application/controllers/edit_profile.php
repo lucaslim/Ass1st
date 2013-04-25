@@ -11,6 +11,7 @@
 			$this -> load -> model('Division_Model');
 			$this -> load -> model('News_Model');
 			$this -> load -> model('user_model');
+			$this -> load -> model('image_model');
 
 			$this -> load -> helper('date');
 			$this -> load -> helper(array('form', 'url'));
@@ -58,6 +59,22 @@
 		public function edit_player()
 		{
 			
+			
+				$user_data = $this->session->userdata('authorized');
+
+				$data = array('upload_data' => $this->upload->data());
+				
+				$pic = $_FILES['userfile']['name'];
+				
+
+				
+				$this->user_model->edit_user($user_data['id']);
+
+				
+		}
+
+		public function edit_player_img()
+		{
 			$config['upload_path'] = './uploads/playerlogo/';
 			$config['allowed_types'] = 'gif|jpg|png';
 			$config['max_size']	= '100';
@@ -66,13 +83,7 @@
 
 			$this->load->library('upload', $config);
 
-			/*if ($_POST){
-				$this -> form_validation->set_rules('fname', 'First Name', 'required|callback_check_fname');
-				if ($this->form_validation->run() == FALSE){            
-		            echo validation_errors();       
-		        }
-		        else {}
-			}*/
+			
 
 			if ( ! $this->upload->do_upload())
 			{
@@ -87,28 +98,11 @@
 				$data = array('upload_data' => $this->upload->data());
 				
 				$pic = $_FILES['userfile']['name'];
-				
 
-				$this->load->model('user_model');
-				$this->user_model->edit_user($user_data['id'], $pic);
+				$this -> user_model->edit_image($user_data['id'], $pic);
 
 				header('Location: ../');
 			}
 		}
-
-		// function check_fname($p)
-		// {
-		// 	$p = $this -> input -> post('fname');
-
-
-		// 	$pattern = '/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/';
-
-		// 	if (preg_match($pattern, $p))
-		// 		return true;
-		// 	else{
-		// 		$this->form_validation->set_message('check_fname', 'check your first name');
-		// 		return false;
-		// 	}
-		// }
 	}
 ?>

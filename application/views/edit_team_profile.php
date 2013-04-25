@@ -15,11 +15,31 @@
 				</div>
 			<?php endif;?>
 
-			<label>Team Name:</label>
-			<input class="input" disabled type="text" name="Name" value="<?php echo $team -> Name; ?>" />
+			<div class="row-fluid">
+				<div class="span4">
+					<!-- Begin Image Uploader -->
+					<?php echo form_open_multipart('edit_team_profile/do_upload/');?>			
+						<p>
+							<input type="hidden" name="TeamId" value="<?php echo $team -> Id; ?>" />
+							<img style="max-width: 250px; max-height: 250px;" class="img-polaroid" id="imageUploader" src="<?php echo base_url();?>uploads/teamlogos/<?php echo $team -> Picture; ?>" alt="Team Image" />
+						</p>
+						<p>
+							<input type="file" name="userfile" onchange="readURL(this);" />
+							<input class="btn" type="submit" value="Upload" />
+						</p>
+					</form>					
+				</div>
 
-			<label>Founded:</label>
-			<input class="input" disabled type="text" name="Name" value="<?php echo $team -> Founded; ?>" />
+				<div class="span8">
+					<label>Team Name:</label>
+					<input class="input" disabled type="text" name="Name" value="<?php echo $team -> Name; ?>" />
+
+					<label>Founded:</label>
+					<input class="input" disabled type="text" name="Name" value="<?php echo $team -> Founded; ?>" />				
+				</div>		
+			</div>
+
+			<legend>Manage Team Roster</legend>
 			
 			<?php echo form_open('edit_team_profile/update_roster'); ?>
 			<table class="table table-hover">
@@ -29,7 +49,7 @@
 						<th>Name</th>
 						<th>Jersey Number</th>
 						<th>Captain</th>
-						<th>&nbsp;</th>
+						<th>Remove Player</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,13 +63,36 @@
 
 							<!-- If player is a captain, load the page with the radio button selected -->
 							<td><?php echo '<input type="checkbox" name="player[' . $key . '][Captain]"' . (($value -> Captain == 'Yes') ? 'checked="checked"' : '') . ' />'; ?></td>
-							<td><a class="btn btn-danger" href="<?php echo base_url(); ?>edit_team_profile/removeplayer/<?php echo $value -> UserId; ?>/<?php echo $teamid; ?>" onclick="return confirm('Delete?');">Delete</a></td>
+							<td><a class="btn btn-inverse" href="<?php echo base_url(); ?>edit_team_profile/removeplayer/<?php echo $value -> UserId; ?>/<?php echo $teamid; ?>" onclick="return confirm('Remove user from roster?');">Remove</a></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
 			</table>
 				<input type="submit" class="btn btn-primary" value="Save Changes" />
 			<?php echo form_close(); ?>
+
+			<legend>Edit Team Colours</legend>
+			
+			<div class="row-fluid">
+				<div style="width:99%;">
+					<?php echo $color_chooser ?>
+				</div>
+			</div>			
+
      	</div>
     </div>  
 </div>  	
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imageUploader').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

@@ -44,11 +44,34 @@ function set_oauth_data($id, $username) {
  *
  */
 function set_session_data($id, $full_name, $picture = NULL) {
+	$CI =& get_instance();
+
+	$CI -> load -> model( 'User_Model');
+
 	return array('id' => $id,
 				 'fullname' => $full_name,
 				 'picture' => $picture,
-				 'team' => get_user_teams( $id )
+				 'team' => get_user_teams( $id ),
+				 'captain' => is_captain( $id )
 			 	);
+}
+
+// --------------------------------------------------------------------
+/**
+ * Check if user is a captain
+ *
+ * Returns true if user is a captain
+ *
+ */
+function is_captain($id) {
+	$CI =& get_instance();
+
+	$CI -> db -> where('UserId', $id);
+
+	//Execute query
+	$query = $CI -> db -> get('Roster');
+
+	return $query -> row('Captain');
 }
 
 // --------------------------------------------------------------------
@@ -91,7 +114,7 @@ function get_user_teams( $user_id ) {
 		if ( $result ) {
 			$team_id = array();
 			foreach ( $result as $value ) {
-				array_push( $team_id, $value -> TeamId );
+				array_push( $team_id, $value -> TeamId, $value -> Name );
 			}
 
 			return $team_id;

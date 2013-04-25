@@ -6,14 +6,13 @@
 	====================================================================== -->
 	<div class="row-fluid">
 		<div class="span12">
-			<img src="<?= base_url()?>/uploads/teamassist.jpg" alt="Team Assist" title="Team Assist" class="span12" />
+			<img src="<?= base_url()?>/uploads/assistlogo/teamassist-banner.jpg" alt="Team Assist" title="Team Assist" class="span12" />
 		</div>
 	</div>
 	<div class="row-fluid">
 		<!-- Place Main Content Here -->
 		<div id="leftContent" class="span4">
 			<img src="<?= base_url()?>/uploads/assistlogo/AssistLogo.png" alt="Team Assist" title="Team Assist" /><br /><!--team logo-->
-			Team Assist Logo
 		</div>
 		<div id="rightContent" class="span8">
 			<legend>About</legend>
@@ -26,7 +25,7 @@
 	<hr>
 	<div class="row-fluid">
 		<div class="span2">
-			<img src="<?= base_url()?>/uploads/assistlogo/mike.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/mike.jpg'" alt="Team Assist" title="Team Assist" />
+			<img src="<?= base_url()?>/uploads/assistlogo/mike.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/mandarinoB.png'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/mike.jpg'" alt="Team Assist" title="Team Assist" />
 		</div>
 		<div class="span10">
 			<strong>Michael Mandarino – Developer &amp; Project Leader</strong>
@@ -38,7 +37,7 @@
 	<hr>
 	<div class="row-fluid">
 		<div class="span2">
-			<img src="<?= base_url()?>/uploads/assistlogo/lucas.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/lucas.jpg'" alt="Team Assist" title="Team Assist" />
+			<img src="<?= base_url()?>/uploads/assistlogo/lucas.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/lucasB.png'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/lucas.jpg'" alt="Team Assist" title="Team Assist" />
 		</div>
 		<div class="span10">
 			<strong>Lucas Lim – Developer </strong>
@@ -50,7 +49,7 @@
 	<hr>
 	<div class="row-fluid">
 		<div class="span2">
-			<img src="<?= base_url()?>/uploads/assistlogo/neil.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/mike.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" alt="Team Assist" title="Team Assist" />
+			<img src="<?= base_url()?>/uploads/assistlogo/neil.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/neilB.png'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" alt="Team Assist" title="Team Assist" />
 		</div>
 		<div class="span10">
 			<strong>Neil Fenton – Developer</strong>
@@ -62,7 +61,7 @@
 	<hr>
 	<div class="row-fluid">
 		<div class="span2">
-			<img src="<?= base_url()?>/uploads/assistlogo/joel.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/neil.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/joel.jpg'" alt="Team Assist" title="Team Assist" />
+			<img src="<?= base_url()?>/uploads/assistlogo/joel.jpg" onmouseover="this.src='<?= base_url()?>/uploads/assistlogo/joelB.jpg'" onmouseout="this.src='<?= base_url()?>/uploads/assistlogo/joel.jpg'" alt="Team Assist" title="Team Assist" />
 		</div>
 		<div class="span10">
 			<strong>Joel Ymele – Developer</strong>
