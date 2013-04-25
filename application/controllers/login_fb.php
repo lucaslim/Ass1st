@@ -141,7 +141,7 @@ class Login_Fb extends CI_Controller {
 			}
 		}
 
-		redirect(base_url('/'));
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 }

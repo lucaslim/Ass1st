@@ -182,11 +182,11 @@ class Login_Twitter extends CI_Controller {
 						$this -> session -> set_userdata('authorized', $sess_array);
 					}
 				}
-				redirect(base_url('/'));
+				redirect($_SERVER['HTTP_REFERER']);
 
 			} else {
 				// An error occured. Add your notification code here.
-				redirect(base_url('/'));
+				redirect($_SERVER['HTTP_REFERER']);
 			}
 		}
 	}
