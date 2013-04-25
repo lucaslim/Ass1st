@@ -277,13 +277,15 @@
                             <form class="form-search pull-right" method="post" action="<?php echo base_url(); ?>search">
                               <div class="input-prepend">
                                 <button type="submit" class="btn">Search</button>
-                                <input type="text" class="span2 search-query">
+                                <input type="text" id="search_box" class="span2 search-query">
                               </div>
+                              
                             </form>                             
                         </div>                     
                     </div>
                 </div>
             </div>
-
+<div id="search_results" style="border: 1px solid white; background: white;">
+                              </div>
         <div class="contentWrapper">
 

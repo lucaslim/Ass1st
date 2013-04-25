@@ -49,6 +49,62 @@
 
 // --------------------------------------------------------------------
 
+$(function() {
+	//hide search box
+	$('#search_results').hide();
+
+	var search;
+
+	//auto complete
+	$('#search_box').on({
+		keyup: function(e) {
+			e.preventDefault();
+
+			//set delay
+			clearTimeout(search);
+			
+			search = setTimeout(function () {
+				$.ajax({
+					type : 'get',
+					url : $.myURL() + 'search/',
+					data : {'k' : $('#search_box').val() },
+					dataType : "json",
+					success : function(data) {
+							//show result
+						$('#search_results').show();
+
+						if(data.success){
+							var header_text ="";
+							var output = "<table>";
+							$.each(data.result, function(index, value){
+								if(header_text != value.Type){
+									output += "<tr><th>" + value.Type + "</th></tr>";
+									header_text = value.Type;
+								}
+								
+								output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a></td></tr>";
+								
+							});
+
+							//View more
+							output += "<tr><td>&nbsp;</td></tr>";
+							output += "<tr><td><a href='" + $.myURL() + "pages/search/?k=" + $('#search_box').val() + "'>View more results...</a></td></tr>";
+
+							output += "</table>";
+
+							$('#search_results').html(output);
+						}	
+						else{
+							$('#search_results').html('No results found');
+						}					
+					}
+				});
+			}, 200);
+		}
+	});
+});
+
+
 /**
  * 
  * Ajax for Quick Register
@@ -214,6 +270,7 @@ $(document).ready(function() {
 			$('#bg_fade').fadeOut(fade_time);
 		}
 	});
+
 
 	//Escape Button
 	$(this).on({
