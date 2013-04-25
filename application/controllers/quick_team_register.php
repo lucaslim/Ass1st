@@ -125,7 +125,7 @@ class Quick_Team_Register extends CI_Controller {
 			$data['provinces'] = array( 'Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Québec', 'Saskatchewan', 'Others' );
 
 			//Team Design
-			$color_chooser_data['default'] = array( "TeamName" => $sess_data["Name"], "ShowUpdate" => false, "ShowUpload" => false );
+			$color_chooser_data['default'] = array( "TeamName" => $sess_data["Name"], "ShowUpdate" => false, "ShowUpload" => true );
 			$data['color_chooser'] = $this -> load -> view( 'team_color_chooser_view', $color_chooser_data, true );
 		}
 

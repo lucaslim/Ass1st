@@ -193,8 +193,8 @@
 				  		</div>
 						<div class="row-fluid">
 							<div class="span11 text-right">
-								<input class="btn" type="submit" value="Cancel" id="cancel" name="cancel"/>
-			                    <input class="btn btn-info" type="submit" value="Next" id="submit" name="submit"/>
+								<!-- <input class="btn" type="submit" value="Cancel" id="cancel" name="cancel"/>
+			                    <input class="btn btn-info" type="submit" value="Next" id="submit" name="submit"/> -->
 							</div>
 						</div>
 					</fieldset>
@@ -205,11 +205,6 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<!-- if logged in -->
-					<div class="reg_title_bar">
-						<div class="reg_title_text">
-							<h2>Team Registration</h2>
-						</div>
-					</div>
 					<div class="reg_subsec_title_bar">
 						<div class="reg_subsec_text">
 							<h3>Team Design</h3>

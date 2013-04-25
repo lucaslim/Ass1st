@@ -140,8 +140,7 @@ class Login_Fb extends CI_Controller {
 				$this -> session -> set_userdata('authorized', $sess_array);
 			}
 		}
-
-		redirect($_SERVER['HTTP_REFERER']);
+				redirect(base_url('/'));
 	}
 
 }
