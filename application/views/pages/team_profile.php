@@ -49,7 +49,21 @@
 
 		<!-- Place Sidebar Content Here -->
 		<div id="rightContent" class="span4">
-			<p>Empty</p>
+			<!-- /begin news list-->
+			<div class="newsDisplay" style="margin-top: 35px;">
+				<legend><?php echo $archive; // display title ?></legend>
+				<?php foreach ( $news as $news_item ): ?>
+			    	<span class="lead">
+			    		<a href="<?php echo base_url(); ?>pages/news/<?php echo $news_item -> Id ?>"><?php echo $news_item -> Title ?></a>
+			    	</span>
+		    		<p class="subtitle">
+		    			<p class="subtitle"><small>Posted: <?php echo $news_item -> PostDate; ?></small></p>
+		    			<?php echo $news_item -> Description ?>
+		    		</p>
+
+				<?php endforeach ?>
+			</div>
+		</div><!-- /end news list-->
 		</div>
 
 	</div>
