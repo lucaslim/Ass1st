@@ -4,7 +4,7 @@
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#blah').attr('src', e.target.result);
+                    $('#img').attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(input.files[0]);
@@ -28,7 +28,7 @@
 	<?php $this->load->helper('form'); ?><!--loads the form helper to help us create a form-->
 	<?php echo form_open_multipart("edit_profile/edit_player"); ?><!--this is the function called to enable us insert players-->
                     
-                    <img id="blah" src="<?php echo base_url();?>uploads/playerlogo/<?= $results -> Picture ?>" alt="your image" />
+                    <img id="img" src="<?php echo base_url();?>uploads/playerlogo/<?= $results -> Picture ?>" alt="your image" />
                     <br /><br />
                     <input type="file" name="userfile" size="20" onchange="readURL(this);" />
                     

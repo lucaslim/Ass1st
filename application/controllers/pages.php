@@ -29,6 +29,7 @@ class Pages extends CI_Controller {
 		$this -> load -> model( 'Scorekeeper_Model' );
 		$this -> load -> model( 'News_Model' );
 		$this -> load -> model( 'Team_Model' );
+		$this -> load -> model( 'User_Model' );
 
 		// Load Libraries
 		$this -> load -> library( 'pagination' );
@@ -39,7 +40,7 @@ class Pages extends CI_Controller {
 		$this -> load -> helper( 'template' );
 		$this -> load -> helper( 'scoring' );
 		$this -> load -> helper( array( 'form', 'url' ) );
-		$this -> load -> model('image_model');
+		$this -> load -> model( 'image_model' );
 	}
 
 	// --------------------------------------------------------------------
@@ -74,8 +75,8 @@ class Pages extends CI_Controller {
 		$data['query'] = $this -> image_model -> get_mediaImages();
 
 		// Get leader stat data
-		$data['leadingscorers'] = $this -> Division_Model -> get_leading_scorers('Goals', 5);
-		$data['leadingassists'] = $this -> Division_Model -> get_leading_scorers('Assists', 5);
+		$data['leadingscorers'] = $this -> Division_Model -> get_leading_scorers( 'Goals', 5 );
+		$data['leadingassists'] = $this -> Division_Model -> get_leading_scorers( 'Assists', 5 );
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
@@ -137,7 +138,7 @@ class Pages extends CI_Controller {
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
-		$data['teams'] = $this -> Division_Model -> get_standings($seasonid, $leagueid); // retrieve teams
+		$data['teams'] = $this -> Division_Model -> get_standings( $seasonid, $leagueid ); // retrieve teams
 
 		// provide a page title
 		$data['title'] = "League Standings";
@@ -233,41 +234,41 @@ class Pages extends CI_Controller {
 	function user_profile() {
 
 		// Check user is logged in
-		if(!is_loggedin())
-			header('Location: ../');
+		if ( !is_loggedin() )
+			header( 'Location: ../' );
 
-		// Load the chat data / functions 
-		$this-> load -> model('chat_model');
-		$data['user_id'] = $this -> session -> userdata('authorized');
-		$user_data = $this -> session -> userdata('authorized');
+		// Load the chat data / functions
+		$this-> load -> model( 'chat_model' );
+		$data['user_id'] = $this -> session -> userdata( 'authorized' );
+		$user_data = $this -> session -> userdata( 'authorized' );
 		$data['chat_id'] = $user_data['team'][0];
-		$this -> session -> set_userdata('last_chat_message_id_' . $data['chat_id'], 0);		
+		$this -> session -> set_userdata( 'last_chat_message_id_' . $data['chat_id'], 0 );
 
 		// Get live scoring
-		$data['livescores'] = $this -> Division_Model -> get_live_scores();		
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
 		// Get user data from session
-		$user_data = $this -> session -> userdata('authorized');
+		$user_data = $this -> session -> userdata( 'authorized' );
 		$playerid = $user_data['id'];
 
 		// Hard code season id for now
 		$seasonid = 1;
 
 		// Get user team info
-		$user_team_data = $this -> Division_Model -> get_user_teams($playerid);
+		$user_team_data = $this -> Division_Model -> get_user_teams( $playerid );
 		$teamid = $user_team_data -> TeamId;
-		$data['team'] = $this -> Division_Model -> get_team_by_id($teamid); // retrieve team info
+		$data['team'] = $this -> Division_Model -> get_team_by_id( $teamid ); // retrieve team info
 		$divisionid = $data['team'] -> DivisionId;
 		$leagueid = $data['team'] -> LeagueId;
 
 		// Get user stats info
-		$data['statistics'] = $this -> Scorekeeper_Model -> get_player_stats($playerid, $seasonid);
+		$data['statistics'] = $this -> Scorekeeper_Model -> get_player_stats( $playerid, $seasonid );
 
 		// Get team schedule, limit 15 results
-		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_by_team($teamid, $seasonid, 10, $playerid);
+		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_by_team( $teamid, $seasonid, 10, $playerid );
 
 		// Get team standings for the division
-		$data['standings'] = $this -> Division_Model -> get_standings($seasonid, $leagueid, $divisionid);
+		$data['standings'] = $this -> Division_Model -> get_standings( $seasonid, $leagueid, $divisionid );
 
 		// Get latest news
 		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news title
@@ -280,7 +281,7 @@ class Pages extends CI_Controller {
 
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'pages/user_profile.php', $data );
-		$this -> load -> view( 'templates/footer' ); 
+		$this -> load -> view( 'templates/footer' );
 	}
 
 	// --------------------------------------------------------------------
@@ -295,7 +296,8 @@ class Pages extends CI_Controller {
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
-
+		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news titles
+		
 		// Provide a page title
 		$data['title'] = "Scores";
 
@@ -377,7 +379,7 @@ class Pages extends CI_Controller {
 	 *
 	 */
 
-	function stats($seasonid = 1, $leagueid = 1) {
+	function stats( $seasonid = 1, $leagueid = 1 ) {
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
@@ -391,7 +393,7 @@ class Pages extends CI_Controller {
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'pages/stats.php', $data );
 		$this -> load -> view( 'templates/footer' );
-	}	
+	}
 
 	// --------------------------------------------------------------------
 	/**
@@ -424,7 +426,7 @@ class Pages extends CI_Controller {
 		// Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
-		$data['team_data'] = $this -> Team_Model -> get_team_by_id($invite_data["team_id"]);
+		$data['team_data'] = $this -> Team_Model -> get_team_by_id( $invite_data["team_id"] );
 
 		//load view
 		$this -> load -> view( 'templates/header', $data );
@@ -444,34 +446,122 @@ class Pages extends CI_Controller {
 
 	function send_invite() {
 		$checkbox_list = $this -> input -> post( 'select' );
+		$team_name = $this -> input -> post( 'team_name' );
+		$team_id = $this -> input -> post( 'team_id' );
+		$user_id = $this -> session -> userdata["authorized"]["id"];
+		$full_name = $this -> session -> userdata["authorized"]["fullname"];
 
 		$this -> load -> library( 'email' );
 
-		$config['protocol'] = 'sendmail';
-		$config['mailpath'] = '/usr/sbin/sendmail';
-		$config['charset'] = 'iso-8859-1';
-		$config['wordwrap'] = TRUE;
+		$config['mailtype'] = 'html';
 
+		// set email config
 		$this -> email -> initialize( $config );
 
-		foreach ( $checkbox_list as $value ) {
-			$result = $this -> User_Model -> get_user_by_id( $value );
+		foreach ( $checkbox_list as $id ) {
+			$result = $this -> User_Model -> get_user_by_id( $id );
 
 			if ( $result ) {
 				$email = $result -> Email;
 
 				if ( isset( $email ) && !empty( $email ) ) {
-					$this -> email -> from( $email );
+					$email = 'lucas@nuxbox.me';
+					$this -> email -> from( 'notification@teamassist.ca', 'Team Assist' );
 					$this -> email -> to( $email );
-					$this -> email -> subject( 'You have been invited to join '  );
-					$this -> email -> message( 'testing' );
+					$this -> email -> subject( $full_name . ' invited to you join to the team "' . $team_name . '"' );
+
+					//start encryption library
+					$this->load->library( 'encrypt' );
+
+					//Encrypt user id and team id;
+					$querystring = $this -> encrypt -> encode( $id. '|' . $team_id . '|' . $user_id );
+
+					//Create email message
+					$message = '<b>Click on the link below to accept:</b> <br /><br />';
+
+					$message .= base_url(). 'pages/accept_invite/?e=' . urlencode( $querystring );
+
+					$this -> email -> message( $message );
 
 					$send_email = $this -> email -> send();
-					var_dump( $email );
-					var_dump( $send_email );
+
 				}
 			}
 		}
+	}
+
+	function accept_invite() {
+		// Load encryption Library
+		$this->load->library( 'encrypt' );
+
+		//get cipher text
+		$ciphertext = $this -> input -> get( 'e' );
+		//decrypt cipher text
+		$plaintext = $this -> encrypt -> decode ( $ciphertext );
+
+		$data = explode( '|', $plaintext );
+
+		$reciever_id = $data[0];
+		$team_id = $data[1];
+		$user_id = $data[2];
+
+		// Add player to roster
+		$roster_data = array( "UserId" => $reciever_id, "SeasonId" => 1, "TeamId" => $team_id, "JerseyNo" => 1, "Captain" => 0 );
+
+		//Load roster model
+		$this -> load -> model( 'Roster_Model', 'roster' );
+
+		try{
+
+			//Add to roster
+			//$result = $this -> roster -> add_roster( $roster_data );
+			$result = 1;
+			if ( $result > 0 ) {
+				$data["result"] = "Success";
+
+				$team_data = $this -> Team_Model -> get_team_by_id($team_id);
+
+				// $config['image_library'] = 'gd';
+				// $config['source_image']	= '/uploads/teamlogos/' . $team_data -> Picture;
+				// $config['create_thumb'] = TRUE;
+				// $config['maintain_ratio'] = TRUE;
+				// $config['width'] = 235;
+				// $config['heigh'] = 235;
+
+				// //load image manipulation class
+				// $this -> load -> library('image_lib', $config);
+
+				// $this -> image_lib -> resize();
+
+				// echo $this->image_lib->display_errors();
+
+				// Provide a page title
+				$data['title'] = "Welcome to " . $team_data -> Name;
+
+				$data['body'] = '<br /><div>You are now part of the team "' . $team_data -> Name . '"</div><br />';
+				$data['body'] .= '<img src="' . base_url() . 'uploads/teamlogos/' . $team_data -> Picture . '" /><br /><br />';
+				$data['body'] .= '<div>Click <a href="#' . $team_data -> Id . '">here</a> to view the team profile</div>';
+				$data['body'] .= '<br /><div><b>OR</b></div><br />';
+				$data['body'] .= '<a href="' . base_url() . '">Return to the main page</a>';
+
+			}
+			else {
+				$data["result"] = "Failure";
+			}
+
+		}
+		catch( Exception $e ) {
+			$data["result"] = "Failure";
+		}
+
+		// Get live scoring
+		$data['livescores'] = $this -> Division_Model -> get_live_scores();
+		// Check if logged in
+		$data['login_header'] = set_login_header(); //get from template_helper.php
+
+		$this -> load -> view( 'templates/header', $data );
+		$this -> load -> view( 'pages/accept_invite.php', $data );
+		$this -> load -> view( 'templates/footer' );
 	}
 
 }

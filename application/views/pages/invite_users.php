@@ -5,7 +5,9 @@
 			<h1>Invite Users <small><?php echo $page_links ?></small></h1>
 			<h2><small><?php echo $team_data -> Name ?></small></h2>
 			<?php echo form_open('pages/send_invite'); ?>
-			<div>
+			<input type="hidden" name="team_id" id="team_id" value="<?php echo $team_data -> Id ?>"/>
+			<input type="hidden" name="team_name" id="team_name" value="<?php echo $team_data -> Name ?>"/>
+			<div>	
 				<table class="table table-hover">
 					<tr>
 						<th style="width: 1%"><input type="checkbox" name="select_all" id="select_all" /></th>
