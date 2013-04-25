@@ -64,7 +64,16 @@
 					<div class="reg_subsec_desc text-left" style="margin-bottom:20px;">
 						<p>
 							<small>
-								<img class="img-player" src="<?php echo $picture; ?>" align="left" style="margin: 8px 10px 5px 0; border:1px solid black;" />
+
+						        <?php $string = 'https://fbcdn-profile';
+						            $imgpath = $picture; ?>
+						        
+						        <?php if (strpos($imgpath, $string) === false ) : ?>
+						    		<img class="img-player" align="left" style="max-width: 75px; max-height: 75px; margin: 8px 10px 5px 0; border:1px solid black;" src="<?php echo base_url();?>uploads/playerlogo/<?php echo $picture; ?>" alt="your image" />
+						        <?php else : ?>
+						            <img class="img-player" align="left" style="max-width: 75px; max-height: 75px; margin: 8px 10px 5px 0; border:1px solid black;" src="<?php echo $picture ?>" alt="your image" />
+						        <?php endif; ?>
+
 								Accurate e-mail addresses and mobile telephone numbers are CRITICAL in order for the league organizers to contact both the captains and other players on each team. A confirmation e-mail will be sent to all team members once your team registration is complete.
 							</small>
 						</p>

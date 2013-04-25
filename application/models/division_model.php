@@ -144,6 +144,30 @@ class Division_Model extends CI_Model {
 
 	// --------------------------------------------------------------------
 	/**
+	 * Get Team Standing
+	 *
+	 * Retrieves a teams standing
+	 *
+	 */
+
+    public function get_team_standing($teamid, $seasonid) {
+
+    	// where clause
+		$this -> db -> where('SeasonId', $seasonid);
+		$this -> db -> where('Id', $teamid);
+
+		// select required fields
+		$this -> db -> select('Win, Lost, OvertimeLoss');
+
+		$query = $this -> db -> get('AllTeamStandings');
+
+		// return total
+		return $query -> row();
+   	}
+
+
+	// --------------------------------------------------------------------
+	/**
 	 * Get Games Played by Team
 	 *
 	 * Calculates the games played by a team (that have been completed)

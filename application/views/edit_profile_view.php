@@ -1,16 +1,4 @@
-<script type="text/javascript">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('#img').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 
 <!-- Main Content
 ====================================================================== -->
@@ -26,21 +14,36 @@
 	<?php $this->load->helper('form'); ?><!--loads the form helper to help us create a form-->
 
     <legend>Edit Player Image</legend>
-	<?php echo form_open_multipart("edit_profile/edit_player"); ?><!--this is the function called to enable us insert players-->
+	<?php echo form_open_multipart("edit_profile/edit_player_img"); ?><!--this is the function called to enable us insert players-->
                     <?php 
                         $string = 'https://fbcdn-profile';
                         $imgpath = $results -> Picture;
                         if (strpos($imgpath, $string) === false ) :
                     ?>
-                    <img id="img" src="<?php echo base_url();?>uploads/playerlogo/<?= $results -> Picture ?>" alt="your image" />
+                        <img class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?php echo base_url();?>uploads/playerlogo/<?= $results -> Picture ?>" alt="your image" />
                     <?php else : ?>
-                        <img id="img" src="<?= $results -> Picture ?>" alt="your image" />
+                        <img class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?= $results -> Picture ?>" alt="your image" />
                     <?php endif; ?>
         <p>
-            <input type="file" name="userfile" size="20" onchange="readURL(this);" />
+            <input type="file" name="userfile" onchange="readURL(this);" />
             <br/><br/>
             <input type="submit" value="Save" class="btn btn-primary" />
         </p>
+
+<script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.img-polaroid').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
    <?php echo form_close(); ?>             
 
     <legend>Edit Player Info</legend>

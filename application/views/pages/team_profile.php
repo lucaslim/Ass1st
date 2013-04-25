@@ -7,25 +7,23 @@
 	<div class="row-fluid">
 
 		<!-- Place Main Content Here -->
-		<div id="leftContent" class="teamProfile span8">
-				<h1><?php echo $team -> Name; ?></h1>
+		<div class="span8">
+				<legend><?php echo $team -> Name; ?></legend>
 				<p>Founded: <?php echo $team -> Founded; ?></p>
 				
 				<!-- this is not dynamic -->
-				<p>Overall Record: 221 - 43 - 13</p>
+				<p>Overall Record: <?php echo $standings -> Win . ' - ' . $standings -> Lost . ' - ' . $standings -> OvertimeLoss; ?>
 
 				<p>
 					<?php if($team -> Picture !='') : ?>
-						<img src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $team -> Picture; ?>" />	
+						<img style="max-width: 200px;" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $team -> Picture; ?>" />	
 					<?php else : ?>
-						<img src="<?php echo base_url(); ?>uploads/teamlogos/blank_avatar.png" />	
+						<img style="max-width: 200px;" src="<?php echo base_url(); ?>uploads/teamlogos/blank_avatar.png" />	
 					<?php endif; ?>					
 				</p>
 
 				<p><a href="<?php echo base_url(); ?>pages/standings/"><?php echo $team -> DivisionName; ?> Division</a></p>
 
-
-				<?php if($roster != FALSE) : ?>
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -34,23 +32,28 @@
 							</tr>
 						</thead>
 						<tbody>
-					<?php foreach($roster as $player): ?>
+						<?php if($roster != FALSE) : ?>
+							<?php foreach($roster as $player): ?>
+									<tr>
+										<td><?php echo $player -> FullName ?></td>
+										<td><?php echo $player -> JerseyNo ?></td>
+									</tr>
+							<?php endforeach ?>
+						<?php else : ?>
 							<tr>
-								<td><?php echo $player -> FullName ?></td>
-								<td><?php echo $player -> JerseyNo ?></td>
+								<td>
+									No Roster Data Found
+								</td>
 							</tr>
-					<?php endforeach ?>
+						<?php endif; ?>
 						</tbody>
 					</table>						
-				<?php else : ?>
-					<h3>No Roster Data Found</h3>
-				<?php endif; ?>
 		</div>
 
 		<!-- Place Sidebar Content Here -->
-		<div id="rightContent" class="span4">
+		<div class="span4">
 			<!-- /begin news list-->
-			<div class="newsDisplay" style="margin-top: 35px;">
+			<div class="newsDisplay">
 				<legend><?php echo $archive; // display title ?></legend>
 				<?php foreach ( $news as $news_item ): ?>
 			    	<span class="lead">
