@@ -85,7 +85,7 @@ $(function() {
 							var output = "<table>";
 							$.each(data.result, function(index, value){
 								if(header_text != value.Type){
-									output += "<tr><th>" + value.Type + "<hr style='width:231px' /></th></tr>";
+									output += "<tr><th>" + value.Type + "<hr style='width:228px' /></th></tr>";
 									header_text = value.Type;
 								}
 								
@@ -95,17 +95,17 @@ $(function() {
 								//checks if the image comes from facebook or from the website
 								if (value.Picture.indexOf("https://fbcdn-profile") < 0)
 								{
-									output += "<tr><td><img class='search_results_images' style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/playerlogo/' + value.Picture;
+									output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + $.myURL() + 'uploads/playerlogo/' + value.Picture;
 								// }else if (value.Url.indexOf("team") > 0) 
 								// {
 								// 	output += "<tr><td><img style='width: 20px; height: 20px;' src='" + $.myURL() + 'uploads/teamlogos/' + value.Picture;
 								}
 								else
 								{
-									output += "<tr><td><img class='search_results_images' style='width: 20px; height: 20px;' src='" + value.Picture;
+									output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + value.Picture;
 								}
 
-								output += "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:231px'/></td></tr>";
+								output += "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:228px'/></td></tr>";
 							});
 
 							//View more
