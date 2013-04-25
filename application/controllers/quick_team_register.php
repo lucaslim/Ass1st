@@ -102,6 +102,8 @@ class Quick_Team_Register extends CI_Controller {
 
 		$data['is_logged_in'] = is_loggedin();
 
+
+
 		if ( is_loggedin() ) {
 
 			//Team Representitve Information
@@ -126,8 +128,6 @@ class Quick_Team_Register extends CI_Controller {
 			$color_chooser_data['default'] = array( "TeamName" => $sess_data["Name"], "ShowUpdate" => false, "ShowUpload" => false );
 			$data['color_chooser'] = $this -> load -> view( 'team_color_chooser_view', $color_chooser_data, true );
 		}
-
-
 
 		$this -> load -> view( 'templates/header', $data );
 		$this -> load -> view( 'pages/team_registration.php', $data );

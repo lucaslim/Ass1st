@@ -17,8 +17,8 @@
 				<?php echo $full_name; ?> <b class="caret white-caret"></b>
 			</a>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-				<?php if($team) : ?>
-					<li><a href="<?php echo base_url(); ?>pages/user_profile"><?php echo $team[1]; ?></a></li>
+				<?php if($teams) : ?>
+					<li><a href="<?php echo base_url(); ?>pages/user_profile"><img style="width:20px; height:20px;" src="<?php echo base_url() . '/uploads/teamlogos/' . $team_data -> Picture?>"/>&nbsp;<?php echo $team_data -> Name; ?></a></li>
 				<?php endif; ?>				
 				<li><a href="<?php echo base_url(); ?>edit_profile">Edit My Info</a></li>
 				<?php if($captain == 1) : ?>

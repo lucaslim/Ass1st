@@ -36,7 +36,9 @@
 		<!-- ////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////   -->
 		<!-- //////////////// STYLE //////////////   -->
 		<!-- ///////////////////// Script //////////////   -->
-		<script typevar TPrimG = '="text/javascript"'>
+		<script type="text/javascript">
+
+		<?php echo isset($team) ? $team -> TPrimR : 21; ?>
 
 		// Primary
 		var TPrimR = '<?php echo isset($team) ? $team -> TPrimR : 21; ?>';
@@ -175,7 +177,8 @@
             }
         }
 
-		</script> <!-- /////////////////////  HTML  //////////////   -->
+		</script> 
+		<!-- /////////////////////  HTML  //////////////   -->
 		<div id="teamBanner">
 			<div class="color-none-top"></div>
 			<!--Secondary Color - Import - 17854b -->

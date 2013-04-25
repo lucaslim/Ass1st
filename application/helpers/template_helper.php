@@ -31,7 +31,14 @@ function set_login_header() {
 		$profile['id'] = $userdata['id'];
 		$profile['picture'] = $userdata['picture'];
 		$profile['captain'] = $userdata['captain'];
-		$profile['team'] = $userdata['team'];
+		$profile['teams'] = $userdata['team'];
+
+		$CI -> load -> model('Team_Model');
+
+		$profile['team_data'] =  $CI -> Team_Model -> get_team_by_id($profile['teams'][0]);
+
+
+
 
 		return $CI -> load -> view('header_profile_view', $profile, true);
 	}
