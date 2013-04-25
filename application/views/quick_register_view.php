@@ -54,11 +54,11 @@
 		<input type="password" name="password" id="password" placeholder="Password"  />
 		</td>
 	</tr>
-	<tr>
+	<!-- <tr>
 		<td colspan="2">
 		<input type="password" name="repassword" id="repassword" placeholder="Re-enter Password"  />
 		</td>
-	</tr>
+	</tr> -->
 	<tr>
 		<td>
 			<select name="dob_month">

@@ -64,7 +64,7 @@ class Quick_Register extends CI_Controller {
 					    array('field' => 'last_name', 'label' => 'last name', 'rules' => 'required'),
 					    array('field' => 'email', 'label' => 'email', 'rules' => 'required|trim|xss_clean|prep_for_form|callback_validate_email'),
 					    array('field' => 'password', 'label' => 'password', 'rules' => 'required|min_length[8]'),
-					    array('field' => 'repassword', 'label' => 're-password', 'rules' => 'required|min_length[8]'),
+					    // array('field' => 'repassword', 'label' => 're-password', 'rules' => 'required|min_length[8]'),
 					    array('field' => 'dob_year', 'label' => 'year', 'rules' => 'required'),
 					    array('field' => 'dob_month', 'label' => 'month', 'rules' => 'required'),
 					    array('field' => 'dob_day', 'label' => 'day', 'rules' => 'required'),
@@ -79,7 +79,7 @@ class Quick_Register extends CI_Controller {
 												form_error('last_name') . 
 												form_error('email') . 
 												form_error('password') . 
-												form_error('repassword') . 
+												// form_error('repassword') . 
 												form_error('dob_year') . 
 												form_error('dob_month') . 
 												form_error('dob_day') . 

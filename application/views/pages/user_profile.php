@@ -39,7 +39,7 @@
 	<div class="row-fluid">
 
 		<div id="ppp_menu_container" class="span3">
-			<ul id="navbar" data-spy="affix" data-offset-top="200">
+			<ul id="navbar" data-spy="affix" data-offset-top="225">
 				<li class="text-right">
 					<img class="team-logo" src="<?php echo base_url(); ?>/uploads/teamlogos/<?php echo $team -> Picture; ?>" />
 				</li>

@@ -326,7 +326,7 @@ $(document).ready(function() {
  
     //Calculate the height of #headerWrapper
     //Use outerHeight() instead of height() if have padding
-    var aboveHeight = $('#headerWrapper').outerHeight() + 69;
+    var aboveHeight = $('#headerWrapper').outerHeight() + 128;
 
 	//When scrolling
     $(window).scroll(function(){
