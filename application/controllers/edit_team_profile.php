@@ -97,9 +97,9 @@ class Edit_Team_Profile extends CI_Controller {
 	function removeplayer($id, $teamid) {
 		// Handle delete errors
 		if($this -> Team_Model -> delete_user_from_roster($id, $teamid))
-			$this -> session -> set_userdata('message', 'Success removing player');
+			$this -> session -> set_userdata('message', 'Successfully removed player');
 		else
-			$this -> session -> set_userdata('message', 'Failed removing player');
+			$this -> session -> set_userdata('message', 'Failed removing player, please try again');
 
 		// Return to index
 		header("Location: ../../");
@@ -117,8 +117,8 @@ class Edit_Team_Profile extends CI_Controller {
 		$players = $_POST['player'];
 
 		// Handle update errors
-		if($this -> Team_Model -> update_team_roster($players) != NULL)
-			$this -> session -> set_userdata('message', 'Roster update failed');
+		if($this -> Team_Model -> update_team_roster($players) == FALSE)
+			$this -> session -> set_userdata('message', 'Error: Roster update failed, please try again');
 		else
 			$this -> session -> set_userdata('message', 'Roster updated successfully');
 		

@@ -25,7 +25,7 @@
 						</p>
 						<p>
 							<input type="file" name="userfile" onchange="readURL(this);" />
-							<input class="btn" type="submit" value="Upload" />
+							<input class="btn btn-primary" type="submit" value="Upload" />
 						</p>
 					</form>					
 				</div>
@@ -82,6 +82,7 @@
      	</div>
     </div>  
 </div>  	
+</div>
 
 <script type="text/javascript">
     function readURL(input) {

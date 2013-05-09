@@ -156,12 +156,14 @@ class Team_Model extends CI_Model {
 				'Captain' => $captain
 			);
 
-			array_push($data, $array);
+			// Required both team id and user id because neither are unique, but combined they are
+			$this -> db -> where('UserId', $player['Id']);
+			$this -> db -> where('TeamId', $player['TeamId']);
+			if(!$this -> db -> update('Roster', $array))
+				return false;
 		}	
 
-		// Codeigniter has a bug, update_batch does not return true / false
-		// instead returns NULL or FALSE only
-		return $this -> db -> update_batch('Roster', $data, 'UserId');
+		return true;
 	}		
 
 	// --------------------------------------------------------------------
