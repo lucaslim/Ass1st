@@ -12,6 +12,7 @@
 		<div class="row-fluid">
 			<div class="span8">
 				<legend>Player Profile: <?= $playerinfo -> FullName; ?></legend>
+				<?php if(!empty($teaminfo)) : ?>
 				<table class="table">
 					<thead>
 						<tr>
@@ -32,15 +33,18 @@
 						</tr>
 					</tbody>
 				</table>
+				<?php else : ?>
+					<p class="lead"><?= $playerinfo -> FullName; ?> currently has zero statistical data</p>
+				<?php endif; ?>
 			</div>
 			<div class="span4">
 				<!-- player logo -->
 		        <?php $string = 'https://fbcdn-profile';
 		            $imgpath = $playerinfo -> Picture; ?>				
 		        <?php if (strpos($imgpath, $string) === false ) : ?>
-		    		<p><img class="img-polaroid" style="max-width: 100%; max-height: 100%;" id="img" src="<?php echo base_url();?>uploads/playerlogo/<?php echo $playerinfo -> Picture; ?>" alt="your image" /></p>
+		    		<p><img class="img-polaroid" style="max-width: 100px; max-height: 100px;" id="img" src="<?php echo base_url();?>uploads/playerlogo/<?php echo $playerinfo -> Picture; ?>" alt="your image" /></p>
 		        <?php else : ?>
-		            <p><img class="img-polaroid" style="max-width: 100%; max-height: 100%;" id="img" src="<?php echo $playerinfo -> Picture; ?>" alt="your image" /></p>
+		            <p><img class="img-polaroid" style="max-width: 100px; max-height: 100px;" id="img" src="<?php echo $playerinfo -> Picture; ?>" alt="your image" /></p>
 		        <?php endif; ?>
 		        <legend>Player Info</legend>
 		        <blockquote>
@@ -54,9 +58,10 @@
 			</div>					
 		</div>
 	<?php else : ?>
-	<div class="span12">
-		<p class="lead">Player not found</p>
-	</div>
+		<div class="span12">
+			<p class="lead">Player not found</p>
+		</div>
 	<?php endif;?>
 	</div>
+</div>
 </div>

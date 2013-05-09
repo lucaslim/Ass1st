@@ -2,13 +2,13 @@ Assit -- Bugs and Improvements
 ======
 
 • Invite player (as a captain)
-	• Remove (Or maybe put a note on a page of how to do it)
-	• Search player, then add player to team with a button. 
+- [x] Remove (Or maybe put a note on a page of how to do it)
+- [ ] Search player, then add player to team with a button. 
 
 • Individual player page
 	• Add a button to add player to team
 	• Add current team and image (if no team, then add player button would exist)
-	• 
+	• Add ability to see 
 
 • Search Bar
 	• Bugs
