@@ -15,20 +15,34 @@
 
     <legend>Edit Player Image</legend>
 	<?php echo form_open_multipart("edit_profile/edit_player_img"); ?><!--this is the function called to enable us insert players-->
-                    <?php 
-                        $string = 'https://fbcdn-profile';
-                        $imgpath = $results -> Picture;
-                        if (strpos($imgpath, $string) === false ) :
-                    ?>
-                        <img class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?php echo base_url();?>uploads/playerlogo/<?= $results -> Picture ?>" alt="your image" />
-                    <?php else : ?>
-                        <img class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?= $results -> Picture ?>" alt="your image" />
-                    <?php endif; ?>
-        <p>
-            <input type="file" name="userfile" onchange="readURL(this);" />
-            <br/><br/>
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </p>
+    <div class="span12">
+        <div class="span3">
+            <?php 
+                $string = 'https://fbcdn-profile';
+                $imgpath = $results -> Picture;
+                if (strpos($imgpath, $string) === false ) :
+            ?>
+                <img class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?php echo base_url();?>uploads/playerlogo/<?= $results -> Picture ?>" alt="your image" />
+            <?php else : ?>
+                <img class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?= $results -> Picture ?>" alt="your image" />
+            <?php endif; ?>
+            <p>
+                <input type="file" name="userfile" onchange="readURL(this);" />
+                <br/><br/>  
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </p>
+
+            <input type="radio" name="image"  />
+        </div>
+        <div class="span3">
+            <?php if(isset($facebook_picture) && $facebook_picture): ?>
+                <img class="img-polaroid" src="<?php echo $facebook_picture ?>" />
+            <?php endif; ?>
+            <input type="radio" name="image" />
+        </div>
+        <div class="span3">
+        </div>
+    </div>
 
 <script type="text/javascript">
         function readURL(input) {
