@@ -48,9 +48,9 @@
 		<div class="span4">
 			<p>
 				<?php if($team -> Picture !='') : ?>
-					<img style="max-width: 100%; max-height: 100%" class="img-polaroid" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $team -> Picture; ?>" />	
+					<img style="max-width: 150px; max-height: 150px" class="img-polaroid" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $team -> Picture; ?>" />	
 				<?php else : ?>
-					<img style="max-width: 100%; max-height: 100%" class="img-polaroid" src="<?php echo base_url(); ?>uploads/teamlogos/blank_avatar.png" />	
+					<img style="max-width: 100px; max-height: 100px" class="img-polaroid" src="<?php echo base_url(); ?>uploads/teamlogos/blank_avatar.png" />	
 				<?php endif; ?>					
 			</p>			
 			<legend>Team Info</legend>

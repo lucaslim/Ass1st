@@ -24,7 +24,8 @@ class Chat_model extends CI_Model {
 					FROM chat_messages cm
 					JOIN User u ON cm.user_id = u.id
 					WHERE cm.chat_id = ?
-					ORDER BY cm.chat_message_id DESC LIMIT 1";
+					ORDER BY cm.chat_message_id DESC";
+					//ORDER BY cm.chat_message_id DESC LIMIT 1";
 		
 		$result = $this->db->query($query_str, array($chat_id));
 		
