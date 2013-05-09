@@ -63,6 +63,20 @@ $(function() {
 
 	var search;
 
+	// $('#search_box').typeahead({
+	// 	source : function () {
+	// 		$.ajax({
+	// 				type : 'get',
+	// 				url : $.myURL() + 'search/query/',
+	// 				data : {'q' : $('#search_box').val() },
+	// 				dataType : "json",
+	// 				success : function(data) {
+	// 					alert(data.result);
+	// 				}
+	// 		});
+	// 	}
+	// });
+
 	//auto complete
 	$('#search_box').on({
 		keyup: function(e) {

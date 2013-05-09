@@ -31,7 +31,7 @@ class Search extends CI_Controller {
 	}
 
 
-	// public function index() {
+	// public function index() 
 	// 	$search = $this->input->post( 'q' );
 	// 	$data['login_header'] = set_login_header(); //get from template_helper.php
 

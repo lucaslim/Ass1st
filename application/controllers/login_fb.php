@@ -1,5 +1,5 @@
 <?php
-if (!defined('BASEPATH'))	exit('no direct script access allowed');
+if ( !defined( 'BASEPATH' ) ) exit( 'no direct script access allowed' );
 
 session_start();
 /**
@@ -7,8 +7,8 @@ session_start();
  *
  * This is the controller for the login
  *
- * @package		Assist
- * @author		Team Assist
+ * @package  Assist
+ * @author  Team Assist
  */
 
 // --------------------------------------------------------------------
@@ -25,23 +25,23 @@ class Login_Fb extends CI_Controller {
 		parent::__construct();
 
 		//Load Login Helper
-		$this -> load -> helper('login_helper');
+		$this -> load -> helper( 'login_helper' );
 
 		//Redirect if user is logged in
-		if (is_loggedin())
-			redirect(base_url());
+		if ( is_loggedin() )
+			redirect( base_url() );
 
 		//Load facebook config
-		$this -> config -> load("facebook", TRUE);
+		$this -> config -> load( "facebook", TRUE );
 
 		//Set config variable
-		$config = $this -> config -> item('facebook');
+		$config = $this -> config -> item( 'facebook' );
 
 		//Loads Facebook API Library
-		$this -> load -> library('facebook', $config);
+		$this -> load -> library( 'facebook', $config );
 
 		//Load User Model
-		$this -> load -> model('User_Model', 'user', TRUE);
+		$this -> load -> model( 'User_Model', 'user', TRUE );
 	}
 
 	// --------------------------------------------------------------------
@@ -56,15 +56,15 @@ class Login_Fb extends CI_Controller {
 
 	function index() {
 		$fb_user = $this -> facebook -> getUser();
-		if ($fb_user == 0) {
+		if ( $fb_user == 0 ) {
 			//Generate Login Url
-			Redirect($this -> facebook -> getLoginUrl(array('scope' => 'email ,user_birthday, publish_actions')));
+			Redirect( $this -> facebook -> getLoginUrl( array( 'scope' => 'email ,user_birthday, publish_actions' ) ) );
 			//print_r($this -> facebook -> getLoginUrl(array('scope' => 'email')));
 		} else {
 			try {
 				// Get user's data and print it
-				$fb_user = $this -> facebook -> api('/me?fields=first_name,last_name,gender,email,picture');
-			} catch(FacebookApiException $e) {
+				$fb_user = $this -> facebook -> api( '/me?fields=first_name,last_name,gender,email,picture' );
+			} catch( FacebookApiException $e ) {
 				// Throw Error
 			}
 
@@ -75,72 +75,94 @@ class Login_Fb extends CI_Controller {
 			$fb_id = $fb_user['id'];
 
 			//Get user account
-			$account = $this -> user -> check_facebook_account($fb_id);
+			$account = $this -> user -> check_facebook_account( $fb_id );
 
 			//facebook_id is not attached to an account
-			if ($account == NULL) {
-				$username = array_key_exists('username', $fb_user) ? $fb_user['username'] : NULL;
+			if ( $account == NULL ) {
+				$username = array_key_exists( 'username', $fb_user ) ? $fb_user['username'] : NULL;
 
 				//Set facebook data
-				$fb_data = set_oauth_data($fb_id, $username);
+				$fb_data = set_oauth_data( $fb_id, $username );
 
 				//Insert facebook id into the database
-				if ($this -> user -> insert_facebook_user($fb_data)) {
-					$first_name = array_key_exists('first_name', $fb_user) ? $fb_user['first_name'] : '';
-					$last_name = array_key_exists('last_name', $fb_user) ? $fb_user['last_name'] : '';
-					$gender = array_key_exists('gender', $fb_user) ? $fb_user['gender'] : '';
+				if ( $this -> user -> insert_facebook_user( $fb_data ) ) {
+					$first_name = array_key_exists( 'first_name', $fb_user ) ? $fb_user['first_name'] : '';
+					$last_name = array_key_exists( 'last_name', $fb_user ) ? $fb_user['last_name'] : '';
+					$gender = array_key_exists( 'gender', $fb_user ) ? $fb_user['gender'] : '';
 
-					$picture = array_key_exists('picture', $fb_user) ? $fb_user['picture']['data']['url'] : NULL;
-					
+					$picture = array_key_exists( 'picture', $fb_user ) ? $fb_user['picture']['data']['url'] : NULL;
 
-					$email = array_key_exists('email', $fb_user) ? $fb_user['email'] : '';
 
-					$user_id = $this -> user -> check_user_email($email);
+					$email = array_key_exists( 'email', $fb_user ) ? $fb_user['email'] : '';
+
+					$user_id = $this -> user -> check_user_email( $email );
 
 					//Check if email already exists
-					if ($user_id) {
-						$data = array('FacebookId' => $fb_id, 
-									  'Picture' => $picture);
+					if ( $user_id ) {
+						$data = array( 'FacebookId' => $fb_id,
+							'Picture' => $picture );
 
-						$where_clause = array('Email' => $email);
+						$where_clause = array( 'Email' => $email );
 
 						//Attached facebook Id to existing user account
-						$this -> user -> update_user($data, $where_clause);
+						$this -> user -> update_user( $data, $where_clause );
 					} else {
 						//set facebook data to user account
-						$data = array('FirstName' => $first_name, 
-									  'LastName' => $last_name, 
-									  'Gender' => $gender, 
-									  'Email' => $email, 
-									  'FacebookId' => $fb_id, 
-									  'Picture' => $picture);
+						$data = array( 'FirstName' => $first_name,
+							'LastName' => $last_name,
+							'Gender' => $gender,
+							'Email' => $email,
+							'FacebookId' => $fb_id,
+							'Picture' => $picture );
 
 						//Create new user account
-						$user_id = $this -> user -> insert_user($data);
+						$user_id = $this -> user -> insert_user( $data );
 
-						if ($user_id > 0) {
+						if ( $user_id > 0 ) {
 							//attach player role
-							$this -> user -> insert_user_role($user_id, 7);
+							$this -> user -> insert_user_role( $user_id, 7 );
 						}
 
 					}
 
 					//Get account details for session
-					$account = $this -> user -> get_user_info($user_id);
+					$account = $this -> user -> get_user_info( $user_id );
 
 					//Complete Transaction
 					$this -> db -> trans_complete();
 				}
 			}
 
-			if ($account != NULL) {
-				//Create session
-				$sess_array = set_session_data($account -> Id, $account -> FullName, $account -> Picture);
+			if ( $account != NULL ) {
+				//get image_url
+				$image_url = $fb_user["picture"]["data"]["url"];
 
-				$this -> session -> set_userdata('authorized', $sess_array);
+				//Get file extenstion
+				$ext = pathinfo( $image_url, PATHINFO_EXTENSION );
+
+				//image path
+				$file_path = './uploads/playerlogo/' . $fb_user["id"] . '.' . $ext;
+
+				//image destination
+				$img_destination = base_url() . 'uploads/playerlogo/' . $fb_user["id"] . '.' . $ext;
+
+				//upload image
+				file_put_contents( $file_path, file_get_contents( $image_url ) );
+				// copy($image_url, $file_path);
+
+				//load model
+				$this -> load -> model( 'User_Model' );
+
+				//update image destination to database
+				$this -> User_Model -> update_user( array( 'Picture' => $img_destination ), array( 'Id' => $account ->Id ) );
+
+				//Create session
+				$sess_array = set_session_data( $account -> Id, $account -> FullName, $img_destination );
+
+				$this -> session -> set_userdata( 'authorized', $sess_array );
 			}
 		}
-				redirect(base_url('/'));
+		redirect( base_url( '/' ) );
 	}
 
 }

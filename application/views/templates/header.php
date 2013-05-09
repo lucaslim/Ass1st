@@ -273,7 +273,7 @@
                             <form class="form-search pull-right" method="post" action="<?php echo base_url(); ?>search">
                               <div class="input-prepend" >
                                 <button id="btn_search" type="submit" class="btn">Search</button>
-                                <input type="text" id="search_box" class="span2 search-query">
+                                <input type="text" id="search_box" data-provide="typeahead" class="span2 search-query">
                               </div>
                                 <div id="search_results" style="position: absolute; overflow-y:visible; overflow-x: hidden; max-height:400px; width:233px; z-index: 123; top:37px; right:10px; border: 1px solid #ccf; background: rgba(255,255,255, 0.95)"> </div>
                             </form>                             

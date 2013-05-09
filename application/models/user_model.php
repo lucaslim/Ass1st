@@ -301,6 +301,11 @@ class User_Model extends CI_Model {
 	 */
 	function update_user($data, $where_clause) {
 
+		// var_dump($data);
+
+		// var_dump($where_clause);
+		// exit;
+
 		$this -> db -> where($where_clause);
 		$this -> db -> update('User', $data);
 

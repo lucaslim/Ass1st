@@ -5,7 +5,7 @@
             $imgpath = $picture; ?>
         
         <?php if (strpos($imgpath, $string) === false ) : ?>
-    		<img class="img-player" id="img" src="<?php echo base_url();?>uploads/playerlogo/<?php echo $picture; ?>" alt="your image" />
+    		<img class="img-player" id="img" src="<?php echo $picture; ?>" alt="your image" />
         <?php else : ?>
             <img class="img-player" id="img" src="<?php echo $picture ?>" alt="your image" />
         <?php endif; ?>
