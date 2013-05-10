@@ -125,6 +125,10 @@ class Team_Model extends CI_Model {
 		$this -> db -> set('Picture', $image);
 		$this -> db -> where('Id', $teamid);
 		$this -> db -> update('Team');
+
+		
+		//update cache model for searchbox
+		$this -> cache_model -> update_cache(1, now());
 	}	
 
 	// --------------------------------------------------------------------
@@ -170,6 +174,9 @@ class Team_Model extends CI_Model {
 
 	function add_team($data) {
 		$query = $this -> db -> insert('Team', $data);
+
+		//update cache model for searchbox
+		$this -> cache_model -> update_cache(1, now());
 
 		return $this -> db -> insert_id();
 	}

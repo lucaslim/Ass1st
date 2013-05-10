@@ -49,6 +49,13 @@
 
 // --------------------------------------------------------------------
 
+/**
+ * 
+ * Populate data for search
+ *
+ */
+// --------------------------------------------------------------------
+
 $(function() {
 	$('#btn_search').on({
 		click: function(e) {
@@ -61,91 +68,150 @@ $(function() {
 	//hide search box
 	$('#search_results').hide();
 
+
+
 	var search;
 
-	// $('#search_box').typeahead({
-	// 	source : function () {
-	// 		$.ajax({
-	// 				type : 'get',
-	// 				url : $.myURL() + 'search/query/',
-	// 				data : {'q' : $('#search_box').val() },
-	// 				dataType : "json",
-	// 				success : function(data) {
-	// 					alert(data.result);
-	// 				}
-	// 		});
-	// 	}
-	// });
-
-	//auto complete
-	$('#search_box').on({
-		keyup: function(e) {
-			e.preventDefault();
-
-			//set delay
-			clearTimeout(search);
-			
-			search = setTimeout(function () {
-
-				if ($('#search_box').val() == '') {
-					$('#search_results').hide();
-				}
-				else
-				{
-					$.ajax({
-						type : 'get',
-						url : $.myURL() + 'search/query/',
-						data : {'q' : $('#search_box').val() },
-						dataType : "json",
-						success : function(data) {
-								//show result
-							$('#search_results').show();
-
-							if(data.success){
-								var header_text ="";
-								var output = "<table>";
-								$.each(data.result, function(index, value){
-									if(header_text != value.Type){
-										output += "<tr><th>" + value.Type + "<hr style='width:228px' /></th></tr>";
-										header_text = value.Type;
-									}
-
-									var img_src;
-
-									var picture = value.Picture;
-
-									if(picture.indexOf("http") == 0)
-										img_src = picture;
-									else if (picture != '' && value.Type == 'Team')
-										img_src = $.myURL() + 'uploads/teamlogos/' + picture;
-									else if (picture != '' && value.Type == 'Players')
-										img_src = $.myURL() + 'uploads/playerlogo/' + picture;
-									else
-										img_src = $.myURL() + 'uploads/teamlogos/blank_avatar/png';
-									
-									output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + img_src + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:228px'/></td></tr>";
-								
-								});
-
-							//View more
-							output += "<tr><td>&nbsp;</td></tr>";
-							output += "<tr><td bgcolor='#07bbff' height='40' width='300'><a href='" + $.myURL() + "pages/search/?q=" + $('#search_box').val() + "'>&nbsp;&nbsp;&nbsp;View more results...</a></td></tr>";
-
-							output += "</table>";
-
-							$('#search_results').html(output);
-
-
-						}	
-						else{
-							$('#search_results').html('No results found');
-						}					
-					}
-				})};
-			}, 200);
+	$.ajax({
+		type : 'get',
+		url : $.myURL() + 'search/get_search_data/',
+		dataType : "json",
+		async: false,
+		success : function(data) {
+			search = data.result;
 		}
 	});
+
+	$('#search_box').typeahead({
+		source : function(query, process) {
+			arr = [];
+
+			$.each(search, function(i, result){
+				arr.push(result.Name + '||' + result.Picture + '||' + result.Url + '||' + result.Type + '||' + result.Id);
+			});
+
+			process(arr);
+		},
+		sorter : function(items) {
+			return items.sort(function(a, b){ 
+				var arrA = a.split('||');
+				var arrB = b.split('||');
+
+				if(a[0] < b[0])
+					return -1;
+
+				if(a[0] > b[0])
+					return 1;
+
+				return;
+			});
+		},
+		matcher : function(item) {
+			var arr = item.split('||');
+			if (arr[0].toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1) 
+        		return true;
+		},
+		highlighter: function(item) {
+			var arr = item.split('||');
+
+			html = '<div class="typeahead">';
+            html += '<div class="media" style="width:100%"><a class="pull-left" href="#"><img style="width: 20px; height: 20px; margin:0 20px;" src='+ get_image(arr[3], arr[1]) +' /></a>'
+            html += '<div class="media-body" >';
+            html += '<p class="media-heading">'+arr[0]+' (@'+arr[3]+')'+'</p>';
+            html += '</div>';
+            html += '</div>';
+
+			return html;
+		},
+		updater : function(item) {
+			var arr = item.split('||');
+
+			window.location.replace($.myURL() + arr[2] + arr[4]);
+		}
+	});
+
+	//auto complete
+	// $('#search_box').on({
+	// 	keyup: function(e) {
+	// 		e.preventDefault();
+
+	// 		//set delay
+	// 		clearTimeout(search);
+			
+	// 		search = setTimeout(function () {
+
+	// 			if ($('#search_box').val() == '') {
+	// 				$('#search_results').hide();
+	// 			}
+	// 			else
+	// 			{
+	// 				$.ajax({
+	// 					type : 'get',
+	// 					url : $.myURL() + 'search/query/',
+	// 					data : {'q' : $('#search_box').val() },
+	// 					dataType : "json",
+	// 					success : function(data) {
+	// 							//show result
+	// 						$('#search_results').show();
+
+	// 						if(data.success){
+	// 							var header_text ="";
+	// 							var output = "<table>";
+	// 							$.each(data.result, function(index, value){
+	// 								if(header_text != value.Type){
+	// 									output += "<tr><th>" + value.Type + "<hr style='width:228px' /></th></tr>";
+	// 									header_text = value.Type;
+	// 								}
+
+	// 								var img_src;
+
+	// 								var picture = value.Picture;
+
+	// 								if(picture.indexOf("http") == 0)
+	// 									img_src = picture;
+	// 								else if (picture != '' && value.Type == 'Team')
+	// 									img_src = $.myURL() + 'uploads/teamlogos/' + picture;
+	// 								else if (picture != '' && value.Type == 'Players')
+	// 									img_src = $.myURL() + 'uploads/playerlogo/' + picture;
+	// 								else
+	// 									img_src = $.myURL() + 'uploads/teamlogos/blank_avatar/png';
+									
+	// 								output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + img_src + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:228px'/></td></tr>";
+								
+	// 							});
+
+	// 						//View more
+	// 						output += "<tr><td>&nbsp;</td></tr>";
+	// 						output += "<tr><td bgcolor='#07bbff' height='40' width='300'><a href='" + $.myURL() + "pages/search/?q=" + $('#search_box').val() + "'>&nbsp;&nbsp;&nbsp;View more results...</a></td></tr>";
+
+	// 						output += "</table>";
+
+	// 						$('#search_results').html(output);
+
+
+	// 					}	
+	// 					else{
+	// 						$('#search_results').html('No results found');
+	// 					}					
+	// 				}
+	// 			})};
+	// 		}, 200);
+	// 	}
+	// });
 });
+
+function get_image(type, image) {
+	switch(type.toLowerCase()) {
+		case 'player':
+			return $.myURL() + 'uploads/playerlogo/' + image;
+
+		case 'team':
+			return $.myURL() + 'uploads/teamlogos/' + image;
+
+		default:
+			return $.myURL() + 'uploads/playerlogo/blank_avatar.png';
+	}
+}
 
 
 /**

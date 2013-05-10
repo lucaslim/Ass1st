@@ -93,6 +93,32 @@ class Search_Model extends CI_Model {
 		// return $return_data;
 	}
 
+	function get_search_data() {
+		//player data
+		$this -> db -> select( 'Id, FullName as `Name`, Picture as `Picture`, \'Players\' as `Type`, \'pages/player/\' as `Url`, City, Province, CountryName ', FALSE );
+		// $this -> db -> like( 'FullName', $keyword );
+		$this -> db -> order_by( 'FullName', 'asc' );
+		
+		$query = $this -> db -> get( 'AllUsers' );
+		$player_data = $query -> result();
+
+		//team data
+		$this -> db -> select( 'Id, Name as `Name`, Picture as `Picture`, \'Team\' as `Type`, \'pages/team/\' as `Url`, LeagueName, ConferenceName, ArenaName ', FALSE );
+		// $this -> db -> like( 'Name', $keyword );
+		$this -> db -> order_by( 'Name', 'asc' );
+		$query = $this -> db -> get( 'AllTeams' );
+
+		$team_data = $query -> result();
+
+		//return array
+		$return_data = array();
+
+		$return_data = array_merge( $return_data, $player_data );
+		$return_data = array_merge( $return_data, $team_data );
+
+		return $return_data;
+	}
+
 	function search_keyword( $keyword, $num_results = null ) {
 		//Get top 5 player data
 		$this -> db -> select( 'Id, FullName as `Name`, Picture as `Picture`, \'Players\' as `Type`, \'pages/player/\' as `Url`, City, Province, CountryName ', FALSE );

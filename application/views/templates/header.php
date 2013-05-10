@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>style/bootstrap/css/main.css">
 
         <!-- Modernizr -->
-        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="<?php echo base_url(); ?>script/vendor/modernizr-2.6.2.min.js"></script>
 
         <!-- jQuery (needed?) Needed for inline jQuery. -->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>          
@@ -271,10 +271,9 @@
                         </div>   
                         <div class="span4" style="position: relative;">
                             <form class="form-search pull-right" method="post" action="<?php echo base_url(); ?>search">
-                              <div class="input-prepend" >
-                                <button id="btn_search" type="submit" class="btn">Search</button>
-                                <input type="text" id="search_box" data-provide="typeahead" class="span2 search-query">
-                              </div>
+                              
+                               <input type="text" id="search_box" data-provide="typeahead" autocomplete="off" placeholder="search" class="span3 search-query">
+                              
                                 <div id="search_results" style="position: absolute; overflow-y:visible; overflow-x: hidden; max-height:400px; width:233px; z-index: 123; top:37px; right:10px; border: 1px solid #ccf; background: rgba(255,255,255, 0.95)"> </div>
                             </form>                             
                         </div>                     

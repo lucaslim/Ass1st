@@ -216,6 +216,9 @@ class User_Model extends CI_Model {
 		//Get returned Id
 		$return_id = $this -> db -> insert_id();
 
+		//update cache model for searchbox
+		$this -> cache_model -> update_cache(1, now());
+
 		return $return_id;
 	}
 
@@ -242,6 +245,9 @@ class User_Model extends CI_Model {
 
 		//Get returned Id
 		$return_id = $this -> db -> insert_id();
+
+		//update cache model for searchbox
+		$this -> cache_model -> update_cache(1, now());
 
 		return $return_id;
 	}
@@ -308,6 +314,10 @@ class User_Model extends CI_Model {
 
 		$this -> db -> where($where_clause);
 		$this -> db -> update('User', $data);
+
+		
+		//update cache model for searchbox
+		$this -> cache_model -> update_cache(1, now());
 
 		return true;
 	}
