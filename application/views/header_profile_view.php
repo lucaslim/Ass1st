@@ -1,14 +1,7 @@
 <ul class="nav pull-right player-controls">
     <li>
 		<!-- player logo -->
-        <?php $string = 'https://fbcdn-profile';
-            $imgpath = $picture; ?>
-        
-        <?php if (strpos($imgpath, $string) === false ) : ?>
-    		<img class="img-player" id="img" src="<?php echo $picture; ?>" alt="your image" />
-        <?php else : ?>
-            <img class="img-player" id="img" src="<?php echo $picture ?>" alt="your image" />
-        <?php endif; ?>
+    	<img class="img-player" id="img" src="<?php echo base_url(); ?>uploads/playerlogo/<?php echo $picture ?>" alt="your image" />
     </li>
     <li>
     	<!-- player controls -->
@@ -19,10 +12,12 @@
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 				<?php if($teams) : ?>
 					<li><a href="<?php echo base_url(); ?>pages/user_profile"><img style="width:20px; height:20px;" src="<?php echo base_url() . '/uploads/teamlogos/' . $team_data -> Picture?>"/>&nbsp;<?php echo $team_data -> Name; ?></a></li>
-				<?php endif; ?>				
+				<?php endif; ?>
+				<li class="divider"></li>			
 				<li><a href="<?php echo base_url(); ?>edit_profile">Edit My Info</a></li>
 				<?php if($captain == 1) : ?>
-						<li class="divider"></li>
+					<li class="divider"></li>
+					<li class="nav-header">Captain Options</li>
 					<li><a href="<?php echo base_url(); ?>edit_team_profile">Edit Team Profile</a></li>
 					<li><a href="<?php echo base_url(); ?>pages/invite_users">Invite Players</a></li>
 				<?php endif; ?>				

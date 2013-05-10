@@ -65,12 +65,13 @@ div#chat_viewport ul li.by_current_user span.chat_message_header {
 
 </style>
 
+
+
 <div id="chat_input">
 	<input id="chat_message" name="chat_message" type="text" value="" tabindex="1" />
 	<?php echo anchor('#', 'Say it', array('title' => 'Send this chat message', 'id' => 'submit_message'));?>
 	<div class="clearer"></div>
 </div>
 
-<div id="chat_viewport">
-</div>
+<div id="chat_viewport"></div>
 

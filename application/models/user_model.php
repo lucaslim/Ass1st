@@ -365,9 +365,10 @@ class User_Model extends CI_Model {
 	 */
 
 	function insert_facebook_user($fb_data) {
+
 		$result = $this -> db -> insert('UserFacebook', $fb_data);
 
-		if ($result)
+		if ($this -> db -> insert_id() > 0)
 			return TRUE;
 		else
 			return FALSE;
