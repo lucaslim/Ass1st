@@ -1,14 +1,7 @@
 <ul class="nav pull-right player-controls">
     <li>
 		<!-- player logo -->
-        <?php $string = 'https://fbcdn-profile';
-            $imgpath = $picture; ?>
-        
-        <?php if (strpos($imgpath, $string) === false ) : ?>
-    		<img class="img-player" id="img" src="<?php echo $picture; ?>" alt="your image" />
-        <?php else : ?>
-            <img class="img-player" id="img" src="<?php echo $picture ?>" alt="your image" />
-        <?php endif; ?>
+    	<img class="img-player" id="img" src="<?php echo base_url(); ?>uploads/playerlogo/<?php echo $picture ?>" alt="your image" />
     </li>
     <li>
     	<!-- player controls -->
