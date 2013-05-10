@@ -46,7 +46,7 @@ class Edit_profile extends CI_Controller
 
 		$this -> load -> model( 'Facebook_Model', 'fb' );
 
-		if($this -> fb -> is_registered())
+		if ( $this -> fb -> is_registered() )
 			$data['facebook_picture'] = $this -> fb -> get_image_url();
 
 
@@ -64,14 +64,29 @@ class Edit_profile extends CI_Controller
 		 *
 		 */
 	public function edit_player() {
-		$user_data = $this->session->userdata( 'authorized' );
+		$user_data = $this -> session -> userdata( 'authorized' );
 
-		$this->user_model->edit_user( $user_data['id'] );
+		$data = array ( 'FirstName'=> $this -> input -> post( 'fname' )
+			, 'LastName'=> $this -> input -> post( 'lname' )
+			, 'Height'=> $this -> input -> post( 'height' )
+			, 'Weight'=> $this -> input -> post( 'weight' )
+			, 'City'=> $this -> input -> post( 'city' )
+			, 'Province'=> $this -> input -> post( 'province' )
+			, 'Address'=> $this -> input -> post( 'address' )
+			, 'PostalCode'=> $this -> input -> post( 'pcode' )
+			, 'ContactNumber'=> $this -> input -> post( 'phone1' )
+			, 'OtherNumber'=> $this -> input -> post( 'phone2' )
+		);
+
+		$where = array ( 'Id' , $user_data['id'] );
+
+		$this -> user_model -> update_user( $data, $where );
 
 		header( 'Location: edit_profile' );
 	}
 
 	public function edit_player_img() {
+
 		$config['upload_path'] = './uploads/playerlogo/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size'] = '100';

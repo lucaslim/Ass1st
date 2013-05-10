@@ -51,7 +51,7 @@ class Facebook_model extends CI_Model {
 	}
 
 	function set_basic_data() {
-		return $this -> set_data( 'first_name,last_name,gender,email,picture' );
+		return $this -> set_data( 'first_name,last_name,gender,email,picture.type(large)' );
 	}
 
 	function get_data() {
@@ -133,18 +133,15 @@ class Facebook_model extends CI_Model {
 		//Get file extenstion
 		$ext = pathinfo( $image_url, PATHINFO_EXTENSION );
 
-		$image_path = 'uploads/playerlogo/' . $this -> get_id() . '.' . $ext;
+		$image_name =  $this -> get_id() . '.' . $ext;
 
 		//image path
-		$file_path = './' . $image_path;
+		$file_path = './uploads/playerlogo/' . $image_name;
 
 		//upload image
 		file_put_contents( $file_path, file_get_contents( $image_url ) );
 
-		//image destination
-		$img_destination = base_url() . $image_path;
-
-		return $img_destination;
+		return $image_name;
 	}
 }
 
