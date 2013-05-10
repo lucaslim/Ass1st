@@ -16,10 +16,11 @@ class Chat extends CI_Controller {
 		//$data['chat_id'] = 1;
 		
 		// check they are logged in
-		// if (! $this->session->userdata('logged_in')) {
-		// 	redirect('user/login');
-		// }
-		$this->view_data['chat_id'] = 1;
+		if (! $this->session->userdata('authorized')) {
+			redirect('index.php');
+		}
+
+		$this->view_data['chat_id'] = $user_data['team'][0];
 
 
 		 $user_data = $this->session->userdata('authorized');
@@ -47,7 +48,7 @@ class Chat extends CI_Controller {
 		 */
 		
 		$user_data = $this->session->userdata('authorized');
-		$chat_id = $this->input->post('chat_id');
+		$chat_id = $user_data['team'][0];
 		$user_id = $user_data['id'];
 
 		$chat_message_content = $this->input->post('chat_message_content', TRUE);
@@ -60,7 +61,8 @@ class Chat extends CI_Controller {
 	
 	function ajax_get_chat_messages()
 	{
-		$chat_id = $this->input->post('chat_id');
+		$user_data = $this->session->userdata('authorized');
+		$chat_id = $user_data['team'][0];
 		
 		echo $this->_get_chat_messages($chat_id);
 	}
@@ -86,7 +88,7 @@ class Chat extends CI_Controller {
 			{
 				$li_class = ($this->session->userdata('user_id') == $chat_message->user_id) ? 'class="by_current_user"' : '';
 				
-				$chat_messages_html .= '<li>' . '<span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span><p class="message_content">' .  $chat_message->chat_message_content . '</p></li>';
+				$chat_messages_html .= '<li>' . '<img src="'. $chat_message->Picture. '" /><br />' .'<span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span><p class="message_content">' .  $chat_message->chat_message_content . '</p></li><hr />';
 			}
 			
 			$chat_messages_html .= '</ul>';

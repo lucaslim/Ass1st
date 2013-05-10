@@ -20,7 +20,7 @@ class Chat_model extends CI_Model {
 					cm.user_id,
 					cm.chat_message_content,
 					DATE_FORMAT(cm.create_date, '%D of %M %Y at %H:%i:%s') AS chat_message_timestamp,
-					u.FirstName, u.LastName
+					u.FirstName, u.LastName, u.Picture
 					FROM chat_messages cm
 					JOIN User u ON cm.user_id = u.Id
 					WHERE cm.chat_id = ?
