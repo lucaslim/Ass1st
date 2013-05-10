@@ -88,7 +88,7 @@ class Chat extends CI_Controller {
 			{
 				$li_class = ($this->session->userdata('user_id') == $chat_message->user_id) ? 'class="by_current_user"' : '';
 				
-				$chat_messages_html .= '<li>' . '<img src="'. $chat_message->Picture. '" /><br />' .'<span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span><p class="message_content">' .  $chat_message->chat_message_content . '</p></li><hr />';
+				$chat_messages_html .= '<li>' . '<div style="float:left;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span></div>'.  '<img style="float:right;" src="'. $chat_message->Picture. '" />'.'<div style="clear:both"></div><p class="message_content">' .  $chat_message->chat_message_content . '</p></li><hr />';
 			}
 			
 			$chat_messages_html .= '</ul>';
