@@ -244,7 +244,7 @@
 								<option value="">Gender</option>
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
-								<option value="Mixed">Mixed</option>
+								<option value="Coed">Coed</option>
 							</select>
 						</div>
 						<div class="span6 text-center">
@@ -260,7 +260,7 @@
 		                    <label class="checkbox"><input type="checkbox" name="team_terms" id="team_terms"/> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>
 						</div>
 						<div class="span3 text-left">
-							<input class="btn btn-info" type="submit" value="Sign Up" id="team_submit" name="team_submit" />
+							<input class="btn btn-info" type="submit" value="Register" id="team_submit" name="team_submit" />
 						</div>
 					</div>
 	            </fieldset>
