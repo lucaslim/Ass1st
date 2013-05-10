@@ -33,15 +33,73 @@
 								<td><?php echo $player['Goals'] + $player['Assists']; ?></td>
 							</tr>
 					<?php endforeach ?>
-				<?php else : ?>
-					<tr>
-						<td colspan="6">
-							No Roster Data Found
-						</td>
-					</tr>
-				<?php endif; ?>
 				</tbody>
-			</table>						
+			</table>
+			<?php else : ?>
+				<p class="lead">
+					No Roster Data Found
+				</p>
+			<?php endif; ?>			
+
+			<legend>Upcoming Games</legend>
+			<?php if(isset($schedule)) : ?>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Home</th>
+							<th>Away</th>
+							<th>Arena</th>
+							<th>Type</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($schedule as $game) : ?>
+						<tr>
+							<td><?php echo $game -> Date; ?></td>
+							<td><?php echo $game -> Time; ?></td>
+							<td><a href="<?php echo base_url(); ?>pages/team/<?php echo $game -> HomeTeamId; ?>"><?php echo $game -> HomeTeamName; ?></a></td>
+							<td><a href="<?php echo base_url(); ?>pages/team/<?php echo $game -> AwayTeamId; ?>"><?php echo $game -> AwayTeamName; ?></a></td>
+							<td><?php echo $game -> ArenaName; ?></td>
+							<td><?php echo $game -> MatchTypeName; ?></td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>	
+				</table>
+			<?php else : ?>
+				<p class="lead">There are no games currently scheduled</p>
+			<?php endif; ?>
+
+			<legend>Past Game Results</legend>
+			<?php if($game_results != FALSE) : ?>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Away</th>
+							<th>&nbsp;</th>
+							<th>Home</th>
+							<th>Result</th>
+							<th>Boxscore</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($game_results as $result) : ?>
+						<tr>
+							<td><?php echo $result -> Date; ?></td>
+							<td><a href="<?php echo base_url(); ?>pages/team/<?php echo $result -> AwayTeamId; ?>"><?php echo $result -> AwayTeamName; ?></a></td>
+							<td>vs.</td>
+							<td><a href="<?php echo base_url(); ?>pages/team/<?php echo $result -> HomeTeamId; ?>"><?php echo $result -> HomeTeamName; ?></a></td>
+							<td><?php echo $result -> AwayTeamScore . ' - ' . $result -> HomeTeamScore; ?></td>
+							<td><a href="<?php echo base_url(); ?>pages/boxscore/<?php echo $result -> Id; ?>">View</a></td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>	
+				</table>
+			<?php else : ?>
+				<p class="lead">No past game results found</p>
+			<?php endif; ?>
 		</div>
 
 		<!-- Place Sidebar Content Here -->
@@ -59,6 +117,14 @@
 				<p>Founded: <?php echo $team -> Founded; ?></p>
 				<p>Overall Record: <?php echo $standings -> Win . ' - ' . $standings -> Lost . ' - ' . $standings -> OvertimeLoss; ?>
 			</blockquote>
+			<?php if(isset($schedule)) : ?>
+				<legend>Next Game</legend>
+				<blockquote>
+					<p><?php echo $schedule[0] -> Date; ?> @ <?php echo $schedule[0] -> Time; ?></p>
+					<p><?php echo $schedule[0] -> AwayTeamName; ?> vs. <?php echo $schedule[0] -> HomeTeamName; ?></p>
+					<p><?php echo $schedule[0] -> ArenaName; ?></p>
+				</blockquote>
+			<?php endif; ?>
 		</div><!-- /end news list-->
 		<?php else : ?>
 			<p class="lead">No team data found</p>

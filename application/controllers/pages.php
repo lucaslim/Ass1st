@@ -210,13 +210,19 @@ class Pages extends CI_Controller {
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
+		// Hard code season id for now
+		$seasonid = 1;		
+
+		// Set data
 		$data['team'] = $this -> Division_Model -> get_team_by_id( $id ); // retrieve team info
 		$data['standings'] = $this -> Division_Model -> get_team_standing( $id, 1 ); // retrieve teams
 		$data['roster'] = $this -> Division_Model -> get_team_roster_by_id( $id ); // retrieve team roster
 		$data['scoring'] = $this -> Scorekeeper_Model -> load_team_scoring( $id );
+		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_by_team($id, $seasonid, 5);
+		$data['game_results'] = $this -> Scorekeeper_Model -> game_results($id, $seasonid);
 
 		// Provide a page title
-		$data['title'] = "Team Profile";
+		$data['title'] = "Team Profile: " . $data['team'] -> Name;
 
 		//Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
@@ -267,7 +273,7 @@ class Pages extends CI_Controller {
 		$data['statistics'] = $this -> Scorekeeper_Model -> get_player_stats( $playerid, $seasonid );
 
 		// Get team schedule, limit 15 results
-		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_by_team( $teamid, $seasonid, 10, $playerid );
+		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_and_attendance( $teamid, $seasonid, 10, $playerid );
 
 		// Get team standings for the division
 		$data['standings'] = $this -> Division_Model -> get_standings( $seasonid, $leagueid, $divisionid );
@@ -276,7 +282,7 @@ class Pages extends CI_Controller {
 		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news title
 
 		// Provide a page title
-		$data['title'] = "User Profile";
+		$data['title'] = "My Profile: " . $user_data['fullname'];
 
 		// Check if logged in, show header based on login
 		$data['login_header'] = set_login_header(); //get from template_helper.php
