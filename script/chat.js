@@ -19,7 +19,8 @@ $(document).ready(function() {
 			if (data.status == 'ok')
 			{ 
 				var current_content = $("div#chat_viewport").html();
-				$("div#chat_viewport").html(current_content + data.content);
+				// $("div#chat_viewport").html(current_content + data.content);
+				$("div#chat_viewport").html(data.content);
 				
 			}
 			else
@@ -45,7 +46,8 @@ $(document).ready(function() {
 			{
 				var current_content = $("div#chat_viewport").html();
 				
-				$("div#chat_viewport").html(current_content + data.content);
+				// $("div#chat_viewport").html(current_content + data.content);
+				$("div#chat_viewport").html(data.content);
 				
 			}
 			else

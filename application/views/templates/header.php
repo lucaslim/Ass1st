@@ -40,7 +40,6 @@
 
         <!-- Anchor for back to top -->
         <div id="top"></div>
-
 		<script>
 		  // Load the Facebook SDK Asynchronously
 		  (function(d, s, id) {

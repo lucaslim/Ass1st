@@ -20,15 +20,17 @@ class Chat_model extends CI_Model {
 					cm.user_id,
 					cm.chat_message_content,
 					DATE_FORMAT(cm.create_date, '%D of %M %Y at %H:%i:%s') AS chat_message_timestamp,
-					u.FirstName
+					u.FirstName, u.LastName, u.Picture
 					FROM chat_messages cm
-					JOIN User u ON cm.user_id = u.id
+					JOIN User u ON cm.user_id = u.Id
 					WHERE cm.chat_id = ?
 					ORDER BY cm.chat_message_id DESC";
 					//ORDER BY cm.chat_message_id DESC LIMIT 1";
 		
-		$result = $this->db->query($query_str, array($chat_id));
+		$result = $this->db->query($query_str, array($chat_id, $last_chat_message_id));
 		
 		return $result;
 	}
+
+	
 }
