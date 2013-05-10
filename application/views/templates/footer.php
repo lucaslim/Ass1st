@@ -12,16 +12,31 @@
                             </a> TEAM ASSIST &trade; - &copy; 2013</span>
                         <div id="footerLinks" class="pull-right">
                             <ul>
+                                <li style="cursor:default;">Follow Team Assist on:</li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>">Home</a>
+                                    <!-- facebook -->
+                                    <a href="https://www.facebook.com/pages/Team-Assist/522491314469799?ref=notif&amp;notif_t=fbpage_presence"  target="_blank">
+                                        <i class="icon-facebook-sign icon-large" target="_blank"></i>
+                                    </a>
                                 </li>
-                                <li>•</li>
+                                <li style="margin-left:15px; cursor:default;">•</li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>pages/news">News</a>
+                                    <!-- twitter -->
+                                    <a href="https://twitter.com/teamassist_" class="twitter-sign" target="_blank">
+                                        <i class="icon-twitter icon-large"></i>
+                                    </a>
                                 </li>
-                                <li>•</li>
+                                <li style="margin-left:15px; cursor:default;">•</li>
+                                <!-- <li> -->
+                                <!-- Google + -->
+                                <!-- <a href="#" target="_blank"><i class="icon-google-plus-sign icon-large"></i></a> -->
+                                <!-- </li> -->
+                                <!-- <li style="margin-left:15px;">•</li> -->
                                 <li>
-                                    <a href="<?php echo base_url(); ?>pages/about">About</a>
+                                    <!-- RSS -->
+                                    <a href="#" target="_blank">
+                                        <i class="icon-rss icon-large"></i>
+                                    </a>
                                 </li>
                             </ul>
                         </div>                            
