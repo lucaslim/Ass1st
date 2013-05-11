@@ -157,7 +157,7 @@ function convert_date_to_daymmdd($date) {
 /**
  * Convert Date to: MM/DD
  *
- * Takes date as input and converts it to: Monday 04/20
+ * Takes date as input and converts it to: 04/20
  *
  */
 function convert_date_to_mmdd($date) {
