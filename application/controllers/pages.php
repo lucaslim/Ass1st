@@ -159,28 +159,10 @@ class Pages extends CI_Controller {
 	 *
 	 */
 
-	function schedule( $seasonid = 1 ) {
+	function schedule($sort_by = 'Date', $sort_order = 'asc', $offset = 0) {
 
-		// Configuration options for pagination
-		$config['base_url'] = base_url() . '/pages/schedule/' . $seasonid;
-		$config['total_rows'] = $this -> Scorekeeper_Model -> game_count( $seasonid ); // Returns total rows
-		$config['per_page'] = 50; // Determines how many games per page
-		$config['uri_segment'] = 4; // 5th segment of the URI contains the page # (for ex. controller/function/seasonid/pagenumber)
-
-		// Initialize pagination using the $config options
-		$this -> pagination -> initialize( $config );
-
-		// Determine which page number we are on
-		$page = ( $this -> uri -> segment( 4 ) ) ? $this -> uri -> segment( 4 ) : 0;
-
-		// Load the results per page
-		$data['games'] = $this -> Scorekeeper_Model -> get_schedule( $seasonid, $config['per_page'], $page );
-
-		// Create the pagination links
-		$data['links'] = $this -> pagination -> create_links();
-
-		// Count total games
-		$data['totalrow'] = $this -> Scorekeeper_Model -> game_count( $seasonid );
+		// Load required
+		$this -> load -> model('Schedule_Model');
 
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
@@ -191,10 +173,50 @@ class Pages extends CI_Controller {
 		// Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
-		// Load the view
-		$this -> load -> view( 'templates/header', $data );
-		$this -> load -> view( 'pages/schedule.php', $data );
-		$this -> load -> view( 'templates/footer' );
+		// limit per page
+		$limit = 20;
+
+		// define table fields
+		$data['fields'] = array(
+			'SeasonYear' => 'Season',
+			'HomeTeamName' => 'Home',
+			'AwayTeamName' => 'Away',
+			'ArenaName' => 'Location', 
+			'Date' => 'Date',
+			'Time' => 'Time'
+		);		
+
+		// load required
+		$this -> load -> model('Schedule_Model');
+		$this -> load -> library('pagination');
+
+		// execute search
+		$results = $this -> Schedule_Model -> search($limit, $sort_by, $sort_order, $offset);
+
+		// define view data
+		$data['games'] = $results['rows'];
+		$data['num_results'] = $results['num_rows'];
+		$data['sort_by'] = $sort_by;
+		$data['sort_order'] = $sort_order;	
+
+		// pagination options
+		$config = array();
+		$config['base_url'] = site_url("pages/schedule/$sort_by/$sort_order");
+		$config['total_rows'] = $results['num_rows'];
+		$config['per_page'] = $limit;
+		$config['uri_segment'] = 5;
+
+		$this -> pagination -> initialize($config);
+		$data['pagination'] = $this -> pagination -> create_links();
+
+		// if the request is made via ajax, only load required view
+		if($this -> input -> is_ajax_request()) {
+			$this -> load -> view('pages/schedule_ajax', $data);
+		} else {
+			$this -> load -> view( 'templates/header', $data );
+			$this -> load -> view( 'pages/schedule', $data );
+			$this -> load -> view( 'templates/footer' );
+		}		
 	}
 
 	// --------------------------------------------------------------------
