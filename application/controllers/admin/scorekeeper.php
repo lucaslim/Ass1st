@@ -127,6 +127,9 @@ class Scorekeeper extends Admin_Controller {
 			// Provide success message via session variable
 			$_SESSION['message'] = "Game created successfully";
 
+			// Update cache
+			$this -> cache_model -> update_cache( 2, now() );
+
 			// Return user to view_games
 			header('location: view_games');
 		}

@@ -24,9 +24,9 @@ class MatchFixture extends Admin_Controller {
 		$this -> load -> helper( array( 'form', 'url' ) );
 
 		// Load Model
-		$this -> load -> model( 'MatchFixture_Model', 'matchfixture' );
+		$this -> load -> model( 'MatchFixture_Model', 'matchfixture', 'cache_model' );
 
-		$this -> load -> helper( 'grid_helper' );
+		$this -> load -> helper( 'grid_helper', 'date_helper' );
 
 		// start session so we can use session variables
 		session_start();
@@ -219,6 +219,7 @@ class MatchFixture extends Admin_Controller {
 	 */
 
 	function generate() {
+
 		//Get Post
 		$season_id = $this -> input -> post( 'season_id' );
 		$league_id = $this -> input -> post( 'league_id' );
@@ -240,6 +241,7 @@ class MatchFixture extends Admin_Controller {
 
 		//Generate Schedule
 		$this -> schedule -> generate();
+		$this -> cache_model -> update_cache( 2, now());
 
 		header( 'location: ../matchfixture/' );
 	}

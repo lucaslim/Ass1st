@@ -30,17 +30,13 @@ class Pages extends CI_Controller {
 		$this -> load -> model( 'News_Model' );
 		$this -> load -> model( 'Team_Model' );
 		$this -> load -> model( 'User_Model' );
+		$this -> load -> model( 'image_model' );
 
 		// Load Libraries
 		$this -> load -> library( 'pagination' );
 
 		// Load Helpers
-		$this -> load -> helper( 'date' );
-		$this -> load -> helper( 'login' );
-		$this -> load -> helper( 'template' );
-		$this -> load -> helper( 'scoring' );
-		$this -> load -> helper( array( 'form', 'url' ) );
-		$this -> load -> model( 'image_model' );
+		$this -> load -> helper( array( 'form', 'url', 'scoring', 'template', 'login', 'date' ) );
 	}
 
 	// --------------------------------------------------------------------
@@ -173,6 +169,19 @@ class Pages extends CI_Controller {
 		// Check if logged in
 		$data['login_header'] = set_login_header(); //get from template_helper.php
 
+		// Check the cache to see if new data exists
+		$cache_result =  $this -> cache -> get( 'schedule' );
+
+		// If cache_result found
+		if ( $cache_result ) {
+			//check if update is not needed
+			if ( !$this -> cache_model -> new_update( 2, $cache_result['timestamp'] ) ) {
+				//return cache result
+				echo json_encode( $cache_result );
+				return;
+			}
+		}		
+
 		// limit per page
 		$limit = 20;
 
@@ -185,10 +194,6 @@ class Pages extends CI_Controller {
 			'Date' => 'Date',
 			'Time' => 'Time'
 		);		
-
-		// load required
-		$this -> load -> model('Schedule_Model');
-		$this -> load -> library('pagination');
 
 		// execute search
 		$results = $this -> Schedule_Model -> search($limit, $sort_by, $sort_order, $offset);

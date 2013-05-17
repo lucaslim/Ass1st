@@ -26,7 +26,7 @@ class Chat extends CI_Controller {
 		 $user_data = $this->session->userdata('authorized');
 		// $data['user_id'] = $user_data['id'];
 
-		 $this->view_data['user_id'] = $user_data['id'];
+		 // $this->view_data['user_id'] = $user_data['id'];
 		
 		$this->session->set_userdata('last_chat_message_id_' . $this->view_data['chat_id'], 0);
 		
