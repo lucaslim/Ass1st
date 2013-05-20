@@ -7,30 +7,40 @@
         <div class="span12">
             <section id="chat">
                 <?php $this -> load -> helper( 'form' ); ?><!--loads the form helper to help us create a form-->
-                <legend>Edit Player Image</legend> <?php echo form_open_multipart( "edit_profile/edit_player_img" ); ?><!--this is the function called to enable us insert players-->
+                <legend>Edit Player Image</legend> 
+                <?php echo form_open_multipart( "edit_profile/edit_player_img" ); ?><!--this is the function called to enable us insert players-->
                 <div class="span12">
                     <div class="span3">
-                        <img class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?php echo base_url(); ?>uploads/playerlogo/<?php echo $results -> Picture ?>" alt="your image">
+                        <img id="user-image" class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?php echo base_url(); ?>uploads/playerlogo/<?php echo $results -> Picture ?>" alt="your image">
                         <p>
                             <input type="file" name="userfile" onchange="readURL(this);">
-                        </p><input type="radio" name="image">
+                        </p><input type="radio" name="image" value="user">
                     </div>
                     <div class="span3">
                         <?php if ( isset( $facebook_picture ) && $facebook_picture ): ?>
                             <img class="img-polaroid" style="max-width: 200px; max-height: 200px;" src="<?php echo $facebook_picture ?>"> 
                         <?php endif; ?> 
-                        <input type="radio" name="image">
+                        <input type="radio" name="image" value="facebook">
                     </div>
-                    <div class="span3"></div>
+                    <div class="span3">
+                        <?php if($twitter_is_link): ?>
+
+                        <?php else: ?>
+                            <!-- <div style="border:1px solid #333; padding: 30px; text-align: center;">
+                                <a href="edit_profile/link_twitter">Link Twitter Account</a>
+                            </div> -->
+                        <?php endif; ?>
+                    </div>
                 </div>
                 <div class="span12">
                     <input type="submit" value="Save" class="btn btn-primary">
-                </div><script type="text/javascript">
+                </div>
+                <script type="text/javascript">
                 function readURL(input) {
                     if (input.files && input.files[0]) {
                         var reader = new FileReader();
                         reader.onload = function (e) {
-                            $('.img-polaroid').attr('src', e.target.result);
+                            $('#user-image').attr('src', e.target.result);
                         }
                         
                         reader.readAsDataURL(input.files[0]);

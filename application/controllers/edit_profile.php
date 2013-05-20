@@ -11,6 +11,7 @@ class Edit_profile extends CI_Controller
 		$this -> load -> model( 'News_Model' );
 		$this -> load -> model( 'user_model' );
 		$this -> load -> model( 'image_model' );
+		$this -> load -> model( 'Facebook_Model', 'fb' );
 
 		$this -> load -> helper( 'date' );
 		$this -> load -> helper( array( 'form', 'url' ) );
@@ -44,25 +45,63 @@ class Edit_profile extends CI_Controller
 
 		$data['results'] = $this -> user_model -> get_user_info( $user_data['id'] );
 
-		$this -> load -> model( 'Facebook_Model', 'fb' );
+
 
 		if ( $this -> fb -> is_registered() )
 			$data['facebook_picture'] = $this -> fb -> get_image_url();
 
+		$this -> load -> model( 'Twitter_Model', 'twitter' );
 
+		//Check if twitter is link
+		// if($this -> twitter -> is_registered())
+		//  $data['twitter_picture'] = $this -> get_twitter_image_url();
 
-		$data['twitter_picture'] = '';
-
+		$data['twitter_is_link'] = $this -> twitter -> is_link( $user_data['id'] );
 
 		$this -> load -> view( 'templates/header', $data );
-		$this-> load -> view( 'edit_profile_view', $data );
+		$this -> load -> view( 'edit_profile_view', $data );
 		$this -> load -> view( 'templates/footer', $data );
 	}
 
+	public function link_twitter() {
+		// Load TwitterOauth Library
+		$this -> load -> library( 'TwitterOAuth' );
+
+		// Loading twitter configuration.
+		$this -> config -> load( 'twitter' );
+
+		//Load User Model
+		$this -> load -> model( 'User_Model', 'user', TRUE );
+
+
+		if ( is_twitter_loggedin() ) {
+			// If user already logged in
+			$this -> connection = $this -> twitteroauth -> create( $this -> config -> item( 'twitter_consumer_token' ),
+				$this -> config -> item( 'twitter_consumer_secret' ),
+				$this -> session -> userdata( 'access_token' ),
+				$this -> session -> userdata( 'access_token_secret' ) );
+		} elseif ( is_twitter_authenticating() ) {
+			// If user in process of authentication
+			$this -> connection = $this -> twitteroauth -> create( $this -> config -> item( 'twitter_consumer_token' ),
+				$this -> config -> item( 'twitter_consumer_secret' ),
+				$this -> session -> userdata( 'request_token' ),
+				$this -> session -> userdata( 'request_token_secret' ) );
+		} else {
+			// Unknown user
+			$this -> connection = $this -> twitteroauth -> create( $this -> config -> item( 'twitter_consumer_token' ),
+				$this -> config -> item( 'twitter_consumer_secret' ) );
+		}
+
+	}
+
+	public function get_twitter_image_url() {
+
+	}
+
 	/*
-		 * $sess_array is an array with the session id and full name stored in it from the validate_user in controllers/action.php
-		 *
-		 */
+	 * $sess_array is an array with the session id and full name stored in it from the validate_user in controllers/action.php
+	 *
+	 */
 	public function edit_player() {
 		$user_data = $this -> session -> userdata( 'authorized' );
 
@@ -78,6 +117,8 @@ class Edit_profile extends CI_Controller
 			, 'OtherNumber'=> $this -> input -> post( 'phone2' )
 		);
 
+
+
 		$where = array ( 'Id' , $user_data['id'] );
 
 		$this -> user_model -> update_user( $data, $where );
@@ -86,33 +127,41 @@ class Edit_profile extends CI_Controller
 	}
 
 	public function edit_player_img() {
+		
+		$user_data = $this -> session -> userdata( 'authorized' );
 
-		$config['upload_path'] = './uploads/playerlogo/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size'] = '100';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		$image = $this -> input -> post( 'image' );
+		$image_name = '';
+		switch ( strtolower( $image ) ) {
+		case 'facebook':
+			{
+				$image_name = $this -> fb -> save_profile_picture();
+			}
 
-		$this->load->library( 'upload', $config );
+		case 'user':
+			{
+				$config['upload_path'] = './uploads/playerlogo/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size'] = '100';
+				$config['max_width']  = '1024';
+				$config['max_height']  = '768';
 
+				$this->load->library( 'upload', $config );
 
+				if (  $this -> upload -> do_upload() ) {
+					$user_data = $this->session->userdata( 'authorized' );
 
-		if ( ! $this->upload->do_upload() ) {
-			$error = array( 'error' => $this->upload->display_errors() );
+					$data = array( 'upload_data' => $this->upload->data() );
 
-			$this->load->view( 'edit_profile_view', $error );
+					$image_name = $_FILES['userfile']['name'];
+
+				}
+			}
 		}
-		else {
-			$user_data = $this->session->userdata( 'authorized' );
 
-			$data = array( 'upload_data' => $this->upload->data() );
+		$this -> image_model -> edit_image( $user_data['id'], $image_name );
 
-			$pic = $_FILES['userfile']['name'];
-
-			$this -> image_model -> edit_image( $user_data['id'], $pic );
-
-			header( 'Location: edit_profile' );
-		}
+		header( 'Location: '. base_url() . 'edit_profile' );
 	}
 }
 ?>
