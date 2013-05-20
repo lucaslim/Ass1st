@@ -169,7 +169,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <th colspan="2" style="text-align: left;">
-                                                                <small style="font-weight: 200;"><?php echo $score['Date']; ?></small>
+                                                                <small style="font-weight: 200;"><?php echo date('l m/d', strtotime($score['Date'])); ?></small>
                                                             </th>
                                                         </tr>
                                                         <tr>
@@ -191,7 +191,7 @@
                                                         <tr>
                                                             <th colspan="2" style="text-align: left;">
                                                                 <?php if($score['Progress'] == 'false') : ?>
-                                                                    <small style="font-weight: 200;"><?php echo $score['Time']; ?></small>
+                                                                    <small style="font-weight: 200;"><?php echo date('g:i A', strtotime($score['Time'])); ?></small>
                                                                 <?php else : ?>
                                                                     <small style="font-weight: 200;"><?php echo $score['Progress']; ?></small>
                                                                 <?php endif; ?>

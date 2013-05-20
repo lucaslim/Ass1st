@@ -26,7 +26,7 @@ class Chat extends CI_Controller {
 		 $user_data = $this->session->userdata('authorized');
 		// $data['user_id'] = $user_data['id'];
 
-		 $this->view_data['user_id'] = $user_data['id'];
+		 // $this->view_data['user_id'] = $user_data['id'];
 		
 		$this->session->set_userdata('last_chat_message_id_' . $this->view_data['chat_id'], 0);
 		
@@ -69,6 +69,7 @@ class Chat extends CI_Controller {
 	
 	function _get_chat_messages($chat_id)
 	{
+		$user_data = $this->session->userdata('authorized');
 		$last_chat_message_id = (int)$this->session->userdata('last_chat_message_id_' . $chat_id); 
 		
 		$chat_messages = $this->chat_model->get_chat_messages($chat_id, $last_chat_message_id);
@@ -87,8 +88,15 @@ class Chat extends CI_Controller {
 			foreach ($chat_messages->result() as $chat_message)
 			{
 				$li_class = ($this->session->userdata('user_id') == $chat_message->user_id) ? 'class="by_current_user"' : '';
-				
-				$chat_messages_html .= '<li>' . '<div style="float:left;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span></div>'.  '<img style="float:right;" src="'. $chat_message->Picture. '" />'.'<div style="clear:both"></div><p class="message_content">' .  $chat_message->chat_message_content . '</p></li><hr />';
+
+				if($chat_message->Id == $user_data['id'])
+				{
+					$chat_messages_html .= '<li>' . '<div style="float:right; text-align: right;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span><br />' .  $chat_message->chat_message_content.'</div>'.  '<img style="float:left;" src="'. $chat_message->Picture. '" />' . '<div style="clear:both"></div></li><hr />';
+				}
+				else
+				{
+					$chat_messages_html .= '<li>' . '<div style="float:left;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span></div>'.  '<img style="float:right;" src="'. $chat_message->Picture. '" />'.'<div style="clear:both"></div><p class="message_content">' .  $chat_message->chat_message_content . '</p></li><hr />';
+				}
 			}
 			
 			$chat_messages_html .= '</ul>';

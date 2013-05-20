@@ -68,8 +68,6 @@ $(function() {
 	//hide search box
 	$('#search_results').hide();
 
-
-
 	var search;
 
 	$.ajax({
@@ -673,4 +671,3 @@ $(function() {
 		}
 	});
 });
-

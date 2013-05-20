@@ -405,59 +405,24 @@ class Division_Model extends CI_Model {
 	 */
 	function get_live_scores() {
 
-		// Get todays date
+		// Get dates
 		$date = date('Y-m-d');
+		$tomorrow = date('Y-m-d', strtotime(' +1 day'));
 
 		// Set where clause
 		$this -> db -> where('Date', $date);
+		$this -> db -> or_where('Date', $tomorrow);
 
 		// Sort games by progress
 		$this -> db -> order_by('Progress', 'asc');
 
-		$query = $this -> db -> get('AllFixtures');
+		$query = $this -> db -> get('AllResults');
 
-		$data = array();
-
-		// Check if any rows returned
-	    if ($query -> num_rows() > 0) {
-	        foreach ($query -> result() as $row) {
-
-	        	// Stash the data
-	        	$gameid = $row -> Id;
-	            $hometeamname = $row -> HomeTeamName;
-	            $hometeam = $row -> HomeTeamId;
-	            $awayteamname = $row -> AwayTeamName;
-	            $awayteam = $row -> AwayTeamId;
-	            $progress = convert_period_string($row -> Progress);
-	            $date = convert_date_to_daymmdd($row -> Date);
-	            $time = date('g:i A', strtotime($row -> Time));
-
-	            // Get the score for the home team
-	            $homescore = $this -> Scorekeeper_Model -> get_team_score($gameid, $hometeam);	 
-
-	            // Get the goal totals for this game
-	            $awayscore = $this -> Scorekeeper_Model -> get_team_score($gameid, $awayteam);	 
-
-            	// Stash data in associative array
-				$push_me = array (
-					'GameId' => $gameid,
-					'HomeTeamName' => $hometeamname,
-					'HomeTeamScore' => $homescore,
-					'AwayTeamName' => $awayteamname,
-					'AwayTeamScore' =>  $awayscore,
-					'Progress' => $progress,
-					'Date' => $date,
-					'Time' => $time
-				);
-
-				// Push it into the array
-				array_push($data, $push_me);
-	        }
-	        return $data;
-	    }
-	    else {
-			return false;
-	    }
+		//Check if any rows returned
+		if (!$query || $query -> num_rows() <= 0)
+			return FALSE;
+		
+		return $query -> result_array();
    	} 
 
 	// --------------------------------------------------------------------

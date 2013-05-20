@@ -2,8 +2,8 @@
 
 <script type="text/javascript">
 
-var chat_id = "<?php echo $chat_id; ?>";
-var user_id = "<?php echo $user_id; ?>";
+var chat_id = "<?php if(isset($user_id)) echo $chat_id; ?>";
+var user_id = "<?php if(isset($playerid)) echo $playerid; ?>";
 
 </script>
 
