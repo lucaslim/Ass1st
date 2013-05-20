@@ -201,7 +201,7 @@
 								</div>
 								<div class="row-fluid">
 									<div class="span9">
-					                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="terms.php">Terms</a> and <a href="policy.php">Policy</a>.</label>
+					                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="#theterms" data-toggle="modal">Terms</a> and <a href="#policy" data-toggle="modal">Policy</a>.</label>
 									</div>
 									<div class="span3 text-left">
 										<input class="btn btn-info" type="submit" value="Sign Up" id="submit" name="submit"/>
@@ -209,6 +209,62 @@
 								</div>
 				            </fieldset>
 				        </form>
+
+				        <!-- terms -->
+						<div id="theterms" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-header">
+						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						    <h3 id="myModalLabel">Terms of Service</h3>
+						  </div>
+						  <div class="modal-body">
+						    <h6>Don’t forget that you are legally obligated to the Terms of Service noted below as well as to any other agreements, terms and rules that we tell you apply to your use of our Sites.</h6>
+						    <h6>Please don’t use our Sites if you don’t agree to these Terms of Service because once you are on our Sites, you have to follow the rules. Representatives and agents that assist in operating our Sites reserve the right to temporarily or permanently disable access to the Sites for anyone who violates these Terms of Service. Because of the importance of these Terms of Service, we will disable access to the Sites at our discretion and may do so without notice.</h6>
+						    <h6>Because we reserve the right to change the Terms of Service at any time, we recommend visiting this page periodically to make sure that the rules have not changed since your last visit. By using these Sites, you agree to be bound by all of the current terms of service.</h6>
+						  	
+						  	<h3>Here are the Terms of Service we expect you to follow:</h3>
+						  	<h5>1. ABILITY TO ACCEPT TERMS OF SERVICE</h5>
+						  	<h6>These Terms of Service form a legally binding contract between you and us. By using our Sites, you affirm that you are at least 18 years of age, an emancipated minor or possess legal parental or guardian consent, and are fully able and competent to enter into the terms, conditions, obligations, representations and responsibilities set forth in these Terms of Service, and to abide and comply with these Terms of Service.</h6>
+
+						  	<h5>2. ACCOUNT AND NON-ACCOUNT USERS</h5>
+						  	<h6>You do not need to create an account with us in order to view the Sites. However, if you already have a facebook or twitter account or if you create one on our our website, you will have access to more of the features on our Sites. Note that if you do choose to create a Teamassist, you will need to agree to a separate Terms of Service and User Agreement ("ToSUA") and Privacy Policy that govern our website. When you login to your account while on one of our Site, the ToSUA and Privacy Policy applies to your activities on the Site. Except for any internet fees that you are responsible for, creating a Teamassist account is free, so we encourage you to do so.</h6>
+
+						  	<h5>3. USE OF YOUR INFORMATION</h5>
+						  	<h6>We respect your information and privacy and will not publicly disclose your personal information to non-affiliated third parties other than as stated in our Privacy Policy. By using our Sites, you acknowledge that we are not responsible for any personal information that you publicly disclose (intentionally or unintentionally) using the Sites’ services such as through discussion forums or message boards. You should avoid saying anything personally identifying in these areas of our Sites.</h6>
+						  	<h6>If you use our Site you also agree that through your use of the Site, you may be provided with information about Teamassist’s or a third party’s products or services, including promotions, advertisements, product placements or marketing materials within the Sites. You acknowledge that Teamassist does not endorse any of the products or services advertised, promoted or marketed by third parties.</h6>
+
+						  	<h6 style="text-align: center;">TEAM ASSIST &trade; - &copy; 2013</h6>
+						  </div>
+						  <div class="modal-footer">
+						    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						  </div>
+						</div>
+
+						<!-- policy -->
+						<div id="policy" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-header">
+						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						    <h3 id="myModalLabel">Privacy Policy</h3>
+						  </div>
+						  <div class="modal-body">
+						    <h6>Teamassist is committed to respecting the privacy rights of all visitors to our websites. This privacy policy is intended to provide you with information on how we collect, use and store the information that you provide to us through our websites so that you can make appropriate choices for sharing information with us.</h6>
+
+						    <h5>WHAT WE COLLECT:</h6>
+						    <h6>We do not require that website visitors reveal any personally identifying information in order to gain general access to our website. However, visitors who do not wish to, or are not allowed by law to share personally identifying information, may not be able to access certain areas of our website, or participate in certain activities. Although personally identifying information may be required to participate in certain features offered through our website, participants provide this information on a voluntary basis only. Collection of personal information required to access certain website services may include the collection of date of birth, name, mailing address or email address.</h6>
+
+						    <h5>HOW WE USE YOUR INFORMATION</h5>
+						    <h6>Teamassist may use personally identifying information for marketing and demographic studies. These studies help us improve our websites, products and services to better meet our users’ needs.</h6>
+						    <h6>We may use personally identifying information and records for defense of a lawsuit, investigation or other action if such personally identifying information, records or profiles are relevant to the lawsuit, investigation or action.</h6>
+
+						    <h5>Policies for Children</h5>
+						    <h6>Teamassist does not knowingly collect personally identifying information from children under 13 years of age via our websites.</h6>
+
+						    <h5>Wreckit Website Message Boards</h5>
+						    <h6>Our website message boards are a place where users can go to freely share their thoughts and ideas about the Teamassist brand. A twitter, facebook or Wreckit account is required to contribute to these message boards. We prohibit message board participants from disclosing their own personally identifying information other than their own Online IDs. We ask our users to respect the privacy of others. Disclosure of phone numbers, addresses, age or other personally identifying information that may violate someone else's privacy is prohibited. Encouraging or asking users to disclose publicly their personally identifying information is also prohibited.</h6>
+						  </div>
+						  <div class="modal-footer">
+						    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						  </div>
+						</div>
 				  </div>
 				</div>
 			</div>
