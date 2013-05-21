@@ -49,7 +49,7 @@
                 </script> 
                 <?php echo form_close(); ?> 
                 <legend>Edit Player Info</legend> 
-                <?php echo form_open_multipart( "edit_profile/edit_player" ); ?>
+                <?php echo form_open_multipart( "edit_profile/edit_player", array( 'id' => 'edit_profile_form' ) ); ?>
                 <!--this is the function called to enable us insert players-->
                 <label for="fname">First Name:</label> 
                 <input type="text" name="fname" value='<?php echo $results -> FirstName ?>'> 

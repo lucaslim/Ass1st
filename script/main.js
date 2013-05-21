@@ -234,6 +234,52 @@ function get_image(type, image) {
  // --------------------------------------------------------------------
 
 /**
+ * 
+ * Ajax for Edit Profile
+ *
+ */
+
+ $(document).ready(function() {
+		//Form
+		$('#edit_profile_form').submit(function(e) {
+			e.preventDefault();
+
+			dataString = $(this).serialize();
+
+			$.ajax({
+				type : $(this).attr("method"),
+				url : $(this).attr("action"),
+				data : dataString,
+				dataType : "json",
+				success : function(data) {
+					if(!data.success){
+						$('#error_message').html(data.message);
+						$('#error_box').dialog("open");
+					}
+					else{
+						window.location.replace($.myURL() + 'pages/user_profile');
+					}
+				}
+			});
+		});
+
+		//Error Box
+		$('#error_box').dialog({
+			resizable : false,
+			autoOpen : false,
+			modal : true,
+			buttons : {
+				Cancel : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+
+ // --------------------------------------------------------------------
+
+
+/**
  *
  * User Login
  *

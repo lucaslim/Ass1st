@@ -101,7 +101,46 @@ class Edit_profile extends CI_Controller
 	 *
 	 */
 	public function edit_player() {
+
 		$user_data = $this -> session -> userdata( 'authorized' );
+		$this -> load -> library('form_validation');
+		$this -> load -> helper('validation_helper');
+
+		//Get post array
+		$result = $this -> input -> post(NULL, TRUE);
+
+		//make sure user doesn't run the action script immediately
+		if (!$result)
+			return;
+
+		//Set rules
+		$rules = array( array('field' => 'fname', 'label' => 'first name', 'rules' => 'required'),
+					    array('field' => 'lname', 'label' => 'last name', 'rules' => 'required'),
+					    array('field' => 'height', 'label' => 'height', 'rules' => 'required|numeric|is_natural_no_zero|callback_check_height'),
+					    array('field' => 'weight', 'label' => 'weight', 'rules' => 'required|numeric|is_natural_no_zero|callback_check_weight'),
+					    array('field' => 'city', 'label' => 'city', 'rules' => 'required'),
+					    array('field' => 'province', 'label' => 'province', 'rules' => 'required'),
+					    array('field' => 'address', 'label' => 'address', 'rules' => 'required'),
+					    array('field' => 'pcode', 'label' => 'postal code', 'rules' => 'required|callback_check_postal_code'),
+					    array('field' => 'phone1', 'label' => 'phone number', 'rules' => 'required|numeric|is_natural_no_zero|min_length[10]|max_length[10]'),
+						array('field' => 'phone2' , 'label' => 'other phone number', 'rules' => 'required|numeric|is_natural_no_zero|min_length[10]|max_length[10]'));
+
+		$this -> form_validation -> set_rules($rules);	
+
+		if ($this -> form_validation -> run() == FALSE) {
+			echo json_encode(array("success" => false, 
+								   "message" => form_error('fname') . 
+												form_error('lname') . 
+												form_error('height') . 
+												form_error('weight') . 
+												form_error('city') . 
+												form_error('province') . 
+												form_error('address') . 
+												form_error('pcode') . 
+												form_error('phone1') . 
+												form_error('phone2')));
+			return;
+		}
 
 		$data = array ( 'FirstName'=> $this -> input -> post( 'fname' )
 			, 'LastName'=> $this -> input -> post( 'lname' )
@@ -115,13 +154,33 @@ class Edit_profile extends CI_Controller
 			, 'OtherNumber'=> $this -> input -> post( 'phone2' )
 		);
 
+		$where = array ( 'Id' => $user_data['id'] );
 
+		$result = $this -> user_model -> update_user( $data, $where );
+		
+		echo json_encode(array("success" => true));
+	}
 
-		$where = array ( 'Id' , $user_data['id'] );
+	public function check_postal_code($val) {
+		return validate_postal_code($this -> form_validation, $val, __FUNCTION__);
+	}
 
-		$this -> user_model -> update_user( $data, $where );
+	public function check_height($val) {
+		$min = 100;
+		$max = 230;
 
-		header( 'Location: edit_profile' );
+		$this->form_validation->set_message('check_height', 'Height is invalid, must be between ' . $min . ' and ' . $max);
+
+		return ($val > $min && $val <= $max);
+	}
+
+	public function check_weight($val) {
+		$min = 20;
+		$max = 200;
+
+		$this->form_validation->set_message('check_weight', 'Weight is invalid, must be between ' . $min . ' and ' . $max);
+
+		return ($val > $min && $val <= $max);
 	}
 
 	public function edit_player_img() {
