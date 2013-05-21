@@ -114,12 +114,12 @@ class Edit_profile extends CI_Controller
 			return;
 
 		//Set rules
-		$rules = array( array('field' => 'fname', 'label' => 'first name', 'rules' => 'required'),
-					    array('field' => 'lname', 'label' => 'last name', 'rules' => 'required'),
+		$rules = array( array('field' => 'fname', 'label' => 'first name', 'rules' => 'required|alpha'),
+					    array('field' => 'lname', 'label' => 'last name', 'rules' => 'required|alpha'),
 					    array('field' => 'height', 'label' => 'height', 'rules' => 'required|numeric|is_natural_no_zero|callback_check_height'),
 					    array('field' => 'weight', 'label' => 'weight', 'rules' => 'required|numeric|is_natural_no_zero|callback_check_weight'),
-					    array('field' => 'city', 'label' => 'city', 'rules' => 'required'),
-					    array('field' => 'province', 'label' => 'province', 'rules' => 'required'),
+					    array('field' => 'city', 'label' => 'city', 'rules' => 'required|alpha'),
+					    array('field' => 'province', 'label' => 'province', 'rules' => 'required|alpha'),
 					    array('field' => 'address', 'label' => 'address', 'rules' => 'required'),
 					    array('field' => 'pcode', 'label' => 'postal code', 'rules' => 'required|callback_check_postal_code'),
 					    array('field' => 'phone1', 'label' => 'phone number', 'rules' => 'required|numeric|is_natural_no_zero|min_length[10]|max_length[10]'),
