@@ -1,11 +1,11 @@
 <!-- Main Content
 ====================================================================== -->
-<div id="contentBegin" class="container-fluid">
+<div id="contentBegin" class="container-fluid" style="margin-bottom: 20px;">
 
 	<!-- New Row
 	====================================================================== -->
 	<div class="row-fluid">
-		<div class="span12">
+		<div class="span12" style="margin-bottom: 20px;">
 			<img src="<?= base_url()?>/uploads/assistlogo/teamassist-banner.jpg" alt="Team Assist" title="Team Assist" class="span12" />
 		</div>
 	</div>

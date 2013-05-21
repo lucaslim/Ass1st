@@ -91,11 +91,15 @@ class Chat extends CI_Controller {
 
 				if($chat_message->Id == $user_data['id'])
 				{
-					$chat_messages_html .= '<li>' . '<div style="float:right; text-align: right;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span><br />' .  $chat_message->chat_message_content.'</div>'.  '<img style="float:left;" src="'. $chat_message->Picture. '" />' . '<div style="clear:both"></div></li><hr />';
+					// $chat_messages_html .= '<li>' . '<div style="float:right;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span></div>'.  '<img style="float:right;" src="'.base_url(). 'uploads/playerlogo/' . $chat_message->Picture. '" width=50 height=50 />'.'<div style="clear:both"></div><p class="message_content">' .  $chat_message->chat_message_content . '</p></li><hr />';
+
+					$chat_messages_html .= '<li>'.  '<img style="float:right;" src="'.base_url(). 'uploads/playerlogo/' . $chat_message->Picture. '" width=50 height=50 />' . '<div style="float:right;text-align: right;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span><p class="message_content">'.$chat_message->chat_message_content .'</p></li><div style="clear:both;"></div><hr />';
 				}
 				else
 				{
-					$chat_messages_html .= '<li>' . '<div style="float:left;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span></div>'.  '<img style="float:right;" src="'. $chat_message->Picture. '" />'.'<div style="clear:both"></div><p class="message_content">' .  $chat_message->chat_message_content . '</p></li><hr />';
+					// $chat_messages_html .= '<li>' . '<div style="float:right; text-align: right;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span><br />' .  $chat_message->chat_message_content.'</div>'.  '<img style="float:left;" src="'.base_url(). 'uploads/playerlogo/'. $chat_message->Picture. '" width=50 height=50 />' . '<div style="clear:both"></div></li><hr />';
+
+					$chat_messages_html .= '<li>'.  '<img style="float:left;" src="'.base_url(). 'uploads/playerlogo/' . $chat_message->Picture. '" width=50 height=50 />' . '<div style="float:left;"><span class="chat_message_header">' . $chat_message->chat_message_timestamp . ' by ' . $chat_message->FirstName . ' ' . $chat_message->LastName . '</span><p class="message_content" style="text-align:left;">'.$chat_message->chat_message_content .'</p></li><div style="clear:both;"></div><hr />';
 				}
 			}
 			
