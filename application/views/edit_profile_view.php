@@ -75,7 +75,7 @@
                 <input type="number" name="phone2" id="phone2" value='<?php echo $results -> OtherNumber ?>'><br>
                 <br>
                 <input type="submit" value="Save" class="btn btn-primary"> 
-                <a href="%3C?php%20base_url();%20?%3Epages/user_profile" class="btn btn-danger">Cancel</a> <?php echo form_close(); ?>
+                <a href="<?php echo base_url(); ?>pages/user_profile" class="btn btn-danger">Cancel</a> <?php echo form_close(); ?>
             </section>
         </div>
     </div>

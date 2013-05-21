@@ -127,75 +127,6 @@ $(function() {
 			window.location.replace($.myURL() + arr[2] + arr[4]);
 		}
 	});
-
-	//auto complete
-	// $('#search_box').on({
-	// 	keyup: function(e) {
-	// 		e.preventDefault();
-
-	// 		//set delay
-	// 		clearTimeout(search);
-			
-	// 		search = setTimeout(function () {
-
-	// 			if ($('#search_box').val() == '') {
-	// 				$('#search_results').hide();
-	// 			}
-	// 			else
-	// 			{
-	// 				$.ajax({
-	// 					type : 'get',
-	// 					url : $.myURL() + 'search/query/',
-	// 					data : {'q' : $('#search_box').val() },
-	// 					dataType : "json",
-	// 					success : function(data) {
-	// 							//show result
-	// 						$('#search_results').show();
-
-	// 						if(data.success){
-	// 							var header_text ="";
-	// 							var output = "<table>";
-	// 							$.each(data.result, function(index, value){
-	// 								if(header_text != value.Type){
-	// 									output += "<tr><th>" + value.Type + "<hr style='width:228px' /></th></tr>";
-	// 									header_text = value.Type;
-	// 								}
-
-	// 								var img_src;
-
-	// 								var picture = value.Picture;
-
-	// 								if(picture.indexOf("http") == 0)
-	// 									img_src = picture;
-	// 								else if (picture != '' && value.Type == 'Team')
-	// 									img_src = $.myURL() + 'uploads/teamlogos/' + picture;
-	// 								else if (picture != '' && value.Type == 'Players')
-	// 									img_src = $.myURL() + 'uploads/playerlogo/' + picture;
-	// 								else
-	// 									img_src = $.myURL() + 'uploads/teamlogos/blank_avatar/png';
-									
-	// 								output += "<tr><td><img style='width: 20px; height: 20px; margin:0 20px;' src='" + img_src + "'/><a href='" + $.myURL() + value.Url + value.Id + "'>" + value.Name + "</a><hr style='width:228px'/></td></tr>";
-								
-	// 							});
-
-	// 						//View more
-	// 						output += "<tr><td>&nbsp;</td></tr>";
-	// 						output += "<tr><td bgcolor='#07bbff' height='40' width='300'><a href='" + $.myURL() + "pages/search/?q=" + $('#search_box').val() + "'>&nbsp;&nbsp;&nbsp;View more results...</a></td></tr>";
-
-	// 						output += "</table>";
-
-	// 						$('#search_results').html(output);
-
-
-	// 					}	
-	// 					else{
-	// 						$('#search_results').html('No results found');
-	// 					}					
-	// 				}
-	// 			})};
-	// 		}, 200);
-	// 	}
-	// });
 });
 
 function get_image(type, image) {
@@ -236,7 +167,7 @@ function get_image(type, image) {
 						$('#error_box').dialog("open");
 					}
 					else{
-						window.location.replace($.myURL());
+						window.location.replace($.myURL() + 'edit_profile');
 					}
 				}
 			});

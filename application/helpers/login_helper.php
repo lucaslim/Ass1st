@@ -43,7 +43,7 @@ function set_oauth_data($id, $username) {
  * This will set Session Data to be placed into session
  *
  */
-function set_session_data($id, $full_name, $picture = NULL) {
+function set_session_data($id, $full_name, $picture = 'blank_avatar.png') {
 	$CI =& get_instance();
 
 	$CI -> load -> model( 'User_Model');

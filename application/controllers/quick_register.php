@@ -64,7 +64,7 @@ class Quick_Register extends CI_Controller {
 					    array('field' => 'last_name', 'label' => 'last name', 'rules' => 'required'),
 					    array('field' => 'email', 'label' => 'email', 'rules' => 'required|trim|xss_clean|prep_for_form|callback_validate_email'),
 					    array('field' => 'password', 'label' => 'password', 'rules' => 'required|min_length[8]'),
-					    // array('field' => 'repassword', 'label' => 're-password', 'rules' => 'required|min_length[8]'),
+					    array('field' => 'repassword', 'label' => 're-password', 'rules' => 'required|min_length[8]|callback_match_password'),
 					    array('field' => 'dob_year', 'label' => 'year', 'rules' => 'required'),
 					    array('field' => 'dob_month', 'label' => 'month', 'rules' => 'required'),
 					    array('field' => 'dob_day', 'label' => 'day', 'rules' => 'required'),
@@ -80,7 +80,7 @@ class Quick_Register extends CI_Controller {
 												form_error('last_name') . 
 												form_error('email') . 
 												form_error('password') . 
-												// form_error('repassword') . 
+												form_error('repassword') . 
 												form_error('dob_year') . 
 												form_error('dob_month') . 
 												form_error('dob_day') . 
@@ -107,7 +107,7 @@ class Quick_Register extends CI_Controller {
 			$this -> load -> helper('login_helper');
 
 			$sess_array = set_session_data($id, $this -> input -> post('first_name') . ' ' . $this -> input -> post('last_name') );
-
+			
 			$this -> session -> set_userdata('authorized', $sess_array);
 
 			echo json_encode(array("success" => true));
@@ -125,5 +125,13 @@ class Quick_Register extends CI_Controller {
 	}
 
 	// --------------------------------------------------------------------
+
+	function match_password($repassword) {
+		$password = $this -> input -> post( 'password' );
+
+		$this->form_validation->set_message('match_password', 'Password does not match.');
+
+		return $password == $repassword;
+	}
 }
 ?>

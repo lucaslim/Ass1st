@@ -125,6 +125,7 @@
 
 		<!-- /begin accordion-->
 		<div id="accordion" >
+			<?php if(!is_loggedin()): ?>
 			<h3>New Player Registration</h3>
 			<div class="player-register" >
 				
@@ -155,11 +156,11 @@
 										<input class="input-full" type="password" name="password" id="password" placeholder="Password"  />
 						  			</div>
 						  		</div>
-						  		<!-- <div class="row-fluid">
+						  		<div class="row-fluid">
 						  			<div class="span12">
-										<input class="input-full" type="password" name="repassword" id="repassword" placeholder="Password"  />
+										<input class="input-full" type="password" name="repassword" id="repassword" placeholder="Re-enter Password"  />
 						  			</div>
-						  		</div> -->
+						  		</div>
 						  		<div class="row-fluid">
 						  			<div class="span4 text-right">
 					                    <!-- Month -->
@@ -212,6 +213,7 @@
 				  </div>
 				</div>
 			</div>
+			<?php endif; ?>
 		  	<!-- end group -->
 
 		  	<!-- begin group -->

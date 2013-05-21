@@ -45,8 +45,6 @@ class Edit_profile extends CI_Controller
 
 		$data['results'] = $this -> user_model -> get_user_info( $user_data['id'] );
 
-
-
 		if ( $this -> fb -> is_registered() )
 			$data['facebook_picture'] = $this -> fb -> get_image_url();
 

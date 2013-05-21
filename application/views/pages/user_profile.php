@@ -7,30 +7,31 @@
 	<div class="row-fluid">
 		
 		<div class="span12">
-
+			<?php //if($has_team): ?>
 			<div id="teamBanner">
 				<div class="color-none-top"></div>
 				<!--Secondary Color - Import - 17854b -->
-				<div class="color-secondary" style="background-color: rgb(<?php echo $team -> TSecR; ?>, <?php echo $team -> TSecG; ?>, <?php echo $team -> TSecB; ?>)"> 
+				<div class="color-secondary" style="background-color: rgb(<?php echo $has_team ? $team -> TSecR : 23; ?>, <?php echo $has_team ? $team -> TSecG : 133; ?>, <?php echo $has_team ? $team -> TSecB : 75; ?>)"> 
 					<img class="transparent-ice secondary-ice" src="<?php echo base_url(); ?>/assets/images/banner/ice_overlay.jpg" />
 				</div>
 				<!-- Primary Color - Import - 152a51 -->
-				<div class="color-main" style="background-color: rgb(<?php echo $team -> TPrimR; ?>, <?php echo $team -> TPrimG; ?>, <?php echo $team -> TPrimB; ?>)"> 
+				<div class="color-main" style="background-color: rgb(<?php echo $has_team ? $team -> TPrimR : 21; ?>, <?php echo $has_team ? $team -> TPrimG : 42; ?>, <?php echo $has_team ? $team -> TPrimB : 81; ?>)"> 
 					<img class="transparent-ice main-ice" src="<?php echo base_url(); ?>/assets/images/banner/ice_overlay.jpg" />
 					<div id="team-name-banner">
 						<!--Tertiary Color - Import - ffffff -->
-						<span id="bannerT" style="color: rgb(<?php echo $team -> TTerR; ?>, <?php echo $team -> TTerG; ?>, <?php echo $team -> TTerB; ?>)"> 
+						<span id="bannerT" style="color: rgb(<?php echo $has_team ? $team -> TTerR : 255; ?>, <?php echo $has_team ? $team -> TTerG : 255; ?>, <?php echo $has_team ? $team -> TTerB : 255; ?>)"> 
 							<!-- Team Name - Import -->
-							<?php echo $team -> Name; ?>
+							<?php echo $has_team ? $team -> Name : ''; ?>
 						</span>
 					</div>
 				</div>
 				<!--Secondary Color - Import - 17854b -->
-				<div class="color-secondary" style="background-color: rgb(<?php echo $team -> TSecR; ?>, <?php echo $team -> TSecG; ?>, <?php echo $team -> TSecB; ?>)">
+				<div class="color-secondary" style="background-color: rgb(<?php echo $has_team ? $team -> TSecR : 23; ?>, <?php echo $has_team ? $team -> TSecG : 133; ?>, <?php echo $has_team ? $team -> TSecB : 75; ?>)"> 
 					<img class="transparent-ice secondary-ice" src="<?php echo base_url(); ?>/assets/images/banner/ice_overlay.jpg" />
 				</div>
 				<div class="color-none-bottom"></div>
 			</div>
+			<?php //endif; ?>
 		</div>
 	</div>
 
@@ -41,7 +42,7 @@
 		<div id="ppp_menu_container" class="span3">
 			<ul id="navbar" data-spy="affix" data-offset-top="225">
 				<li class="text-right">
-					<img class="team-logo" src="<?php echo base_url(); ?>/uploads/teamlogos/<?php echo $team -> Picture; ?>" />
+					<img class="team-logo" src="<?php echo base_url(); ?>/uploads/teamlogos/<?php  echo $has_team ? $team -> Picture : 'teamLogo.png'; ?>" />
 				</li>
 				<li style="margin-top: 50px;">
 					<legend>
@@ -56,12 +57,14 @@
 				        <?php endif; ?>
 					</legend>
 				</li>
+				<?php if($has_team): ?>
 				<li>
 					<a href="#"><strong><?php echo $team -> Name; ?> </strong> <img class="img-team" src="<?php echo base_url(); ?>uploads/teamlogos/<?php echo $team -> Picture; ?>" /></a>
 				</li>
 				<li><a href="#chat">Team Messages</a></li>
 				<li><a href="#schedule">Schedule</a></li>
 				<li><a href="#standings">Standings</a></li>
+				<?php endif; ?>
 				<li><a href="#stats">Stats</a></li>
 				<li><a href="#news">News</a></li>
 				<li>
@@ -71,7 +74,7 @@
 		</div>
 
 		<div class="span9" id="ppp_content_container">
-
+			<?php if($has_team): ?>
 			<script type="text/javascript">
 				var base_url = "<?php echo base_url();?>";
 				var chat_id;
@@ -82,7 +85,6 @@
 				<legend>Team Messages</legend>
 				<?php $this->load->view('view_chat'); ?>
 			</section>
-
 			<section id="schedule">
 				<legend>Schedule</legend>
 				<table class="table table-hover">
@@ -166,6 +168,7 @@
 				</table>
 			</section>
 
+		<?php endif; ?>
 			<section id="stats">
 				<legend>My Player Statistics</legend>
 				<table class="table">

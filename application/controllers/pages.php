@@ -54,6 +54,9 @@ class Pages extends CI_Controller {
 			show_404();
 		}
 
+		//Load Login Helper
+		$this -> load -> helper( 'login_helper' );
+
 		// Get live scoring
 		$data['livescores'] = $this -> Division_Model -> get_live_scores();
 
@@ -291,20 +294,25 @@ class Pages extends CI_Controller {
 
 		// Get user team info
 		$user_team_data = $this -> Division_Model -> get_user_teams( $playerid );
-		$teamid = $user_team_data -> TeamId;
-		$data['team'] = $this -> Division_Model -> get_team_by_id( $teamid ); // retrieve team info
-		$divisionid = $data['team'] -> DivisionId;
-		$leagueid = $data['team'] -> LeagueId;
+		$data['has_team'] = !empty($user_team_data);
+		
+		if($data['has_team']){
+
+			$teamid = $user_team_data -> TeamId;
+			$data['team'] = $this -> Division_Model -> get_team_by_id( $teamid ); // retrieve team info
+			$divisionid = $data['team'] -> DivisionId;
+			$leagueid = $data['team'] -> LeagueId;
+
+			// Get team schedule, limit 15 results
+			$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_and_attendance( $teamid, $seasonid, 10, $playerid );
+
+			// Get team standings for the division
+			$data['standings'] = $this -> Division_Model -> get_standings( $seasonid, $leagueid, $divisionid );
+		}
 
 		// Get user stats info
 		$data['statistics'] = $this -> Scorekeeper_Model -> get_player_stats( $playerid, $seasonid );
-
-		// Get team schedule, limit 15 results
-		$data['schedule'] = $this -> Scorekeeper_Model -> get_schedule_and_attendance( $teamid, $seasonid, 10, $playerid );
-
-		// Get team standings for the division
-		$data['standings'] = $this -> Division_Model -> get_standings( $seasonid, $leagueid, $divisionid );
-
+		
 		// Get latest news
 		$data['headlines'] = $this -> News_Model -> get_news_headlines(); // retrieve news title
 
