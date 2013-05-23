@@ -50,29 +50,42 @@
                 <?php echo form_close(); ?> 
                 <legend>Edit Player Info</legend> 
                 <?php echo form_open_multipart( "edit_profile/edit_player", array( 'id' => 'edit_profile_form' ) ); ?>
-                <!--this is the function called to enable us insert players-->
+                <!--this is the function called to enable us edit player profile-->
+                <label>Player ID: <?php echo $results -> Id ?></label>
                 <label for="fname">First Name:</label> 
-                <input type="text" name="fname" value='<?php echo $results -> FirstName ?>'> 
+                <input type="text" name="fname" value='<?php echo $results -> FirstName ?>' /> 
                 <label for="lname">Last Name:</label> 
-                <input type="text" name="lname" id="lname" value='<?php echo $results -> LastName ?>'> 
+                <input type="text" name="lname" id="lname" value='<?php echo $results -> LastName ?>' />
                 <label for="email">Email Address:</label> 
-                <input type="email" name="email" id="email" value='<?php echo $results -> Email ?>' disabled="disabled"> 
+                <input type="email" name="email" id="email" value='<?php echo $results -> Email ?>' disabled="disabled" /> 
                 <label for="height">Height:</label> 
-                <input type="number" name="height" id="height" value='<?php echo $results -> Height ?>'> 
+                <input type="text" name="height" id="height" value='<?php echo $results -> Height ?>' placeholder="400 for 4feet 0inches" /> 
                 <label for="weight">Weight:</label> 
-                <input type="number" name="weight" id="weight" value='<?php echo $results -> Weight ?>'>
+                <input type="number" name="weight" id="weight" value='<?php echo $results -> Weight ?>' />
                 <label for="city">City:</label> 
-                <input type="text" name="city" id="city" value='<?php echo $results -> City ?>'> 
+                <input type="text" name="city" id="city" value='<?php echo $results -> City ?>' /> 
                 <label for="province">Province:</label> 
-                <input type="text" name="province" id="province" value='<?php echo $results -> Province ?>'> 
+                <!-- <input type="text" name="province" id="province" value='<?php echo $results -> Province ?>' /> --> 
+                <select name="province" id="province" value='<?php echo $results -> Province ?>'>
+                  <option value="Alberta">Alberta</option>
+                  <option value="British Columbia">British Columbia</option>
+                  <option value="Nova Scotia">Nova Scotia</option>
+                  <option value="Québec">Québec</option>
+                  <option value="Ontario">Ontario</option>
+                  <option value="Manitoba">Manitoba</option>
+                  <option value="Saskatchewan">Saskatchewan</option>
+                  <option value="Québec">Québec</option>
+                  <option value="New Brunswick">New Brunswick</option>
+                  <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                </select>
                 <label for="address">Address:</label> 
-                <input type="text" name="address" id="address" value='<?php echo $results -> Address ?>'> 
+                <input type="text" name="address" id="address" value='<?php echo $results -> Address ?>' /> 
                 <label for="pcode">Postal Code:</label> 
-                <input type="text" name="pcode" id="pcode" value='<?php echo $results -> PostalCode ?>'> 
+                <input type="text" name="pcode" id="pcode" value='<?php echo $results -> PostalCode ?>' /> 
                 <label for="phone1">Phone Number:</label> 
-                <input type="number" name="phone1" id="phone1" value='<?php echo $results -> ContactNumber ?>'> 
+                <input type="text" name="phone1" id="phone1" value='<?php echo $results -> ContactNumber ?>' placeholder="4166665555" /> 
                 <label for="phone2">Other Phone Number:</label> 
-                <input type="number" name="phone2" id="phone2" value='<?php echo $results -> OtherNumber ?>'><br>
+                <input type="text" name="phone2" id="phone2" value='<?php echo $results -> OtherNumber ?>' placeholder="4166665555" /><br>
                 <br>
                 <input type="submit" value="Save" class="btn btn-primary"> 
                 <a href="<?php echo base_url(); ?>pages/user_profile" class="btn btn-danger">Cancel</a> <?php echo form_close(); ?>

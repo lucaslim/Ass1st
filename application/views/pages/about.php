@@ -11,10 +11,10 @@
 	</div>
 	<div class="row-fluid">
 		<!-- Place Main Content Here -->
-		<div id="leftContent" class="span4">
+		<div id="leftContent" class="span3">
 			<img src="<?= base_url()?>/uploads/assistlogo/AssistLogo.png" alt="Team Assist" title="Team Assist" /><br /><!--team logo-->
 		</div>
-		<div id="rightContent" class="span8">
+		<div id="rightContent" class="span9">
 			<legend>About</legend>
 			<!-- <p>Currently under development</p> -->
 			<p style="text-indent: 45px">Project Assist is a web application that is an application website that make it easier for sports leagues of all skills level and ages to manage their website. Assist is designed for any sports leagues to implement. It takes your competitive athletes and gives them a whole new outlet to raise the bar and continue to challenge themselves—and other competitors around the world. Currently most leagues are updating stats and information manually, or, unfortunately, they are not using dynamic data to their advantage. We want to make an application that simplifies data input and makes it easier and more engaging for our clients to access. </p>
