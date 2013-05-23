@@ -51,8 +51,8 @@
                 <legend style="text-align:center">Edit Player Info</legend> 
                 <?php echo form_open_multipart( "edit_profile/edit_player", array( 'id' => 'edit_profile_form' ) ); ?>
                 <!--this is the function called to enable us edit player profile-->
-                <!-- <label>Player ID: <?php echo $results -> Id ?></label> -->
-                <hr style="visibility:hidden;"/>
+                <label style="margin-left: 2.5%" class="span3" for="plyerid">Player ID:</label>
+                <input type="text" style="width:25px;" value="<?php echo $results -> Id ?>" disabled="disabled" /><hr />
                 <label class="span3" for="fname">First Name:</label> 
                 <input type="text" name="fname" value='<?php echo $results -> FirstName ?>' /><hr />
                 <label class="span3" for="lname">Last Name:</label> 
