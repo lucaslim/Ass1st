@@ -269,11 +269,10 @@
                             </ul>                                                  
                         </div>   
                         <div class="span4" style="position: relative;">
-                            <form class="form-search pull-right" method="post" action="<?php echo base_url(); ?>search">
+                            <form class="form-search" method="post" action="<?php echo base_url(); ?>search">
                               
                                <input type="text" id="search_box" data-provide="typeahead" autocomplete="off" placeholder="search" class="span3 search-query">
-                              
-                                <div id="search_results" style="position: absolute; overflow-y:visible; overflow-x: hidden; max-height:400px; width:233px; z-index: 123; top:37px; right:10px; border: 1px solid #ccf; background: rgba(255,255,255, 0.95)"> </div>
+                        
                             </form>                             
                         </div>                     
                     </div>

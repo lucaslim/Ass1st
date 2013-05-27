@@ -386,6 +386,11 @@ a {
           color: gray;
           background: #091834;
         }
+
+        i {
+          padding-right: 5px;
+          font-size:1.2em;
+        }
       }
       #signup_twitter{
         background: #07bbff; /* Old browsers */
@@ -405,6 +410,10 @@ a {
         &:active{
           color: DarkGray;
           background: #005472;
+        }
+
+        i {
+          margin-left: -25px;
         }
       }
       #signup_google{
@@ -571,7 +580,19 @@ a {
   width: 1200px;
 
   form {
-    margin: 5px 0 0 0;
+    margin: 5px 0 0 0;   
+
+    input#search_box {
+      width:95%;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+    }
+    ul.typeahead {
+      li {
+        width: 100%;
+      }
+    }
   }
 
   ul {

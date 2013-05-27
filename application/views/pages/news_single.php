@@ -14,7 +14,7 @@
 				</p>
 				<p>
 					<!-- Social Media Buttons -->
-					<a style="top: -4px;" class="fb-like" data-href="<?php echo current_url(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></a>
+					<a class="fb-like" data-href="<?php echo current_url(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></a>
 					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo current_url(); ?>" data-via="teamassist_" data-count="noneπ" data-lang="en">Tweet</a>
 				</p>
 				<?php echo $news -> Content; ?>

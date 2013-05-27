@@ -57,17 +57,6 @@
 // --------------------------------------------------------------------
 
 $(function() {
-	$('#btn_search').on({
-		click: function(e) {
-			e.preventDefault();
-
-			window.location.replace($.myURL() + 'pages/search/?q=' + $('#search_box').val());
-		}
-	})
-
-	//hide search box
-	$('#search_results').hide();
-
 	var search;
 
 	$.ajax({
@@ -81,6 +70,7 @@ $(function() {
 	});
 
 	$('#search_box').typeahead({
+		items: 5,
 		source : function(query, process) {
 			arr = [];
 
@@ -110,7 +100,7 @@ $(function() {
         		return true;
 		},
 		highlighter: function(item) {
-			var arr = item.split('||');
+			var arr = item.split('||'); 
 
 			html = '<div class="typeahead">';
             html += '<div class="media" style="width:100%"><a class="pull-left" href="#"><img style="width: 20px; height: 20px; margin:0 20px;" src='+ get_image(arr[3], arr[1]) +' /></a>'
@@ -361,8 +351,7 @@ $(document).ready(function() {
 		keyup: function(e){
 			e.preventDefault();
 			if(e.keyCode == 27){
-				$('#signin_dialog').fadeOut(fade_time);
-				$('#bg_fade').fadeOut(fade_time);
+				$('#signin_dialog').modal({show: false});
 			}
 		}
 	});
