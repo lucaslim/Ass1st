@@ -493,5 +493,18 @@ class User_Model extends CI_Model {
 		return get_row_count( "AllUsersWithLeagueDivision", $option );
 	}
 
+	// function change_pass_by_id($data, $where_clause) {
+
+
+	// 	$this -> db -> where($where_clause);
+	// 	$this -> db -> update('User', $data);
+
+		
+	// 	//update cache model for searchbox
+	// 	$this -> cache_model -> update_cache(1, now());
+
+	// 	return true;
+	// }
+
 }
 ?>

@@ -122,7 +122,7 @@
     		                </ul>
     		                <input type="hidden" id="return_url" name="return_url" value="<?php echo base_url() . $this -> uri -> uri_string() ?>" />
     		                <div class="forgot-password">
-    		                    <a href="#">Forgot your password?</a>
+    		                    <a href="get_pass">Forgot your password?</a>
                         	</div>
                         	<div class="create-account">
     		                    <p>No account yet? <a href="#">Sign Up</a></p>
