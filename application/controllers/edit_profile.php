@@ -193,6 +193,7 @@ class Edit_profile extends CI_Controller
 		case 'facebook':
 			{
 				$image_name = $this -> fb -> save_profile_picture();
+				break;
 			}
 
 		case 'user':
@@ -213,6 +214,7 @@ class Edit_profile extends CI_Controller
 					$image_name = $_FILES['userfile']['name'];
 
 				}
+				break;
 			}
 		}
 
