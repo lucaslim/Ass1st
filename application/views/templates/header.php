@@ -163,7 +163,7 @@
                                         <?php foreach($livescores as $score) : ?>
                                             <div class="liveScoreItem">
                                                 <?php if($score['Progress'] != 'false') : ?>
-                                                    <div class="boxScoreLink"><a href="<?php echo base_url(); ?>pages/boxscore/<?php echo $score['GameId']; ?>">View Boxscore</a></div>
+                                                    <div class="boxScoreLink"><a href="<?php echo base_url(); ?>pages/boxscore/<?php echo $score['Id']; ?>">View Boxscore</a></div>
                                                 <?php endif; ?>
                                                 <table>
                                                     <tbody>
