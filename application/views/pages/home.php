@@ -315,7 +315,7 @@
 
 					<div class="row-fluid">
 						<div class="span9">
-		                    <label class="checkbox"><input type="checkbox" name="terms" id="terms" /> I agree to the <a href="#theterms" data-toggle="modal" style="text-decoration: underline;">Terms</a> and <a href="#policy" data-toggle="modal" style="text-decoration: underline;">Policy</a>.</label>
+		                    <label class="checkbox"><input type="checkbox" name="team_terms" id="team_terms" /> I agree to the <a href="#theterms" data-toggle="modal" style="text-decoration: underline;">Terms</a> and <a href="#policy" data-toggle="modal" style="text-decoration: underline;">Policy</a>.</label>
 						</div>
 						<div class="span3 text-left">
 							<input class="btn btn-info" type="submit" value="Register" id="team_submit" name="team_submit" />
