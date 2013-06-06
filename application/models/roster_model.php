@@ -39,6 +39,6 @@ class Roster_Model extends CI_Model {
 
 		$query = $this -> db -> insert('Roster', $data);
 
-		return $this -> db -> insert_id();
+		return true;
 	}
 }

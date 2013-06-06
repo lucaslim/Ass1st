@@ -191,9 +191,8 @@ class Quick_Team_Register extends CI_Controller {
 
 
 			$result = $this -> roster -> add_roster($roster_data);
-			if($result > 0){
+			if($result){
 				//Update User Information
-
 				$user_data = array("ContactNumber" => $post_data["phone"],
 								   "Address" => $post_data["address"],
 								   "City" => $post_data["city"],
@@ -211,8 +210,7 @@ class Quick_Team_Register extends CI_Controller {
 
 					//set variables for invite page
 					$this -> session -> set_userdata('invitedata', array("team_id" => $return_id));
-
-					header('location: '. base_url() . 'pages/invite_user');
+					header('location: '. base_url());
 				}
 			}
 

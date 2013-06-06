@@ -173,12 +173,16 @@ class Team_Model extends CI_Model {
 	// --------------------------------------------------------------------
 
 	function add_team($data) {
+		$this -> load -> helper('date');
+
 		$query = $this -> db -> insert('Team', $data);
+
+		$return_id = $this -> db -> insert_id();
 
 		//update cache model for searchbox
 		$this -> cache_model -> update_cache(1, now());
 
-		return $this -> db -> insert_id();
+		return $return_id;
 	}
 
 	function get_team_by_id($team_id) {
